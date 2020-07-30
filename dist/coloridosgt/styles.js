@@ -11,7 +11,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(true);
 // Module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", "",{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,8EAA8E","file":"styles.css","sourcesContent":["/* You can add global styles to this file, and also import other style files */\n"]}]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n/* @font-face {\n    font-family: 'Poppins', sans-serif;\n\n} */\n*{\n    font-family: 'Poppins', sans-serif;\n}\nbody {\n    font-family: Poppins-Regular;\n}", "",{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,8EAA8E;AAC9E;;;GAGG;AAEH;IACI,kCAAkC;AACtC;AAEA;IACI,4BAA4B;AAChC","file":"styles.css","sourcesContent":["/* You can add global styles to this file, and also import other style files */\n/* @font-face {\n    font-family: 'Poppins', sans-serif;\n\n} */\n\n*{\n    font-family: 'Poppins', sans-serif;\n}\n\nbody {\n    font-family: Poppins-Regular;\n}"]}]);
 // Exports
 module.exports = exports;
 
@@ -439,7 +439,7 @@ module.exports = content.locals || {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\diego\Documents\Decimo Semestre\Seminario de Tecnologias de la Informacion\Repositorios Coloridos\coloridosgt\coloridosgt\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! C:\Users\diego\Documents\Decimo Semestre\Seminario de Tecnologias de la Informacion\Repositorios Coloridos\coloridosgt\src\styles.css */"./src/styles.css");
 
 
 /***/ })
