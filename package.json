@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start-prod": "ng serve --prod=true"
+    "start-prod": "ng serve --prod=true",
+    "start-dev": "ng serve -o"
   },
   "private": true,
   "dependencies": {

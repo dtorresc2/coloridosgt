@@ -9,6 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShopComponent } from './routes/shop/shop.component';
 import { HomeComponent } from './routes/home/home.component';
 import { AboutComponent } from './routes/about/about.component';
+import { SinginComponent } from './routes/singin/singin.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AboutComponent } from './routes/about/about.component';
     NavbarComponent,
     ShopComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    SinginComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
