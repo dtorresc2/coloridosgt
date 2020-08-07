@@ -13,6 +13,9 @@ body {
     /* font-family: Poppins-Regular; */
     /* font-family: 'Poppins', sans-serif; */
     font-family: Poppins-SemiBold;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
 
 }
 
