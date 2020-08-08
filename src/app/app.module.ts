@@ -10,6 +10,7 @@ import { ShopComponent } from './routes/shop/shop.component';
 import { HomeComponent } from './routes/home/home.component';
 import { AboutComponent } from './routes/about/about.component';
 import { SingupComponent } from './routes/singup/singup.component';
+import { SinginComponent } from './routes/singin/singin.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SingupComponent } from './routes/singup/singup.component';
     ShopComponent,
     HomeComponent,
     AboutComponent,
-    SingupComponent
+    SingupComponent,
+    SinginComponent
   ],
   imports: [
     BrowserModule,

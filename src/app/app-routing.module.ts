@@ -4,12 +4,14 @@ import { ShopComponent } from './routes/shop/shop.component';
 import { HomeComponent } from './routes/home/home.component';
 import { AboutComponent } from './routes/about/about.component';
 import { SingupComponent } from './routes/singup/singup.component';
+import { SinginComponent } from './routes/singin/singin.component';
 
 const routes: Routes = [
   { path:'', component: HomeComponent },
   { path:'shop', component: ShopComponent },
   { path:'about', component: AboutComponent },
-  { path:'singup', component: SingupComponent }
+  { path:'singup', component: SingupComponent },
+  { path:'singin', component: SinginComponent }
 ];
 
 @NgModule({
