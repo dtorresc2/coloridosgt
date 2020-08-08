@@ -1,0 +1,13 @@
+form label {
+    font-size: 14px;
+}
+
+form input {
+    font-size: 15px;
+}
+
+img {
+    width: 100%; 
+    height: auto; 
+    margin-top: 1%;
+}
