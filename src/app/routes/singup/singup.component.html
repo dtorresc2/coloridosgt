@@ -10,52 +10,67 @@
     <div class="col-md-4 ">
         <div class="card">
             <div class="card-body">
-                <!-- <h4 class="card-title text-center bg-secondary text-white p-2">
-                    Inicio de Sesion
-                </h4> -->
                 <h4 class="card-title text-center pt-2">
                     Creacion de Cuenta
                 </h4>
-                <form>
+                <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
                     <div class="form-group">
                         <label>Correo</label>
-                        <!-- <input type="text" name="title" [(ngModel)]="game.title" placeholder="Titulo" class="form-control" autofocus> -->
-                        <input class="form-control" type="email" name="correo" placeholder="Ingrese su correo"
+                        <input class="form-control" type="email" formControlName="email" placeholder="Ingrese su correo"
                             autofocus>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="user.get('email').hasError('required') && user.get('email').touched">
+                            Correo requerido
+                        </span>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="user.get('email').hasError('email') && user.get('email').touched">
+                            Correo invalido
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>Nombres</label>
-                        <!-- <input type="text" name="title" [(ngModel)]="game.title" placeholder="Titulo" class="form-control" autofocus> -->
-                        <input class="form-control" type="email" name="correo" placeholder="Ingrese su correo"
+                        <input class="form-control" type="text" formControlName="name" placeholder="Ingrese su correo"
                             autofocus>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="user.get('name').hasError('required') && user.get('name').touched">
+                            Nombre requerido
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>Apellidos</label>
-                        <!-- <input type="text" name="title" [(ngModel)]="game.title" placeholder="Titulo" class="form-control" autofocus> -->
-                        <input class="form-control" type="email" name="correo" placeholder="Ingrese su correo"
-                            autofocus>
+                        <input class="form-control" type="text" formControlName="lastname"
+                            placeholder="Ingrese su correo" autofocus>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="user.get('lastname').hasError('required') && user.get('lastname').touched">
+                            Apellido requerido
+                        </span>
                     </div>
-                    <!-- <div class="form-group">
-                        <label>Descripcion</label>
-                        <textarea class="form-control" name="description" rows="2" placeholder="Descripcion" class="form-control"></textarea>
-                    </div> -->
                     <div class="form-group">
                         <label>Contraseña</label>
-                        <!-- <input type="url" name="image" placeholder="Imagen" [(ngModel)]="game.image" class="form-control"> -->
-                        <input class="form-control" type="password" name="password" placeholder="Ingrese su contraseña"
-                            autofocus>
+                        <input class="form-control" type="password" formControlName="password"
+                            placeholder="Ingrese su contraseña" autofocus>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="user.get('password').hasError('required') && user.get('password').touched">
+                            Contraseña requerida
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>Confirmar Contraseña</label>
-                        <!-- <input type="url" name="image" placeholder="Imagen" [(ngModel)]="game.image" class="form-control"> -->
-                        <input class="form-control" type="password" name="password" placeholder="Ingrese su contraseña"
-                            autofocus>
+                        <input class="form-control" type="password" formControlName="confirmpass"
+                            placeholder="Confirme su contraseña" autofocus>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="user.get('confirmpass').hasError('required') && user.get('confirmpass').touched">
+                            Contraseña requerida
+                        </span>
+                        <span class="text-danger" style="font-size: 10px;" *ngIf="user.errors?.invalid">
+                            Contraseña sin coincidir
+                        </span>
                     </div>
-                    <!-- <button class="btn btn-success btn-block" (click)="edit ? updateGame() : saveNewGame()">Save</button> -->
 
-                    <div class="card-subtitle mb-2 text-center p-4">¿Tienes cuenta? <a routerLink="/singin" class="text-primary ">Pulsa aca</a></div>
+                    <div class="card-subtitle mb-2 text-center p-4">¿Tienes cuenta? <a routerLink="/singin"
+                            class="text-primary ">Pulsa aca</a></div>
 
-                    <button class="btn btn-primary btn-block" style="padding-bottom: 0%;">
+                    <button class="btn btn-primary btn-block" [disabled]="user.invalid" style="padding-bottom: 0%;">
                         <label>Registrar</label>
                     </button>
                 </form>
