@@ -12,6 +12,8 @@ import { AboutComponent } from './routes/about/about.component';
 import { SingupComponent } from './routes/singup/singup.component';
 import { SinginComponent } from './routes/singin/singin.component';
 
+import { ClientsService } from './services/clientes/clients.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,9 @@ import { SinginComponent } from './routes/singin/singin.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ClientsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
