@@ -18,10 +18,10 @@ export class SingupComponent implements OnInit {
     lastname: '',
     nit: '0',
     nick: '',
-    pass: ''
+    password: ''
   }
 
-  constructor(private clientService:ClientsService, private router:Router) {
+  constructor(private clientService: ClientsService, private router: Router) {
 
   }
 
@@ -51,18 +51,19 @@ export class SingupComponent implements OnInit {
   }
 
   // Registrar Cliente
-  guardarCliente(){
+  guardarCliente() {
     // delete this.cliente.created_at;
     // delete this.game.id;
 
     this.cliente.name = this.user.get('name').value;
     this.cliente.lastname = this.user.get('lastname').value;
     this.cliente.nick = this.user.get('email').value;
-    this.cliente.pass = this.user.get('password').value;
+    this.cliente.password = this.user.get('password').value;
+
 
     this.clientService.registrarCliente(this.cliente)
       .subscribe(
-        res => { 
+        res => {
           console.log(res);
           // this.user.reset();
           // this.router.navigate(['/home']);

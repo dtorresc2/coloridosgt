@@ -3,5 +3,5 @@ export interface Cliente{
     lastname?: string;
     nit?: string;
     nick?: string;
-    pass?: string;
+    password?: string;
 }

@@ -9,11 +9,12 @@ export class ClientsService {
 
   constructor(private http: HttpClient) { }
 
-  API_URI_LOCAL = 'http://localhost:3000/api';
+  API_URI_LOCAL = 'http://localhost:3000/';
   API_URI = 'http://api-rest.coloridosgt.xyz';
 
   registrarCliente(cliente: Cliente) {
-    return this.http.post('http://api-rest.coloridosgt.xyz/registerClient', cliente);
+    console.log(cliente);
+    return this.http.post('http://localhost:3000/registerClient', cliente);
   }
 
 }
