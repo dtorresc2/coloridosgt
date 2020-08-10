@@ -14,7 +14,7 @@ export class ClientsService {
 
   registrarCliente(cliente: Cliente) {
     console.log(cliente);
-    return this.http.post('http://localhost:3000/registerClient', cliente);
+    return this.http.post(this.API_URI + '/registerClient', cliente);
   }
 
 }
