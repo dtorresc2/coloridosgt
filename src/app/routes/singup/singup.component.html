@@ -13,6 +13,15 @@
                 <h4 class="card-title text-center pt-2">
                     Creacion de Cuenta
                 </h4>
+
+                <div *ngIf="this.respuesta.Id == -1" class="alert alert-secondary alert-dismissible fade show text-center" role="alert" style="padding-bottom: 0;">
+                    <!-- <strong>Holy guacamole!</strong> You should check in on some of those fields below. -->
+                    <p style="padding: 0; font-size: 12px;"> Credenciales Existentes</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
                 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
                     <div class="form-group">
                         <label>Correo</label>
@@ -66,10 +75,9 @@
                             Contraseña sin coincidir
                         </span>
                     </div>
-
                     <div class="card-subtitle mb-2 text-center p-4">¿Tienes cuenta? <a routerLink="/singin"
                             class="text-primary ">Pulsa aca</a></div>
-
+                            
                     <button class="btn btn-primary btn-block" [disabled]="user.invalid" style="padding-bottom: 0%;">
                         <label>Registrar</label>
                     </button>

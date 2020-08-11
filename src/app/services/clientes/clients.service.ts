@@ -8,11 +8,17 @@ import { Servidor } from '../../config/config';
 })
 export class ClientsService {
 
+  autenticado : boolean = false;
+
   constructor(private http: HttpClient) { }
 
   registrarCliente(cliente: Cliente) {
-    console.log(cliente);
+    // console.log(cliente);
     return this.http.post(Servidor.API_URI + '/registerClient', cliente);
+  }
+
+  autenticarCliente(cliente: Cliente) {
+    return this.http.post(Servidor.API_URI + '/loginClient', cliente);
   }
   
 

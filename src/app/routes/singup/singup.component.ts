@@ -70,13 +70,14 @@ export class SingupComponent implements OnInit {
     this.clientService.registrarCliente(this.cliente)
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.respuesta = res;
 
-          console.log(this.respuesta);
+          // console.log(this.respuesta);
 
           if (this.respuesta.Id > 0) {
             localStorage.setItem('idUsuario', this.respuesta.Id.toString());
+            this.clientService.autenticado = true;
             this.router.navigate(['/']);
           }
 

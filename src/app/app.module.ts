@@ -12,7 +12,8 @@ import { AboutComponent } from './routes/about/about.component';
 import { SingupComponent } from './routes/singup/singup.component';
 import { SinginComponent } from './routes/singin/singin.component';
 
-import { ClientsService } from './services/clientes/clients.service'
+import { ClientsService } from './services/clientes/clients.service';
+import { DashboardComponent } from './routes/dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ClientsService } from './services/clientes/clients.service'
     HomeComponent,
     AboutComponent,
     SingupComponent,
-    SinginComponent
+    SinginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
