@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { Cliente } from '../../controllers/cliente';
+import { RespuestaUsuario } from '../../controllers/respuestaUsuario';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
 import { Router } from '@angular/router';
 
@@ -21,11 +22,17 @@ export class SingupComponent implements OnInit {
     password: ''
   }
 
+  respuesta: RespuestaUsuario = {
+    EstadoInsert: '',
+    Id: 0
+  }
+
   constructor(private clientService: ClientsService, private router: Router) {
 
   }
 
   ngOnInit(): void {
+    localStorage.clear();
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -52,21 +59,27 @@ export class SingupComponent implements OnInit {
 
   // Registrar Cliente
   guardarCliente() {
-    // delete this.cliente.created_at;
-    // delete this.game.id;
-
     this.cliente.name = this.user.get('name').value;
     this.cliente.lastname = this.user.get('lastname').value;
     this.cliente.nick = this.user.get('email').value;
     this.cliente.password = this.user.get('password').value;
-
+    // this.user.reset();
+    // this.router.navigate(['/home']);
+    // localStorage.setItem('','');
 
     this.clientService.registrarCliente(this.cliente)
       .subscribe(
         res => {
           console.log(res);
-          // this.user.reset();
-          // this.router.navigate(['/home']);
+          this.respuesta = res;
+
+          console.log(this.respuesta);
+
+          if (this.respuesta.Id > 0) {
+            localStorage.setItem('idUsuario', this.respuesta.Id.toString());
+            this.router.navigate(['/']);
+          }
+
         },
         err => console.error(err)
       );
