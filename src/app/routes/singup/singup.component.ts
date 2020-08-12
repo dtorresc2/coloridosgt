@@ -27,12 +27,12 @@ export class SingupComponent implements OnInit {
     Id: 0
   }
 
-  constructor(private clientService: ClientsService, private router: Router) {
-
-  }
+  constructor(private clientService: ClientsService, private router: Router) {}
 
   ngOnInit(): void {
     localStorage.clear();
+    this.clientService.autenticado = false;
+
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -78,7 +78,7 @@ export class SingupComponent implements OnInit {
           if (this.respuesta.Id > 0) {
             localStorage.setItem('idUsuario', this.respuesta.Id.toString());
             this.clientService.autenticado = true;
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
           }
 
         },

@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   idUsuario: any;
   sesion: boolean = false;
 
-  constructor(private clientService: ClientsService, private router:Router) { }
+  constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
     this.sesion = this.clientService.autenticado;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientsService } from 'src/app/services/clientes/clients.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  ID: any;
+  idUsuario: any;
 
-  constructor() { }
+  constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
+    this.idUsuario = localStorage.getItem('idUsuario');
+
+    if (this.idUsuario > 0) {
+      this.ID = 'Registrado';
+    }
+    else {
+      this.ID = 'Inicie Sesion';
+      this.router.navigate(['/']);
+    }
+
   }
 
 }
