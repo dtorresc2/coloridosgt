@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ShopComponent } from './routes/shop/shop.component';
 import { HomeComponent } from './routes/home/home.component';
-import { AboutComponent } from './routes/about/about.component';
 import { SinginComponent } from './routes/singin/singin.component';
+import { AccountsComponent } from './routes/accounts/accounts.component';
+import { ProductsComponent } from './routes/products/products.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'singin', pathMatch:'full' },
   { path:'home', component: HomeComponent },
-  { path:'shop', component: ShopComponent },
-  { path:'about', component: AboutComponent },
-  { path:'singin', component: SinginComponent }
+  { path:'singin', component: SinginComponent },
+  { path:'accounts', component: AccountsComponent },
+  { path:'products', component: ProductsComponent }
+
 ];
 
 @NgModule({

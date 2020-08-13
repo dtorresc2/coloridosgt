@@ -12,14 +12,14 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul *ngIf="sesion || this.idUsuario > 0"  class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link">Productos</a>
+                <a class="nav-link" routerLink="/products" routerLinkActive="active">Productos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">Usuarios</a>
+                <a class="nav-link" routerLink="/accounts" routerLinkActive="active">Finanzas</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link">Contabilidad</a>
-            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" routerLink="/us" routerLinkActive="active">Finanzas</a>
+            </li> -->
             <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="/about" routerLinkActive="active">Acerca</a>
             </li> -->

@@ -18,10 +18,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.intervalo = setInterval(() => {
       this.comprobarSesion();
-      console.log(this.sesion);
-
-    },1000)
-
+    },1);
   }
 
   comprobarSesion() {
