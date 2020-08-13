@@ -6,6 +6,10 @@ form input {
     font-size: 15px;
 }
 
+button {
+    padding-bottom: 0%;
+}
+
 /* .footer {
     background-image: url("https://i.stack.imgur.com/AZ2Xw.png");
     background-position: center center;
