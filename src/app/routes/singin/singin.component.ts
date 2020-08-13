@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/controllers/usuario';
 import { RespuestaLogin } from 'src/app/controllers/respuestaLogin';
 import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
+declare var $: any; // jQuery
 
 @Component({
   selector: 'app-singin',
@@ -22,7 +23,7 @@ export class SinginComponent implements OnInit {
   }
 
   respuesta: RespuestaLogin = {
-    ESTADO: '',
+    ESTADO: 0,
     USUARIO: 0
   }
 
@@ -44,7 +45,7 @@ export class SinginComponent implements OnInit {
     else {
       localStorage.clear();
       this.usersService.autenticado = false;
-      
+
     }
   }
 
@@ -68,6 +69,13 @@ export class SinginComponent implements OnInit {
           this.usersService.autenticado = true;
           console.log(this.usersService.autenticado);
           this.router.navigate(['/home']);
+        }
+        else {
+          setTimeout(() => {
+            this.respuesta.USUARIO = 0
+            this.respuesta.ESTADO = 0
+            $('.alert').alert('close');
+          }, 2000);
         }
       },
       err => console.log(err)

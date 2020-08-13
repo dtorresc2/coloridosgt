@@ -1,4 +1,4 @@
 export interface RespuestaLogin{
-    ESTADO?: string;
+    ESTADO?: number;
     USUARIO?: number;
 }

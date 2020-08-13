@@ -12,6 +12,19 @@
                 <h4 class="card-title text-center pt-2">
                     Inicio de Sesion
                 </h4>
+
+                <!-- <div *ngIf="this.respuesta.USUARIO == -1" class="alert alert-secondary alert-dismissible fade show text-center" role="alert" style="padding-bottom: 0;">
+                    <p style="padding: 0; font-size: 12px;"> Credenciales Existentes</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div> -->
+
+                <div *ngIf="this.respuesta.USUARIO == -1" class="alert alert-secondary fade show text-center" role="alert"
+                    style="font-size: 12px;" data-dismiss="alert">
+                    ¡Credenciales incorrectas!
+                </div>
+
                 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
                     <div class="form-group">
                         <label>Correo</label>
