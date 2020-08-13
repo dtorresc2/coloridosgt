@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class SinginComponent implements OnInit {
   user: FormGroup;
+  idUsuario: any;
 
   usuario: Usuario = {
     email: '',
@@ -28,14 +29,23 @@ export class SinginComponent implements OnInit {
   constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
-    // localStorage.clear();
-    // this.usersService.autenticado = false; ACA ME QUEDE
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', Validators.required)
       }
     );
+
+    this.idUsuario = localStorage.getItem('idUsuario');
+
+    if (this.idUsuario > 0) {
+      this.router.navigate(['/home']);
+    }
+    else {
+      localStorage.clear();
+      this.usersService.autenticado = false;
+      
+    }
   }
 
   onSubmit() {
@@ -56,6 +66,7 @@ export class SinginComponent implements OnInit {
         if (this.respuesta.USUARIO > 0) {
           localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
           this.usersService.autenticado = true;
+          console.log(this.usersService.autenticado);
           this.router.navigate(['/home']);
         }
       },

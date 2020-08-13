@@ -4,38 +4,43 @@
             alt="" loading="lazy">
         ColoridosGT Admin
     </a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav mr-auto">
+        <ul *ngIf="sesion || this.idUsuario > 0"  class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/shop" routerLinkActive="active">Tienda</a>
+                <a class="nav-link">Productos</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link">Usuarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Contabilidad</a>
+            </li>
+            <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="/about" routerLinkActive="active">Acerca</a>
-            </li>
+            </li> -->
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul *ngIf="sesion || this.idUsuario > 0"  class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" routerLinkActive="active" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    Tu Cuenta
+                    @USUARIO
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" routerLink="/singin"><i class="fas fa-user"></i> Iniciar
+                    <!-- <a class="dropdown-item" routerLink="/singin"><i class="fas fa-user"></i> Iniciar
                         Sesion</a>
                     <a class="dropdown-item" href="#">
                         Cerrar Sesion</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="#">Something else here</a> -->
+                    <a class="dropdown-item" (click)="cerrarSesion()">
                         Cerrar Sesion</a>
                 </div>
-
             </li>
         </ul>
-    </div> -->
+    </div>
 </nav>

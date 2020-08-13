@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     }
     else {
       this.ID = 'Inicie Sesion';
-      this.router.navigate(['/home']);
+      this.router.navigate(['/singin']);
     }
   }
 
