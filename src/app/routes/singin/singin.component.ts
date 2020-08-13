@@ -4,6 +4,7 @@ import { ClientsService } from 'src/app/services/clientes/clients.service';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/controllers/cliente';
 import { RespuestaLogin } from 'src/app/controllers/respuestaLogin';
+declare var $: any; // jQuery
 
 @Component({
   selector: 'app-singin',
@@ -13,6 +14,7 @@ import { RespuestaLogin } from 'src/app/controllers/respuestaLogin';
 
 export class SinginComponent implements OnInit {
   user: FormGroup;
+  idUsuario: any;
 
   cliente: Cliente = {
     name: '',
@@ -41,6 +43,17 @@ export class SinginComponent implements OnInit {
       }
     );
 
+    this.idUsuario = localStorage.getItem('idUsuario');
+
+    if (this.idUsuario > 0) {
+      this.router.navigate(['/']);
+    }
+    else {
+      localStorage.clear();
+      this.clientService.autenticado = false;
+
+    }
+
   }
 
   onSubmit() {
@@ -61,6 +74,13 @@ export class SinginComponent implements OnInit {
           localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
           this.clientService.autenticado = true;
           this.router.navigate(['/dashboard']);
+        }
+        else {
+          setTimeout(() => {
+            this.respuesta.USUARIO = 0
+            this.respuesta.ESTADO = ''
+            $('.alert').alert('close');
+          }, 2000);
         }
       },
       err => console.log(err)

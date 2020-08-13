@@ -13,6 +13,11 @@
                     Inicio de Sesion
                 </h4>
 
+                <div *ngIf="this.respuesta.USUARIO == -1" class="alert alert-secondary fade show text-center" role="alert"
+                    style="font-size: 12px;" data-dismiss="alert">
+                    ¡Credenciales incorrectas!
+                </div>
+
                 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
                     <div class="form-group">
                         <label>Correo</label>

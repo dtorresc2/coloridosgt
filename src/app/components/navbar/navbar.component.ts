@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   ID: any;
   idUsuario: any;
   sesion: boolean = false;
+  intervalo;
 
   constructor(private clientService: ClientsService, private router: Router) { }
 
