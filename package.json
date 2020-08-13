@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start1": "node server.js",
+    "start": "serve -s dist/coloridosgt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -29,6 +30,7 @@
     "path": "^0.12.7",
     "rxjs": "~6.5.5",
     "save": "^2.4.0",
+    "serve": "^11.3.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
