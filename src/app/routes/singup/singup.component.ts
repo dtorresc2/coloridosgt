@@ -5,6 +5,7 @@ import { Cliente } from '../../controllers/cliente';
 import { RespuestaUsuario } from '../../controllers/respuestaUsuario';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
 import { Router } from '@angular/router';
+declare var $: any; // jQuery
 
 @Component({
   selector: 'app-singup',
@@ -79,6 +80,16 @@ export class SingupComponent implements OnInit {
             localStorage.setItem('idUsuario', this.respuesta.Id.toString());
             this.clientService.autenticado = true;
             this.router.navigate(['/dashboard']);
+          }
+          else {
+            setTimeout(() => {
+              this.respuesta.Id = 0;
+              this.respuesta.EstadoInsert = '';
+              $('.alert').alert('close');
+              this.user.get('email').setValue(null);
+              this.user.get('password').setValue(null);
+              this.user.get('confirmpass').setValue(null);
+            }, 2000);
           }
 
         },

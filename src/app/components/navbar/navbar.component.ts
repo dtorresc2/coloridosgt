@@ -16,10 +16,13 @@ export class NavbarComponent implements OnInit {
   constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.sesion = this.clientService.autenticado;
+    this.intervalo = setInterval(() => {
+      this.comprobarSesion();
+    },1);
   }
 
   comprobarSesion() {
+    this.idUsuario = localStorage.getItem('idUsuario');
     this.sesion = this.clientService.autenticado;
   }
 

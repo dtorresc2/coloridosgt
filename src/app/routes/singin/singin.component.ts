@@ -77,8 +77,9 @@ export class SinginComponent implements OnInit {
         }
         else {
           setTimeout(() => {
-            this.respuesta.USUARIO = 0
-            this.respuesta.ESTADO = ''
+            this.respuesta.USUARIO = 0;
+            this.respuesta.ESTADO = '';
+            this.user.get('password').setValue(null);
             $('.alert').alert('close');
           }, 2000);
         }
