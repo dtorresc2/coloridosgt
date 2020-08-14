@@ -96,6 +96,7 @@ export class SinginComponent implements OnInit {
           else {
             this.respuesta.USUARIO = 0
             this.respuesta.ESTADO = 0
+            this.user.get('password').setValue(null);
             $('.alert').alert('close');
           }
         }, 1000);
