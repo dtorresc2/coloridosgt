@@ -15,6 +15,7 @@ declare var $: any; // jQuery
 export class SinginComponent implements OnInit {
   user: FormGroup;
   idUsuario: any;
+  comprobador: boolean = false;
 
   usuario: Usuario = {
     email: '',
@@ -50,6 +51,7 @@ export class SinginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.comprobador = true;
     this.autenticarUsuario();
   }
 
@@ -64,19 +66,40 @@ export class SinginComponent implements OnInit {
         console.log(res);
         this.respuesta = res;
 
-        if (this.respuesta.USUARIO > 0) {
-          localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
-          this.usersService.autenticado = true;
-          console.log(this.usersService.autenticado);
-          this.router.navigate(['/home']);
-        }
-        else {
-          setTimeout(() => {
+        setTimeout(() => {
+          this.comprobador = false;
+        }, 1500);
+
+        // this.comprobador = false;
+
+        // if (this.respuesta.USUARIO > 0) {
+        //   localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
+        //   this.usersService.autenticado = true;
+        //   console.log(this.usersService.autenticado);
+        //   this.router.navigate(['/home']);
+        // }
+        // else {
+        //   setTimeout(() => {
+        //     this.respuesta.USUARIO = 0
+        //     this.respuesta.ESTADO = 0
+        //     $('.alert').alert('close');
+        //   }, 2000);
+        // }
+
+        setTimeout(() => {
+          if (this.respuesta.USUARIO > 0) {
+            localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
+            this.usersService.autenticado = true;
+            console.log(this.usersService.autenticado);
+            this.router.navigate(['/home']);
+          }
+          else {
             this.respuesta.USUARIO = 0
             this.respuesta.ESTADO = 0
             $('.alert').alert('close');
-          }, 2000);
-        }
+          }
+        }, 1000);
+
       },
       err => console.log(err)
     );

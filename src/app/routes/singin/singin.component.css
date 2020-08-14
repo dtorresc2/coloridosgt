@@ -10,6 +10,9 @@ button {
     padding-bottom: 0%;
 }
 
+button span {
+    margin-bottom: 1%;
+}
 /* .footer {
     background-image: url("https://i.stack.imgur.com/AZ2Xw.png");
     background-position: center center;
