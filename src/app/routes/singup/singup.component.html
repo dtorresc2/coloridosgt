@@ -82,8 +82,9 @@
                     <div class="card-subtitle mb-2 text-center p-4">¿Tienes cuenta? <a routerLink="/singin"
                             class="text-primary ">Pulsa aca</a></div>
                             
-                    <button class="btn btn-primary btn-block" [disabled]="user.invalid" style="padding-bottom: 0%;">
-                        <label>Registrar</label>
+                    <button class="btn btn-primary btn-block" [disabled]="user.invalid || this.comprobador" style="padding-bottom: 0%;">
+                        <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <label *ngIf="!this.comprobador">Registrar</label>
                     </button>
                 </form>
             </div>

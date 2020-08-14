@@ -14,6 +14,7 @@ declare var $: any; // jQuery
 })
 export class SingupComponent implements OnInit {
   user: FormGroup
+  comprobador: boolean = false;
 
   cliente: Cliente = {
     name: '',
@@ -28,7 +29,7 @@ export class SingupComponent implements OnInit {
     Id: 0
   }
 
-  constructor(private clientService: ClientsService, private router: Router) {}
+  constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
     localStorage.clear();
@@ -50,6 +51,7 @@ export class SingupComponent implements OnInit {
   }
 
   onSubmit() {
+    this.comprobador = true;
     this.guardarCliente();
   }
 
@@ -71,27 +73,29 @@ export class SingupComponent implements OnInit {
     this.clientService.registrarCliente(this.cliente)
       .subscribe(
         res => {
-          // console.log(res);
+          console.log(res);
+
           this.respuesta = res;
 
-          // console.log(this.respuesta);
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
 
-          if (this.respuesta.Id > 0) {
-            localStorage.setItem('idUsuario', this.respuesta.Id.toString());
-            this.clientService.autenticado = true;
-            this.router.navigate(['/dashboard']);
-          }
-          else {
-            setTimeout(() => {
+          setTimeout(() => {
+            if (this.respuesta.Id > 0) {
+              localStorage.setItem('idUsuario', this.respuesta.Id.toString());
+              this.clientService.autenticado = true;
+              this.router.navigate(['/dashboard']);
+            }
+            else {
               this.respuesta.Id = 0;
               this.respuesta.EstadoInsert = '';
               $('.alert').alert('close');
               this.user.get('email').setValue(null);
               this.user.get('password').setValue(null);
               this.user.get('confirmpass').setValue(null);
-            }, 2000);
-          }
-
+            }
+          }, 1000);
         },
         err => console.error(err)
       );
