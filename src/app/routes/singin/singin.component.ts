@@ -15,6 +15,7 @@ declare var $: any; // jQuery
 export class SinginComponent implements OnInit {
   user: FormGroup;
   idUsuario: any;
+  comprobador: boolean = false;
 
   cliente: Cliente = {
     name: '',
@@ -57,6 +58,7 @@ export class SinginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.comprobador = true;
     this.autenticarCliente();
   }
 
@@ -70,19 +72,23 @@ export class SinginComponent implements OnInit {
 
         this.respuesta = res;
 
-        if (this.respuesta.USUARIO > 0) {
-          localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
-          this.clientService.autenticado = true;
-          this.router.navigate(['/dashboard']);
-        }
-        else {
-          setTimeout(() => {
+        setTimeout(() => {
+          this.comprobador = false;
+        }, 1500);
+
+        setTimeout(() => {
+          if (this.respuesta.USUARIO > 0) {
+            localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
+            this.clientService.autenticado = true;
+            this.router.navigate(['/dashboard']);
+          }
+          else {
             this.respuesta.USUARIO = 0;
             this.respuesta.ESTADO = '';
             this.user.get('password').setValue(null);
             $('.alert').alert('close');
-          }, 2000);
-        }
+          }
+        }, 1000);
       },
       err => console.log(err)
     );

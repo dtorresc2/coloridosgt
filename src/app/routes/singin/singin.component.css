@@ -5,3 +5,7 @@ form label {
 form input {
     font-size: 15px;
 }
+
+button span {
+    margin-bottom: 1%;
+}

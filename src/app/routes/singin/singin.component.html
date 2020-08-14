@@ -1,7 +1,7 @@
 <div class="row align-items-center" style="padding-top: 5%;">
     <!-- Formulario para Crear o Editar -->
     <div class="col-md-4 offset-md-1 d-none d-md-block d-lg-block d-xl-block">
-        <img src="../../../assets/svgs/shop.svg" class="img-fluid" style="width: 100%; height: auto; margin-top: 1%;">
+        <img src="../../../assets/svgs/pc_verde.svg" class="img-fluid" style="width: 100%; height: auto; margin-top: 1%;">
     </div>
 
     <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
@@ -46,8 +46,9 @@
                     <div class="card-subtitle mb-2 text-center p-4">¿No Tienes Cuenta? <a routerLink="/singup"
                             class="text-primary">Pulsa aca</a></div>
 
-                    <button class="btn btn-primary btn-block" [disabled]="user.invalid" style="padding-bottom: 0%;">
-                        <label>Ingresar</label>
+                    <button class="btn btn-primary btn-block" [disabled]="user.invalid || this.comprobador" style="padding-bottom: 0%;">
+                        <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <label *ngIf="!this.comprobador" >Ingresar</label>
                     </button>
 
                 </form>
