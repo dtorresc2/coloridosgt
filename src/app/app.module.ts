@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { UsersService } from './services/usuarios/users.service';
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
+import { UsersComponent } from './routes/users/users.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AccountsComponent } from './routes/accounts/accounts.component';
     SinginComponent,
     FooterComponent,
     ProductsComponent,
-    AccountsComponent
+    AccountsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
