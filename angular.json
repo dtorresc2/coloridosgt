@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "coloridosgt"
+  "defaultProject": "coloridosgt",
+  "cli": {
+    "analytics": false
+  }
 }

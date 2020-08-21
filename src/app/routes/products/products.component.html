@@ -1,1 +1,117 @@
-<p>products works!</p>
+<div class="text-center">
+    <h2>Mantenimiento Productos</h2>
+</div>
+<div class="row align-items-start" style="padding-top: 5%;">
+    <div class="col-md-3">
+        <table class="table table-hover table-active" style="width: 500px;" >
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">#Minimo </th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Crayola super tips</td>
+                    <td>Crayolas de multiples colores</td>
+                    <td>Q170</td>
+                    <td>14</td>
+                    <td>30</td>
+                    <td>Boligrafos</td>
+                    <td>
+                        <div class="text-center">
+                            <!--<button type="button" class="btn btn-success"><i class="fas fa-map-pin" style="width: 10px;"></i></button>-->
+                            <button type="button" class="btn btn-info"><i type="submit" class="fas fa-pencil-alt" style="width: 10px;"></i></button> 
+                            <button type="button" class="btn btn-danger"><i type="submit" class="fas fa-trash" style="width: 10px;"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STA- metálicos</td>
+                    <td>Boligrafos de multiples colores</td>
+                    <td>Q120</td>
+                    <td>35</td>
+                    <td>56</td>
+                    <td>Boligrafos</td>
+                    <td>
+                        <div class="text-center">
+                            <!--<button type="button" class="btn btn-success"><i class="fas fa-map-pin" style="width: 10px;"></i></button>-->
+                            <button type="button" class="btn btn-info"><i type="submit" class="fas fa-pencil-alt" style="width: 10px;"></i></button> 
+                            <button type="button" class="btn btn-danger"><i type="submit" class="fas fa-trash" style="width: 10px;"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Stabilo boss pastel</td>
+                    <td>Resaltadores de 6 colores</td>
+                    <td>Q40</td>
+                    <td>10</td>
+                    <td>40</td>
+                    <td>Resaltadores</td>
+                    <td>
+                        <div class="text-center">
+                            <!--<button type="button" class="btn btn-success"><i class="fas fa-map-pin" style="width: 10px;"></i></button>-->
+                            <button type="button" class="btn btn-info"><i type="submit" class="fas fa-pencil-alt" style="width: 10px;"></i></button> 
+                            <button type="button" class="btn btn-danger"><i type="submit" class="fas fa-trash" style="width: 10px;"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    <div class="col-md-5 d-none d-md-block d-lg-block d-xl-block"></div>
+    <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
+        <h4 class="card-title text-center pt-2">
+            Ingresar Producto
+        </h4>
+        <form>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label>Descripcion</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label>Precio</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label>Cantidad</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label>Cantidad Minima</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label>Categoria</label>
+                <div class="dropdown">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categoria
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Subir Imagen</label>
+                <input type="file" class="file-input">
+            </div> 
+            <button class="btn btn-secondary btn-block">
+                <!-- <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> -->
+                <label id="labelCarga">Ingresar</label>
+            </button>
+        </form>
+    </div>
+</div>
