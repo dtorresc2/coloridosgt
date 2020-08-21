@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
+import { Producto } from 'src/app/controllers/producto';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -13,8 +15,22 @@ export class ProductsComponent implements OnInit {
   idUsuario: any;
   fileToUpload: File = null;
   nombreArchivo: any;
-
+  base64Final: string;
+  user: FormGroup;
+  
   listaCategorias: any = [];
+  listaProductos: any = [];
+
+  producto: Producto = {
+    nombre: '',
+    descripcion: '',
+    precio: 0.00,
+    cantidad: 0,
+    descuento: 0.00,
+    cantidad_minima: 0,
+    categoria_idcategoria: 0,
+    buffer: ''
+  }
 
   constructor(private usersService: UsersService, private categoriaService: CategoriasService, private router: Router) { }
 
@@ -47,12 +63,13 @@ export class ProductsComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(this.fileToUpload);
     reader.onload = () => {
-        console.log(reader.result);
-        const base64str = reader.result.toString();
-        base64str.replace(/^data:image\/\w+;base64,/, '');
+      // console.log(reader.result);
+      const base64str = reader.result.toString();
+      this.base64Final = base64str.replace(/^data:image\/\w+;base64,/, '');
+      // console.log(this.base64Final);
     };
 
-    
+
     // console.log(this.fileToUpload);
     // this.nombreArchivo = this.fileToUpload.name;
   }
@@ -62,6 +79,7 @@ export class ProductsComponent implements OnInit {
   //   return Buffer.from(base64str, 'base64');
   // }
 
+  
   // CAMPOS
   // { nombre, descripcion, precio, cantidad, descuento, cantidad_minima, categoria_idcategoria }, url_imagen
 }
