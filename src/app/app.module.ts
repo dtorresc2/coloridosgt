@@ -11,6 +11,9 @@ import { SinginComponent } from './routes/singin/singin.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { UsersService } from './services/usuarios/users.service';
+import { CategoriasService } from './services/productos/categorias.service';
+
+
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
 import { UsersComponent } from './routes/users/users.component';
@@ -34,7 +37,8 @@ import { UsersComponent } from './routes/users/users.component';
     ReactiveFormsModule
   ],
   providers: [
-    UsersService
+    UsersService,
+    CategoriasService
   ],
   bootstrap: [AppComponent]
 })
