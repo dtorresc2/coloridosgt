@@ -97,9 +97,9 @@
                             <option>4</option>
                             <option>5</option> -->
 
-                            <!-- <option [value]="item2.idingrediente" *ngFor="let categoria of categorias">
-                                {{item2.ingrediente}} -
-                                Q.{{item2.precio}} </option> -->
+                            <option [value]="categoria.idcategoria" *ngFor="let categoria of listaCategorias">
+                                {{categoria.nombre}}
+                            </option>
                         </select>
                     </div>
                     <!-- <div class="form-group">

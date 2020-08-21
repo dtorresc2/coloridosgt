@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriasService {
+export class ProductosService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerCategorias() {
+  obtenerProductos() {
     return this.http.get(Servidor.API_URI + '/categorias');
   }
 }
