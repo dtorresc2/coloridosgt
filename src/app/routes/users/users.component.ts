@@ -68,10 +68,11 @@ export class UsersComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.comprobador = true;
+    this.comprobador = true;
 
     if (this.isNew) {
-      console.log("Voy a crear")
+      // console.log("Voy a crear")
+      this.guardarCliente();
     }
 
     if (this.isEdit) {
@@ -91,6 +92,13 @@ export class UsersComponent implements OnInit {
     this.isNew = true;
   }
 
+  editado(id) {
+    this.user.reset();
+    this.isEdit = true;
+    this.isDelete = false;
+    this.isNew = false;
+  }
+
 
   // Catalogo de clientes
   obtenerListaClientes() {
@@ -98,7 +106,7 @@ export class UsersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaClientes = res;
-          console.log(res);
+          // console.log(res);
         },
         err => console.error(err)
       )
@@ -124,6 +132,7 @@ export class UsersComponent implements OnInit {
           setTimeout(() => {
             if (this.respuesta.Id > 0) {
               this.user.reset();
+              this.obtenerListaClientes();
               // localStorage.setItem('idUsuario', this.respuesta.Id.toString());
               // this.clientService.autenticado = true;
               // this.router.navigate(['/dashboard']);

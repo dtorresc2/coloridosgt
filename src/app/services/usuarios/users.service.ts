@@ -23,4 +23,8 @@ export class UsersService {
     return this.http.get(Servidor.API_URI + '/users');
   }
 
+  actualizarUsuario(usuario: Usuario){
+    return this.http.put(Servidor.API_URI + '/users', usuario);
+  }
+
 }
