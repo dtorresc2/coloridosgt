@@ -7,24 +7,24 @@ import { Usuario } from '../../controllers/usuario';
   providedIn: 'root'
 })
 export class UsersService {
-  autenticado : boolean = false;
-  
+  autenticado: boolean = false;
+
   constructor(private http: HttpClient) { }
 
   autenticarUsuario(usuario: Usuario) {
     return this.http.post(Servidor.API_URI + '/login', usuario);
   }
 
-  registrarUsuario(usuario: Usuario){
+  registrarUsuario(usuario: Usuario) {
     return this.http.post(Servidor.API_URI + '/register', usuario);
   }
 
-  obtenerUsuarios(){
+  obtenerUsuarios() {
     return this.http.get(Servidor.API_URI + '/users');
   }
 
-  actualizarUsuario(usuario: Usuario){
-    return this.http.put(Servidor.API_URI + '/users', usuario);
+  actualizarUsuario(id, usuario: Usuario) {
+    return this.http.put(Servidor.API_URI + '/users/' + id, usuario);
   }
 
 }

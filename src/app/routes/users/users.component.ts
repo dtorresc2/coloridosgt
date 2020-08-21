@@ -23,6 +23,8 @@ export class UsersComponent implements OnInit {
   isDelete: boolean = false;
   isNew: boolean = true;
 
+  idUsuarioAUX: any;
+
   usuario: Usuario = {
     email: '',
     user: '',
@@ -100,12 +102,12 @@ export class UsersComponent implements OnInit {
     this.isDelete = false;
     this.isNew = false;
 
+    this.idUsuarioAUX = id;
+
     this.user.get('username').setValue(usuarioParametro.nombrerol);
     this.user.get('email').setValue(usuarioParametro.correo);
     this.user.get('password').setValue('2');
     this.user.get('confirmpass').setValue('2');
-
-
   }
 
 
@@ -153,6 +155,42 @@ export class UsersComponent implements OnInit {
               this.user.get('email').setValue(null);
               this.user.get('password').setValue(null);
               this.user.get('confirmpass').setValue(null);
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
+  editarCliente() {
+    this.usuario.user = this.user.get('username').value;
+    this.usuario.email = this.user.get('email').value;
+    this.usuario.password = this.user.get('password').value;
+
+    this.usersService.actualizarUsuario(this.idUsuarioAUX, this.usuario)
+      .subscribe(
+        res => {
+          console.log(res);
+
+          this.respuesta = res;
+
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if (this.respuesta.Id > 0) {
+              this.user.reset();
+              this.obtenerListaClientes();
+              this.creado();
+            }
+            else {
+              this.respuesta.Id = 0;
+              this.respuesta.EstadoInsert = '';
+              $('.alert').alert('close');
+              // this.user.get('email').setValue(null);
+              // this.user.get('password').setValue(null);
+              // this.user.get('confirmpass').setValue(null);
             }
           }, 1000);
         },
