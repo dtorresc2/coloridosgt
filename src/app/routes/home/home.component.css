@@ -1,0 +1,27 @@
+
+.body { 
+    background-color: #FFC067; 
+}
+
+.text-center{
+    text-align: center;
+}
+
+img{
+width:100px;
+height:550px;
+} 
+
+div{
+    font-size: 20px;
+}
+
+span{
+    margin-left: 80px;
+}
+
+#pasos{
+    text-align: center;
+    margin-left: 80px;
+    color:#FFCE67;
+}
