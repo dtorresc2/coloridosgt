@@ -92,11 +92,20 @@ export class UsersComponent implements OnInit {
     this.isNew = true;
   }
 
-  editado(id) {
+  editado(id, usuarioParametro) {
+    // console.log(usuarioParametro);
+    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
     this.user.reset();
     this.isEdit = true;
     this.isDelete = false;
     this.isNew = false;
+
+    this.user.get('username').setValue(usuarioParametro.nombrerol);
+    this.user.get('email').setValue(usuarioParametro.correo);
+    this.user.get('password').setValue('2');
+    this.user.get('confirmpass').setValue('2');
+
+
   }
 
 
