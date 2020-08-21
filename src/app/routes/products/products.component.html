@@ -77,40 +77,19 @@
                     </div>
                     <div class="form-group">
                         <label>Categoria</label>
-                        <!-- <div class="dropdown">
-                            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Categoria
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div> -->
                         <select class="form-control form-control-sm" id="exampleFormControlSelect1">
-                            <!-- <select class="custom-select custom-select-sm" name="miselect2" [(ngModel)]="combo2"> -->
-                            <!-- </select> -->
-                            <!-- <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option> -->
-
                             <option [value]="categoria.idcategoria" *ngFor="let categoria of listaCategorias">
                                 {{categoria.nombre}}
                             </option>
                         </select>
                     </div>
-                    <!-- <div class="form-group">
-                        <label>Subir Imagen</label>
-                        <input type="file" class="file-input">
-                    </div> -->
                     <div class="form-group custom-file" style="margin-bottom: 3%;">
                         <!-- <label>Subir Imagen</label> -->
-                        <input type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/*">
+                        <input type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/*"
+                            (change)="handleFileInput($event.target.files)">
                         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
                     </div>
+
 
                     <button class="btn btn-secondary btn-block">
                         <!-- <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> -->
