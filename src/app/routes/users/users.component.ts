@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/controllers/usuario';
 import { RespuestaUsuario } from 'src/app/controllers/respuestaUsuario';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 declare var $: any; // jQuery
 
 @Component({
@@ -20,7 +21,7 @@ export class UsersComponent implements OnInit {
 
   isEdit: boolean = false;
   isDelete: boolean = false;
-  isNew: boolean = false;
+  isNew: boolean = true;
 
   usuario: Usuario = {
     email: '',
@@ -77,10 +78,17 @@ export class UsersComponent implements OnInit {
       console.log("Voy a editar")
     }
 
-    if (this.isDelete){
+    if (this.isDelete) {
       console.log("Voy a eliminar");
     }
 
+  }
+
+  creado() {
+    this.user.reset();
+    this.isEdit = false;
+    this.isDelete = false;
+    this.isNew = true;
   }
 
 
@@ -90,6 +98,7 @@ export class UsersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaClientes = res;
+          console.log(res);
         },
         err => console.error(err)
       )

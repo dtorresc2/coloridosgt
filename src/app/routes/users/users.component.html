@@ -15,11 +15,21 @@
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody *ngFor="let user of listaClientes">
+                <!-- <tr>
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Mar2@gmail.com</td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm"><i class="fas fa-map-pin fa-sm"></i></button>
+                        <button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt fa-sm"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash fa-sm"></i></button>
+                    </td>
+                </tr> -->
+                <tr>
+                    <th scope="row"> {{user.idusuario}} </th>
+                    <td>{{user.nombrerol}}</td>
+                    <td>{{user.correo}}</td>
                     <td>
                         <button type="button" class="btn btn-success btn-sm"><i class="fas fa-map-pin fa-sm"></i></button>
                         <button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt fa-sm"></i></button>
@@ -39,9 +49,16 @@
                     </button>
                 </div> -->
         <div class="card">
+
+            <div class="card-header d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="creado()">
+                    <span>Nuevo Usuario</span>
+                </button>
+            </div>
+
             <div class="card-body">
                 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
-                    <h4 class="card-title text-center pt-2" style="padding-bottom: 3%;">
+                    <h4 class="card-title text-center" style="padding-bottom: 1%;">
                         Ingresar Usuario
                     </h4>
                     <div class="form-group">
@@ -89,7 +106,8 @@
 
                     <button class="btn btn-secondary btn-block" [disabled]="user.invalid || this.comprobador">
                         <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        <label *ngIf="!this.comprobador" id="labelCarga">Registrar</label>
+                        <label *ngIf="!this.comprobador && isNew" id="labelCarga">Registrar</label>
+                        <label *ngIf="!this.comprobador && isEdit" id="labelCarga">Actualizar</label>
                     </button>
                 </form>
 
