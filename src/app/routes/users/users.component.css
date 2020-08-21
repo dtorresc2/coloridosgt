@@ -14,14 +14,12 @@ form input {
     font-size: 15px;
 }
 
-
-
 button {
     padding-bottom: 0%;
 }
 
 td button {
-    padding-bottom: 2%;
+    padding-bottom: 3%;
 }
 
 button span {

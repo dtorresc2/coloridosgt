@@ -12,6 +12,7 @@ import { Usuario } from 'src/app/controllers/usuario';
 export class UsersComponent implements OnInit {
   idUsuario: any;
   user: FormGroup;
+  comprobador: boolean = false;
 
   usuario: Usuario = {
     email: '',
@@ -27,10 +28,14 @@ export class UsersComponent implements OnInit {
       {
         email: new FormControl('', [Validators.required, Validators.email]),
         username: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required)
+        password: new FormControl('', Validators.required),
+        confirmpass: new FormControl('', Validators.required)
+      },
+      {
+        validators: this.passwordMatchValidator
       }
     );
-    
+
     this.idUsuario = localStorage.getItem('idUsuario');
 
     if (this.idUsuario > 0) {
@@ -43,8 +48,14 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  // Funcion de confirmacion de usuarios
+  passwordMatchValidator(g: FormGroup): { invalid: boolean } {
+    return g.get('password').value === g.get('confirmpass').value ? null : { invalid: true };
+  }
+
+
   onSubmit() {
-    // this.comprobador = true;
+    this.comprobador = true;
     // this.autenticarUsuario();
   }
 
