@@ -3,7 +3,8 @@ import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
 import { Producto } from 'src/app/controllers/producto';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProductosService } from 'src/app/services/productos/productos.service';
 
 @Component({
   selector: 'app-products',
@@ -16,8 +17,16 @@ export class ProductsComponent implements OnInit {
   fileToUpload: File = null;
   nombreArchivo: any;
   base64Final: string;
-  user: FormGroup;
-  
+  product: FormGroup;
+
+  comprobador: boolean = false;
+
+  isEdit: boolean = false;
+  isDelete: boolean = false;
+  isNew: boolean = true;
+
+  idUsuarioAUX: any;
+
   listaCategorias: any = [];
   listaProductos: any = [];
 
@@ -32,14 +41,33 @@ export class ProductsComponent implements OnInit {
     buffer: ''
   }
 
-  constructor(private usersService: UsersService, private categoriaService: CategoriasService, private router: Router) { }
+  constructor(
+    private productoService: ProductosService,
+    private categoriaService: CategoriasService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.product = new FormGroup(
+      {
+        nombre: new FormControl('', [Validators.required]),
+        descripcion: new FormControl('', Validators.required),
+        precio: new FormControl('', [Validators.required, Validators.pattern("^\d+(\.\d{2})?$")]),
+        cantidad: new FormControl('', [Validators.required, Validators.pattern("^\d+$")]),
+        descuento: new FormControl('', [Validators.required, Validators.pattern("^\d+(\.\d{2})?$")]),
+        cantidad_minima: new FormControl('', [Validators.required, Validators.pattern("^\[1-9]+$")]),
+        categoria: new FormControl('', Validators.required),
+        imagen: new FormControl('', Validators.required)
+      }
+    );
+
+
     this.idUsuario = localStorage.getItem('idUsuario');
 
     if (this.idUsuario > 0) {
       this.ID = 'Registrado';
       this.obtenerListaCategorias();
+      this.obtenerListaProductos();
     }
     else {
       this.ID = 'Inicie Sesion';
@@ -47,11 +75,64 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  onSubmit() {
+    this.comprobador = true;
+
+    if (this.isNew) {
+      console.log("Voy a crear")
+      // this.guardarCliente();
+    }
+
+    if (this.isEdit) {
+      console.log("Voy a editar")
+      // this.editarCliente();
+    }
+
+    if (this.isDelete) {
+      console.log("Voy a eliminar");
+    }
+
+  }
+
+  creado() {
+    this.product.reset();
+    this.isEdit = false;
+    this.isDelete = false;
+    this.isNew = true;
+  }
+
+  editado(id, usuarioParametro) {
+    // console.log(usuarioParametro);
+    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
+    this.product.reset();
+    this.isEdit = true;
+    this.isDelete = false;
+    this.isNew = false;
+
+    this.idUsuarioAUX = id;
+
+    this.product.get('username').setValue(usuarioParametro.nombrerol);
+    this.product.get('email').setValue(usuarioParametro.correo);
+    this.product.get('password').setValue('2');
+    this.product.get('confirmpass').setValue('2');
+  }
+
   obtenerListaCategorias() {
     this.categoriaService.obtenerCategorias()
       .subscribe(
         res => {
           this.listaCategorias = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
+  }
+
+  obtenerListaProductos() {
+    this.productoService.obtenerProductos()
+      .subscribe(
+        res => {
+          this.listaProductos = res;
           // console.log(res);
         },
         err => console.error(err)
@@ -79,7 +160,7 @@ export class ProductsComponent implements OnInit {
   //   return Buffer.from(base64str, 'base64');
   // }
 
-  
+
   // CAMPOS
   // { nombre, descripcion, precio, cantidad, descuento, cantidad_minima, categoria_idcategoria }, url_imagen
 }

@@ -12,7 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { UsersService } from './services/usuarios/users.service';
 import { CategoriasService } from './services/productos/categorias.service';
-
+import { ProductosService } from './services/productos/productos.service';
 
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
@@ -38,7 +38,8 @@ import { UsersComponent } from './routes/users/users.component';
   ],
   providers: [
     UsersService,
-    CategoriasService
+    CategoriasService,
+    ProductosService
   ],
   bootstrap: [AppComponent]
 })

@@ -17,8 +17,8 @@
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody *ngFor="let producto of listaProductos">
+                <!-- <tr>
                     <td>Crayola super tips</td>
                     <td>Crayolas de multiples colores</td>
                     <td>Q170</td>
@@ -27,7 +27,23 @@
                     <td>Boligrafos</td>
                     <td>
                         <div class="text-center">
-                            <!--<button type="button" class="btn btn-success"><i class="fas fa-map-pin" style="width: 10px;"></i></button>-->
+                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                            <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"><i
+                                    class="far fa-image"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm"
+                                style="margin-left: 1%; margin-top: 2%;"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr> -->
+                <tr>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.descripcion}}</td>
+                    <td>Q.{{producto.precio}}</td>
+                    <td>{{producto.cantidad}}</td>
+                    <td>{{producto.cantidad_minima}}</td>
+                    <td>{{producto.categoria_idcategoria}}</td>
+                    <td>
+                        <div class="text-center">
                             <button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
                             <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"><i
                                     class="far fa-image"></i></button>
@@ -50,31 +66,31 @@
 
             <div class="card-body">
 
-                <form>
+                <form novalidate (ngSubmit)="onSubmit()" [formGroup]="product">
                     <h4 class="card-title text-center" style="padding-bottom: 1%;">
                         Ingresar Producto
                     </h4>
 
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input class="form-control form-control-sm" type="text">
+                        <input class="form-control form-control-sm" type="text" formControlName="nombre">
                     </div>
                     <div class="form-group">
                         <label>Descripcion</label>
-                        <input class="form-control form-control-sm" type="text">
+                        <input class="form-control form-control-sm" type="text" formControlName="descripcion">
                     </div>
                     
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label>Precio</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <input class="form-control form-control-sm" type="text" formControlName="precio">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Descuento</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <input class="form-control form-control-sm" type="text" formControlName="descuento">
                             </div>
                         </div>
                     </div>
@@ -83,13 +99,13 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Cantidad</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <input class="form-control form-control-sm" type="text" formControlName="cantidad">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Cantidad Minima</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <input class="form-control form-control-sm" type="text" formControlName="cantidad_minima">
                             </div>
                         </div>
                     </div>
@@ -120,3 +136,25 @@
         </div>
     </div>
 </div>
+
+<!-- 
+    cantidad: 10
+​​
+cantidad_minima: 1
+​​
+categoria_idcategoria: "Marcadores"
+​​
+descripcion: "Caja de Marcadores"
+​​
+descuento: 0
+​​
+estado: 1
+​​
+idproducto: 2
+​​
+nombre: "Marcadores"
+​​
+precio: 15.25
+​​
+url_imagen: "a"
+ -->

@@ -10,6 +10,6 @@ export class ProductosService {
   constructor(private http: HttpClient) { }
 
   obtenerProductos() {
-    return this.http.get(Servidor.API_URI + '/categorias');
+    return this.http.get(Servidor.API_URI + '/productos');
   }
 }
