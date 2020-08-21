@@ -13,10 +13,12 @@ export class UsersComponent implements OnInit {
   idUsuario: any;
   user: FormGroup;
   comprobador: boolean = false;
+  isEdit: boolean = false;
+  isDelete: boolean = false;
 
   usuario: Usuario = {
     email: '',
-    user: 'user',
+    user: '',
     password: ''
   }
 
@@ -53,10 +55,50 @@ export class UsersComponent implements OnInit {
     return g.get('password').value === g.get('confirmpass').value ? null : { invalid: true };
   }
 
-
   onSubmit() {
     this.comprobador = true;
-    // this.autenticarUsuario();
+
+    if (this.isEdit) {
+
+    }
+
+  }
+
+  // Registrar Cliente
+  guardarCliente() {
+    this.usuario.user = this.user.get('username').value;
+    this.usuario.email = this.user.get('email').value;
+    this.usuario.password = this.user.get('password').value;
+
+  //   this.usersService.registrarCliente(this.cliente)
+  //     .subscribe(
+  //       res => {
+  //         console.log(res);
+
+  //         this.respuesta = res;
+
+  //         setTimeout(() => {
+  //           this.comprobador = false;
+  //         }, 1500);
+
+  //         setTimeout(() => {
+  //           if (this.respuesta.Id > 0) {
+  //             localStorage.setItem('idUsuario', this.respuesta.Id.toString());
+  //             this.clientService.autenticado = true;
+  //             this.router.navigate(['/dashboard']);
+  //           }
+  //           else {
+  //             this.respuesta.Id = 0;
+  //             this.respuesta.EstadoInsert = '';
+  //             $('.alert').alert('close');
+  //             this.user.get('email').setValue(null);
+  //             this.user.get('password').setValue(null);
+  //             this.user.get('confirmpass').setValue(null);
+  //           }
+  //         }, 1000);
+  //       },
+  //       err => console.error(err)
+  //     );
   }
 
 }
