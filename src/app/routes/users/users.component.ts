@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/controllers/usuario';
 import { RespuestaUsuario } from 'src/app/controllers/respuestaUsuario';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 declare var $: any; // jQuery
 
 @Component({
@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
 
   idUsuarioAUX: any;
 
+  // Inicializacion de interfaces
   usuario: Usuario = {
     email: '',
     user: '',
@@ -34,6 +35,10 @@ export class UsersComponent implements OnInit {
   respuesta: RespuestaUsuario = {
     EstadoInsert: '',
     Id: 0
+  }
+
+  update : RespuestaUpdate = {
+    EstadoUpdate: ''
   }
 
   constructor(private usersService: UsersService, private router: Router) { }
@@ -78,7 +83,8 @@ export class UsersComponent implements OnInit {
     }
 
     if (this.isEdit) {
-      console.log("Voy a editar")
+      // console.log("Voy a editar")
+      this.editarCliente();
     }
 
     if (this.isDelete) {
@@ -163,30 +169,29 @@ export class UsersComponent implements OnInit {
   }
 
   editarCliente() {
-    this.usuario.user = this.user.get('username').value;
-    this.usuario.email = this.user.get('email').value;
-    this.usuario.password = this.user.get('password').value;
+    this.usuario.nombrerol = this.user.get('username').value;
+    this.usuario.correo = this.user.get('email').value;
+    // this.usuario.password = this.user.get('password').value;
 
     this.usersService.actualizarUsuario(this.idUsuarioAUX, this.usuario)
       .subscribe(
         res => {
-          console.log(res);
 
-          this.respuesta = res;
+          this.update = res;
 
           setTimeout(() => {
             this.comprobador = false;
           }, 1500);
 
           setTimeout(() => {
-            if (this.respuesta.Id > 0) {
+            if (this.update.EstadoUpdate == 'Correcto') {
               this.user.reset();
               this.obtenerListaClientes();
               this.creado();
             }
             else {
-              this.respuesta.Id = 0;
-              this.respuesta.EstadoInsert = '';
+              this.update.EstadoUpdate = '';
+              // this.respuesta.EstadoInsert = '';
               $('.alert').alert('close');
               // this.user.get('email').setValue(null);
               // this.user.get('password').setValue(null);

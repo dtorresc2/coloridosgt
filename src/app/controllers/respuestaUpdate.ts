@@ -1,3 +1,3 @@
-export interface RespuestaUsuario{
+export interface RespuestaUpdate{
    EstadoUpdate?: string;
 }
