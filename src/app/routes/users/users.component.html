@@ -1,10 +1,13 @@
-<div class="text-center">
-    <h2>Mantenimiento Usuarios</h2>
+<div class="text-center" style="font-size: 28px;">
+    <!-- <h2 class="card-title">Mantenimiento Usuarios</h2> -->
+    Mantenimiento Usuarios
 </div>
 <div class="row align-items-center" style="padding-top: 5%;">
-    <div class="col-md-4">
-        <table class="table table-hover table-active table-responsive-sm" style="width: 500px;">
-            <thead class="thead-light">
+    <div class="col-md-6">
+        <!-- <table class="table table-hover table-active table-striped table-responsive-sm"> -->
+        <table class="table table-hover table-striped table-responsive-sm">
+            <!-- <thead class="thead-light table-primary"> -->
+            <thead class="table-secondary">
                 <tr>
                     <th scope="col">Codigo</th>
                     <th scope="col">Nombre</th>
@@ -18,54 +21,31 @@
                     <td>Mark</td>
                     <td>Mar2@gmail.com</td>
                     <td>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-success"><i class="fas fa-map-pin" style="width: 10px;"></i></button>
-                            <button type="button" class="btn btn-info"><i type="submit" class="fas fa-pencil-alt"></i></button> 
-                            <button type="button" class="btn btn-danger"><i type="submit" class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Susan</td>
-                    <td>Ssus2@gmail.com</td>
-                    <td>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-success"><i class="fas fa-map-pin" style="width: 10px;"></i></button>
-                            <button type="button" class="btn btn-info"><i type="submit" class="fas fa-pencil-alt"></i></button> 
-                            <button type="button" class="btn btn-danger"><i type="submit" class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>John</td>
-                    <td>Jond12@gmail.com</td>
-                    <td>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-success"><i class="fas fa-map-pin" style="width: 10px;"></i></button>
-                            <button type="button" class="btn btn-info"><i type="submit" class="fas fa-pencil-alt"></i></button> 
-                            <button type="button" class="btn btn-danger"><i type="submit" class="fas fa-trash"></i></button>
-                        </div>
+                        <button type="button" class="btn btn-success"><i class="fas fa-map-pin"></i></button>
+                        <button type="button" class="btn btn-info"><i class="fas fa-pencil-alt"></i></button>
+                        <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block"></div>
+    <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
-                <h4 class="card-title text-center pt-2">
-                    Ingresar Usuario
-                </h4>
 
-                <!-- <div *ngIf="this.respuesta.USUARIO == -1" class="alert alert-secondary alert-dismissible fade show text-center" role="alert" style="padding-bottom: 0;">
+
+        <!-- <div *ngIf="this.respuesta.USUARIO == -1" class="alert alert-secondary alert-dismissible fade show text-center" role="alert" style="padding-bottom: 0;">
                     <p style="padding: 0; font-size: 12px;"> Credenciales Existentes</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div> -->
-
+        <div class="card">
+            <div class="card-body">
                 <form>
+
+                    <h4 class="card-title text-center pt-2">
+                        Ingresar Usuario
+                    </h4>
                     <div class="form-group">
                         <label>Nombre</label>
                         <input class="form-control" type="text">
@@ -83,7 +63,7 @@
                             Contraseña requerida
                         </span> -->
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Contraseña</label>
                         <input class="form-control" type="password" formControlName="password">
@@ -91,8 +71,11 @@
 
                     <button class="btn btn-secondary btn-block">
                         <!-- <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> -->
-                        <label id="labelCarga">Ingresar</label>
+                        <label id="labelCarga">Registrar</label>
                     </button>
                 </form>
+
+            </div>
+        </div>
     </div>
 </div>

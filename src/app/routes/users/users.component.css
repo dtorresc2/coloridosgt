@@ -1,7 +1,29 @@
-.text-center{
+/* .text-center{
     text-align: center;
+} */
+
+/* .tabla{
+    width: 150px;
+} */
+
+form label {
+    font-size: 14px;
 }
 
-.tabla{
-    width: 150px;
+form input {
+    font-size: 15px;
+}
+
+
+
+button {
+    padding-bottom: 0%;
+}
+
+td button {
+    padding-bottom: 2%;
+}
+
+button span {
+    margin-bottom: 1%;
 }
