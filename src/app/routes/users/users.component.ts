@@ -3,6 +3,8 @@ import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/controllers/usuario';
+import { RespuestaUsuario } from 'src/app/controllers/respuestaUsuario';
+declare var $: any; // jQuery
 
 @Component({
   selector: 'app-users',
@@ -12,14 +14,23 @@ import { Usuario } from 'src/app/controllers/usuario';
 export class UsersComponent implements OnInit {
   idUsuario: any;
   user: FormGroup;
+  listaClientes: any = [];
+
   comprobador: boolean = false;
+
   isEdit: boolean = false;
   isDelete: boolean = false;
+  isNew: boolean = false;
 
   usuario: Usuario = {
     email: '',
     user: '',
     password: ''
+  }
+
+  respuesta: RespuestaUsuario = {
+    EstadoInsert: '',
+    Id: 0
   }
 
   constructor(private usersService: UsersService, private router: Router) { }
@@ -41,12 +52,12 @@ export class UsersComponent implements OnInit {
     this.idUsuario = localStorage.getItem('idUsuario');
 
     if (this.idUsuario > 0) {
-      this.router.navigate(['/home']);
+      // this.ID = 'Registrado';
+      this.obtenerListaClientes();
     }
     else {
-      localStorage.clear();
-      this.usersService.autenticado = false;
-
+      // this.ID = 'Inicie Sesion';
+      this.router.navigate(['/singin']);
     }
   }
 
@@ -56,12 +67,32 @@ export class UsersComponent implements OnInit {
   }
 
   onSubmit() {
-    this.comprobador = true;
+    // this.comprobador = true;
 
-    if (this.isEdit) {
-
+    if (this.isNew) {
+      console.log("Voy a crear")
     }
 
+    if (this.isEdit) {
+      console.log("Voy a editar")
+    }
+
+    if (this.isDelete){
+      console.log("Voy a eliminar");
+    }
+
+  }
+
+
+  // Catalogo de clientes
+  obtenerListaClientes() {
+    this.usersService.obtenerUsuarios()
+      .subscribe(
+        res => {
+          this.listaClientes = res;
+        },
+        err => console.error(err)
+      )
   }
 
   // Registrar Cliente
@@ -70,35 +101,36 @@ export class UsersComponent implements OnInit {
     this.usuario.email = this.user.get('email').value;
     this.usuario.password = this.user.get('password').value;
 
-  //   this.usersService.registrarCliente(this.cliente)
-  //     .subscribe(
-  //       res => {
-  //         console.log(res);
+    this.usersService.registrarUsuario(this.usuario)
+      .subscribe(
+        res => {
+          console.log(res);
 
-  //         this.respuesta = res;
+          this.respuesta = res;
 
-  //         setTimeout(() => {
-  //           this.comprobador = false;
-  //         }, 1500);
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
 
-  //         setTimeout(() => {
-  //           if (this.respuesta.Id > 0) {
-  //             localStorage.setItem('idUsuario', this.respuesta.Id.toString());
-  //             this.clientService.autenticado = true;
-  //             this.router.navigate(['/dashboard']);
-  //           }
-  //           else {
-  //             this.respuesta.Id = 0;
-  //             this.respuesta.EstadoInsert = '';
-  //             $('.alert').alert('close');
-  //             this.user.get('email').setValue(null);
-  //             this.user.get('password').setValue(null);
-  //             this.user.get('confirmpass').setValue(null);
-  //           }
-  //         }, 1000);
-  //       },
-  //       err => console.error(err)
-  //     );
+          setTimeout(() => {
+            if (this.respuesta.Id > 0) {
+              this.user.reset();
+              // localStorage.setItem('idUsuario', this.respuesta.Id.toString());
+              // this.clientService.autenticado = true;
+              // this.router.navigate(['/dashboard']);
+            }
+            else {
+              this.respuesta.Id = 0;
+              this.respuesta.EstadoInsert = '';
+              $('.alert').alert('close');
+              this.user.get('email').setValue(null);
+              this.user.get('password').setValue(null);
+              this.user.get('confirmpass').setValue(null);
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
   }
 
 }

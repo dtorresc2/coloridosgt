@@ -61,7 +61,7 @@ export class SinginComponent implements OnInit {
     let auxUser = this.usuario.email.split('@');
     this.usuario.user = auxUser.toString();
 
-    this.usersService.autenticarCliente(this.usuario).subscribe(
+    this.usersService.autenticarUsuario(this.usuario).subscribe(
       res => {
         console.log(res);
         this.respuesta = res;

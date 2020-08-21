@@ -11,7 +11,16 @@ export class UsersService {
   
   constructor(private http: HttpClient) { }
 
-  autenticarCliente(usuario: Usuario) {
+  autenticarUsuario(usuario: Usuario) {
     return this.http.post(Servidor.API_URI + '/login', usuario);
   }
+
+  registrarUsuario(usuario: Usuario){
+    return this.http.post(Servidor.API_URI + '/register', usuario);
+  }
+
+  obtenerUsuarios(){
+    return this.http.get(Servidor.API_URI + '/users');
+  }
+
 }
