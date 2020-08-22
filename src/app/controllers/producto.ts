@@ -1,4 +1,5 @@
 export interface Producto {
+   id?: number,
    nombre?: string,
    descripcion?: string,
    precio?: number, 
@@ -6,5 +7,6 @@ export interface Producto {
    descuento?: number,
    cantidad_minima?: number,
    categoria_idcategoria?: number,
-   buffer?: string
+   buffer?: string,
+   key?:string
 }

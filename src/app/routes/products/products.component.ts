@@ -23,6 +23,8 @@ export class ProductsComponent implements OnInit {
   base64Final: string = null;
   product: FormGroup;
 
+  
+
   comprobador: boolean = false;
 
   isEdit: boolean = false;
@@ -30,6 +32,7 @@ export class ProductsComponent implements OnInit {
   isNew: boolean = true;
 
   idUsuarioAUX: any;
+  urlAUX : any;
 
   listaCategorias: any = [];
   listaProductos: any = [];
@@ -103,6 +106,7 @@ export class ProductsComponent implements OnInit {
 
     if (this.isDelete) {
       console.log("Voy a eliminar");
+      this.eliminarProducto();
     }
 
   }
@@ -131,6 +135,27 @@ export class ProductsComponent implements OnInit {
     this.product.get('cantidad').setValue(productoParametro.cantidad);
     this.product.get('descuento').setValue(productoParametro.descuento);
     this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+  }
+
+  eliminado(id, productoParametro) {
+    // console.log(productoParametro);
+    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
+    this.product.reset();
+    this.isEdit = false;
+    this.isDelete = true;
+    this.isNew = false;
+
+    this.idUsuarioAUX = id;
+    this.urlAUX = productoParametro.url_imagen;
+    this.base64Final = null;
+
+    this.product.get('nombre').setValue(productoParametro.nombre);
+    this.product.get('descripcion').setValue(productoParametro.descripcion);
+    this.product.get('precio').setValue(productoParametro.precio);
+    this.product.get('cantidad').setValue(productoParametro.cantidad);
+    this.product.get('descuento').setValue(productoParametro.descuento);
+    this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+    this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
   }
 
   obtenerListaCategorias() {
@@ -167,55 +192,6 @@ export class ProductsComponent implements OnInit {
     };
   }
 
-  editarProducto() {
-    let imgAux: any = "0";
-    this.producto.nombre = this.product.get('nombre').value;
-    this.producto.descripcion = this.product.get('descripcion').value;
-    this.producto.precio = this.product.get('precio').value;
-    this.producto.cantidad = this.product.get('cantidad').value;
-    this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
-    this.producto.descuento = this.product.get('descuento').value;
-    this.producto.buffer = this.base64Final;
-    this.producto.categoria_idcategoria = this.product.get('categoria').value;
-
-    if (this.base64Final == null) {
-      this.producto.buffer = '0';
-      imgAux = "0"
-    }
-    else {
-      imgAux = "1"
-    }
-
-    this.productoService.editarProducto(this.idUsuarioAUX, imgAux, this.producto)
-      .subscribe(
-        res => {
-          // console.log(res);
-
-          this.respuestaUpdate = res;
-
-          setTimeout(() => {
-            this.comprobador = false;
-          }, 1500);
-
-          setTimeout(() => {
-            if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
-              this.product.reset();
-              this.obtenerListaProductos();
-            }
-            else {
-              this.respuestaUpdate.EstadoUpdate = '';
-              // this.respuesta.Id = 0;
-              // this.respuesta.EstadoInsert = '';
-              // this.respuesta.Conteo = 0;
-              $('.alert').alert('close');
-              this.product.reset();
-            }
-          }, 1000);
-        },
-        err => console.error(err)
-      );
-  }
-
   // Registrar Cliente
   guardarProducto() {
     this.producto.nombre = this.product.get('nombre').value;
@@ -234,7 +210,6 @@ export class ProductsComponent implements OnInit {
     this.productoService.registrarProducto(this.producto)
       .subscribe(
         res => {
-          // console.log(res);
 
           this.respuesta = res;
 
@@ -259,6 +234,89 @@ export class ProductsComponent implements OnInit {
         err => console.error(err)
       );
   }
+
+  editarProducto() {
+    let imgAux: any = "0";
+    this.producto.nombre = this.product.get('nombre').value;
+    this.producto.descripcion = this.product.get('descripcion').value;
+    this.producto.precio = this.product.get('precio').value;
+    this.producto.cantidad = this.product.get('cantidad').value;
+    this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
+    this.producto.descuento = this.product.get('descuento').value;
+    this.producto.buffer = this.base64Final;
+    this.producto.categoria_idcategoria = this.product.get('categoria').value;
+
+    if (this.base64Final == null) {
+      this.producto.buffer = '0';
+      imgAux = "0"
+    }
+    else {
+      imgAux = "1"
+    }
+
+    this.productoService.editarProducto(this.idUsuarioAUX, imgAux, this.producto)
+      .subscribe(
+        res => {
+          this.respuestaUpdate = res;
+
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
+              this.product.reset();
+              this.obtenerListaProductos();
+              this.creado();
+            }
+            else {
+              this.respuestaUpdate.EstadoUpdate = '';
+              $('.alert').alert('close');
+              this.product.reset();
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
+  eliminarProducto() {
+    let arreglo = this.urlAUX.split('/');
+    let conteo = arreglo.length;
+    let keyAUX;
+    // console.log(arreglo[conteo - 1], '-', conteo);
+
+    this.producto.id = this.idUsuarioAUX;
+    keyAUX = arreglo[conteo - 1];
+    this.producto.key = keyAUX;
+    console.log(this.producto.id, '-', keyAUX);
+
+    this.productoService.eliminarProducto(this.producto)
+      .subscribe(
+        res => {
+          this.respuestaUpdate = res;
+
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
+              this.product.reset();
+              this.obtenerListaProductos();
+              this.creado()
+            }
+            else {
+              this.respuestaUpdate.EstadoUpdate = '';
+              $('.alert').alert('close');
+              this.product.reset();
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
 
   // CAMPOS
   // { nombre, descripcion, precio, cantidad, descuento, cantidad_minima, categoria_idcategoria }, url_imagen
