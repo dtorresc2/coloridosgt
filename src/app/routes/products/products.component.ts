@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { RespuestaUsuario } from 'src/app/controllers/respuestaUsuario';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 declare var $: any; // jQuery
 
 @Component({
@@ -19,7 +20,7 @@ export class ProductsComponent implements OnInit {
   idUsuario: any;
   fileToUpload: File = null;
   nombreArchivo: any;
-  base64Final: string;
+  base64Final: string = null;
   product: FormGroup;
 
   comprobador: boolean = false;
@@ -47,7 +48,11 @@ export class ProductsComponent implements OnInit {
     descuento: 0.00,
     cantidad_minima: 0,
     categoria_idcategoria: 0,
-    buffer: ''
+    buffer: '0'
+  }
+
+  respuestaUpdate: RespuestaUpdate = {
+    EstadoUpdate: ''
   }
 
   constructor(
@@ -93,7 +98,7 @@ export class ProductsComponent implements OnInit {
 
     if (this.isEdit) {
       console.log("Voy a editar")
-      // this.editarCliente();
+      this.editarProducto();
     }
 
     if (this.isDelete) {
@@ -118,6 +123,7 @@ export class ProductsComponent implements OnInit {
     this.isNew = false;
 
     this.idUsuarioAUX = id;
+    this.base64Final = null;
 
     this.product.get('nombre').setValue(productoParametro.nombre);
     this.product.get('descripcion').setValue(productoParametro.descripcion);
@@ -159,17 +165,10 @@ export class ProductsComponent implements OnInit {
       this.base64Final = base64str.replace(/^data:image\/\w+;base64,/, '');
       // console.log(this.base64Final);
     };
-
-
-    // console.log(this.fileToUpload);
-    // this.nombreArchivo = this.fileToUpload.name;
   }
 
-  // Registrar Cliente
-  guardarProducto() {
-    // this.usuario.user = this.user.get('username').value;
-    // this.usuario.email = this.user.get('email').value;
-    // this.usuario.password = this.user.get('password').value;
+  editarProducto() {
+    let imgAux: any = "0";
     this.producto.nombre = this.product.get('nombre').value;
     this.producto.descripcion = this.product.get('descripcion').value;
     this.producto.precio = this.product.get('precio').value;
@@ -179,14 +178,58 @@ export class ProductsComponent implements OnInit {
     this.producto.buffer = this.base64Final;
     this.producto.categoria_idcategoria = this.product.get('categoria').value;
 
-    // console.log(this.producto);
+    if (this.base64Final == null) {
+      this.producto.buffer = '0';
+      imgAux = "0"
+    }
+    else {
+      imgAux = "1"
+    }
 
-    // this.product.get('nombre').setValue(productoParametro.nombre);
-    // this.product.get('descripcion').setValue(productoParametro.descripcion);
-    // this.product.get('precio').setValue(productoParametro.precio);
-    // this.product.get('cantidad').setValue(productoParametro.cantidad);
-    // this.product.get('descuento').setValue(productoParametro.descuento);
-    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+    this.productoService.editarProducto(this.idUsuarioAUX, imgAux, this.producto)
+      .subscribe(
+        res => {
+          // console.log(res);
+
+          this.respuestaUpdate = res;
+
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
+              this.product.reset();
+              this.obtenerListaProductos();
+            }
+            else {
+              this.respuestaUpdate.EstadoUpdate = '';
+              // this.respuesta.Id = 0;
+              // this.respuesta.EstadoInsert = '';
+              // this.respuesta.Conteo = 0;
+              $('.alert').alert('close');
+              this.product.reset();
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
+  // Registrar Cliente
+  guardarProducto() {
+    this.producto.nombre = this.product.get('nombre').value;
+    this.producto.descripcion = this.product.get('descripcion').value;
+    this.producto.precio = this.product.get('precio').value;
+    this.producto.cantidad = this.product.get('cantidad').value;
+    this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
+    this.producto.descuento = this.product.get('descuento').value;
+    this.producto.buffer = this.base64Final;
+    this.producto.categoria_idcategoria = this.product.get('categoria').value;
+
+    if (this.base64Final == null) {
+      this.producto.buffer = '0';
+    }
 
     this.productoService.registrarProducto(this.producto)
       .subscribe(
@@ -216,12 +259,6 @@ export class ProductsComponent implements OnInit {
         err => console.error(err)
       );
   }
-
-  // fileToBufer(){
-  //   const base64str = base64.replace(/^data:image\/\w+;base64,/, '');
-  //   return Buffer.from(base64str, 'base64');
-  // }
-
 
   // CAMPOS
   // { nombre, descripcion, precio, cantidad, descuento, cantidad_minima, categoria_idcategoria }, url_imagen

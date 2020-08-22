@@ -15,8 +15,14 @@ export class ProductosService {
   }
 
   registrarProducto(producto: Producto) {
-    return this.http.post(Servidor.API_URI + '/productos', producto , {
-      headers: {'Content-Length': '54138'}
-    });
+    // return this.http.post(Servidor.API_URI + '/productos', producto, {
+    //   headers: { 'Content-Length': '54138' }
+    // });
+    return this.http.post(Servidor.API_URI + '/productos', producto);
   }
+
+  editarProducto(id, img, producto: Producto) {
+    return this.http.put(Servidor.API_URI + '/productos/' + id + '/imagen/' + img, producto);
+  }
+
 }
