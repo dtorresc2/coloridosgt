@@ -101,11 +101,23 @@ export class UsersComponent implements OnInit {
   }
 
   editado(id, usuarioParametro) {
-    // console.log(usuarioParametro);
-    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
     this.user.reset();
     this.isEdit = true;
     this.isDelete = false;
+    this.isNew = false;
+
+    this.idUsuarioAUX = id;
+
+    this.user.get('username').setValue(usuarioParametro.nombrerol);
+    this.user.get('email').setValue(usuarioParametro.correo);
+    this.user.get('password').setValue('2');
+    this.user.get('confirmpass').setValue('2');
+  }
+
+  eliminado(id, usuarioParametro) {
+    this.user.reset();
+    this.isEdit = false;
+    this.isDelete = true;
     this.isNew = false;
 
     this.idUsuarioAUX = id;
@@ -196,6 +208,33 @@ export class UsersComponent implements OnInit {
               // this.user.get('email').setValue(null);
               // this.user.get('password').setValue(null);
               // this.user.get('confirmpass').setValue(null);
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
+  eliminarProducto() {
+    this.usersService.eliminarUsuario(this.idUsuarioAUX)
+      .subscribe(
+        res => {
+          this.update = res;
+
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if (this.update.EstadoUpdate == 'Correcto') {
+              this.user.reset();
+              this.obtenerListaClientes();
+              this.creado();
+            }
+            else {
+              this.update.EstadoUpdate = '';
+              $('.alert').alert('close');
+              this.user.reset();
             }
           }, 1000);
         },

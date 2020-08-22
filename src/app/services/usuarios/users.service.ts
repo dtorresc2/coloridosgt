@@ -27,4 +27,8 @@ export class UsersService {
     return this.http.put(Servidor.API_URI + '/users/' + id, usuario);
   }
 
+  eliminarUsuario(id){
+    return this.http.delete(Servidor.API_URI + '/users/' + id);
+  }
+
 }

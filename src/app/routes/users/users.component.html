@@ -32,12 +32,12 @@
                     <td>{{user.nombrerol}}</td>
                     <td>{{user.correo}}</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm" style="padding-left: 8%; padding-right: 8%;"><i
-                                class="fas fa-map-pin fa-sm"></i></button>
-                        <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;" (click)="editado(user.idusuario,user)"><i
-                                class="fas fa-pencil-alt fa-sm"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"><i 
-                                class="fas fa-trash fa-sm"></i></button>
+                        <button type="button" class="btn btn-success btn-sm"
+                            style="padding-left: 8%; padding-right: 8%;"><i class="fas fa-map-pin fa-sm"></i></button>
+                        <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"
+                            (click)="editado(user.idusuario,user)"><i class="fas fa-pencil-alt fa-sm"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"
+                            (click)="eliminado(user.idusuario,user)" class=" fas fa-trash fa-sm"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -103,7 +103,8 @@
 
                     <div class="form-group" style="padding-bottom: 3%;">
                         <label>Confirmar Contraseña</label>
-                        <input class="form-control" type="password" formControlName="confirmpass" [readonly]="!this.isNew">
+                        <input class="form-control" type="password" formControlName="confirmpass"
+                            [readonly]="!this.isNew">
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="user.get('confirmpass').hasError('required') && user.get('confirmpass').touched">
                             Contraseña requerida
@@ -118,6 +119,7 @@
                             aria-hidden="true"></span>
                         <label *ngIf="!this.comprobador && this.isNew" id="labelCarga">Registrar</label>
                         <label *ngIf="!this.comprobador && this.isEdit" id="labelCarga">Actualizar</label>
+                        <label *ngIf="!this.comprobador && this.isDelete" id="labelCarga">Eliminar</label>
                     </button>
                 </form>
 
