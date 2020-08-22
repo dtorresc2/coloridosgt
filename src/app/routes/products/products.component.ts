@@ -52,15 +52,14 @@ export class ProductsComponent implements OnInit {
       {
         nombre: new FormControl('', [Validators.required]),
         descripcion: new FormControl('', Validators.required),
-        precio: new FormControl('', [Validators.required, Validators.pattern("^\d+(\.\d{2})?$")]),
-        cantidad: new FormControl('', [Validators.required, Validators.pattern("^\d+$")]),
-        descuento: new FormControl('', [Validators.required, Validators.pattern("^\d+(\.\d{2})?$")]),
-        cantidad_minima: new FormControl('', [Validators.required, Validators.pattern("^\[1-9]+$")]),
-        categoria: new FormControl('', Validators.required),
-        imagen: new FormControl('', Validators.required)
+        precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+        cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+        descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+        cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+        categoria: new FormControl('', Validators.required)
+        // imagen: new FormControl('', Validators.required)
       }
     );
-
 
     this.idUsuario = localStorage.getItem('idUsuario');
 
@@ -101,8 +100,8 @@ export class ProductsComponent implements OnInit {
     this.isNew = true;
   }
 
-  editado(id, usuarioParametro) {
-    // console.log(usuarioParametro);
+  editado(id, productoParametro) {
+    // console.log(productoParametro);
     // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
     this.product.reset();
     this.isEdit = true;
@@ -111,10 +110,12 @@ export class ProductsComponent implements OnInit {
 
     this.idUsuarioAUX = id;
 
-    this.product.get('username').setValue(usuarioParametro.nombrerol);
-    this.product.get('email').setValue(usuarioParametro.correo);
-    this.product.get('password').setValue('2');
-    this.product.get('confirmpass').setValue('2');
+    this.product.get('nombre').setValue(productoParametro.nombre);
+    this.product.get('descripcion').setValue(productoParametro.descripcion);
+    this.product.get('precio').setValue(productoParametro.precio);
+    this.product.get('cantidad').setValue(productoParametro.cantidad);
+    this.product.get('descuento').setValue(productoParametro.descuento);
+    this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
   }
 
   obtenerListaCategorias() {

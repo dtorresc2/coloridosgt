@@ -44,7 +44,7 @@
                     <td>{{producto.categoria_idcategoria}}</td>
                     <td>
                         <div class="text-center">
-                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                            <button type="button" class="btn btn-info btn-sm" (click)="editado(producto.idproducto,producto)"><i class="fas fa-pencil-alt"></i></button>
                             <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"><i
                                     class="far fa-image"></i></button>
                             <button type="button" class="btn btn-danger btn-sm"
@@ -59,7 +59,7 @@
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary btn-sm">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="creado()">
                     <span>Nuevo Producto</span>
                 </button>
             </div>
@@ -74,23 +74,47 @@
                     <div class="form-group">
                         <label>Nombre</label>
                         <input class="form-control form-control-sm" type="text" formControlName="nombre">
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('nombre').hasError('required') && product.get('nombre').touched">
+                            Nombre requerido
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>Descripcion</label>
                         <input class="form-control form-control-sm" type="text" formControlName="descripcion">
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('descripcion').hasError('required') && product.get('descripcion').touched">
+                            Descripcion requerida
+                        </span>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label>Precio</label>
                                 <input class="form-control form-control-sm" type="text" formControlName="precio">
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('precio').hasError('required') && product.get('precio').touched">
+                                    Precio requerido
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('precio').hasError('pattern') && product.get('precio').touched">
+                                    Precio invalido
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Descuento</label>
                                 <input class="form-control form-control-sm" type="text" formControlName="descuento">
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('descuento').hasError('required') && product.get('descuento').touched">
+                                    Descuento requerido
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('descuento').hasError('pattern') && product.get('descuento').touched">
+                                    Descuento invalido
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -100,35 +124,63 @@
                             <div class="form-group">
                                 <label>Cantidad</label>
                                 <input class="form-control form-control-sm" type="text" formControlName="cantidad">
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad').hasError('required') && product.get('cantidad').touched">
+                                    Cantidad requerida
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad').hasError('pattern') && product.get('cantidad').touched">
+                                    Cantidad invalida
+                                </span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Cantidad Minima</label>
-                                <input class="form-control form-control-sm" type="text" formControlName="cantidad_minima">
+                                <input class="form-control form-control-sm" type="text"
+                                    formControlName="cantidad_minima">
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad_minima').hasError('required') && product.get('cantidad_minima').touched">
+                                    Cantidad requerida
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad_minima').hasError('pattern') && product.get('cantidad_minima').touched">
+                                    Cantidad invalida
+                                </span>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Categoria</label>
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1"
+                            formControlName="categoria">
                             <option [value]="categoria.idcategoria" *ngFor="let categoria of listaCategorias">
                                 {{categoria.nombre}}
                             </option>
                         </select>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('categoria').hasError('required') && product.get('categoria').touched">
+                            Categoria requerida
+                        </span>
                     </div>
                     <div class="form-group custom-file" style="margin-bottom: 3%;">
                         <!-- <label>Subir Imagen</label> -->
                         <input type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/*"
                             (change)="handleFileInput($event.target.files)">
                         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                        <!-- <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('categoria').hasError('required') && product.get('categoria').touched">
+                            Imagen requerida
+                        </span> -->
                     </div>
 
 
-                    <button class="btn btn-secondary btn-block">
-                        <!-- <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> -->
-                        <label id="labelCarga">Ingresar</label>
+                    <button class="btn btn-secondary btn-block" [disabled]="product.invalid || this.comprobador">
+                        <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
+                        <label *ngIf="!this.comprobador && this.isNew" id="labelCarga">Registrar</label>
+                        <label *ngIf="!this.comprobador && this.isEdit" id="labelCarga">Actualizar</label>
                     </button>
                 </form>
 
