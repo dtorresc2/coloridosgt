@@ -5,6 +5,9 @@ import { CategoriasService } from 'src/app/services/productos/categorias.service
 import { Producto } from 'src/app/controllers/producto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductosService } from 'src/app/services/productos/productos.service';
+import { RespuestaUsuario } from 'src/app/controllers/respuestaUsuario';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+declare var $: any; // jQuery
 
 @Component({
   selector: 'app-products',
@@ -29,6 +32,12 @@ export class ProductsComponent implements OnInit {
 
   listaCategorias: any = [];
   listaProductos: any = [];
+
+  respuesta: RespuestaUsuario = {
+    EstadoInsert: '',
+    Id: 0,
+    Conteo: 0
+  }
 
   producto: Producto = {
     nombre: '',
@@ -79,7 +88,7 @@ export class ProductsComponent implements OnInit {
 
     if (this.isNew) {
       console.log("Voy a crear")
-      // this.guardarCliente();
+      this.guardarProducto();
     }
 
     if (this.isEdit) {
@@ -154,6 +163,58 @@ export class ProductsComponent implements OnInit {
 
     // console.log(this.fileToUpload);
     // this.nombreArchivo = this.fileToUpload.name;
+  }
+
+  // Registrar Cliente
+  guardarProducto() {
+    // this.usuario.user = this.user.get('username').value;
+    // this.usuario.email = this.user.get('email').value;
+    // this.usuario.password = this.user.get('password').value;
+    this.producto.nombre = this.product.get('nombre').value;
+    this.producto.descripcion = this.product.get('descripcion').value;
+    this.producto.precio = this.product.get('precio').value;
+    this.producto.cantidad = this.product.get('cantidad').value;
+    this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
+    this.producto.descuento = this.product.get('descuento').value;
+    this.producto.buffer = this.base64Final;
+    this.producto.categoria_idcategoria = this.product.get('categoria').value;
+
+    // console.log(this.producto);
+
+    // this.product.get('nombre').setValue(productoParametro.nombre);
+    // this.product.get('descripcion').setValue(productoParametro.descripcion);
+    // this.product.get('precio').setValue(productoParametro.precio);
+    // this.product.get('cantidad').setValue(productoParametro.cantidad);
+    // this.product.get('descuento').setValue(productoParametro.descuento);
+    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+
+    this.productoService.registrarProducto(this.producto)
+      .subscribe(
+        res => {
+          // console.log(res);
+
+          this.respuesta = res;
+
+          setTimeout(() => {
+            this.comprobador = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if (this.respuesta.Conteo == 0) {
+              this.product.reset();
+              this.obtenerListaProductos();
+            }
+            else {
+              this.respuesta.Id = 0;
+              this.respuesta.EstadoInsert = '';
+              this.respuesta.Conteo = 0;
+              $('.alert').alert('close');
+              this.product.reset();
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
   }
 
   // fileToBufer(){
