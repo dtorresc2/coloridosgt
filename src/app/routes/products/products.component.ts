@@ -284,7 +284,6 @@ export class ProductsComponent implements OnInit {
     let arreglo = this.urlAUX.split('/');
     let conteo = arreglo.length;
     let keyAUX;
-    // console.log(arreglo[conteo - 1], '-', conteo);
 
     this.producto.id = this.idUsuarioAUX;
     keyAUX = arreglo[conteo - 1];
