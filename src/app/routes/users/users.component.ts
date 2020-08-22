@@ -88,7 +88,8 @@ export class UsersComponent implements OnInit {
     }
 
     if (this.isDelete) {
-      console.log("Voy a eliminar");
+      // console.log("Voy a eliminar");
+      this.eliminarCliente();
     }
 
   }
@@ -215,7 +216,7 @@ export class UsersComponent implements OnInit {
       );
   }
 
-  eliminarProducto() {
+  eliminarCliente() {
     this.usersService.eliminarUsuario(this.idUsuarioAUX)
       .subscribe(
         res => {
