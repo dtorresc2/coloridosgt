@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3 pb-4">
+    <!-- <div class="col-md-3 pb-4">
         <div class="card text-center">
             <img src="http://hp-api.herokuapp.com/images/mcgonagall.jpg" height="200">
             <div class="card-body">
@@ -19,18 +19,26 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 pb-4">
+    </div> -->
+    <div class="col-md-3 pb-4" *ngFor="let producto of listaProductos">
         <div class="card text-center">
-            <img src="http://hp-api.herokuapp.com/images/mcgonagall.jpg" height="200">
+            <img [src]="producto.url_imagen" height="200">
             <div class="card-body">
-                <h4 class="card-title">Marcadores Crayola</h4>
-                <p class="card-text">Caja de 12 unidades de marcadores marca crayola</p>
+                <h4 class="card-title"> {{producto.nombre}} </h4>
+                <p class="card-text">{{producto.descripcion}}</p>
             </div>
             <div class="card-footer text-muted">
-                <div class="row">
+                <div class="row" *ngIf="producto.descuento == 0">
                     <div class="col">
-                        Q. 12.50
+                      Q.{{ producto.precio | number:'1.2-2' }}
+                    </div>
+                </div>
+                <div class="row" *ngIf="producto.descuento > 0">
+                    <div class="col text-danger">
+                        Q.{{ producto.precio | number:'1.2-2' }}
+                    </div>
+                    <div class="col text-primary">
+                        Q.{{ producto.descuento | number:'1.2-2' }}
                     </div>
                 </div>
             </div>
