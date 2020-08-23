@@ -7,6 +7,7 @@ import { ProductsComponent } from './routes/products/products.component';
 import { UsersComponent } from './routes/users/users.component';
 import { DashProductsComponent } from './views/products/dash-products/dash-products.component';
 import { DetailProductsComponent } from './views/products/detail-products/detail-products.component';
+import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
@@ -20,8 +21,12 @@ const routes: Routes = [
       { path: ':id', component: DetailProductsComponent }
     ]
   },
-  { path: 'users', component: UsersComponent }
-
+  {
+    path: 'users', component: UsersComponent,
+    children: [
+      { path: '', component: DashUsersComponent}
+    ]
+  }
 ];
 
 @NgModule({

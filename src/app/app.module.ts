@@ -19,6 +19,7 @@ import { AccountsComponent } from './routes/accounts/accounts.component';
 import { UsersComponent } from './routes/users/users.component';
 import { DashProductsComponent } from './views/products/dash-products/dash-products.component';
 import { DetailProductsComponent } from './views/products/detail-products/detail-products.component';
+import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DetailProductsComponent } from './views/products/detail-products/detail
     AccountsComponent,
     UsersComponent,
     DashProductsComponent,
-    DetailProductsComponent
+    DetailProductsComponent,
+    DashUsersComponent
   ],
   imports: [
     BrowserModule,
