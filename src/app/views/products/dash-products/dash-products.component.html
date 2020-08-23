@@ -1,4 +1,4 @@
-<!-- <div class="text-center" style="font-size: 28px;">
+<div class="text-center" style="font-size: 28px;">
     Mantenimiento Productos
 </div>
 <div class="row align-items-start" style="padding-top: 5%;">
@@ -9,8 +9,8 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">#Minimo </th>
+                    <th scope="col">Cant</th>
+                    <th scope="col">#Min</th>
                     <th scope="col">Categoria</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -26,13 +26,23 @@
                     <td>
                         <div class="text-center">
                             <button type="button" class="btn btn-info btn-sm"
-                                (click)="editado(producto.idproducto,producto)"><i
-                                    class="fas fa-pencil-alt"></i></button>
-                            <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"><i
-                                    class="far fa-image"></i></button>
+                                (click)="editado(producto.idproducto,producto)">
+                                <i class="fas fa-pencil-alt"></i></button>
+
+                            <button type="button" class="btn btn-info btn-sm"
+                                (click)="editado(producto.idproducto,producto)"
+                                style="margin-left: 1%;">
+                                <i class="far fa-image"></i></button>
+
+                            <button type="button" class="btn btn-info btn-sm" 
+                                style="margin-top: 2%;"
+                                (click)="inventario(producto.idproducto)">
+                                <i class="fas fa-boxes"></i></button>
+
                             <button type="button" class="btn btn-danger btn-sm"
                                 (click)="eliminado(producto.idproducto,producto)"
-                                style="margin-left: 1%; margin-top: 2%;"><i class="fas fa-trash"></i></button>
+                                style="margin-left: 2%; margin-top: 2%;">
+                                <i class="fas fa-trash"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -167,5 +177,4 @@
             </div>
         </div>
     </div>
-</div> -->
-<router-outlet></router-outlet>
+</div>

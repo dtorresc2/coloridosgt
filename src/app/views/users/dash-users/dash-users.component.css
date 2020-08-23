@@ -7,31 +7,31 @@
 } */
 
 form label {
-    font-size: 14px;
+   font-size: 14px;
 }
 
 form input {
-    font-size: 15px;
+   font-size: 15px;
 }
 
 button {
-    padding-bottom: 0%;
+   padding-bottom: 0%;
 }
 
 td button {
-    padding-bottom: 3%;
+   padding-bottom: 3%;
 }
 
 button span {
-    margin-bottom: 1%;
+   margin-bottom: 1%;
 }
 
 .card-header button {
-    padding-bottom: 1%;
-    /* width: 30%; */
+   padding-bottom: 1%;
+   /* width: 30%; */
 }
 
 /* .card-header button span {
-    padding-left: 3%;
+   padding-left: 3%;
 
 } */

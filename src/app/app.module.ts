@@ -11,9 +11,16 @@ import { SinginComponent } from './routes/singin/singin.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { UsersService } from './services/usuarios/users.service';
+import { CategoriasService } from './services/productos/categorias.service';
+import { ProductosService } from './services/productos/productos.service';
+
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
 import { UsersComponent } from './routes/users/users.component';
+import { DashProductsComponent } from './views/products/dash-products/dash-products.component';
+import { DetailProductsComponent } from './views/products/detail-products/detail-products.component';
+import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
+import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,11 @@ import { UsersComponent } from './routes/users/users.component';
     FooterComponent,
     ProductsComponent,
     AccountsComponent,
-    UsersComponent
+    UsersComponent,
+    DashProductsComponent,
+    DetailProductsComponent,
+    DashUsersComponent,
+    BitacoraUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +45,9 @@ import { UsersComponent } from './routes/users/users.component';
     ReactiveFormsModule
   ],
   providers: [
-    UsersService
+    UsersService,
+    CategoriasService,
+    ProductosService
   ],
   bootstrap: [AppComponent]
 })
