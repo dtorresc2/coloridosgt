@@ -154,6 +154,10 @@ export class DashProductsComponent implements OnInit {
     this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
   }
 
+  inventario(id){
+    this.router.navigate(['products',id]);
+  }
+
   obtenerListaCategorias() {
     this.categoriaService.obtenerCategorias()
       .subscribe(
