@@ -17,6 +17,8 @@ import { ProductosService } from './services/productos/productos.service';
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
 import { UsersComponent } from './routes/users/users.component';
+import { DashProductsComponent } from './views/products/dash-products/dash-products.component';
+import { DetailProductsComponent } from './views/products/detail-products/detail-products.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { UsersComponent } from './routes/users/users.component';
     FooterComponent,
     ProductsComponent,
     AccountsComponent,
-    UsersComponent
+    UsersComponent,
+    DashProductsComponent,
+    DetailProductsComponent
   ],
   imports: [
     BrowserModule,

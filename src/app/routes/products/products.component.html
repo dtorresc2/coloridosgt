@@ -1,10 +1,8 @@
-<div class="text-center" style="font-size: 28px;">
-    <!-- <p>Mantenimiento Productos</p> -->
+<!-- <div class="text-center" style="font-size: 28px;">
     Mantenimiento Productos
 </div>
 <div class="row align-items-start" style="padding-top: 5%;">
     <div class="col-md-6">
-        <!-- <table class="table table-hover table-active"> -->
         <table class="table table-hover table-striped table-md table-responsive-sm">
             <thead class="table-secondary">
                 <tr>
@@ -18,23 +16,6 @@
                 </tr>
             </thead>
             <tbody *ngFor="let producto of listaProductos">
-                <!-- <tr>
-                    <td>Crayola super tips</td>
-                    <td>Crayolas de multiples colores</td>
-                    <td>Q170</td>
-                    <td>14</td>
-                    <td>30</td>
-                    <td>Boligrafos</td>
-                    <td>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                            <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"><i
-                                    class="far fa-image"></i></button>
-                            <button type="button" class="btn btn-danger btn-sm"
-                                style="margin-left: 1%; margin-top: 2%;"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr> -->
                 <tr>
                     <td>{{producto.nombre}}</td>
                     <td>{{producto.descripcion}}</td>
@@ -168,14 +149,9 @@
                         </span>
                     </div>
                     <div class="form-group custom-file" style="margin-bottom: 3%;">
-                        <!-- <label>Subir Imagen</label> -->
                         <input type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/*"
                             (change)="handleFileInput($event.target.files)">
                         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                        <!-- <span class="text-danger" style="font-size: 10px;"
-                            *ngIf="product.get('categoria').hasError('required') && product.get('categoria').touched">
-                            Imagen requerida
-                        </span> -->
                     </div>
 
 
@@ -191,26 +167,5 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- 
-    cantidad: 10
-​​
-cantidad_minima: 1
-​​
-categoria_idcategoria: "Marcadores"
-​​
-descripcion: "Caja de Marcadores"
-​​
-descuento: 0
-​​
-estado: 1
-​​
-idproducto: 2
-​​
-nombre: "Marcadores"
-​​
-precio: 15.25
-​​
-url_imagen: "a"
- -->
+</div> -->
+<router-outlet></router-outlet>
