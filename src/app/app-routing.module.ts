@@ -8,6 +8,7 @@ import { UsersComponent } from './routes/users/users.component';
 import { DashProductsComponent } from './views/products/dash-products/dash-products.component';
 import { DetailProductsComponent } from './views/products/detail-products/detail-products.component';
 import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
+import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
@@ -18,13 +19,16 @@ const routes: Routes = [
     path: 'products', component: ProductsComponent,
     children: [
       { path: '', component: DashProductsComponent },
-      { path: ':id', component: DetailProductsComponent }
+      { path: ':id', component: DetailProductsComponent },
+      { path: '**', component: DashProductsComponent }
     ]
   },
   {
     path: 'users', component: UsersComponent,
     children: [
-      { path: '', component: DashUsersComponent}
+      { path: '', component: DashUsersComponent},
+      { path: ':id/bitacora', component: BitacoraUsersComponent},
+      { path: '**', component: DashUsersComponent}
     ]
   }
 ];

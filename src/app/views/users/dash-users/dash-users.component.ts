@@ -242,4 +242,8 @@ export class DashUsersComponent implements OnInit {
       );
   }
 
+  bitacora(id){
+    this.router.navigate(['users',id,'bitacora']);
+  }
+
 }
