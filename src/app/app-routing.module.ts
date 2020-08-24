@@ -9,12 +9,14 @@ import { DashProductsComponent } from './views/products/dash-products/dash-produ
 import { DetailProductsComponent } from './views/products/detail-products/detail-products.component';
 import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
+import { OrdersComponent } from './routes/orders/orders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'singin', component: SinginComponent },
   { path: 'accounts', component: AccountsComponent },
+  { path: 'orders', component: OrdersComponent },
   {
     path: 'products', component: ProductsComponent,
     children: [
