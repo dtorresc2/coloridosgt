@@ -20,6 +20,11 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a *ngIf="!sesion" class="nav-link" routerLink="/order" routerLinkActive="active"> 
+                    <i class="fas fa-shopping-cart"></i><span class="badge badge-danger">0</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -34,7 +39,15 @@
                         <i class="fas fa-sign-in-alt"></i>
                         Iniciar Sesion
                     </a>
-                    <!-- <div *ngIf="!sesion" class="dropdown-divider"></div> -->
+                    <a *ngIf="!sesion" class="dropdown-item" routerLink="/order/list" routerLinkActive="active">
+                        <i class="fas fa-list-ul"></i>
+                        Pedidos
+                    </a>
+                    <a *ngIf="!sesion" class="dropdown-item" routerLink="/log" routerLinkActive="active">
+                        <i class="far fa-eye"></i>
+                        Bitacora
+                    </a>
+                    <!-- <div *ngIf="sesion" class="dropdown-divider"></div> -->
                     <a *ngIf="sesion" class="dropdown-item" (click)="cerrarSesion()">
                         <i class="fas fa-sign-out-alt"></i>
                         Cerrar Sesion</a>
