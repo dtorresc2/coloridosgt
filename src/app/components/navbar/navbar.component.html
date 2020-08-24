@@ -18,7 +18,7 @@
                 <a class="nav-link" routerLink="/accounts" routerLinkActive="active">Finanzas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/users" routerLinkActive="active">Usuarios</a>
+                <a class="nav-link" routerLink="/orders" routerLinkActive="active">Pedidos</a>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="/us" routerLinkActive="active">Finanzas</a>
@@ -28,6 +28,9 @@
             </li> -->
         </ul>
         <ul *ngIf="sesion || this.idUsuario > 0"  class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/users" routerLinkActive="active">Usuarios</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" routerLinkActive="active" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">

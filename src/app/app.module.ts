@@ -21,6 +21,7 @@ import { DashProductsComponent } from './views/products/dash-products/dash-produ
 import { DetailProductsComponent } from './views/products/detail-products/detail-products.component';
 import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
+import { OrdersComponent } from './routes/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-us
     DashProductsComponent,
     DetailProductsComponent,
     DashUsersComponent,
-    BitacoraUsersComponent
+    BitacoraUsersComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
