@@ -16,7 +16,8 @@ import { ClientsService } from './services/clientes/clients.service';
 import { DashboardComponent } from './routes/dashboard/dashboard.component';
 import { OrderComponent } from './routes/order/order.component';
 import { CartComponent } from './views/order/cart/cart.component';
-import { OrdersComponent } from './views/order/orders/orders.component'
+import { OrdersComponent } from './views/order/orders/orders.component';
+import { LogComponent } from './routes/log/log.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OrdersComponent } from './views/order/orders/orders.component'
     DashboardComponent,
     OrderComponent,
     CartComponent,
-    OrdersComponent
+    OrdersComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,
