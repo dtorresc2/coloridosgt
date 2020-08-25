@@ -29,7 +29,8 @@ export class DashUsersComponent implements OnInit {
   usuario: Usuario = {
     email: '',
     user: '',
-    password: ''
+    password: '',
+    usuario: 0
   }
 
   respuesta: RespuestaUsuario = {
@@ -146,6 +147,7 @@ export class DashUsersComponent implements OnInit {
     this.usuario.user = this.user.get('username').value;
     this.usuario.email = this.user.get('email').value;
     this.usuario.password = this.user.get('password').value;
+    this.usuario.usuario = this.idUsuario;
 
     this.usersService.registrarUsuario(this.usuario)
       .subscribe(
@@ -183,6 +185,8 @@ export class DashUsersComponent implements OnInit {
   editarCliente() {
     this.usuario.nombrerol = this.user.get('username').value;
     this.usuario.correo = this.user.get('email').value;
+    this.usuario.usuario = this.idUsuario;
+
     // this.usuario.password = this.user.get('password').value;
 
     this.usersService.actualizarUsuario(this.idUsuarioAUX, this.usuario)
@@ -216,7 +220,9 @@ export class DashUsersComponent implements OnInit {
   }
 
   eliminarCliente() {
-    this.usersService.eliminarUsuario(this.idUsuarioAUX)
+    this.usuario.usuario = this.idUsuario;
+
+    this.usersService.eliminarUsuario(this.idUsuarioAUX, this.idUsuario)
       .subscribe(
         res => {
           this.update = res;
