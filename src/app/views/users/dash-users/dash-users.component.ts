@@ -38,13 +38,12 @@ export class DashUsersComponent implements OnInit {
     Id: 0
   }
 
-  update : RespuestaUpdate = {
+  update: RespuestaUpdate = {
     EstadoUpdate: ''
   }
   constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
-    
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -67,6 +66,15 @@ export class DashUsersComponent implements OnInit {
       // this.ID = 'Inicie Sesion';
       this.router.navigate(['/singin']);
     }
+
+    this.usersService.getIPAddress()
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => console.error(err)
+      )
+
   }
 
   // Funcion de confirmacion de usuarios
@@ -248,8 +256,8 @@ export class DashUsersComponent implements OnInit {
       );
   }
 
-  bitacora(id){
-    this.router.navigate(['users',id,'bitacora']);
+  bitacora(id) {
+    this.router.navigate(['users', id, 'bitacora']);
   }
 
 }

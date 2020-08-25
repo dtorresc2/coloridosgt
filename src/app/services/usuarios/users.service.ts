@@ -31,5 +31,9 @@ export class UsersService {
     return this.http.delete(Servidor.API_URI + '/users/' + id + '/admin/' + usuario);
   }
 
+  public getIPAddress()  
+  {  
+    return this.http.get("http://api.ipify.org/?format=json");  
+  }  
 
 }
