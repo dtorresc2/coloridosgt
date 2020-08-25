@@ -67,13 +67,13 @@ export class DashUsersComponent implements OnInit {
       this.router.navigate(['/singin']);
     }
 
-    this.usersService.getIPAddress()
-      .subscribe(
-        res => {
-          console.log(res);
-        },
-        err => console.error(err)
-      )
+    // this.usersService.getIPAddress()
+    //   .subscribe(
+    //     res => {
+    //       console.log(res);
+    //     },
+    //     err => console.error(err)
+    //   )
 
   }
 
