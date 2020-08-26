@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-orders',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
+
+  openScrollableContent(longContent) {
+    this.modalService.open(longContent, { scrollable: true });
+  }
 
   ngOnInit(): void {
   }
