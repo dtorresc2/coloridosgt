@@ -27,9 +27,13 @@ export class UsersService {
     return this.http.put(Servidor.API_URI + '/users/' + id, usuario);
   }
 
-  eliminarUsuario(id){
-    return this.http.delete(Servidor.API_URI + '/users/' + id);
+  eliminarUsuario(id, usuario) {
+    return this.http.delete(Servidor.API_URI + '/users/' + id + '/admin/' + usuario);
   }
 
-  
+  public getIPAddress()  
+  {  
+    return this.http.get("http://api.ipify.org/?format=json");  
+  }  
+
 }

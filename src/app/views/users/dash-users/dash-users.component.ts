@@ -29,7 +29,8 @@ export class DashUsersComponent implements OnInit {
   usuario: Usuario = {
     email: '',
     user: '',
-    password: ''
+    password: '',
+    usuario: 0
   }
 
   respuesta: RespuestaUsuario = {
@@ -37,13 +38,12 @@ export class DashUsersComponent implements OnInit {
     Id: 0
   }
 
-  update : RespuestaUpdate = {
+  update: RespuestaUpdate = {
     EstadoUpdate: ''
   }
   constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
-    
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -66,6 +66,15 @@ export class DashUsersComponent implements OnInit {
       // this.ID = 'Inicie Sesion';
       this.router.navigate(['/singin']);
     }
+
+    // this.usersService.getIPAddress()
+    //   .subscribe(
+    //     res => {
+    //       console.log(res);
+    //     },
+    //     err => console.error(err)
+    //   )
+
   }
 
   // Funcion de confirmacion de usuarios
@@ -146,6 +155,7 @@ export class DashUsersComponent implements OnInit {
     this.usuario.user = this.user.get('username').value;
     this.usuario.email = this.user.get('email').value;
     this.usuario.password = this.user.get('password').value;
+    this.usuario.usuario = this.idUsuario;
 
     this.usersService.registrarUsuario(this.usuario)
       .subscribe(
@@ -183,6 +193,8 @@ export class DashUsersComponent implements OnInit {
   editarCliente() {
     this.usuario.nombrerol = this.user.get('username').value;
     this.usuario.correo = this.user.get('email').value;
+    this.usuario.usuario = this.idUsuario;
+
     // this.usuario.password = this.user.get('password').value;
 
     this.usersService.actualizarUsuario(this.idUsuarioAUX, this.usuario)
@@ -216,7 +228,9 @@ export class DashUsersComponent implements OnInit {
   }
 
   eliminarCliente() {
-    this.usersService.eliminarUsuario(this.idUsuarioAUX)
+    this.usuario.usuario = this.idUsuario;
+
+    this.usersService.eliminarUsuario(this.idUsuarioAUX, this.idUsuario)
       .subscribe(
         res => {
           this.update = res;
@@ -242,8 +256,8 @@ export class DashUsersComponent implements OnInit {
       );
   }
 
-  bitacora(id){
-    this.router.navigate(['users',id,'bitacora']);
+  bitacora(id) {
+    this.router.navigate(['users', id, 'bitacora']);
   }
 
 }

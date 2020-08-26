@@ -5,7 +5,7 @@
 <div class="row align-items-center" style="padding-top: 3%;">
     <div class="col-md-6 text-center">
         <table class="table table-hover table-striped table-sm table-responsive-sm">
-            <thead class="table-secondary">  
+            <thead class="table-secondary">
                 <tr>
                     <th scope="col">Codigo</th>
                     <th scope="col">Cliente</th>
@@ -69,9 +69,11 @@
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
-                <!-- <button type="button" class="btn btn-secondary btn-sm"> 
+                <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)"> 
                     <span>Nuevo Pedido</span>
-                </button>-->
+                </button>
+                <!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">Modal
+                    scrollable content</button> -->
             </div>
             <div class="card-body">
                 <form>
@@ -85,15 +87,13 @@
 
                     <div class="form-group">
                         <label>Empleado</label>
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1"
-                            formControlName="Cliente">
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Tipo De Pedido</label>
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1"
-                            formControlName="Cliente">
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
                         </select>
                     </div>
 
@@ -112,15 +112,68 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Estado</label>
-                                <select class="form-control form-control-sm" id="exampleFormControlSelect1"
-                                    formControlName="Cliente">
-                                  </select>
+                                <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-secondary btn-block">Registrar</button>
+                    <button class="btn btn-secondary btn-block">
+                        <span>Registrar</span>
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+            rutrum faucibus dolor auctor.</p>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+            rutrum faucibus dolor auctor.</p>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+            rutrum faucibus dolor auctor.</p>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+            rutrum faucibus dolor auctor.</p>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+            rutrum faucibus dolor auctor.</p>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
+            rutrum faucibus dolor auctor.</p>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
+            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+            <span>Cerrar</span>
+        </button>
+    </div>
+</ng-template>

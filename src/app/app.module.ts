@@ -22,6 +22,7 @@ import { DetailProductsComponent } from './views/products/detail-products/detail
 import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 import { OrdersComponent } from './routes/orders/orders.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { OrdersComponent } from './routes/orders/orders.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     UsersService,
