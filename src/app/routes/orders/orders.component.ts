@@ -11,8 +11,9 @@ export class OrdersComponent implements OnInit {
 
   constructor(private modalService: NgbModal) { }
 
-  openScrollableContent(longContent) {
+  openScrollableContent(longContent, id) {
     this.modalService.open(longContent, { scrollable: true });
+    console.log(id);
   }
 
   ngOnInit(): void {

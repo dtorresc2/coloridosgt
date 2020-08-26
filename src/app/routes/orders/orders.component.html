@@ -69,7 +69,7 @@
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent)"> 
+                <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)"> 
                     <span>Nuevo Pedido</span>
                 </button>
                 <!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">Modal
@@ -172,7 +172,7 @@
             consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
             <span>Cerrar</span>
         </button>
     </div>
