@@ -15,14 +15,14 @@
         </div>
 
         <div class="row">
-            <table class="table table-hover table-striped table-md table-responsive-sm">
+            <table class="table table-hover table-striped table-sm table-responsive-md">
                 <thead class="table-secondary">
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Cant</th>
-                        <th scope="col">#Min</th>
+                        <!-- <th scope="col">#Min</th> -->
                         <th scope="col">Categoria</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -31,9 +31,9 @@
                     <tr>
                         <td>{{producto.nombre}}</td>
                         <td>{{producto.descripcion}}</td>
-                        <td>Q.{{producto.precio}}</td>
+                        <td>Q.{{producto.precio | number:'1.2-2'}}</td>
                         <td>{{producto.cantidad}}</td>
-                        <td>{{producto.cantidad_minima}}</td>
+                        <!-- <td>{{producto.cantidad_minima}}</td> -->
                         <td>{{producto.categoria_idcategoria}}</td>
                         <td>
                             <div class="text-center">
@@ -64,7 +64,7 @@
 
         
     </div>
-    <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block"></div>
+    <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
