@@ -27,7 +27,7 @@
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let producto of listaProductos">
+                <tbody *ngFor="let producto of listaProductos | filtroProducto:filtro.value">
                     <tr>
                         <td>{{producto.nombre}}</td>
                         <td>{{producto.descripcion}}</td>
