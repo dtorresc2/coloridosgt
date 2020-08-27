@@ -23,6 +23,8 @@ import { DashUsersComponent } from './views/users/dash-users/dash-users.componen
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 import { OrdersComponent } from './routes/orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FiltroUsuarioPipe } from './pipes/usuarios/filtro-usuario.pipe';
+import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DetailProductsComponent,
     DashUsersComponent,
     BitacoraUsersComponent,
-    OrdersComponent
+    OrdersComponent,
+    FiltroUsuarioPipe,
+    FiltroProductoPipe
   ],
   imports: [
     BrowserModule,
