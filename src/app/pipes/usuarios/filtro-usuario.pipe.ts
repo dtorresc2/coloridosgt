@@ -10,7 +10,7 @@ export class FiltroUsuarioPipe implements PipeTransform {
     const resultadoUsuarios = [];
     
     for (const user of value) {
-      if (user.nombrerol.toLowerCase().indexOf(args.toLowerCase()) > -1 ){
+      if (user.nombrerol.toLowerCase().indexOf(args.toLowerCase()) > -1 || user.correo.toLowerCase().indexOf(args.toLowerCase()) > -1 ){
         resultadoUsuarios.push(user);
       };
     };
