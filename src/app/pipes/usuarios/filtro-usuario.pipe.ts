@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filtroUsuario'
 })
 export class FiltroUsuarioPipe implements PipeTransform {
-
   // transform(value: unknown, ...args: unknown[]): unknown {
   transform(value: any, args: any): any {
     const resultadoUsuarios = [];
