@@ -7,9 +7,17 @@
         <div class="row">
             <form>
                 <div class="form-group">
-                    <!-- <label for="formGroupExampleInput">Usuario:</label> -->
-                    <input type="text" class="form-control" #filtro
-                        placeholder="Producto o caracteristica de producto a buscar">
+                    <div class="input-group">
+                        <input type="text" class="form-control" #filtro
+                            placeholder="Producto o caracteristica de producto a buscar" placement="top"
+                            ngbTooltip="Filtro de Productos">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                style="padding-top: 7%; padding-bottom: 0%;">
+                                <label><i class="fas fa-search"></i></label>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -38,20 +46,23 @@
                         <td>
                             <div class="text-center">
                                 <button type="button" class="btn btn-info btn-sm"
-                                    (click)="editado(producto.idproducto,producto)">
+                                    (click)="editado(producto.idproducto,producto)" placement="top"
+                                    ngbTooltip="Editar Producto">
                                     <i class="fas fa-pencil-alt"></i></button>
 
                                 <button type="button" class="btn btn-info btn-sm"
-                                    (click)="openScrollableContent(longContent,producto.url_imagen)" style="margin-left: 1%;">
+                                    (click)="openScrollableContent(longContent,producto.url_imagen)"
+                                    style="margin-left: 1%;" placement="top" ngbTooltip="Ver Imagen">
                                     <i class="far fa-image"></i></button>
 
                                 <button type="button" class="btn btn-info btn-sm" style="margin-top: 2%;"
-                                    (click)="inventario(producto.idproducto)">
+                                    (click)="inventario(producto.idproducto)" placement="top" ngbTooltip="Inventario">
                                     <i class="fas fa-boxes"></i></button>
 
                                 <button type="button" class="btn btn-danger btn-sm"
                                     (click)="eliminado(producto.idproducto,producto)"
-                                    style="margin-left: 2%; margin-top: 2%;">
+                                    style="margin-left: 2%; margin-top: 2%;" placement="top"
+                                    ngbTooltip="Eliminar Producto">
                                     <i class="fas fa-trash"></i></button>
                             </div>
                         </td>
@@ -159,10 +170,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label style="width: max-content;">Categoria    
-                            <a href="" class="text-secondary" style="font-size: 12px;" placement="top" ngbTooltip="Actualizar Categorias"><i class="fas fa-sync-alt"></i></a>
+                        <label style="width: max-content;">Categoria
+                            <a href="" class="text-secondary" style="font-size: 12px;" placement="top"
+                                ngbTooltip="Actualizar Categorias"><i class="fas fa-sync-alt"></i></a>
                             |
-                            <a href="" class="text-secondary" style="font-size: 12px;" placement="top" ngbTooltip="Mantenimientos"><i class="fas fa-wrench"></i></a>
+                            <a href="" class="text-secondary" style="font-size: 12px;" placement="top"
+                                ngbTooltip="Mantenimientos"><i class="fas fa-wrench"></i></a>
                         </label>
                         <select class="form-control form-control-sm" id="exampleFormControlSelect1"
                             formControlName="categoria">
@@ -204,8 +217,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <img [src]='this.urlAUX' class="rounded mx-auto d-block" alt="..."
-            width="300" height="300">
+        <img [src]='this.urlAUX' class="rounded mx-auto d-block" alt="..." width="300" height="300">
     </div>
     <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
