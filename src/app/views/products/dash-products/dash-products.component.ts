@@ -21,6 +21,7 @@ export class DashProductsComponent implements OnInit {
   nombreArchivo: any;
   base64Final: string = null;
   product: FormGroup;
+  categoria: FormGroup;
 
   comprobador: boolean = false;
 
@@ -29,7 +30,7 @@ export class DashProductsComponent implements OnInit {
   isNew: boolean = true;
 
   idUsuarioAUX: any;
-  urlAUX : any;
+  urlAUX: any;
 
   listaCategorias: any = [];
   listaProductos: any = [];
@@ -63,18 +64,23 @@ export class DashProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.product = new FormGroup(
-      {
-        nombre: new FormControl('', [Validators.required]),
-        descripcion: new FormControl('', Validators.required),
-        precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
-        cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
-        descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
-        cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
-        categoria: new FormControl('', Validators.required)
-        // imagen: new FormControl('', Validators.required)
-      }
-    );
+    // Form de productos
+    this.product = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', Validators.required),
+      precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+      descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+      cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+      categoria: new FormControl('', Validators.required)
+      // imagen: new FormControl('', Validators.required)
+    });
+
+    // Form de categorias
+    this.categoria = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', Validators.required)
+    });
 
     this.idUsuario = localStorage.getItem('idUsuario');
 
@@ -156,8 +162,8 @@ export class DashProductsComponent implements OnInit {
     this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
   }
 
-  inventario(id){
-    this.router.navigate(['products',id]);
+  inventario(id) {
+    this.router.navigate(['products', id]);
   }
 
   obtenerListaCategorias() {
@@ -324,10 +330,17 @@ export class DashProductsComponent implements OnInit {
     // console.log(id);
   }
 
+  // CATEGORIAS ====================================
   abrirMantenimientosCat(content) {
     // this.urlAUX = url;
     this.modalService.open(content, { centered: true, size: 'lg', scrollable: true });
     // console.log(id);
   }
+
+  
+  onSubmitCategoria(){
+    
+  }
+
 
 }

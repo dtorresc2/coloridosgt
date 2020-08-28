@@ -1,9 +1,8 @@
 <div class="text-center" style="font-size: 28px;">
     Mantenimiento Productos
 </div>
-<div class="row" style="padding-top: 5%;">
+<div class="row" style="padding-top: 3%;">
     <div class="col-md-6">
-
         <div class="row">
             <form>
                 <div class="form-group">
@@ -211,6 +210,7 @@
     </div>
 </div>
 
+<!-- Modal para vista previa de imagen -->
 <ng-template #modalImagen let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Imagen de Producto #123</h4>
@@ -241,19 +241,28 @@
             <div class="row justify-content-center">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form novalidate (ngSubmit)="onSubmitCategoria()" [formGroup]="categoria">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Nombre</label>
-                                    <input type="email" class="form-control" id="inputEmail4">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" formControlName="nombre">
+                                    <span class="text-danger" style="font-size: 10px;"
+                                        *ngIf="categoria.get('nombre').hasError('required') && categoria.get('nombre').touched">
+                                        Nombre requerido
+                                    </span>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputPassword4">Descripcion</label>
-                                    <input type="password" class="form-control" id="inputPassword4">
+                                    <label>Descripcion</label>
+                                    <input type="text" class="form-control" formControlName="descripcion">
+                                    <span class="text-danger" style="font-size: 10px;"
+                                        *ngIf="categoria.get('descripcion').hasError('required') && categoria.get('descripcion').touched">
+                                        Descripcion requerida
+                                    </span>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;">
+                                <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;"
+                                    [disabled]="categoria.invalid">
                                     <span>Registrar</span>
                                 </button>
                             </div>
@@ -266,38 +275,30 @@
                 <!-- <table class="table table-hover table-striped table-sm table-responsive-sm"> -->
                 <div class="container">
                     <table class="table table-hover table-striped table-sm table-responsive-sm">
-                        <!-- idcategoria,nombre,descripcion -->
                         <thead class="table-secondary">
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Acciones</th>
-                                <!-- <th scope="col">P.Unidad</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">SubTotal</th> -->
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody *ngFor="let categoria of listaCategorias">
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Marcadores</td>
-                                <td>Marcadores de tipo especial</td>
+                                <th scope="row">{{categoria.idcategoria}} </th>
+                                <td>{{categoria.nombre}} </td>
+                                <td>{{categoria.descripcion}}</td>
                                 <td>
                                     <button type="button" class="btn btn-info btn-sm"
                                         (click)="editado(producto.idproducto,producto)" placement="top"
                                         ngbTooltip="Editar Categoria">
                                         <i class="fas fa-pencil-alt"></i></button>
 
-                                    <button type="button" class="btn btn-danger btn-sm"
+                                    <button type="button" class="btn btn-danger btn-sm" style="margin-left: 2%;"
                                         (click)="eliminado(producto.idproducto,producto)" placement="top"
                                         ngbTooltip="Eliminar Categoria">
                                         <i class="fas fa-trash"></i></button>
                                 </td>
-                                <!-- <td>Marcadores</td>
-                    <td>Q12.00</td>
-                    <td>12</td>
-                    <td>Q24.00</td> -->
                             </tr>
                         </tbody>
                     </table>
