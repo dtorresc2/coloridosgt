@@ -16,4 +16,13 @@ export class CategoriasService {
   registrarCategoria(_nombre, _descripcion) {
     return this.http.post(Servidor.API_URI + '/categorias', { nombre: _nombre, descripcion: _descripcion });
   }
+
+  actualizarCategoria(_id, _nombre, _descripcion) {
+    return this.http.put(
+      Servidor.API_URI + '/categorias/' + _id,
+      { nombre: _nombre, descripcion: _descripcion }
+      // { params: { id: _id } }
+    );
+  }
+
 }

@@ -352,12 +352,12 @@ export class DashProductsComponent implements OnInit {
       this.guardarCategoria();
     }
 
-    if (this.isEdit) {
+    if (this.isEditCat) {
       console.log("Voy a editar una categoria")
-      // this.editarProducto();
+      this.editarCategoria();
     }
 
-    if (this.isDelete) {
+    if (this.isDeleteCat) {
       console.log("Voy a eliminar un categoria");
       // this.eliminarProducto();
     }
@@ -455,6 +455,53 @@ export class DashProductsComponent implements OnInit {
     );
   }
 
+  editarCategoria() {
+    // let imgAux: any = "0";
+    // this.producto.nombre = this.product.get('nombre').value;
+    // this.producto.descripcion = this.product.get('descripcion').value;
+    // this.producto.precio = this.product.get('precio').value;
+    // this.producto.cantidad = this.product.get('cantidad').value;
+    // this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
+    // this.producto.descuento = this.product.get('descuento').value;
+    // this.producto.buffer = this.base64Final;
+    // this.producto.categoria_idcategoria = this.product.get('categoria').value;
+
+    // if (this.base64Final == null) {
+    //   this.producto.buffer = '0';
+    //   imgAux = "0"
+    // }
+    // else {
+    //   imgAux = "1"
+    // }
+
+    this.categoriaService.actualizarCategoria(
+      this.idCategoriaAUX,
+      this.categoria.get('nombre').value,
+      this.categoria.get('descripcion').value
+    ).subscribe(
+      res => {
+        this.respuestaUpdate = res;
+
+        setTimeout(() => {
+          this.comprobadorCat = false;
+        }, 1500);
+
+        setTimeout(() => {
+          if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
+            this.categoria.reset();
+            this.obtenerListaCategorias();
+            this.creadoCat();
+          }
+          else {
+            this.respuestaUpdate.EstadoUpdate = '';
+            // $('.alert').alert('close');
+            // this.product.reset();
+          }
+        }, 1000);
+      },
+      err => console.error(err)
+    );
+  }
 
 
 }
