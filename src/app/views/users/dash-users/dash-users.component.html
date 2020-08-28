@@ -5,11 +5,25 @@
 <div class="row" style="padding-top: 3%;">
     <div class="col-md-6">
         <div class="row">
-            <form>
+            <!-- <form>
                 <div class="form-group">
-                    <!-- <label for="formGroupExampleInput">Usuario:</label> -->
                     <input type="text" class="form-control" #filtro
                         placeholder="Usuario o correo a buscar">
+                </div>
+            </form> -->
+
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" #filtro placeholder="Usuario o correo a buscar"
+                            placement="top" ngbTooltip="Filtro de Usuarios">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                style="padding-top: 7%; padding-bottom: 0%;">
+                                <label><i class="fas fa-search"></i></label>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -31,12 +45,16 @@
                         <td>{{user.correo}}</td>
                         <td>
                             <button type="button" class="btn btn-success btn-sm"
-                                style="padding-left: 8%; padding-right: 8%;" (click)="bitacora(user.idusuario)"><i
-                                    class="fas fa-map-pin fa-sm"></i></button>
+                                style="padding-left: 8%; padding-right: 8%;" (click)="bitacora(user.idusuario)"
+                                placement="top" ngbTooltip="Ver Bitacora"><i class="fas fa-map-pin fa-sm"></i></button>
+
                             <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"
-                                (click)="editado(user.idusuario,user)"><i class="fas fa-pencil-alt fa-sm"></i></button>
+                                (click)="editado(user.idusuario,user)" placement="top" ngbTooltip="Editar Usuario"><i
+                                    class="fas fa-pencil-alt fa-sm"></i></button>
+                                    
                             <button type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"
-                                (click)="eliminado(user.idusuario,user)"><i class=" fas fa-trash fa-sm"></i></button>
+                                (click)="eliminado(user.idusuario,user)" placement="top"
+                                ngbTooltip="Eliminar Usuario"><i class="fas fa-trash fa-sm"></i></button>
                         </td>
                     </tr>
                 </tbody>

@@ -258,7 +258,7 @@ export class DashUsersComponent implements OnInit {
   }
 
   bitacora(id) {
-    this.router.navigate(['users', id, 'bitacora']);
+    this.router.navigate(['users', id, 'log']);
   }
 
   keyPress(event: KeyboardEvent) {
