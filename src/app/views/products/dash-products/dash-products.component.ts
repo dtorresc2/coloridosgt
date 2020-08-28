@@ -24,6 +24,7 @@ export class DashProductsComponent implements OnInit {
   categoria: FormGroup;
 
   comprobador: boolean = false;
+  comprobadorCat: boolean = false;
 
   isEdit: boolean = false;
   isDelete: boolean = false;
@@ -343,8 +344,24 @@ export class DashProductsComponent implements OnInit {
     // console.log(id);
   }
 
-  onSubmitCategoria(){
-    
+  onSubmitCategoria() {
+    this.comprobadorCat = true;
+
+    if (this.isNewCat) {
+      console.log("Voy a crear una categoria")
+      this.guardarCategoria();
+    }
+
+    if (this.isEdit) {
+      console.log("Voy a editar una categoria")
+      // this.editarProducto();
+    }
+
+    if (this.isDelete) {
+      console.log("Voy a eliminar un categoria");
+      // this.eliminarProducto();
+    }
+
   }
 
   creadoCat() {
@@ -371,6 +388,73 @@ export class DashProductsComponent implements OnInit {
     // this.product.get('descuento').setValue(productoParametro.descuento);
     // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
   }
+
+  eliminadoCat(id, categoriaParametro) {
+    // console.log(productoParametro);
+    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
+    this.categoria.reset();
+    this.isEditCat = false;
+    this.isDeleteCat = true;
+    this.isNewCat = false;
+
+    this.idCategoriaAUX = id;
+    // this.urlAUX = productoParametro.url_imagen;
+    // this.base64Final = null;
+
+    this.categoria.get('nombre').setValue(categoriaParametro.nombre);
+    this.categoria.get('descripcion').setValue(categoriaParametro.descripcion);
+    // this.product.get('precio').setValue(productoParametro.precio);
+    // this.product.get('cantidad').setValue(productoParametro.cantidad);
+    // this.product.get('descuento').setValue(productoParametro.descuento);
+    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+    // this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
+  }
+
+  // Registrar Cliente
+  guardarCategoria() {
+    // this.producto.nombre = this.product.get('nombre').value;
+    // this.producto.descripcion = this.product.get('descripcion').value;
+    // this.producto.precio = this.product.get('precio').value;
+    // this.producto.cantidad = this.product.get('cantidad').value;
+    // this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
+    // this.producto.descuento = this.product.get('descuento').value;
+    // this.producto.buffer = this.base64Final;
+    // this.producto.categoria_idcategoria = this.product.get('categoria').value;
+
+    // if (this.base64Final == null) {
+    //   this.producto.buffer = '0';
+    // }
+
+    this.categoriaService.registrarCategoria(
+      this.categoria.get('nombre').value,
+      this.categoria.get('descripcion').value
+    ).subscribe(
+      res => {
+
+        this.respuesta = res;
+
+        setTimeout(() => {
+          this.comprobadorCat = false;
+        }, 1500);
+
+        setTimeout(() => {
+          if (this.respuesta.Conteo == 0) {
+            this.categoria.reset();
+            this.obtenerListaCategorias();
+          }
+          else {
+            this.respuesta.Id = 0;
+            this.respuesta.EstadoInsert = '';
+            this.respuesta.Conteo = 0;
+            // $('.alert').alert('close');
+            // this.product.reset();
+          }
+        }, 1000);
+      },
+      err => console.error(err)
+    );
+  }
+
 
 
 }
