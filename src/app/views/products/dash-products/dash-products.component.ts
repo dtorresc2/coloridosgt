@@ -6,6 +6,7 @@ import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any; // jQuery
 
 @Component({
@@ -57,7 +58,8 @@ export class DashProductsComponent implements OnInit {
   constructor(
     private productoService: ProductosService,
     private categoriaService: CategoriasService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -174,7 +176,7 @@ export class DashProductsComponent implements OnInit {
       .subscribe(
         res => {
           this.listaProductos = res;
-          // console.log(res);
+          console.log(res);
         },
         err => console.error(err)
       )
@@ -314,6 +316,12 @@ export class DashProductsComponent implements OnInit {
         },
         err => console.error(err)
       );
+  }
+
+  openScrollableContent(longContent, url) {
+    this.urlAUX = url;
+    this.modalService.open(longContent, { centered: true });
+    // console.log(id);
   }
 
 }
