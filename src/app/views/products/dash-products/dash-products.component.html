@@ -240,6 +240,18 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="card">
+
+                    <div class="card-header d-flex justify-content-end">
+                        <div class="col-4" style="padding-top: 0.4%;">
+                            Categoria
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="creadoCat()">
+                                <span>Nueva Categoria</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="card-body">
                         <form novalidate (ngSubmit)="onSubmitCategoria()" [formGroup]="categoria">
                             <div class="form-row">
@@ -263,7 +275,11 @@
                             <div class="form-row">
                                 <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;"
                                     [disabled]="categoria.invalid">
-                                    <span>Registrar</span>
+                                    <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm"
+                                        role="status" aria-hidden="true"></span>
+                                    <label *ngIf="!this.comprobador && this.isNew" id="labelCarga">Registrar</label>
+                                    <label *ngIf="!this.comprobador && this.isEdit" id="labelCarga">Actualizar</label>
+                                    <label *ngIf="!this.comprobador && this.isDelete" id="labelCarga">Eliminar</label>
                                 </button>
                             </div>
                         </form>
@@ -290,12 +306,12 @@
                                 <td>{{categoria.descripcion}}</td>
                                 <td>
                                     <button type="button" class="btn btn-info btn-sm"
-                                        (click)="editado(producto.idproducto,producto)" placement="top"
+                                        (click)="editadoCat(categoria.idcategoria,categoria)" placement="top"
                                         ngbTooltip="Editar Categoria">
                                         <i class="fas fa-pencil-alt"></i></button>
 
                                     <button type="button" class="btn btn-danger btn-sm" style="margin-left: 2%;"
-                                        (click)="eliminado(producto.idproducto,producto)" placement="top"
+                                        (click)="eliminado(categoria.idcategoria,categoria)" placement="top"
                                         ngbTooltip="Eliminar Categoria">
                                         <i class="fas fa-trash"></i></button>
                                 </td>

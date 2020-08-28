@@ -29,8 +29,13 @@ export class DashProductsComponent implements OnInit {
   isDelete: boolean = false;
   isNew: boolean = true;
 
+  isEditCat: boolean = false;
+  isDeleteCat: boolean = false;
+  isNewCat: boolean = true;
+
   idUsuarioAUX: any;
   urlAUX: any;
+  idCategoriaAUX: any;
 
   listaCategorias: any = [];
   listaProductos: any = [];
@@ -334,12 +339,37 @@ export class DashProductsComponent implements OnInit {
   abrirMantenimientosCat(content) {
     // this.urlAUX = url;
     this.modalService.open(content, { centered: true, size: 'lg', scrollable: true });
+    this.categoria.reset();
     // console.log(id);
   }
 
-  
   onSubmitCategoria(){
     
+  }
+
+  creadoCat() {
+    this.categoria.reset();
+    this.isEditCat = false;
+    this.isDeleteCat = false;
+    this.isNewCat = true;
+  }
+
+  editadoCat(id, categoriaParametro) {
+    // console.log(productoParametro);
+    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
+    this.categoria.reset();
+    this.isEditCat = true;
+    this.isDeleteCat = false;
+    this.isNewCat = false;
+
+    this.idCategoriaAUX = id;
+
+    this.categoria.get('nombre').setValue(categoriaParametro.nombre);
+    this.categoria.get('descripcion').setValue(categoriaParametro.descripcion);
+    // this.product.get('precio').setValue(productoParametro.precio);
+    // this.product.get('cantidad').setValue(productoParametro.cantidad);
+    // this.product.get('descuento').setValue(productoParametro.descuento);
+    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
   }
 
 
