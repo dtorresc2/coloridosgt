@@ -12,7 +12,7 @@ export class OrdersComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   openScrollableContent(longContent, id) {
-    this.modalService.open(longContent, { scrollable: true });
+    this.modalService.open(longContent, { scrollable: true, size: 'lg', centered: true });
     console.log(id);
   }
 
