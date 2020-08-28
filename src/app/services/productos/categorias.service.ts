@@ -25,4 +25,12 @@ export class CategoriasService {
     );
   }
 
+  deshabilitarCategoria(_id) {
+    return this.http.put(
+      Servidor.API_URI + '/categorias',
+      { id: _id }
+      // { params: { id: _id } }
+    );
+  }
+
 }
