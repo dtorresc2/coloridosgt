@@ -326,7 +326,7 @@ export class DashProductsComponent implements OnInit {
 
   abrirMantenimientosCat(content) {
     // this.urlAUX = url;
-    this.modalService.open(content, { centered: true, size: 'md', scrollable: true });
+    this.modalService.open(content, { centered: true, size: 'lg', scrollable: true });
     // console.log(id);
   }
 
