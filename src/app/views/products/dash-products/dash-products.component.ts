@@ -324,4 +324,10 @@ export class DashProductsComponent implements OnInit {
     // console.log(id);
   }
 
+  abrirMantenimientosCat(content) {
+    // this.urlAUX = url;
+    this.modalService.open(content, { centered: true, size: 'md', scrollable: true });
+    // console.log(id);
+  }
+
 }

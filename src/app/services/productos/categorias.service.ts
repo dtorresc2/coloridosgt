@@ -12,4 +12,8 @@ export class CategoriasService {
   obtenerCategorias() {
     return this.http.get(Servidor.API_URI + '/categorias');
   }
+
+  registrarCategoria(_nombre, _descripcion) {
+    return this.http.post(Servidor.API_URI + '/categorias', { nombre: _nombre, descripcion: _descripcion });
+  }
 }
