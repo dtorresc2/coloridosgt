@@ -433,7 +433,8 @@ export class DashProductsComponent implements OnInit {
 
     this.categoriaService.registrarCategoria(
       this.categoria.get('nombre').value,
-      this.categoria.get('descripcion').value
+      this.categoria.get('descripcion').value,
+      this.idUsuario
     ).subscribe(
       res => {
 
@@ -483,7 +484,8 @@ export class DashProductsComponent implements OnInit {
     this.categoriaService.actualizarCategoria(
       this.idCategoriaAUX,
       this.categoria.get('nombre').value,
-      this.categoria.get('descripcion').value
+      this.categoria.get('descripcion').value,
+      this.idUsuario
     ).subscribe(
       res => {
         this.respuestaUpdate = res;
@@ -519,7 +521,7 @@ export class DashProductsComponent implements OnInit {
     // this.producto.key = keyAUX;
     // console.log(this.producto.id, '-', keyAUX);
 
-    this.categoriaService.deshabilitarCategoria(this.idCategoriaAUX)
+    this.categoriaService.deshabilitarCategoria(this.idCategoriaAUX, this.idUsuario)
       .subscribe(
         res => {
           this.respuestaUpdate = res;
