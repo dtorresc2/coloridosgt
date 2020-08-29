@@ -42,7 +42,7 @@
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)"> 
+                <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)">
                     <span>Nuevo Pedido</span>
                 </button>
                 <!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">Modal
@@ -62,8 +62,7 @@
                         <label>Empleado</label>
                         <!-- <select class="form-control form-control-sm" id="exampleFormControlSelect1">
                         </select> -->
-                        <select class="form-control form-control-sm"
-                            >
+                        <select class="form-control form-control-sm">
                             <!-- formControlName="categoria"> -->
                             <option [value]="empleado.idusuario" *ngFor="let empleado of listaEmpleados">
                                 {{empleado.nombrerol}}
@@ -73,7 +72,11 @@
 
                     <div class="form-group">
                         <label>Tipo De Pedido</label>
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <select class="form-control form-control-sm">
+                            <!-- formControlName="categoria"> -->
+                            <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
+                                {{tipo.tipo}}
+                            </option>
                         </select>
                     </div>
 
@@ -92,7 +95,11 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Estado</label>
-                                <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                                <select class="form-control form-control-sm">
+                                    <!-- formControlName="categoria"> -->
+                                    <option [value]="estado.idestado_pedido" *ngFor="let estado of listaEstados">
+                                        {{estado.estado}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -114,8 +121,8 @@
         </button>
     </div>
     <div class="modal-body">
-        <table  class="table table-hover table-striped table-sm table-responsive-sm">
-            <thead class="table-secondary">  
+        <table class="table table-hover table-striped table-sm table-responsive-sm">
+            <thead class="table-secondary">
                 <tr>
                     <th scope="col">Factura</th>
                     <th scope="col">Detalle</th>

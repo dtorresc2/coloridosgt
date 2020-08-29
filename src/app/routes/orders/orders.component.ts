@@ -37,6 +37,8 @@ export class OrdersComponent implements OnInit {
     }
 
     this.obtenerListaEmpleados();
+    this.obtenerListaEstados();
+    this.obtenerListaTipos();
   }
 
   openScrollableContent(longContent, id) {

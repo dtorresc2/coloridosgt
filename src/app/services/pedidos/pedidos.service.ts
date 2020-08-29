@@ -13,7 +13,15 @@ export class PedidosService {
     return this.http.get(Servidor.API_URI + '/tipoPedido');
   }
 
-  obtenerEstadosCategoria(){
+  obtenerEstadosCategoria() {
     return this.http.get(Servidor.API_URI + '/estadoPedido');
+  }
+
+  obtenerPedidos() {
+    return this.http.get(Servidor.API_URI + '/pedidos');
+  }
+
+  obtenerDetallePedido(id) {
+    return this.http.get(Servidor.API_URI + '/pedidos/' + id);
   }
 }
