@@ -44,7 +44,7 @@
                             (click)="abrirDetallePedido(longContent,pedido.idpedido)"
                             style="padding-left: 10%; padding-right: 10%;" placement="top"
                             ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i></button>
-                        <button type="button" class="btn btn-info btn-sm" style="margin-left: 2%;" placement="top"
+                        <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm" style="margin-left: 2%;" placement="top"
                             ngbTooltip="Ver Comprobante"><i class="far fa-image"></i></button>
                     </td>
                 </tr>
