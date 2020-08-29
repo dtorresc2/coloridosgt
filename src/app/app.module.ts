@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { UsersService } from './services/usuarios/users.service';
 import { CategoriasService } from './services/productos/categorias.service';
 import { ProductosService } from './services/productos/productos.service';
+import { PedidosService } from './services/pedidos/pedidos.service';
 
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
@@ -55,7 +56,8 @@ import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
   providers: [
     UsersService,
     CategoriasService,
-    ProductosService
+    ProductosService,
+    PedidosService
   ],
   bootstrap: [AppComponent]
 })
