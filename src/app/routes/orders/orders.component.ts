@@ -19,6 +19,7 @@ export class OrdersComponent implements OnInit {
   listaEstados: any = [];
   listaTipos: any = [];
   listaPedidos: any = [];
+  listaDetallePedido: any = [];
 
   constructor(
     private modalService: NgbModal, 
@@ -43,9 +44,10 @@ export class OrdersComponent implements OnInit {
     this.obtenerListaPedidos();
   }
 
-  openScrollableContent(longContent, id) {
+  abrirDetallePedido(longContent, id) {
     this.modalService.open(longContent, { scrollable: true, size: 'lg', centered: true });
     console.log(id);
+    this.obtenerListaDetallePedido(id);
   }
 
   obtenerListaEmpleados() {
@@ -90,6 +92,17 @@ export class OrdersComponent implements OnInit {
         },
         err => console.error(err)
       )
+  }
+
+  obtenerListaDetallePedido(id){
+    this.pedidoService.obtenerDetallePedido(id)
+    .subscribe(
+      res => {
+        this.listaDetallePedido = res;
+        console.log(res);
+      },
+      err => console.error(err)
+    )
   }
 
 }

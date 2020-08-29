@@ -15,11 +15,11 @@
                     <th scope="col">T.Pedido</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Estado</th>
+                    <!-- <th scope="col">Estado</th> -->
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let pedido of listaPedidos">
                 <tr>
                     <!-- <td>Carl</td>
                     <td>Zona 12</td>
@@ -34,16 +34,15 @@
                         <button type="button" class="btn btn-info btn-sm"
                             (click)="openScrollableContent(longContent,1)" style="margin-left: 2%;"><i class="far fa-image"></i></button>
                     </td> -->
-                    <td>Carl</td>
-                    <td>Zona 12</td>
-                    <td>Envio</td>
-                    <td>24/07/2020</td>
-                    <td>Q150.00</td>
-                    <td>1</td>
+                    <td> {{pedido.cliente}} </td>
+                    <td> {{pedido.direccion}} </td>
+                    <td> {{pedido.tipo}} </td>
+                    <td> {{pedido.fecha}} </td>
+                    <td> {{pedido.total}} </td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm" (click)="openScrollableContent(longContent,1)"
+                        <button type="button" class="btn btn-info btn-sm" (click)="abrirDetallePedido(longContent,pedido.idpedido)"
                             style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
-                        <button type="button" class="btn btn-info btn-sm" (click)="openScrollableContent(longContent,1)"
+                        <button type="button" class="btn btn-info btn-sm"
                             style="margin-left: 2%;"><i class="far fa-image"></i></button>
                     </td>
                 </tr>
@@ -51,7 +50,7 @@
         </table>
     </div>
 
-    <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block"></div>
+    <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <!-- <div class="card-header d-flex justify-content-end">
@@ -160,8 +159,8 @@
         <table class="table table-hover table-striped table-sm table-responsive-sm">
             <thead class="table-secondary">
                 <tr>
-                    <th scope="col">Factura</th>
-                    <th scope="col">Detalle</th>
+                    <!-- <th scope="col">Factura</th>
+                    <th scope="col">Detalle</th> -->
                     <th scope="col">Linea</th>
                     <th scope="col">Producto</th>
                     <th scope="col">P.Unidad</th>
@@ -169,24 +168,13 @@
                     <th scope="col">SubTotal</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let pedido of listaPedidos">
                 <tr>
                     <th scope="row">1</th>
-                    <td>2</td>
-                    <td>1</td>
                     <td>Marcadores</td>
                     <td>Q12.00</td>
                     <td>12</td>
                     <td>Q24.00</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>Resaltadpres</td>
-                    <td>Q10.00</td>
-                    <td>10</td>
-                    <td>Q20.00</td>
                 </tr>
             </tbody>
         </table>
