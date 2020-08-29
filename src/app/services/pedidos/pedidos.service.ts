@@ -12,4 +12,8 @@ export class PedidosService {
   obtenerTiposCategoria() {
     return this.http.get(Servidor.API_URI + '/tipoPedido');
   }
+
+  obtenerEstadosCategoria(){
+    return this.http.get(Servidor.API_URI + '/estadoPedido');
+  }
 }

@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 
 
 @Component({
@@ -15,12 +16,13 @@ export class OrdersComponent implements OnInit {
   idUsuario: any;
 
   listaEmpleados: any = [];
-  listaCategorias: any = [];
+  listaEstados: any = [];
+  listaTipos: any = [];
 
   constructor(
     private modalService: NgbModal, 
     private usersService: UsersService,
-    private categoriaService: CategoriasService, 
+    private pedidoService: PedidosService, 
     private router: Router) { }
 
   ngOnInit(): void {
@@ -53,11 +55,22 @@ export class OrdersComponent implements OnInit {
       )
   }
 
-  obtenerListaCategorias(){
-    this.categoriaService.obtenerCategorias()
+  obtenerListaEstados(){
+    this.pedidoService.obtenerEstadosCategoria()
       .subscribe(
         res => {
-          this.listaCategorias = res;
+          this.listaEstados = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
+  }
+
+  obtenerListaTipos(){
+    this.pedidoService.obtenerTiposCategoria()
+      .subscribe(
+        res => {
+          this.listaTipos = res;
           // console.log(res);
         },
         err => console.error(err)
