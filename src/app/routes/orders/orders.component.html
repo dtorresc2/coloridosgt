@@ -38,12 +38,13 @@
                     <td> {{pedido.direccion}} </td>
                     <td> {{pedido.tipo}} </td>
                     <td> {{pedido.fecha}} </td>
-                    <td> {{pedido.total}} </td>
+                    <td> Q.{{pedido.total | number:'1.2-2'}} </td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm" (click)="abrirDetallePedido(longContent,pedido.idpedido)"
-                            style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
                         <button type="button" class="btn btn-info btn-sm"
-                            style="margin-left: 2%;"><i class="far fa-image"></i></button>
+                            (click)="abrirDetallePedido(longContent,pedido.idpedido)"
+                            style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
+                        <button type="button" class="btn btn-info btn-sm" style="margin-left: 2%;"><i
+                                class="far fa-image"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -150,7 +151,7 @@
 
 <ng-template #longContent let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Detalle de Pedido #1</h4>
+        <h4 class="modal-title">Detalle de Pedido # {{idDetallePedidoAUX}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -168,13 +169,14 @@
                     <th scope="col">SubTotal</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let pedido of listaPedidos">
+            <tbody *ngFor="let detalle of listaDetallePedido">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Marcadores</td>
-                    <td>Q12.00</td>
-                    <td>12</td>
-                    <td>Q24.00</td>
+                    <!-- <th scope="row"> {{detalle.iddetalle_pedido}} </th> -->
+                    <th scope="row"> {{detalle.linea}} </th>
+                    <td> {{detalle.producto}} </td>
+                    <td>Q.{{detalle.precio_unidad | number:'1.2-2'}}</td>
+                    <td> {{detalle.cantidad}} </td>
+                    <td>Q.{{detalle.subtotal | number:'1.2-2'}}</td>
                 </tr>
             </tbody>
         </table>

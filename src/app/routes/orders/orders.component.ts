@@ -21,6 +21,8 @@ export class OrdersComponent implements OnInit {
   listaPedidos: any = [];
   listaDetallePedido: any = [];
 
+  idDetallePedidoAUX : any;
+
   constructor(
     private modalService: NgbModal, 
     private usersService: UsersService,
@@ -46,7 +48,8 @@ export class OrdersComponent implements OnInit {
 
   abrirDetallePedido(longContent, id) {
     this.modalService.open(longContent, { scrollable: true, size: 'lg', centered: true });
-    console.log(id);
+    // console.log(id);
+    this.idDetallePedidoAUX = id;
     this.obtenerListaDetallePedido(id);
   }
 
@@ -88,7 +91,7 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaPedidos = res;
-          console.log(res);
+          // console.log(res);
         },
         err => console.error(err)
       )
@@ -99,7 +102,7 @@ export class OrdersComponent implements OnInit {
     .subscribe(
       res => {
         this.listaDetallePedido = res;
-        console.log(res);
+        // console.log(res);
       },
       err => console.error(err)
     )
