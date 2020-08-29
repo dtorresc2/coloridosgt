@@ -15,6 +15,7 @@ export class OrdersComponent implements OnInit {
   idUsuario: any;
 
   listaEmpleados: any = [];
+  listaCategorias: any = [];
 
   constructor(
     private modalService: NgbModal, 
@@ -46,6 +47,17 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaEmpleados = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
+  }
+
+  obtenerListaCategorias(){
+    this.categoriaService.obtenerCategorias()
+      .subscribe(
+        res => {
+          this.listaCategorias = res;
           // console.log(res);
         },
         err => console.error(err)
