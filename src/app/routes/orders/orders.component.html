@@ -2,79 +2,64 @@
     Mantenimiento Pedidos
 </div>
 
-<div class="row align-items-center" style="padding-top: 3%;">
+<!-- <div class="row align-items-center" style="padding-top: 3%;"> -->
+<div class="row" style="padding-top: 3%;">
     <div class="col-md-6 text-center">
         <table class="table table-hover table-striped table-sm table-responsive-sm">
             <thead class="table-secondary">
                 <tr>
-                    <th scope="col">Codigo</th>
+                    <!-- <th scope="col">Codigo</th> -->
                     <th scope="col">Cliente</th>
                     <th scope="col">Dirección</th>
-                    <th scope="col">Empleado</th>
+                    <!-- <th scope="col">Empleado</th> -->
                     <th scope="col">T.Pedido</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Estado</th>
+                    <!-- <th scope="col">Estado</th> -->
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let pedido of listaPedidos">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Carl</td>
+                    <!-- <td>Carl</td>
                     <td>Zona 12</td>
-                    <td>admin1</td>
                     <td>Envio</td>
                     <td>24/07/2020</td>
                     <td>Q150.00</td>
                     <td>1</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm"
+                        <button type="button" class="btn btn-info btn-sm"
+                            (click)="openScrollableContent(longContent,1)"
                             style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Karla</td>
-                    <td>Zona 18</td>
-                    <td>admin1</td>
-                    <td>Envio</td>
-                    <td>12/07/2020</td>
-                    <td>Q100.00</td>
-                    <td>1</td>
+                        <button type="button" class="btn btn-info btn-sm"
+                            (click)="openScrollableContent(longContent,1)" style="margin-left: 2%;"><i class="far fa-image"></i></button>
+                    </td> -->
+                    <td> {{pedido.cliente}} </td>
+                    <td> {{pedido.direccion}} </td>
+                    <td> {{pedido.tipo}} </td>
+                    <td> {{pedido.fecha}} </td>
+                    <td> Q.{{pedido.total | number:'1.2-2'}} </td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm"
-                            style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Ismael</td>
-                    <td>Zona 16</td>
-                    <td>admin3</td>
-                    <td>Envio</td>
-                    <td>20/08/2020</td>
-                    <td>Q200.00</td>
-                    <td>1</td>
-                    <td>
-                        <button type="button" class="btn btn-success btn-sm"
-                            style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
+                        <button type="button" class="btn btn-info btn-sm"
+                            (click)="abrirDetallePedido(longContent,pedido.idpedido)"
+                            style="padding-left: 10%; padding-right: 10%;" placement="top"
+                            ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i></button>
+                        <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm" style="margin-left: 2%;" placement="top"
+                            ngbTooltip="Ver Comprobante"><i class="far fa-image"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block"></div>
+    <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
-            <div class="card-header d-flex justify-content-end">
-                <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)"> 
+            <!-- <div class="card-header d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)">
                     <span>Nuevo Pedido</span>
                 </button>
-                <!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">Modal
-                    scrollable content</button> -->
-            </div>
+            </div> -->
             <div class="card-body">
                 <form>
                     <h4 class="card-title text-center" style="padding-bottom: 1%;">
@@ -82,42 +67,81 @@
                     </h4>
                     <div class="form-group">
                         <label>Cliente</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control form-control-sm" type="text">
                     </div>
 
                     <div class="form-group">
                         <label>Empleado</label>
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <!-- <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        </select> -->
+                        <select class="form-control form-control-sm">
+                            <!-- formControlName="categoria"> -->
+                            <option [value]="empleado.idusuario" *ngFor="let empleado of listaEmpleados">
+                                {{empleado.nombrerol}}
+                            </option>
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Tipo De Pedido</label>
-                        <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                        <select class="form-control form-control-sm">
+                            <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
+                                {{tipo.tipo}}
+                            </option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label>Dirección</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control form-control-sm" type="text">
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label>Total</label>
+                        <input class="form-control form-control-sm" type="text">
+                    </div> -->
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>No. Productos</label>
+                                <input class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Total</label>
+                                <input class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label>Total</label>
-                                <input class="form-control" type="text">
+                                <label>Tipo De Pedido</label>
+                                <select class="form-control form-control-sm">
+                                    <!-- formControlName="categoria"> -->
+                                    <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
+                                        {{tipo.tipo}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Estado</label>
-                                <select class="form-control form-control-sm" id="exampleFormControlSelect1">
+                                <select class="form-control form-control-sm">
+                                    <!-- formControlName="categoria"> -->
+                                    <option [value]="estado.idestado_pedido" *ngFor="let estado of listaEstados">
+                                        {{estado.estado}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-secondary btn-block">
+
+                    <button class="btn btn-secondary btn-block" disabled>
                         <span>Registrar</span>
                     </button>
                 </form>
@@ -128,17 +152,17 @@
 
 <ng-template #longContent let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Detalle Factura</h4>
+        <h4 class="modal-title">Detalle de Pedido # {{idDetallePedidoAUX}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <table  class="table table-hover table-striped table-sm table-responsive-sm">
-            <thead class="table-secondary">  
+        <table class="table table-hover table-striped table-sm table-responsive-sm">
+            <thead class="table-secondary">
                 <tr>
-                    <th scope="col">Factura</th>
-                    <th scope="col">Detalle</th>
+                    <!-- <th scope="col">Factura</th>
+                    <th scope="col">Detalle</th> -->
                     <th scope="col">Linea</th>
                     <th scope="col">Producto</th>
                     <th scope="col">P.Unidad</th>
@@ -146,31 +170,21 @@
                     <th scope="col">SubTotal</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let detalle of listaDetallePedido">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>Marcadores</td>
-                    <td>Q12.00</td>
-                    <td>12</td>
-                    <td>Q24.00</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>Resaltadpres</td>
-                    <td>Q10.00</td>
-                    <td>10</td>
-                    <td>Q20.00</td>
+                    <!-- <th scope="row"> {{detalle.iddetalle_pedido}} </th> -->
+                    <th scope="row"> {{detalle.linea}} </th>
+                    <td> {{detalle.producto}} </td>
+                    <td>Q.{{detalle.precio_unidad | number:'1.2-2'}}</td>
+                    <td> {{detalle.cantidad}} </td>
+                    <td>Q.{{detalle.subtotal | number:'1.2-2'}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
             <span>Cerrar</span>
         </button>
-    </div>
+    </div> -->
 </ng-template>

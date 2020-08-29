@@ -31,9 +31,12 @@ export class UsersService {
     return this.http.delete(Servidor.API_URI + '/users/' + id + '/admin/' + usuario);
   }
 
-  public getIPAddress()  
-  {  
-    return this.http.get("http://api.ipify.org/?format=json");  
-  }  
+  obtenerBitacora(id) {
+    return this.http.get(Servidor.API_URI + '/bitacora/' + id);
+  }
+
+  public getIPAddress() {
+    return this.http.get("http://api.ipify.org/?format=json");
+  }
 
 }

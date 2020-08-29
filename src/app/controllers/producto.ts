@@ -9,4 +9,5 @@ export interface Producto {
    categoria_idcategoria?: number,
    buffer?: string,
    key?:string
+   idusuario?: number
 }

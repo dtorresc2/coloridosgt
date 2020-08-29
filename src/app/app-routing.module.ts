@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'users', component: UsersComponent,
     children: [
       { path: '', component: DashUsersComponent},
-      { path: ':id/bitacora', component: BitacoraUsersComponent},
+      { path: ':id/log', component: BitacoraUsersComponent},
       { path: '**', component: DashUsersComponent}
     ]
   }

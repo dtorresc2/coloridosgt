@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from 'src/app/services/usuarios/users.service';
+import { Router } from '@angular/router';
+import { CategoriasService } from 'src/app/services/productos/categorias.service';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 
 
 @Component({
@@ -8,15 +12,100 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
+  ID: any;
+  idUsuario: any;
 
-  constructor(private modalService: NgbModal) { }
+  listaEmpleados: any = [];
+  listaEstados: any = [];
+  listaTipos: any = [];
+  listaPedidos: any = [];
+  listaDetallePedido: any = [];
 
-  openScrollableContent(longContent, id) {
-    this.modalService.open(longContent, { scrollable: true });
-    console.log(id);
-  }
+  idDetallePedidoAUX : any;
+
+  constructor(
+    private modalService: NgbModal, 
+    private usersService: UsersService,
+    private pedidoService: PedidosService, 
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.idUsuario = localStorage.getItem('idUsuario');
+
+    if (this.idUsuario > 0) {
+      this.ID = 'Registrado';
+    }
+    else {
+      this.ID = 'Inicie Sesion';
+      this.router.navigate(['/singin']);
+    }
+
+    this.obtenerListaEmpleados();
+    this.obtenerListaEstados();
+    this.obtenerListaTipos();
+    this.obtenerListaPedidos();
+  }
+
+  abrirDetallePedido(longContent, id) {
+    this.modalService.open(longContent, { scrollable: true, size: 'lg', centered: true });
+    // console.log(id);
+    this.idDetallePedidoAUX = id;
+    this.obtenerListaDetallePedido(id);
+  }
+
+  obtenerListaEmpleados() {
+    this.usersService.obtenerUsuarios()
+      .subscribe(
+        res => {
+          this.listaEmpleados = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
+  }
+
+  obtenerListaEstados(){
+    this.pedidoService.obtenerEstadosCategoria()
+      .subscribe(
+        res => {
+          this.listaEstados = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
+  }
+
+  obtenerListaTipos(){
+    this.pedidoService.obtenerTiposCategoria()
+      .subscribe(
+        res => {
+          this.listaTipos = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
+  }
+
+  obtenerListaPedidos(){
+    this.pedidoService.obtenerPedidos()
+      .subscribe(
+        res => {
+          this.listaPedidos = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
+  }
+
+  obtenerListaDetallePedido(id){
+    this.pedidoService.obtenerDetallePedido(id)
+    .subscribe(
+      res => {
+        this.listaDetallePedido = res;
+        // console.log(res);
+      },
+      err => console.error(err)
+    )
   }
 
 }

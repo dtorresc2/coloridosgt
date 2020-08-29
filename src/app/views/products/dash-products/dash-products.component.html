@@ -1,55 +1,78 @@
 <div class="text-center" style="font-size: 28px;">
     Mantenimiento Productos
 </div>
-<div class="row align-items-start" style="padding-top: 5%;">
+<div class="row" style="padding-top: 3%;">
     <div class="col-md-6">
-        <table class="table table-hover table-striped table-md table-responsive-sm">
-            <thead class="table-secondary">
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Cant</th>
-                    <th scope="col">#Min</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let producto of listaProductos">
-                <tr>
-                    <td>{{producto.nombre}}</td>
-                    <td>{{producto.descripcion}}</td>
-                    <td>Q.{{producto.precio}}</td>
-                    <td>{{producto.cantidad}}</td>
-                    <td>{{producto.cantidad_minima}}</td>
-                    <td>{{producto.categoria_idcategoria}}</td>
-                    <td>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-info btn-sm"
-                                (click)="editado(producto.idproducto,producto)">
-                                <i class="fas fa-pencil-alt"></i></button>
-
-                            <button type="button" class="btn btn-info btn-sm"
-                                (click)="editado(producto.idproducto,producto)"
-                                style="margin-left: 1%;">
-                                <i class="far fa-image"></i></button>
-
-                            <button type="button" class="btn btn-info btn-sm" 
-                                style="margin-top: 2%;"
-                                (click)="inventario(producto.idproducto)">
-                                <i class="fas fa-boxes"></i></button>
-
-                            <button type="button" class="btn btn-danger btn-sm"
-                                (click)="eliminado(producto.idproducto,producto)"
-                                style="margin-left: 2%; margin-top: 2%;">
-                                <i class="fas fa-trash"></i></button>
+        <div class="row">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" #filtro
+                            placeholder="Producto o caracteristica de producto a buscar" placement="top"
+                            ngbTooltip="Filtro de Productos">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                style="padding-top: 7%; padding-bottom: 0%;">
+                                <label><i class="fas fa-search"></i></label>
+                            </button>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <table class="table table-hover table-striped table-sm table-responsive-md">
+                <thead class="table-secondary">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cant</th>
+                        <!-- <th scope="col">#Min</th> -->
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let producto of listaProductos | filtroProducto:filtro.value">
+                    <tr>
+                        <td>{{producto.nombre}}</td>
+                        <td>{{producto.descripcion}}</td>
+                        <td>Q.{{producto.precio | number:'1.2-2'}}</td>
+                        <td>{{producto.cantidad}}</td>
+                        <!-- <td>{{producto.cantidad_minima}}</td> -->
+                        <td>{{producto.categoria_idcategoria}}</td>
+                        <td>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-info btn-sm"
+                                    (click)="editado(producto.idproducto,producto)" placement="top"
+                                    ngbTooltip="Editar Producto">
+                                    <i class="fas fa-pencil-alt"></i></button>
+
+                                <button type="button" class="btn btn-info btn-sm"
+                                    (click)="openScrollableContent(modalImagen,producto.url_imagen)"
+                                    style="margin-left: 1%;" placement="top" ngbTooltip="Ver Imagen">
+                                    <i class="far fa-image"></i></button>
+
+                                <button type="button" class="btn btn-info btn-sm" style="margin-top: 2%;"
+                                    (click)="inventario(producto.idproducto)" placement="top" ngbTooltip="Inventario">
+                                    <i class="fas fa-boxes"></i></button>
+
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    (click)="eliminado(producto.idproducto,producto)"
+                                    style="margin-left: 2%; margin-top: 2%;" placement="top"
+                                    ngbTooltip="Eliminar Producto">
+                                    <i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
-    <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block"></div>
+    <div class="col-sm-1 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
@@ -73,6 +96,7 @@
                             Nombre requerido
                         </span>
                     </div>
+
                     <div class="form-group">
                         <label>Descripcion</label>
                         <input class="form-control form-control-sm" type="text" formControlName="descripcion">
@@ -146,7 +170,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Categoria</label>
+                        <label style="width: max-content;">Categoria
+                            <a (click)="obtenerListaCategorias()" class="text-secondary" style="font-size: 12px;"
+                                placement="top" ngbTooltip="Actualizar Categorias"><i class="fas fa-sync-alt"></i></a>
+                            |
+                            <a (click)="abrirMantenimientosCat(modalCategorias)" class="text-secondary"
+                                style="font-size: 12px;" placement="top" ngbTooltip="Mantenimientos"><i
+                                    class="fas fa-wrench"></i></a>
+                        </label>
                         <select class="form-control form-control-sm" id="exampleFormControlSelect1"
                             formControlName="categoria">
                             <option [value]="categoria.idcategoria" *ngFor="let categoria of listaCategorias">
@@ -178,3 +209,122 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para vista previa de imagen -->
+<ng-template #modalImagen let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Imagen de Producto #123</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300">
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+            <span>Cerrar</span>
+        </button>
+    </div> -->
+</ng-template>
+
+<!-- Modal para mantenimiento de categorias -->
+<ng-template #modalCategorias let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Mantenimientos de Categorias</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="card">
+
+                    <div class="card-header d-flex justify-content-end">
+                        <div class="col-4" style="padding-top: 0.4%;">
+                            Categoria
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="creadoCat()" style="padding-top: 0.4%;">
+                                <span>Nueva Categoria</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <form novalidate (ngSubmit)="onSubmitCategoria()" [formGroup]="categoria">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" formControlName="nombre">
+                                    <span class="text-danger" style="font-size: 10px;"
+                                        *ngIf="categoria.get('nombre').hasError('required') && categoria.get('nombre').touched">
+                                        Nombre requerido
+                                    </span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Descripcion</label>
+                                    <input type="text" class="form-control" formControlName="descripcion">
+                                    <span class="text-danger" style="font-size: 10px;"
+                                        *ngIf="categoria.get('descripcion').hasError('required') && categoria.get('descripcion').touched">
+                                        Descripcion requerida
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <button class="btn btn-secondary btn-block"
+                                    [disabled]="categoria.invalid">
+                                    <span *ngIf="this.comprobadorCat" class="spinner-border spinner-border-sm"
+                                        role="status" aria-hidden="true"></span>
+                                    <label *ngIf="!this.comprobadorCat && this.isNewCat" id="labelCarga">Registrar</label>
+                                    <label *ngIf="!this.comprobadorCat && this.isEditCat" id="labelCarga">Actualizar</label>
+                                    <label *ngIf="!this.comprobadorCat && this.isDeleteCat" id="labelCarga">Eliminar</label>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 2%;">
+                <!-- <table class="table table-hover table-striped table-sm table-responsive-sm"> -->
+                <div class="container">
+                    <table class="table table-hover table-striped table-sm table-responsive-sm">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let categoria of listaCategorias">
+                            <tr>
+                                <th scope="row">{{categoria.idcategoria}} </th>
+                                <td>{{categoria.nombre}} </td>
+                                <td>{{categoria.descripcion}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-sm"
+                                        (click)="editadoCat(categoria.idcategoria,categoria)" placement="top"
+                                        ngbTooltip="Editar Categoria">
+                                        <i class="fas fa-pencil-alt"></i></button>
+
+                                    <button type="button" class="btn btn-danger btn-sm" style="margin-left: 2%;"
+                                        (click)="eliminadoCat(categoria.idcategoria,categoria)" placement="top"
+                                        ngbTooltip="Eliminar Categoria">
+                                        <i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+            <span>Cerrar</span>
+        </button>
+    </div> -->
+</ng-template>

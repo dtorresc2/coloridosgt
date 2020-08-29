@@ -2,35 +2,33 @@
     Bitacora De Usuarios
 </div>
 
-<div class="row align-items-center" style="padding-top: 3%;">
+<div class="row" style="padding-top: 3%;">
     <table class="table table-hover table-responsive-sm">
-        <thead class="table-secondary">  
+        <thead class="table-secondary">
             <tr>
-                <th scope="col">Codigo</th>
-                <th scope="col">Usuario</th>
-                <th scope="col">Descripción</th>
+                <th scope="col">#</th>
+                <th scope="col">Descripcion</th>
                 <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">IP</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let bitacora of listaBitacora; let i=index">
             <tr>
-                <th scope="row">1</th>
-                <td>admin</td>
-                <td>Venta</td>
-                <td>21/08/2020</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>admin2</td>
-                <td>Venta</td>
-                <td>22/08/2020</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>admin3</td>
-                <td>Venta</td>
-                <td>22/08/2020</td>
+                <th scope="row"> {{ i+1 }} </th>
+                <td> {{ bitacora.descripcion }} </td>
+                <td> {{ bitacora.fecha }} </td>
+                <td> {{ bitacora.hora }} </td>
+                <td> {{ bitacora.ip }} </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<!-- 
+     "idbitacora": 1,
+        "descripcion": "Inicio de Sesion",
+        "fecha": "25/08/20",
+        "hora": "8:22:54 PM",
+        "ip": "18.206.205.16"
+ -->

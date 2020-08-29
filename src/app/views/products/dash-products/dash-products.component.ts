@@ -6,6 +6,7 @@ import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any; // jQuery
 
 @Component({
@@ -20,15 +21,22 @@ export class DashProductsComponent implements OnInit {
   nombreArchivo: any;
   base64Final: string = null;
   product: FormGroup;
+  categoria: FormGroup;
 
   comprobador: boolean = false;
+  comprobadorCat: boolean = false;
 
   isEdit: boolean = false;
   isDelete: boolean = false;
   isNew: boolean = true;
 
+  isEditCat: boolean = false;
+  isDeleteCat: boolean = false;
+  isNewCat: boolean = true;
+
   idUsuarioAUX: any;
-  urlAUX : any;
+  urlAUX: any;
+  idCategoriaAUX: any;
 
   listaCategorias: any = [];
   listaProductos: any = [];
@@ -47,7 +55,8 @@ export class DashProductsComponent implements OnInit {
     descuento: 0.00,
     cantidad_minima: 0,
     categoria_idcategoria: 0,
-    buffer: '0'
+    buffer: '0',
+    idusuario: 0
   }
 
   respuestaUpdate: RespuestaUpdate = {
@@ -57,22 +66,28 @@ export class DashProductsComponent implements OnInit {
   constructor(
     private productoService: ProductosService,
     private categoriaService: CategoriasService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.product = new FormGroup(
-      {
-        nombre: new FormControl('', [Validators.required]),
-        descripcion: new FormControl('', Validators.required),
-        precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
-        cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
-        descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
-        cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
-        categoria: new FormControl('', Validators.required)
-        // imagen: new FormControl('', Validators.required)
-      }
-    );
+    // Form de productos
+    this.product = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', Validators.required),
+      precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+      descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+      cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+      categoria: new FormControl('', Validators.required)
+      // imagen: new FormControl('', Validators.required)
+    });
+
+    // Form de categorias
+    this.categoria = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', Validators.required)
+    });
 
     this.idUsuario = localStorage.getItem('idUsuario');
 
@@ -154,8 +169,8 @@ export class DashProductsComponent implements OnInit {
     this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
   }
 
-  inventario(id){
-    this.router.navigate(['products',id]);
+  inventario(id) {
+    this.router.navigate(['products', id]);
   }
 
   obtenerListaCategorias() {
@@ -202,6 +217,7 @@ export class DashProductsComponent implements OnInit {
     this.producto.descuento = this.product.get('descuento').value;
     this.producto.buffer = this.base64Final;
     this.producto.categoria_idcategoria = this.product.get('categoria').value;
+    this.producto.idusuario = this.idUsuario;
 
     if (this.base64Final == null) {
       this.producto.buffer = '0';
@@ -245,6 +261,8 @@ export class DashProductsComponent implements OnInit {
     this.producto.descuento = this.product.get('descuento').value;
     this.producto.buffer = this.base64Final;
     this.producto.categoria_idcategoria = this.product.get('categoria').value;
+    this.producto.idusuario = this.idUsuario;
+    
 
     if (this.base64Final == null) {
       this.producto.buffer = '0';
@@ -286,6 +304,8 @@ export class DashProductsComponent implements OnInit {
     let keyAUX;
 
     this.producto.id = this.idUsuarioAUX;
+    this.producto.idusuario = this.idUsuario;
+    
     keyAUX = arreglo[conteo - 1];
     this.producto.key = keyAUX;
     console.log(this.producto.id, '-', keyAUX);
@@ -309,6 +329,217 @@ export class DashProductsComponent implements OnInit {
               this.respuestaUpdate.EstadoUpdate = '';
               $('.alert').alert('close');
               this.product.reset();
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
+  openScrollableContent(longContent, url) {
+    this.urlAUX = url;
+    this.modalService.open(longContent, { centered: true });
+    // console.log(id);
+  }
+
+  // CATEGORIAS ====================================
+  abrirMantenimientosCat(content) {
+    // this.urlAUX = url;
+    this.modalService.open(content, { centered: true, size: 'lg', scrollable: true });
+    this.categoria.reset();
+    // console.log(id);
+  }
+
+  onSubmitCategoria() {
+    this.comprobadorCat = true;
+
+    if (this.isNewCat) {
+      // console.log("Voy a crear una categoria")
+      this.guardarCategoria();
+    }
+
+    if (this.isEditCat) {
+      // console.log("Voy a editar una categoria")
+      this.editarCategoria();
+    }
+
+    if (this.isDeleteCat) {
+      // console.log("Voy a eliminar un categoria");
+      this.eliminarCategoria();
+    }
+
+  }
+
+  creadoCat() {
+    this.categoria.reset();
+    this.isEditCat = false;
+    this.isDeleteCat = false;
+    this.isNewCat = true;
+  }
+
+  editadoCat(id, categoriaParametro) {
+    // console.log(productoParametro);
+    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
+    this.categoria.reset();
+    this.isEditCat = true;
+    this.isDeleteCat = false;
+    this.isNewCat = false;
+
+    this.idCategoriaAUX = id;
+
+    this.categoria.get('nombre').setValue(categoriaParametro.nombre);
+    this.categoria.get('descripcion').setValue(categoriaParametro.descripcion);
+    // this.product.get('precio').setValue(productoParametro.precio);
+    // this.product.get('cantidad').setValue(productoParametro.cantidad);
+    // this.product.get('descuento').setValue(productoParametro.descuento);
+    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+  }
+
+  eliminadoCat(id, categoriaParametro) {
+    // console.log(productoParametro);
+    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
+    this.categoria.reset();
+    this.isEditCat = false;
+    this.isDeleteCat = true;
+    this.isNewCat = false;
+
+    this.idCategoriaAUX = id;
+    // this.urlAUX = productoParametro.url_imagen;
+    // this.base64Final = null;
+
+    this.categoria.get('nombre').setValue(categoriaParametro.nombre);
+    this.categoria.get('descripcion').setValue(categoriaParametro.descripcion);
+    // this.product.get('precio').setValue(productoParametro.precio);
+    // this.product.get('cantidad').setValue(productoParametro.cantidad);
+    // this.product.get('descuento').setValue(productoParametro.descuento);
+    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+    // this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
+  }
+
+  // Registrar Cliente
+  guardarCategoria() {
+    // this.producto.nombre = this.product.get('nombre').value;
+    // this.producto.descripcion = this.product.get('descripcion').value;
+    // this.producto.precio = this.product.get('precio').value;
+    // this.producto.cantidad = this.product.get('cantidad').value;
+    // this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
+    // this.producto.descuento = this.product.get('descuento').value;
+    // this.producto.buffer = this.base64Final;
+    // this.producto.categoria_idcategoria = this.product.get('categoria').value;
+
+    // if (this.base64Final == null) {
+    //   this.producto.buffer = '0';
+    // }
+
+    this.categoriaService.registrarCategoria(
+      this.categoria.get('nombre').value,
+      this.categoria.get('descripcion').value,
+      this.idUsuario
+    ).subscribe(
+      res => {
+
+        this.respuesta = res;
+
+        setTimeout(() => {
+          this.comprobadorCat = false;
+        }, 1500);
+
+        setTimeout(() => {
+          if (this.respuesta.Conteo == 0) {
+            this.categoria.reset();
+            this.obtenerListaCategorias();
+          }
+          else {
+            this.respuesta.Id = 0;
+            this.respuesta.EstadoInsert = '';
+            this.respuesta.Conteo = 0;
+            // $('.alert').alert('close');
+            // this.product.reset();
+          }
+        }, 1000);
+      },
+      err => console.error(err)
+    );
+  }
+
+  editarCategoria() {
+    // let imgAux: any = "0";
+    // this.producto.nombre = this.product.get('nombre').value;
+    // this.producto.descripcion = this.product.get('descripcion').value;
+    // this.producto.precio = this.product.get('precio').value;
+    // this.producto.cantidad = this.product.get('cantidad').value;
+    // this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
+    // this.producto.descuento = this.product.get('descuento').value;
+    // this.producto.buffer = this.base64Final;
+    // this.producto.categoria_idcategoria = this.product.get('categoria').value;
+
+    // if (this.base64Final == null) {
+    //   this.producto.buffer = '0';
+    //   imgAux = "0"
+    // }
+    // else {
+    //   imgAux = "1"
+    // }
+
+    this.categoriaService.actualizarCategoria(
+      this.idCategoriaAUX,
+      this.categoria.get('nombre').value,
+      this.categoria.get('descripcion').value,
+      this.idUsuario
+    ).subscribe(
+      res => {
+        this.respuestaUpdate = res;
+
+        setTimeout(() => {
+          this.comprobadorCat = false;
+        }, 1500);
+
+        setTimeout(() => {
+          if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
+            this.categoria.reset();
+            this.obtenerListaCategorias();
+            this.creadoCat();
+          }
+          else {
+            this.respuestaUpdate.EstadoUpdate = '';
+            // $('.alert').alert('close');
+            // this.product.reset();
+          }
+        }, 1000);
+      },
+      err => console.error(err)
+    );
+  }
+
+  eliminarCategoria() {
+    // let arreglo = this.urlAUX.split('/');
+    // let conteo = arreglo.length;
+    // let keyAUX;
+
+    // this.producto.id = this.idUsuarioAUX;
+    // keyAUX = arreglo[conteo - 1];
+    // this.producto.key = keyAUX;
+    // console.log(this.producto.id, '-', keyAUX);
+
+    this.categoriaService.deshabilitarCategoria(this.idCategoriaAUX, this.idUsuario)
+      .subscribe(
+        res => {
+          this.respuestaUpdate = res;
+
+          setTimeout(() => {
+            this.comprobadorCat = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
+              this.categoria.reset();
+              this.obtenerListaCategorias();
+              this.creado()
+            }
+            else {
+              this.respuestaUpdate.EstadoUpdate = '';
+              // $('.alert').alert('close');
+              // this.product.reset();
             }
           }, 1000);
         },

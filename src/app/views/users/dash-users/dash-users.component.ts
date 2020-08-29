@@ -24,6 +24,7 @@ export class DashUsersComponent implements OnInit {
   isNew: boolean = true;
 
   idUsuarioAUX: any;
+  filtro = '';
 
   // Inicializacion de interfaces
   usuario: Usuario = {
@@ -257,7 +258,17 @@ export class DashUsersComponent implements OnInit {
   }
 
   bitacora(id) {
-    this.router.navigate(['users', id, 'bitacora']);
+    this.router.navigate(['users', id, 'log']);
   }
+
+  keyPress(event: KeyboardEvent) {
+    // const pattern = /[0-9]/;
+    // const inputChar = String.fromCharCode(event).charCode);
+    // if (!pattern.test(inputChar)) {    
+    //     // invalid character, prevent input
+    //     event.preventDefault();
+    // }
+    console.log(event);
+}
 
 }

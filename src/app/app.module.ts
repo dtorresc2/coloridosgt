@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { UsersService } from './services/usuarios/users.service';
 import { CategoriasService } from './services/productos/categorias.service';
 import { ProductosService } from './services/productos/productos.service';
+import { PedidosService } from './services/pedidos/pedidos.service';
 
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
@@ -23,6 +24,8 @@ import { DashUsersComponent } from './views/users/dash-users/dash-users.componen
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 import { OrdersComponent } from './routes/orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FiltroUsuarioPipe } from './pipes/usuarios/filtro-usuario.pipe';
+import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DetailProductsComponent,
     DashUsersComponent,
     BitacoraUsersComponent,
-    OrdersComponent
+    OrdersComponent,
+    FiltroUsuarioPipe,
+    FiltroProductoPipe
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   providers: [
     UsersService,
     CategoriasService,
-    ProductosService
+    ProductosService,
+    PedidosService
   ],
   bootstrap: [AppComponent]
 })
