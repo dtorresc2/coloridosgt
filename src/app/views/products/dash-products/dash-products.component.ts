@@ -55,7 +55,8 @@ export class DashProductsComponent implements OnInit {
     descuento: 0.00,
     cantidad_minima: 0,
     categoria_idcategoria: 0,
-    buffer: '0'
+    buffer: '0',
+    idusuario: 0
   }
 
   respuestaUpdate: RespuestaUpdate = {
@@ -216,6 +217,7 @@ export class DashProductsComponent implements OnInit {
     this.producto.descuento = this.product.get('descuento').value;
     this.producto.buffer = this.base64Final;
     this.producto.categoria_idcategoria = this.product.get('categoria').value;
+    this.producto.idusuario = this.idUsuario;
 
     if (this.base64Final == null) {
       this.producto.buffer = '0';
@@ -259,6 +261,8 @@ export class DashProductsComponent implements OnInit {
     this.producto.descuento = this.product.get('descuento').value;
     this.producto.buffer = this.base64Final;
     this.producto.categoria_idcategoria = this.product.get('categoria').value;
+    this.producto.idusuario = this.idUsuario;
+    
 
     if (this.base64Final == null) {
       this.producto.buffer = '0';
@@ -300,6 +304,8 @@ export class DashProductsComponent implements OnInit {
     let keyAUX;
 
     this.producto.id = this.idUsuarioAUX;
+    this.producto.idusuario = this.idUsuario;
+    
     keyAUX = arreglo[conteo - 1];
     this.producto.key = keyAUX;
     console.log(this.producto.id, '-', keyAUX);
