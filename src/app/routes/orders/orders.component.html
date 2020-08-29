@@ -21,17 +21,30 @@
             </thead>
             <tbody>
                 <tr>
-                    <!-- <th scope="row">1</th> -->
-                    <td>Carl</td>
+                    <!-- <td>Carl</td>
                     <td>Zona 12</td>
-                    <!-- <td>admin1</td> -->
                     <td>Envio</td>
                     <td>24/07/2020</td>
                     <td>Q150.00</td>
                     <td>1</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm"
+                        <button type="button" class="btn btn-info btn-sm"
+                            (click)="openScrollableContent(longContent,1)"
                             style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
+                        <button type="button" class="btn btn-info btn-sm"
+                            (click)="openScrollableContent(longContent,1)" style="margin-left: 2%;"><i class="far fa-image"></i></button>
+                    </td> -->
+                    <td>Carl</td>
+                    <td>Zona 12</td>
+                    <td>Envio</td>
+                    <td>24/07/2020</td>
+                    <td>Q150.00</td>
+                    <td>1</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-sm" (click)="openScrollableContent(longContent,1)"
+                            style="padding-left: 15%; padding-right: 15%;"><i class="fas fa-map-pin fa-sm"></i></button>
+                        <button type="button" class="btn btn-info btn-sm" (click)="openScrollableContent(longContent,1)"
+                            style="margin-left: 2%;"><i class="far fa-image"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -41,13 +54,11 @@
     <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
-            <div class="card-header d-flex justify-content-end">
+            <!-- <div class="card-header d-flex justify-content-end">
                 <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)">
                     <span>Nuevo Pedido</span>
                 </button>
-                <!-- <button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">Modal
-                    scrollable content</button> -->
-            </div>
+            </div> -->
             <div class="card-body">
                 <form>
                     <h4 class="card-title text-center" style="padding-bottom: 1%;">
@@ -70,26 +81,50 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Tipo De Pedido</label>
                         <select class="form-control form-control-sm">
-                            <!-- formControlName="categoria"> -->
                             <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
                                 {{tipo.tipo}}
                             </option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label>Dirección</label>
                         <input class="form-control form-control-sm" type="text">
                     </div>
 
+                    <!-- <div class="form-group">
+                        <label>Total</label>
+                        <input class="form-control form-control-sm" type="text">
+                    </div> -->
+
                     <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>No. Productos</label>
+                                <input class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Total</label>
                                 <input class="form-control form-control-sm" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Tipo De Pedido</label>
+                                <select class="form-control form-control-sm">
+                                    <!-- formControlName="categoria"> -->
+                                    <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
+                                        {{tipo.tipo}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col">
@@ -104,7 +139,8 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-secondary btn-block">
+
+                    <button class="btn btn-secondary btn-block" disabled>
                         <span>Registrar</span>
                     </button>
                 </form>
