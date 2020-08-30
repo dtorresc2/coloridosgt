@@ -7,6 +7,7 @@ import { ProductosService } from 'src/app/services/productos/productos.service';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 declare var $: any; // jQuery
 
 @Component({
@@ -378,8 +379,6 @@ export class DashProductsComponent implements OnInit {
   }
 
   editadoCat(id, categoriaParametro) {
-    // console.log(productoParametro);
-    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
     this.categoria.reset();
     this.isEditCat = true;
     this.isDeleteCat = false;
@@ -389,48 +388,22 @@ export class DashProductsComponent implements OnInit {
 
     this.categoria.get('nombre').setValue(categoriaParametro.nombre);
     this.categoria.get('descripcion').setValue(categoriaParametro.descripcion);
-    // this.product.get('precio').setValue(productoParametro.precio);
-    // this.product.get('cantidad').setValue(productoParametro.cantidad);
-    // this.product.get('descuento').setValue(productoParametro.descuento);
-    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
   }
 
   eliminadoCat(id, categoriaParametro) {
-    // console.log(productoParametro);
-    // console.log(id, '-', usuarioParametro.correo, '-', usuarioParametro.nombrerol);
     this.categoria.reset();
     this.isEditCat = false;
     this.isDeleteCat = true;
     this.isNewCat = false;
 
     this.idCategoriaAUX = id;
-    // this.urlAUX = productoParametro.url_imagen;
-    // this.base64Final = null;
 
     this.categoria.get('nombre').setValue(categoriaParametro.nombre);
     this.categoria.get('descripcion').setValue(categoriaParametro.descripcion);
-    // this.product.get('precio').setValue(productoParametro.precio);
-    // this.product.get('cantidad').setValue(productoParametro.cantidad);
-    // this.product.get('descuento').setValue(productoParametro.descuento);
-    // this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
-    // this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
   }
 
   // Registrar Cliente
   guardarCategoria() {
-    // this.producto.nombre = this.product.get('nombre').value;
-    // this.producto.descripcion = this.product.get('descripcion').value;
-    // this.producto.precio = this.product.get('precio').value;
-    // this.producto.cantidad = this.product.get('cantidad').value;
-    // this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
-    // this.producto.descuento = this.product.get('descuento').value;
-    // this.producto.buffer = this.base64Final;
-    // this.producto.categoria_idcategoria = this.product.get('categoria').value;
-
-    // if (this.base64Final == null) {
-    //   this.producto.buffer = '0';
-    // }
-
     this.categoriaService.registrarCategoria(
       this.categoria.get('nombre').value,
       this.categoria.get('descripcion').value,
@@ -463,24 +436,6 @@ export class DashProductsComponent implements OnInit {
   }
 
   editarCategoria() {
-    // let imgAux: any = "0";
-    // this.producto.nombre = this.product.get('nombre').value;
-    // this.producto.descripcion = this.product.get('descripcion').value;
-    // this.producto.precio = this.product.get('precio').value;
-    // this.producto.cantidad = this.product.get('cantidad').value;
-    // this.producto.cantidad_minima = this.product.get('cantidad_minima').value;
-    // this.producto.descuento = this.product.get('descuento').value;
-    // this.producto.buffer = this.base64Final;
-    // this.producto.categoria_idcategoria = this.product.get('categoria').value;
-
-    // if (this.base64Final == null) {
-    //   this.producto.buffer = '0';
-    //   imgAux = "0"
-    // }
-    // else {
-    //   imgAux = "1"
-    // }
-
     this.categoriaService.actualizarCategoria(
       this.idCategoriaAUX,
       this.categoria.get('nombre').value,
@@ -512,15 +467,6 @@ export class DashProductsComponent implements OnInit {
   }
 
   eliminarCategoria() {
-    // let arreglo = this.urlAUX.split('/');
-    // let conteo = arreglo.length;
-    // let keyAUX;
-
-    // this.producto.id = this.idUsuarioAUX;
-    // keyAUX = arreglo[conteo - 1];
-    // this.producto.key = keyAUX;
-    // console.log(this.producto.id, '-', keyAUX);
-
     this.categoriaService.deshabilitarCategoria(this.idCategoriaAUX, this.idUsuario)
       .subscribe(
         res => {
