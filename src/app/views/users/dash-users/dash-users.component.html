@@ -55,8 +55,8 @@
                                 (click)="editado(user.idusuario,user)" placement="top" ngbTooltip="Editar Usuario"><i
                                     class="fas fa-pencil-alt fa-sm"></i></button>
 
-                            <button *ngIf="user.idusuario != 1"  type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"
-                                (click)="eliminado(user.idusuario,user)" placement="top"
+                            <button *ngIf="user.idusuario != 1" type="button" class="btn btn-danger btn-sm"
+                                style="margin-left: 1%;" (click)="eliminado(user.idusuario,user)" placement="top"
                                 ngbTooltip="Eliminar Usuario"><i class="fas fa-trash fa-sm"></i></button>
                         </td>
                     </tr>
@@ -174,5 +174,8 @@
                 <label class="custom-control-label" for="customCheck3">Modulo Usuarios</label>
             </div>
         </div>
+        <button class="btn btn-secondary btn-block pb-1">
+            <span>Actualizar</span>
+        </button>
     </div>
 </ng-template>
