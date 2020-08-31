@@ -331,3 +331,5 @@ export class DashUsersComponent implements OnInit {
   }
 
 }
+
+// TEXTO = TEXTO.indexOf("-") >= 0 ? TEXTO.substring(TEXTO.indexOf("-") + 1).trim() : TEXTO;
