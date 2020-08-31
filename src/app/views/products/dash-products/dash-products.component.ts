@@ -38,6 +38,7 @@ export class DashProductsComponent implements OnInit {
   idUsuarioAUX: any;
   urlAUX: any;
   idCategoriaAUX: any;
+  idObjetoAux: any;
 
   listaCategorias: any = [];
   listaProductos: any = [];
@@ -337,20 +338,24 @@ export class DashProductsComponent implements OnInit {
       );
   }
 
-  openScrollableContent(longContent, url) {
+  // Funciones para abrir los distintos modales
+  openScrollableContent(longContent, url, id) {
     this.urlAUX = url;
+    this.idObjetoAux = id;
     this.modalService.open(longContent, { centered: true });
     // console.log(id);
   }
 
-  abrirModalCantidad(content) {
+  abrirModalCantidad(content, id) {
     // this.urlAUX = url;
+    this.idObjetoAux = id;
     this.modalService.open(content, { centered: true });
     // console.log(id);
   }
 
-  abrirModalCostos(content) {
+  abrirModalCostos(content, id) {
     // this.urlAUX = url;
+    this.idObjetoAux = id;
     this.modalService.open(content, { centered: true, size: 'lg' });
     // console.log(id);
   }

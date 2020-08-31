@@ -47,12 +47,12 @@
                                 <div class="row pb-1">
                                     <div class="col-sm-4">
                                         <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
-                                            (click)="abrirModalCantidad(modalCantidad)" ngbTooltip="Agregar Cantidad">
+                                            (click)="abrirModalCantidad(modalCantidad,producto.idproducto)" ngbTooltip="Agregar Cantidad">
                                             <i class="fas fa-plus-square"></i></button>
                                     </div>
                                     <div class="col-sm-4 ml-1">
                                         <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
-                                            (click)="abrirModalCostos(modalCostos)" ngbTooltip="Ver Costos">
+                                            (click)="abrirModalCostos(modalCostos,producto.idproducto)" ngbTooltip="Ver Costos">
                                             <i class="fas fa-search-dollar"></i></button>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-sm-4 ml-1">
                                         <button type="button" class="btn btn-info btn-sm pb-1"
-                                            (click)="openScrollableContent(modalImagen,producto.url_imagen)"
+                                            (click)="openScrollableContent(modalImagen,producto.url_imagen,producto.idproducto)"
                                             placement="top" ngbTooltip="Ver Imagen">
                                             <i class="far fa-image"></i></button>
                                     </div>
@@ -254,7 +254,7 @@
 <!-- Modal para agregar cantidad -->
 <ng-template #modalCantidad let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Cantidad para Producto #</h4>
+        <h4 class="modal-title">Cantidad para Producto #{{idObjetoAux}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -287,7 +287,7 @@
 <!-- Modal para tabla de costos -->
 <ng-template #modalCostos let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Costos de Producto #</h4>
+        <h4 class="modal-title">Costos de Producto #{{idObjetoAux}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -322,7 +322,7 @@
 <!-- Modal para vista previa de imagen -->
 <ng-template #modalImagen let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Imagen de Producto #</h4>
+        <h4 class="modal-title">Imagen de Producto #{{idObjetoAux}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
