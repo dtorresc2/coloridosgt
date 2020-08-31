@@ -27,6 +27,10 @@ export class DashUsersComponent implements OnInit {
   isDelete: boolean = false;
   isNew: boolean = true;
 
+  moduloProductos : boolean = false;
+  moduloPedidos : boolean = true;
+  moduloUsuarios : boolean = false;
+
   idUsuarioAUX: any;
   filtro = '';
   idObjetoAux: any;
@@ -320,6 +324,10 @@ export class DashUsersComponent implements OnInit {
 
   ejecutarActualizacion(){
 
+  }
+
+  checkCheckBoxvalue(event){
+    this.moduloPedidos = event.checked;
   }
 
 }

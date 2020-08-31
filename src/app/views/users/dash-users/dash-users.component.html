@@ -59,8 +59,9 @@
                                     class="fas fa-pencil-alt fa-sm"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm"
-                                style="margin-left: 1%; padding-bottom: 2%;" (click)="abrirModalPass(modalPass,user.idusuario)"
-                                placement="top" ngbTooltip="Actualizar Contraseña"><i class="fas fa-key"></i></button>
+                                style="margin-left: 1%; padding-bottom: 2%;"
+                                (click)="abrirModalPass(modalPass,user.idusuario)" placement="top"
+                                ngbTooltip="Actualizar Contraseña"><i class="fas fa-key"></i></button>
 
                             <button *ngIf="user.idusuario != 1" type="button" class="btn btn-danger btn-sm"
                                 style="margin-left: 1%; padding-bottom: 2%;" (click)="eliminado(user.idusuario,user)"
@@ -169,16 +170,17 @@
     <div class="modal-body">
         <div class="form-group">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck1" checked=""> -->
+                <input type="checkbox" class="custom-control-input" id="customCheck1" [(ngModel)]="moduloProductos">
                 <label class="custom-control-label" for="customCheck1">Modulo Productos</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <!-- <input type="checkbox" class="custom-control-input" id="customCheck2" disabled=""> -->
-                <input type="checkbox" class="custom-control-input" id="customCheck2">
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck2"> -->
+                <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]="moduloPedidos">
                 <label class="custom-control-label" for="customCheck2">Modulo Pedidos</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck3">
+                <input type="checkbox" class="custom-control-input" id="customCheck3" [(ngModel)]="moduloUsuarios">
                 <label class="custom-control-label" for="customCheck3">Modulo Usuarios</label>
             </div>
         </div>
@@ -200,16 +202,27 @@
         <form novalidate (ngSubmit)="ejecutarActualizacion()" [formGroup]="passUpdate">
             <div class="form-group">
                 <label>Contraseña Nueva</label>
-                <input type="password" class="form-control"
+                <input type="password" class="form-control" formControlName="password"
                     placeholder="Ingrese su contraseña nueva">
+                <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="passUpdate.get('password').hasError('required') && passUpdate.get('password').touched">
+                    Contraseña requerida
+                </span>
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Confirmar Contraseña</label>
-                <input type="password" class="form-control"
+                <input type="password" class="form-control" formControlName="confirmpass"
                     placeholder="Confirme su contraseña nueva">
+                <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="passUpdate.get('confirmpass').hasError('required') && passUpdate.get('confirmpass').touched">
+                    Contraseña requerida
+                </span>
+                <span class="text-danger" style="font-size: 10px;" *ngIf="passUpdate.errors?.invalid">
+                    Contraseña sin coincidir
+                </span>
             </div>
         </form>
-        <button class="btn btn-secondary btn-block pb-1">
+        <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;" [disabled]="passUpdate.invalid">
             <span>Actualizar Contraseña</span>
         </button>
     </div>
