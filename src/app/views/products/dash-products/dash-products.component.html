@@ -47,7 +47,7 @@
                                 <div class="row pb-1">
                                     <div class="col-sm-4">
                                         <button type="button" class="btn btn-success btn-sm pb-1"
-                                            placement="top"
+                                            placement="top" (click)="abrirModalCantidad(modalCantidad)"
                                             ngbTooltip="Agregar Cantidad">
                                             <i class="fas fa-plus-square"></i></button>
                                     </div>
@@ -252,10 +252,31 @@
     </div>
 </div>
 
+<!-- Modal para agregar cantidad -->
+<ng-template #modalCantidad let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Cantidades de Producto #</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300"> -->
+        <p>Cantidad</p>
+        <p>Cantidad</p>
+        <p>Cantidad</p>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+            <span>Cerrar</span>
+        </button>
+    </div> -->
+</ng-template>
+
 <!-- Modal para vista previa de imagen -->
 <ng-template #modalImagen let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Imagen de Producto #123</h4>
+        <h4 class="modal-title">Imagen de Producto #</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -263,11 +284,6 @@
     <div class="modal-body">
         <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300">
     </div>
-    <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
-            <span>Cerrar</span>
-        </button>
-    </div> -->
 </ng-template>
 
 <!-- Modal para mantenimiento de categorias -->
