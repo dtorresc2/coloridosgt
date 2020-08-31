@@ -224,6 +224,7 @@
                             <option [value]="categoria.idcategoria" *ngFor="let categoria of listaCategorias">
                                 {{categoria.nombre}}
                             </option>
+                            <!-- <option selected>Choose...</option> -->
                         </select>
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="product.get('categoria').hasError('required') && product.get('categoria').touched">

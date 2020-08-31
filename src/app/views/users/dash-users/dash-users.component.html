@@ -28,7 +28,7 @@
             </form>
         </div>
 
-        <div class="row text-center">
+        <div class="row">
             <table class="table table-hover table-striped table-sm table-responsive-md">
                 <thead class="table-secondary">
                     <tr>
@@ -45,13 +45,17 @@
                         <td>{{user.correo}}</td>
                         <td>
                             <button type="button" class="btn btn-success btn-sm"
-                                style="padding-left: 8%; padding-right: 8%;" (click)="bitacora(user.idusuario)"
-                                placement="top" ngbTooltip="Ver Bitacora"><i class="fas fa-map-pin fa-sm"></i></button>
+                                (click)="bitacora(user.idusuario)"
+                                placement="top" ngbTooltip="Ver Bitacora"><i class="fas fa-stream"></i></button>
+
+                            <button type="button" class="btn btn-success btn-sm" style="margin-left: 1%;"
+                                (click)="bitacora(user.idusuario)" placement="top" ngbTooltip="Gestionar Permisos"><i
+                                    class="fas fa-user-lock"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"
                                 (click)="editado(user.idusuario,user)" placement="top" ngbTooltip="Editar Usuario"><i
                                     class="fas fa-pencil-alt fa-sm"></i></button>
-                                    
+
                             <button type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"
                                 (click)="eliminado(user.idusuario,user)" placement="top"
                                 ngbTooltip="Eliminar Usuario"><i class="fas fa-trash fa-sm"></i></button>
