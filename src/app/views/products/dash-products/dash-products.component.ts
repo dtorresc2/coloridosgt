@@ -80,7 +80,7 @@ export class DashProductsComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', Validators.required),
       precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
-      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
       descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
       cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
       categoria: new FormControl('', Validators.required)
@@ -104,6 +104,8 @@ export class DashProductsComponent implements OnInit {
       this.ID = 'Inicie Sesion';
       this.router.navigate(['/singin']);
     }
+
+    this.product.get('cantidad').setValue(0);
   }
 
   onSubmit() {
@@ -131,6 +133,7 @@ export class DashProductsComponent implements OnInit {
     this.isEdit = false;
     this.isDelete = false;
     this.isNew = true;
+    this.product.get('cantidad').setValue(0);
   }
 
   editado(id, productoParametro) {

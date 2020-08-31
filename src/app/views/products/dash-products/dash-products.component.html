@@ -182,7 +182,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Cantidad</label>
-                                <input class="form-control form-control-sm" type="text" formControlName="cantidad">
+                                <input class="form-control form-control-sm" type="text" formControlName="cantidad" disabled>
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('cantidad').hasError('required') && product.get('cantidad').touched">
                                     Cantidad requerida
@@ -268,14 +268,16 @@
                     <input type="text" class="form-control">
                 </div>
                 <div class=" form-group col-md-6">
-                    <label>Costo - Cant. Disp
-                        <a class="text-secondary" style="font-size: 12px;" placement="top"
-                            ngbTooltip="Actualizar Costos"><i class="fas fa-sync-alt"></i></a>
+                    <label>Costo
+                        <!-- <a class="text-secondary" style="font-size: 12px;" placement="top"
+                            ngbTooltip="Actualizar Costos"><i class="fas fa-sync-alt"></i></a> -->
                     </label>
-                    <select class="form-control">
+                    <input type="text" class="form-control">
+
+                    <!-- <select class="form-control">
                         <option selected>Choose...</option>
                         <option>Q. 12.75 - 123</option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
             <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;">
