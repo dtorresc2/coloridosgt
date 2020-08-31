@@ -46,14 +46,13 @@
                             <div class="container text-center">
                                 <div class="row pb-1">
                                     <div class="col-sm-4">
-                                        <button type="button" class="btn btn-success btn-sm pb-1"
-                                            placement="top" (click)="abrirModalCantidad(modalCantidad)"
-                                            ngbTooltip="Agregar Cantidad">
+                                        <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
+                                            (click)="abrirModalCantidad(modalCantidad)" ngbTooltip="Agregar Cantidad">
                                             <i class="fas fa-plus-square"></i></button>
                                     </div>
                                     <div class="col-sm-4 ml-1">
-                                        <button type="button" class="btn btn-success btn-sm pb-1"
-                                            placement="top" ngbTooltip="Ver Costos">
+                                        <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
+                                            (click)="abrirModalCostos(modalCostos)" ngbTooltip="Ver Costos">
                                             <i class="fas fa-search-dollar"></i></button>
                                     </div>
                                 </div>
@@ -255,22 +254,69 @@
 <!-- Modal para agregar cantidad -->
 <ng-template #modalCantidad let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Cantidades de Producto #</h4>
+        <h4 class="modal-title">Cantidad para Producto #</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <!-- <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300"> -->
-        <p>Cantidad</p>
-        <p>Cantidad</p>
-        <p>Cantidad</p>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Cantidad</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class=" form-group col-md-6">
+                    <label>Costo - Cant. Disp
+                        <a class="text-secondary" style="font-size: 12px;" placement="top"
+                            ngbTooltip="Actualizar Costos"><i class="fas fa-sync-alt"></i></a>
+                    </label>
+                    <select class="form-control">
+                        <option selected>Choose...</option>
+                        <option>Q. 12.75 - 123</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;">
+                <span>Registrar Cantidad</span>
+            </button>
+        </form>
     </div>
-    <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
-            <span>Cerrar</span>
+</ng-template>
+
+<!-- Modal para tabla de costos -->
+<ng-template #modalCostos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Costos de Producto #</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
         </button>
-    </div> -->
+    </div>
+    <div class="modal-body">
+        <table class="table table-hover table-striped table-sm table-responsive-md">
+            <thead class="table-secondary">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cant</th>
+                    <!-- <th scope="col">#Min</th> -->
+                    <th scope="col">Categoria</th>
+                    <!-- <th scope="col">Acciones</th> -->
+                </tr>
+            </thead>
+            <tbody *ngFor="let producto of listaProductos | filtroProducto:filtro.value">
+                <tr>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.descripcion}}</td>
+                    <td>Q.{{producto.precio | number:'1.2-2'}}</td>
+                    <td>{{producto.cantidad}}</td>
+                    <!-- <td>{{producto.cantidad_minima}}</td> -->
+                    <td>{{producto.categoria_idcategoria}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </ng-template>
 
 <!-- Modal para vista previa de imagen -->

@@ -263,7 +263,7 @@ export class DashProductsComponent implements OnInit {
     this.producto.buffer = this.base64Final;
     this.producto.categoria_idcategoria = this.product.get('categoria').value;
     this.producto.idusuario = this.idUsuario;
-    
+
 
     if (this.base64Final == null) {
       this.producto.buffer = '0';
@@ -306,7 +306,7 @@ export class DashProductsComponent implements OnInit {
 
     this.producto.id = this.idUsuarioAUX;
     this.producto.idusuario = this.idUsuario;
-    
+
     keyAUX = arreglo[conteo - 1];
     this.producto.key = keyAUX;
     console.log(this.producto.id, '-', keyAUX);
@@ -346,6 +346,12 @@ export class DashProductsComponent implements OnInit {
   abrirModalCantidad(content) {
     // this.urlAUX = url;
     this.modalService.open(content, { centered: true });
+    // console.log(id);
+  }
+
+  abrirModalCostos(content) {
+    // this.urlAUX = url;
+    this.modalService.open(content, { centered: true, size: 'lg' });
     // console.log(id);
   }
 
