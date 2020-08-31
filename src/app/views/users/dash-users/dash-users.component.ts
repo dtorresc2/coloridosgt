@@ -5,6 +5,7 @@ import { RespuestaUsuario } from 'src/app/controllers/respuestaUsuario';
 import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any; // jQuery
 
 @Component({
@@ -25,6 +26,7 @@ export class DashUsersComponent implements OnInit {
 
   idUsuarioAUX: any;
   filtro = '';
+  idObjetoAux: any;
 
   // Inicializacion de interfaces
   usuario: Usuario = {
@@ -42,7 +44,12 @@ export class DashUsersComponent implements OnInit {
   update: RespuestaUpdate = {
     EstadoUpdate: ''
   }
-  constructor(private usersService: UsersService, private router: Router) { }
+
+  constructor(
+    private usersService: UsersService, 
+    private router: Router, 
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
     this.user = new FormGroup(
@@ -269,6 +276,13 @@ export class DashUsersComponent implements OnInit {
     //     event.preventDefault();
     // }
     console.log(event);
-}
+  }
+
+  abrirModalPermisos(content, id) {
+    // this.urlAUX = url;
+    this.idObjetoAux = id;
+    this.modalService.open(content, { centered: true });
+    // console.log(id);
+  }
 
 }

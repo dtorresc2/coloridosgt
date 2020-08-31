@@ -44,19 +44,18 @@
                         <td>{{user.nombrerol}}</td>
                         <td>{{user.correo}}</td>
                         <td>
-                            <button type="button" class="btn btn-success btn-sm"
-                                (click)="bitacora(user.idusuario)"
+                            <button type="button" class="btn btn-success btn-sm" (click)="bitacora(user.idusuario)"
                                 placement="top" ngbTooltip="Ver Bitacora"><i class="fas fa-stream"></i></button>
 
                             <button type="button" class="btn btn-success btn-sm" style="margin-left: 1%;"
-                                (click)="bitacora(user.idusuario)" placement="top" ngbTooltip="Gestionar Permisos"><i
-                                    class="fas fa-user-lock"></i></button>
+                                (click)="abrirModalPermisos(modalPermisos,user.idusuario)" placement="top"
+                                ngbTooltip="Gestionar Permisos"><i class="fas fa-user-lock"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"
                                 (click)="editado(user.idusuario,user)" placement="top" ngbTooltip="Editar Usuario"><i
                                     class="fas fa-pencil-alt fa-sm"></i></button>
 
-                            <button type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"
+                            <button *ngIf="user.idusuario != 1"  type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"
                                 (click)="eliminado(user.idusuario,user)" placement="top"
                                 ngbTooltip="Eliminar Usuario"><i class="fas fa-trash fa-sm"></i></button>
                         </td>
@@ -150,3 +149,30 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para Permisos de Usuario -->
+<ng-template #modalPermisos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Permisos de Usuario #{{idObjetoAux}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                <label class="custom-control-label" for="customCheck1">Modulo Productos</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck2" disabled=""> -->
+                <input type="checkbox" class="custom-control-input" id="customCheck2">
+                <label class="custom-control-label" for="customCheck2">Modulo Pedidos</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck3">
+                <label class="custom-control-label" for="customCheck3">Modulo Usuarios</label>
+            </div>
+        </div>
+    </div>
+</ng-template>
