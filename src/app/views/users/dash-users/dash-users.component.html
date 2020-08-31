@@ -45,19 +45,27 @@
                         <td>{{user.correo}}</td>
                         <td>
                             <button type="button" class="btn btn-success btn-sm" (click)="bitacora(user.idusuario)"
-                                placement="top" ngbTooltip="Ver Bitacora"><i class="fas fa-stream"></i></button>
+                                style="padding-bottom: 2%;" placement="top" ngbTooltip="Ver Bitacora"><i
+                                    class="fas fa-stream"></i></button>
 
-                            <button type="button" class="btn btn-success btn-sm" style="margin-left: 1%;"
+                            <button type="button" class="btn btn-success btn-sm"
+                                style="margin-left: 1%; padding-bottom: 2%;"
                                 (click)="abrirModalPermisos(modalPermisos,user.idusuario)" placement="top"
                                 ngbTooltip="Gestionar Permisos"><i class="fas fa-user-lock"></i></button>
 
-                            <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"
-                                (click)="editado(user.idusuario,user)" placement="top" ngbTooltip="Editar Usuario"><i
+                            <button type="button" class="btn btn-info btn-sm"
+                                style="margin-left: 1%; padding-bottom: 2%;" (click)="editado(user.idusuario,user)"
+                                placement="top" ngbTooltip="Editar Usuario"><i
                                     class="fas fa-pencil-alt fa-sm"></i></button>
 
+                            <button type="button" class="btn btn-info btn-sm"
+                                style="margin-left: 1%; padding-bottom: 2%;" (click)="abrirModalPass(modalPass,user.idusuario)"
+                                placement="top" ngbTooltip="Actualizar Contraseña"><i class="fas fa-key"></i></button>
+
                             <button *ngIf="user.idusuario != 1" type="button" class="btn btn-danger btn-sm"
-                                style="margin-left: 1%;" (click)="eliminado(user.idusuario,user)" placement="top"
-                                ngbTooltip="Eliminar Usuario"><i class="fas fa-trash fa-sm"></i></button>
+                                style="margin-left: 1%; padding-bottom: 2%;" (click)="eliminado(user.idusuario,user)"
+                                placement="top" ngbTooltip="Eliminar Usuario"><i
+                                    class="fas fa-trash fa-sm"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -176,6 +184,33 @@
         </div>
         <button class="btn btn-secondary btn-block pb-1">
             <span>Actualizar</span>
+        </button>
+    </div>
+</ng-template>
+
+<!-- Modal para Actualizar Contraseña -->
+<ng-template #modalPass let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Actualizacion de Contraseña - Usuario #{{idObjetoAux}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form novalidate (ngSubmit)="ejecutarActualizacion()" [formGroup]="passUpdate">
+            <div class="form-group">
+                <label>Contraseña Nueva</label>
+                <input type="password" class="form-control"
+                    placeholder="Ingrese su contraseña nueva">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Confirmar Contraseña</label>
+                <input type="password" class="form-control"
+                    placeholder="Confirme su contraseña nueva">
+            </div>
+        </form>
+        <button class="btn btn-secondary btn-block pb-1">
+            <span>Actualizar Contraseña</span>
         </button>
     </div>
 </ng-template>

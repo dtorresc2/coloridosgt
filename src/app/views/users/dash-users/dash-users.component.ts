@@ -18,6 +18,7 @@ declare var $: any; // jQuery
 export class DashUsersComponent implements OnInit {
   idUsuario: any;
   user: FormGroup;
+  passUpdate : FormGroup;
   listaClientes: any = [];
 
   comprobador: boolean = false;
@@ -62,6 +63,17 @@ export class DashUsersComponent implements OnInit {
         password: new FormControl('', Validators.required),
         confirmpass: new FormControl('', Validators.required)
       },
+      {
+        validators: this.passwordMatchValidator
+      }
+    );
+
+    this.passUpdate = new FormGroup(
+      {
+        password : new FormControl('', Validators.required),
+        confirmpass : new FormControl('', Validators.required),
+      }
+      ,
       {
         validators: this.passwordMatchValidator
       }
@@ -297,6 +309,17 @@ export class DashUsersComponent implements OnInit {
     this.idObjetoAux = id;
     this.modalService.open(content, { centered: true });
     // console.log(id);
+  }
+
+  abrirModalPass(content, id) {
+    // this.urlAUX = url;
+    this.idObjetoAux = id;
+    this.modalService.open(content, { centered: true });
+    // console.log(id);
+  }
+
+  ejecutarActualizacion(){
+
   }
 
 }
