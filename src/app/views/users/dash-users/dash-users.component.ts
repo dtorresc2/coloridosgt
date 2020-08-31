@@ -6,6 +6,8 @@ import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+
 declare var $: any; // jQuery
 
 @Component({
@@ -46,10 +48,11 @@ export class DashUsersComponent implements OnInit {
   }
 
   constructor(
-    private usersService: UsersService, 
-    private router: Router, 
-    private modalService: NgbModal
-    ) { }
+    private usersService: UsersService,
+    private router: Router,
+    private modalService: NgbModal,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.user = new FormGroup(
@@ -75,6 +78,8 @@ export class DashUsersComponent implements OnInit {
       this.router.navigate(['/singin']);
     }
 
+    // this.showSuccess();
+
     // this.usersService.getIPAddress()
     //   .subscribe(
     //     res => {
@@ -88,6 +93,15 @@ export class DashUsersComponent implements OnInit {
   // Funcion de confirmacion de usuarios
   passwordMatchValidator(g: FormGroup): { invalid: boolean } {
     return g.get('password').value === g.get('confirmpass').value ? null : { invalid: true };
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!','', {
+      closeButton: true,
+      toastClass: 'ngx-toastr bg-primary',
+      titleClass: 'toast-title text-white',
+      timeOut: 1000
+    });
   }
 
   onSubmit() {

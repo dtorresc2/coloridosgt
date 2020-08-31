@@ -36,6 +36,7 @@ button span {
 
 } */
 
+/* https://stackoverflow.com/questions/37493852/how-can-i-change-the-color-of-bootstrap-checkbox */
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
    background-color: #f1959b!important;
 }

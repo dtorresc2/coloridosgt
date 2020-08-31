@@ -7,6 +7,7 @@ import { ProductosService } from 'src/app/services/productos/productos.service';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $: any; // jQuery
 
@@ -69,7 +70,8 @@ export class DashProductsComponent implements OnInit {
     private productoService: ProductosService,
     private categoriaService: CategoriasService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -358,6 +360,19 @@ export class DashProductsComponent implements OnInit {
     this.idObjetoAux = id;
     this.modalService.open(content, { centered: true, size: 'lg' });
     // console.log(id);
+  }
+
+  showSuccess() {
+    this.toastr.success('Creado Correctamente', '', {
+      closeButton: true,
+      toastClass: 'ngx-toastr bg-primary',
+      titleClass: 'toast-title text-white',
+      timeOut: 1000
+    });
+  }
+
+  showError() {
+
   }
 
   // CATEGORIAS ====================================
