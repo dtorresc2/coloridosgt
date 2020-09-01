@@ -21,12 +21,14 @@ export class OrdersComponent implements OnInit {
   listaPedidos: any = [];
   listaDetallePedido: any = [];
 
-  idDetallePedidoAUX : any;
+  idDetallePedidoAUX: any;
+  idPedidoAux: any;
+  urlCompAux: any;
 
   constructor(
-    private modalService: NgbModal, 
+    private modalService: NgbModal,
     private usersService: UsersService,
-    private pedidoService: PedidosService, 
+    private pedidoService: PedidosService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -53,6 +55,12 @@ export class OrdersComponent implements OnInit {
     this.obtenerListaDetallePedido(id);
   }
 
+  abrirModalPedido(content, id, url) {
+    this.idPedidoAux = id;
+    this.urlCompAux = url;
+    this.modalService.open(content, { centered: true });
+  }
+
   obtenerListaEmpleados() {
     this.usersService.obtenerUsuarios()
       .subscribe(
@@ -64,7 +72,7 @@ export class OrdersComponent implements OnInit {
       )
   }
 
-  obtenerListaEstados(){
+  obtenerListaEstados() {
     this.pedidoService.obtenerEstadosCategoria()
       .subscribe(
         res => {
@@ -75,7 +83,7 @@ export class OrdersComponent implements OnInit {
       )
   }
 
-  obtenerListaTipos(){
+  obtenerListaTipos() {
     this.pedidoService.obtenerTiposCategoria()
       .subscribe(
         res => {
@@ -86,7 +94,7 @@ export class OrdersComponent implements OnInit {
       )
   }
 
-  obtenerListaPedidos(){
+  obtenerListaPedidos() {
     this.pedidoService.obtenerPedidos()
       .subscribe(
         res => {
@@ -97,15 +105,15 @@ export class OrdersComponent implements OnInit {
       )
   }
 
-  obtenerListaDetallePedido(id){
+  obtenerListaDetallePedido(id) {
     this.pedidoService.obtenerDetallePedido(id)
-    .subscribe(
-      res => {
-        this.listaDetallePedido = res;
-        // console.log(res);
-      },
-      err => console.error(err)
-    )
+      .subscribe(
+        res => {
+          this.listaDetallePedido = res;
+          // console.log(res);
+        },
+        err => console.error(err)
+      )
   }
 
 }
