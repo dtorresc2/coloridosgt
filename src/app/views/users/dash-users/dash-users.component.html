@@ -50,8 +50,9 @@
 
                             <button type="button" class="btn btn-success btn-sm"
                                 style="margin-left: 1%; padding-bottom: 2%;"
-                                (click)="abrirModalPermisos(modalPermisos,user.idusuario)" placement="top"
-                                ngbTooltip="Gestionar Permisos"><i class="fas fa-user-lock"></i></button>
+                                (click)="abrirModalPermisos(modalPermisos,user.idusuario,user.inventario,user.ventas,user.bitacora_y_usuario)"
+                                placement="top" ngbTooltip="Gestionar Permisos"><i
+                                    class="fas fa-user-lock"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm"
                                 style="margin-left: 1%; padding-bottom: 2%;" (click)="editado(user.idusuario,user)"

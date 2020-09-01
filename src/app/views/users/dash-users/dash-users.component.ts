@@ -309,8 +309,16 @@ export class DashUsersComponent implements OnInit {
     // console.log(event);
   }
 
-  abrirModalPermisos(content, id) {
+  abrirModalPermisos(content, id, inventario, ventas, bitacora_y_usuario) {
     // this.urlAUX = url;
+
+    // let moduloProductosAux = this.moduloProductos == true ? 1 : 0;
+    this.moduloProductos = inventario == 1 ? true : false;
+    this.moduloPedidos = ventas == 1 ? true : false;
+    this.moduloUsuarios = bitacora_y_usuario == 1 ? true : false;
+    // let moduloPedidosAux = this.moduloPedidos == true ? 1 : 0;
+    // let moduloUsuariosAux = this.moduloUsuarios == true ? 1 : 0;
+
     this.idObjetoAux = id;
     this.modalService.open(content, { centered: true });
     // console.log(id);
@@ -377,49 +385,49 @@ export class DashUsersComponent implements OnInit {
     this.comprobador2 = true;
 
     this.usersService.actualizarPermisos(
-      this.idObjetoAux, this.idUsuario, 
-      moduloProductosAux, moduloPedidosAux, 
+      this.idObjetoAux, this.idUsuario,
+      moduloProductosAux, moduloPedidosAux,
       moduloUsuariosAux
-      ).subscribe(
-        res => {
+    ).subscribe(
+      res => {
 
-          setTimeout(() => {
-            this.comprobador2 = false;
-          }, 1500);
+        setTimeout(() => {
+          this.comprobador2 = false;
+        }, 1500);
 
-          setTimeout(() => {
-            if ((<any>res).EstadoUpdate == 'Correcto') {
-              this.passUpdate.reset();
-              $('#modalPass').modal('hide')
-              this.obtenerListaClientes();
-
-              this.toastr.success('Actualizacion Realizada!', '', {
-                closeButton: true,
-                toastClass: 'ngx-toastr bg-primary',
-                titleClass: 'toast-title text-white',
-                timeOut: 1000
-              });
-
-              // this.creado();
-            }
-            else {
-              this.update.EstadoUpdate = '';
-              // $('.alert').alert('close');
-              // this.passUpdate.reset();
-
-              this.toastr.error('Fallo en actualizacion de permisos', '', {
-                closeButton: true,
-                toastClass: 'ngx-toastr bg-danger',
-                titleClass: 'toast-title text-white',
-                timeOut: 1000
-              });
-
-            }
+        setTimeout(() => {
+          if ((<any>res).EstadoUpdate == 'Correcto') {
             this.passUpdate.reset();
-          }, 1000);
-        },
-        err => console.error(err)
-      );
+            $('#modalPass').modal('hide')
+            this.obtenerListaClientes();
+
+            this.toastr.success('Actualizacion Realizada!', '', {
+              closeButton: true,
+              toastClass: 'ngx-toastr bg-primary',
+              titleClass: 'toast-title text-white',
+              timeOut: 1000
+            });
+
+            // this.creado();
+          }
+          else {
+            this.update.EstadoUpdate = '';
+            // $('.alert').alert('close');
+            // this.passUpdate.reset();
+
+            this.toastr.error('Fallo en actualizacion de permisos', '', {
+              closeButton: true,
+              toastClass: 'ngx-toastr bg-danger',
+              titleClass: 'toast-title text-white',
+              timeOut: 1000
+            });
+
+          }
+          this.passUpdate.reset();
+        }, 1000);
+      },
+      err => console.error(err)
+    );
   }
 
   checkCheckBoxvalue(event) {
