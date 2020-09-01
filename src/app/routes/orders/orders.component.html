@@ -43,12 +43,12 @@
                     <td> {{pedido.idTipo}}</td>
                     <!-- url_comprobante -->
                     <td>
-                        <button type="button" class="btn btn-info btn-sm pr-2 pl-2" (click)="enlazarPedido(pedido)"
-                            placement="top" ngbTooltip="Gestionar Pedido"><i class="far fa-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                        <button type="button" class="btn btn-success btn-sm pr-2 pl-2"
                             (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
                             ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1" (click)="enlazarPedido(pedido)"
+                            placement="top" ngbTooltip="Gestionar Pedido"><i class="far fa-eye"></i>
                         </button>
                         <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
                             (click)="abrirModalPedido(modalComprobante, pedido.idpedido, pedido.url_comprobante)"
