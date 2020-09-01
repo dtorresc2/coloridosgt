@@ -221,9 +221,17 @@
                     Contraseña sin coincidir
                 </span>
             </div>
+            <button class="btn btn-secondary btn-block" [disabled]="passUpdate.invalid || this.comprobador2">
+                <span *ngIf="this.comprobador2" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                <label *ngIf="!this.comprobador2" id="labelCarga">Actualizar</label>
+            </button>
         </form>
-        <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;" [disabled]="passUpdate.invalid">
+        <!-- <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;" [disabled]="passUpdate.invalid">
             <span>Actualizar Contraseña</span>
-        </button>
+        </button> -->
+
+        
+
     </div>
 </ng-template>

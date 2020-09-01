@@ -35,6 +35,11 @@ export class UsersService {
     return this.http.get(Servidor.API_URI + '/bitacora/' + id);
   }
 
+  // /users/:id/pass
+  actualizarPass(id, _usuario, pass) {
+    return this.http.put(Servidor.API_URI + '/users/' + id + '/pass', { password: pass, usuario: _usuario });
+  }
+
   public getIPAddress() {
     return this.http.get("http://api.ipify.org/?format=json");
   }

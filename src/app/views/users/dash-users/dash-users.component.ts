@@ -22,6 +22,7 @@ export class DashUsersComponent implements OnInit {
   listaClientes: any = [];
 
   comprobador: boolean = false;
+  comprobador2: boolean = false;
 
   isEdit: boolean = false;
   isDelete: boolean = false;
@@ -305,7 +306,7 @@ export class DashUsersComponent implements OnInit {
     //     // invalid character, prevent input
     //     event.preventDefault();
     // }
-    console.log(event);
+    // console.log(event);
   }
 
   abrirModalPermisos(content, id) {
@@ -323,7 +324,52 @@ export class DashUsersComponent implements OnInit {
   }
 
   ejecutarActualizacion(){
+    // this.usuario.usuario = this.idUsuario;
 
+    this.comprobador2 = true;
+
+    this.usersService.actualizarPass(this.idObjetoAux, this.idUsuario, this.passUpdate.get('password').value)
+      .subscribe(
+        res => {
+          // this.update = res;
+          // console.log((<any>res).EstadoUpdate);
+          setTimeout(() => {
+            this.comprobador2 = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if ((<any>res).EstadoUpdate == 'Correcto') {
+              this.passUpdate.reset();
+              $('#modalPass').modal('hide')
+              this.obtenerListaClientes();
+
+              this.toastr.success('Actualizacion Realizada!','', {
+                closeButton: true,
+                toastClass: 'ngx-toastr bg-primary',
+                titleClass: 'toast-title text-white',
+                timeOut: 1000
+              });
+
+              // this.creado();
+            }
+            else {
+              this.update.EstadoUpdate = '';
+              // $('.alert').alert('close');
+              this.passUpdate.reset();
+
+              this.toastr.error('Fallo en actualizacion de credenciales','', {
+                closeButton: true,
+                toastClass: 'ngx-toastr bg-danger',
+                titleClass: 'toast-title text-white',
+                timeOut: 1000
+              });
+
+            }
+            this.passUpdate.reset();
+          }, 1000);
+        },
+        err => console.error(err)
+      );
   }
 
   checkCheckBoxvalue(event){
