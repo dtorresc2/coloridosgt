@@ -18,7 +18,7 @@ declare var $: any; // jQuery
 export class DashUsersComponent implements OnInit {
   idUsuario: any;
   user: FormGroup;
-  passUpdate : FormGroup;
+  passUpdate: FormGroup;
   listaClientes: any = [];
 
   comprobador: boolean = false;
@@ -28,9 +28,9 @@ export class DashUsersComponent implements OnInit {
   isDelete: boolean = false;
   isNew: boolean = true;
 
-  moduloProductos : boolean = false;
-  moduloPedidos : boolean = true;
-  moduloUsuarios : boolean = false;
+  moduloProductos: boolean = false;
+  moduloPedidos: boolean = true;
+  moduloUsuarios: boolean = false;
 
   idUsuarioAUX: any;
   filtro = '';
@@ -75,8 +75,8 @@ export class DashUsersComponent implements OnInit {
 
     this.passUpdate = new FormGroup(
       {
-        password : new FormControl('', Validators.required),
-        confirmpass : new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
+        confirmpass: new FormControl('', Validators.required),
       }
       ,
       {
@@ -113,7 +113,7 @@ export class DashUsersComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Hello world!','', {
+    this.toastr.success('Hello world!', '', {
       closeButton: true,
       toastClass: 'ngx-toastr bg-primary',
       titleClass: 'toast-title text-white',
@@ -323,16 +323,13 @@ export class DashUsersComponent implements OnInit {
     // console.log(id);
   }
 
-  ejecutarActualizacion(){
+  ejecutarActualizacionPass() {
     // this.usuario.usuario = this.idUsuario;
-
     this.comprobador2 = true;
-
     this.usersService.actualizarPass(this.idObjetoAux, this.idUsuario, this.passUpdate.get('password').value)
       .subscribe(
         res => {
-          // this.update = res;
-          // console.log((<any>res).EstadoUpdate);
+
           setTimeout(() => {
             this.comprobador2 = false;
           }, 1500);
@@ -343,7 +340,7 @@ export class DashUsersComponent implements OnInit {
               $('#modalPass').modal('hide')
               this.obtenerListaClientes();
 
-              this.toastr.success('Actualizacion Realizada!','', {
+              this.toastr.success('Actualizacion Realizada!', '', {
                 closeButton: true,
                 toastClass: 'ngx-toastr bg-primary',
                 titleClass: 'toast-title text-white',
@@ -357,7 +354,7 @@ export class DashUsersComponent implements OnInit {
               // $('.alert').alert('close');
               this.passUpdate.reset();
 
-              this.toastr.error('Fallo en actualizacion de credenciales','', {
+              this.toastr.error('Fallo en actualizacion de credenciales', '', {
                 closeButton: true,
                 toastClass: 'ngx-toastr bg-danger',
                 titleClass: 'toast-title text-white',
@@ -372,7 +369,60 @@ export class DashUsersComponent implements OnInit {
       );
   }
 
-  checkCheckBoxvalue(event){
+  actualizarPermisos() {
+    let moduloProductosAux = this.moduloProductos == true ? 1 : 0;
+    let moduloPedidosAux = this.moduloPedidos == true ? 1 : 0;
+    let moduloUsuariosAux = this.moduloUsuarios == true ? 1 : 0;
+
+    this.comprobador2 = true;
+
+    this.usersService.actualizarPermisos(
+      this.idObjetoAux, this.idUsuario, 
+      moduloProductosAux, moduloPedidosAux, 
+      moduloUsuariosAux
+      ).subscribe(
+        res => {
+
+          setTimeout(() => {
+            this.comprobador2 = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if ((<any>res).EstadoUpdate == 'Correcto') {
+              this.passUpdate.reset();
+              $('#modalPass').modal('hide')
+              this.obtenerListaClientes();
+
+              this.toastr.success('Actualizacion Realizada!', '', {
+                closeButton: true,
+                toastClass: 'ngx-toastr bg-primary',
+                titleClass: 'toast-title text-white',
+                timeOut: 1000
+              });
+
+              // this.creado();
+            }
+            else {
+              this.update.EstadoUpdate = '';
+              // $('.alert').alert('close');
+              // this.passUpdate.reset();
+
+              this.toastr.error('Fallo en actualizacion de permisos', '', {
+                closeButton: true,
+                toastClass: 'ngx-toastr bg-danger',
+                titleClass: 'toast-title text-white',
+                timeOut: 1000
+              });
+
+            }
+            this.passUpdate.reset();
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
+  checkCheckBoxvalue(event) {
     this.moduloPedidos = event.checked;
   }
 

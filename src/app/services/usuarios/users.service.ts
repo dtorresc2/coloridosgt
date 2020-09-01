@@ -40,6 +40,11 @@ export class UsersService {
     return this.http.put(Servidor.API_URI + '/users/' + id + '/pass', { password: pass, usuario: _usuario });
   }
 
+  // /users/:id/permits
+  actualizarPermisos(id, _usuario, _inventario, _ventas, _bitacora_y_usuario) {
+    return this.http.put(Servidor.API_URI + '/users/' + id + '/permits', { inventario: _inventario, ventas: _ventas, bitacora_y_usuario: _bitacora_y_usuario, usuario: _usuario });
+  }
+
   public getIPAddress() {
     return this.http.get("http://api.ipify.org/?format=json");
   }

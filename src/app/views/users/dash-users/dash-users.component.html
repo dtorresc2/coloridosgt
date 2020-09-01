@@ -171,21 +171,25 @@
         <div class="form-group">
             <div class="custom-control custom-checkbox">
                 <!-- <input type="checkbox" class="custom-control-input" id="customCheck1" checked=""> -->
-                <input type="checkbox" class="custom-control-input" id="customCheck1" [(ngModel)]="moduloProductos">
-                <label class="custom-control-label" for="customCheck1">Modulo Productos</label>
+                <input type="checkbox" class="custom-control-input" id="moduloProductosCheck"
+                    [(ngModel)]="moduloProductos">
+                <label class="custom-control-label" for="moduloProductosCheck">Modulo Productos</label>
             </div>
             <div class="custom-control custom-checkbox">
                 <!-- <input type="checkbox" class="custom-control-input" id="customCheck2"> -->
-                <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]="moduloPedidos">
-                <label class="custom-control-label" for="customCheck2">Modulo Pedidos</label>
+                <input type="checkbox" class="custom-control-input" id="moduloPedidosCheck" [(ngModel)]="moduloPedidos">
+                <label class="custom-control-label" for="moduloPedidosCheck">Modulo Pedidos</label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck3" [(ngModel)]="moduloUsuarios">
-                <label class="custom-control-label" for="customCheck3">Modulo Usuarios</label>
+                <input type="checkbox" class="custom-control-input" id="moduloUsuariosCheck"
+                    [(ngModel)]="moduloUsuarios">
+                <label class="custom-control-label" for="moduloUsuariosCheck">Modulo Usuarios</label>
             </div>
         </div>
-        <button class="btn btn-secondary btn-block pb-1">
-            <span>Actualizar</span>
+        <button class="btn btn-secondary btn-block pb-0" (click)="actualizarPermisos()" [disabled]="this.comprobador2">
+            <span *ngIf="this.comprobador2" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+            <label *ngIf="!this.comprobador2" id="labelCarga">Actualizar</label>
         </button>
     </div>
 </ng-template>
@@ -199,7 +203,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <form novalidate (ngSubmit)="ejecutarActualizacion()" [formGroup]="passUpdate">
+        <form novalidate (ngSubmit)="ejecutarActualizacionPass()" [formGroup]="passUpdate">
             <div class="form-group">
                 <label>Contraseña Nueva</label>
                 <input type="password" class="form-control" formControlName="password"
@@ -230,8 +234,5 @@
         <!-- <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;" [disabled]="passUpdate.invalid">
             <span>Actualizar Contraseña</span>
         </button> -->
-
-        
-
     </div>
 </ng-template>
