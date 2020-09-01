@@ -25,11 +25,13 @@ export class OrdersComponent implements OnInit {
   idPedidoAux: any;
   urlCompAux: any;
 
-  nombreCliente: any;
-  direccionPedido: any;
+  nombreCliente: any = "-";
+  direccionPedido: any = "-";
   idEmpleado: any = 1;
   idTipoPedido: any = 1;
   idEstadoPedido: any = 1;
+  numProductos: any = 0;
+  totalPedido: any = 0.00;
 
   constructor(
     private modalService: NgbModal,
@@ -124,8 +126,13 @@ export class OrdersComponent implements OnInit {
       )
   }
 
-  enlazarPedido(pedido){
-
+  enlazarPedido(pedido) {
+    // console.log((<any>pedido).tipo);
+    this.nombreCliente = (<any>pedido).cliente;
+    this.direccionPedido = (<any>pedido).direccion;
+    this.idEmpleado = (<any>pedido).idusuario;
+    this.idTipoPedido = (<any>pedido).idTipo;
+    this.idEstadoPedido = (<any>pedido).idestado_pedido
   }
 
 }
