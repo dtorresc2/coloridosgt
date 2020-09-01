@@ -252,10 +252,10 @@ export class DashUsersComponent implements OnInit {
               this.obtenerListaClientes();
               this.creado();
 
-              if (this.usuario != this.idUsuarioAUX){
+              if (this.usuario.usuario == this.idUsuarioAUX){
                 localStorage.setItem('userName', this.usuario.nombrerol);
               }
-              
+
             }
             else {
               this.update.EstadoUpdate = '';
