@@ -41,29 +41,31 @@
                     <td> Q.{{pedido.total | number:'1.2-2'}} </td>
                     <td>Total</td>
                     <td>
-                        <div class="container">
+                        <button type="button" class="btn btn-info btn-sm pr-2 pl-2" placement="top"
+                            ngbTooltip="Gestionar Pedido"><i class="far fa-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                            (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
+                            ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i>
+                        </button>
+                        <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm ml-1"
+                            placement="top" ngbTooltip="Ver Comprobante"><i class="far fa-image"></i>
+                        </button>
+                        <!-- <div class="container">
                             <div class="row">
                                 <div class="col-md-4">
                                     <button type="button" class="btn btn-info btn-sm pr-2 pl-2" placement="top"
                                         ngbTooltip="Gestionar Pedido">
                                         <i class="far fa-eye"></i>
                                     </button>
-                                    <!-- <button type="button" class="btn btn-info btn-sm pr-2 pl-2"
-                                        style="padding-left: 10%; padding-right: 10%;" placement="top"
-                                        ngbTooltip="Gestionar Pedido">
-                                        <i class="far fa-eye"></i>
-                                    </button> -->
+                                    
                                 </div>
                                 <div class="col-md-4">
                                     <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
                                         (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
                                         ngbTooltip="Ver Detalle"><i class="fas fa-list-ol"></i>
                                     </button>
-                                    <!-- <button type="button" class="btn btn-info btn-sm pr-2 pl-2"
-                                        (click)="abrirDetallePedido(longContent,pedido.idpedido)"
-                                        style="padding-left: 10%; padding-right: 10%;" placement="top"
-                                        ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i>
-                                    </button> -->
+                                    
                                 </div>
                             </div>
 
@@ -73,13 +75,10 @@
                                         class="btn btn-info btn-sm pr-2 pl-2" placement="top"
                                         ngbTooltip="Ver Comprobante"><i class="far fa-image"></i>
                                     </button>
-                                    <!-- <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm"
-                                        style="margin-left: 2%;" placement="top" ngbTooltip="Ver Comprobante"><i
-                                            class="far fa-image"></i>
-                                    </button> -->
+                                    
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </td>
                     <!-- <i class="far fa-eye"></i> -->
                 </tr>
