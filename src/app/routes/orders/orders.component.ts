@@ -32,7 +32,9 @@ export class OrdersComponent implements OnInit {
   idEstadoPedido: any = 1;
   numProductos: any = 0;
   totalPedido: any = 0.00;
-
+  fechaAUX: any = "-";
+  idPedido_AUX: any = 0;
+  
   constructor(
     private modalService: NgbModal,
     private usersService: UsersService,
@@ -134,6 +136,8 @@ export class OrdersComponent implements OnInit {
     this.idEmpleado = (<any>pedido).idusuario;
     this.idTipoPedido = (<any>pedido).idTipo;
     this.idEstadoPedido = (<any>pedido).idestado_pedido
+    this.fechaAUX = (<any>pedido).fecha;
+    this.idPedido_AUX = (<any>pedido).idpedido;
   }
 
   onChangeEmpleado(deviceValue) {
