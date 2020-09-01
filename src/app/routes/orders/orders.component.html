@@ -103,14 +103,14 @@
                     </h4>
                     <div class="form-group">
                         <label>Cliente</label>
-                        <input class="form-control form-control-sm" type="text" readonly>
+                        <input class="form-control form-control-sm" type="text" name="nomCliente" [(ngModel)]="nombreCliente" readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Empleado</label>
                         <!-- <select class="form-control form-control-sm" id="exampleFormControlSelect1">
                         </select> -->
-                        <select class="form-control form-control-sm">
+                        <select class="form-control form-control-sm" name="Empleado" [(ngModel)]="idEmpleado">
                             <!-- formControlName="categoria"> -->
                             <option [value]="empleado.idusuario" *ngFor="let empleado of listaEmpleados">
                                 {{empleado.nombrerol}}
@@ -156,7 +156,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Tipo De Pedido</label>
-                                <select class="form-control form-control-sm">
+                                <select class="form-control form-control-sm" name="tipoPedido" [(ngModel)]="idTipoPedido">
                                     <!-- formControlName="categoria"> -->
                                     <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
                                         {{tipo.tipo}}
@@ -167,7 +167,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Estado</label>
-                                <select class="form-control form-control-sm">
+                                <select class="form-control form-control-sm" name="estadoPedido1" [(ngModel)]="idEstadoPedido">
                                     <!-- formControlName="categoria"> -->
                                     <option [value]="estado.idestado_pedido" *ngFor="let estado of listaEstados">
                                         {{estado.estado}}

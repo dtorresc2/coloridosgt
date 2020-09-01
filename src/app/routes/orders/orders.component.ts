@@ -25,6 +25,12 @@ export class OrdersComponent implements OnInit {
   idPedidoAux: any;
   urlCompAux: any;
 
+  nombreCliente: any;
+  direccionPedido: any;
+  idEmpleado: any = 1;
+  idTipoPedido: any = 1;
+  idEstadoPedido: any = 1;
+
   constructor(
     private modalService: NgbModal,
     private usersService: UsersService,
@@ -41,6 +47,8 @@ export class OrdersComponent implements OnInit {
       this.ID = 'Inicie Sesion';
       this.router.navigate(['/singin']);
     }
+
+    // this.idEmpleado = 10;
 
     this.obtenerListaEmpleados();
     this.obtenerListaEstados();
@@ -114,6 +122,10 @@ export class OrdersComponent implements OnInit {
         },
         err => console.error(err)
       )
+  }
+
+  enlazarPedido(pedido){
+
   }
 
 }
