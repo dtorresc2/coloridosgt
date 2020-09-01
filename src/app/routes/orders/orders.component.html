@@ -4,7 +4,7 @@
 
 <!-- <div class="row align-items-center" style="padding-top: 3%;"> -->
 <div class="row justify-content-center" style="padding-top: 3%;">
-    <div class="col-md-6 text-center">
+    <div class="col-md-8 text-center">
         <table class="table table-hover table-striped table-sm table-responsive-sm">
             <thead class="table-secondary">
                 <tr>
@@ -15,7 +15,7 @@
                     <th scope="col">T.Pedido</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Total</th>
-                    <!-- <th scope="col">Estado</th> -->
+                    <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -39,20 +39,55 @@
                     <td> {{pedido.tipo}} </td>
                     <td> {{pedido.fecha}} </td>
                     <td> Q.{{pedido.total | number:'1.2-2'}} </td>
+                    <td>Total</td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm"
-                            (click)="abrirDetallePedido(longContent,pedido.idpedido)"
-                            style="padding-left: 10%; padding-right: 10%;" placement="top"
-                            ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i></button>
-                        <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm" style="margin-left: 2%;" placement="top"
-                            ngbTooltip="Ver Comprobante"><i class="far fa-image"></i></button>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-info btn-sm pr-2 pl-2" placement="top"
+                                        ngbTooltip="Gestionar Pedido">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                    <!-- <button type="button" class="btn btn-info btn-sm pr-2 pl-2"
+                                        style="padding-left: 10%; padding-right: 10%;" placement="top"
+                                        ngbTooltip="Gestionar Pedido">
+                                        <i class="far fa-eye"></i>
+                                    </button> -->
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                                        (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
+                                        ngbTooltip="Ver Detalle"><i class="fas fa-list-ol"></i>
+                                    </button>
+                                    <!-- <button type="button" class="btn btn-info btn-sm pr-2 pl-2"
+                                        (click)="abrirDetallePedido(longContent,pedido.idpedido)"
+                                        style="padding-left: 10%; padding-right: 10%;" placement="top"
+                                        ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i>
+                                    </button> -->
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="col-md-4">
+                                    <button *ngIf="pedido.idTipo == 2" type="button"
+                                        class="btn btn-info btn-sm pr-2 pl-2" placement="top"
+                                        ngbTooltip="Ver Comprobante"><i class="far fa-image"></i>
+                                    </button>
+                                    <!-- <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm"
+                                        style="margin-left: 2%;" placement="top" ngbTooltip="Ver Comprobante"><i
+                                            class="far fa-image"></i>
+                                    </button> -->
+                                </div>
+                            </div>
+                        </div>
                     </td>
+                    <!-- <i class="far fa-eye"></i> -->
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
+    <!-- <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div> -->
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <!-- <div class="card-header d-flex justify-content-end">
@@ -67,7 +102,7 @@
                     </h4>
                     <div class="form-group">
                         <label>Cliente</label>
-                        <input class="form-control form-control-sm" type="text">
+                        <input class="form-control form-control-sm" type="text" readonly>
                     </div>
 
                     <div class="form-group">
@@ -93,7 +128,7 @@
 
                     <div class="form-group">
                         <label>Dirección</label>
-                        <input class="form-control form-control-sm" type="text">
+                        <input class="form-control form-control-sm" type="text" readonly>
                     </div>
 
                     <!-- <div class="form-group">
@@ -105,13 +140,13 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>No. Productos</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <input class="form-control form-control-sm" type="text" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Total</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <input class="form-control form-control-sm" type="text" readonly>
                             </div>
                         </div>
                     </div>
@@ -141,9 +176,9 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-secondary btn-block" disabled>
+                    <!-- <button class="btn btn-secondary btn-block" disabled>
                         <span>Registrar</span>
-                    </button>
+                    </button> -->
                 </form>
             </div>
         </div>
