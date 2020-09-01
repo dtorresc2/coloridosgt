@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   idUsuario: any;
   sesion: boolean = false;
   intervalo;
+  userName: any = "username"
 
   constructor(private usersService: UsersService, private router: Router) { }
 
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
   comprobarSesion() {
     this.idUsuario = localStorage.getItem('idUsuario');
     this.sesion = this.usersService.autenticado;
+    this.userName = localStorage.getItem('userName');
   }
 
   cerrarSesion() {

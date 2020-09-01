@@ -8,6 +8,7 @@ import { Usuario } from '../../controllers/usuario';
 })
 export class UsersService {
   autenticado: boolean = false;
+  userName: any = "usuario";
 
   constructor(private http: HttpClient) { }
 
