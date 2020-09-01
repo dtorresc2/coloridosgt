@@ -112,7 +112,8 @@
                         <label>Empleado</label>
                         <!-- <select class="form-control form-control-sm" id="exampleFormControlSelect1">
                         </select> -->
-                        <select class="form-control form-control-sm" name="Empleado" [(ngModel)]="idEmpleado">
+                        <select class="form-control form-control-sm" name="Empleado" [(ngModel)]="idEmpleado" (change)="onChangeEmpleado($event.target.value)">
+                        <!-- <select class="form-control form-control-sm" name="Empleado" [(ngModel)]="idEmpleado"> -->
                             <!-- formControlName="categoria"> -->
                             <option [value]="empleado.idusuario" *ngFor="let empleado of listaEmpleados">
                                 {{empleado.nombrerol}}
@@ -162,7 +163,7 @@
                             <div class="form-group">
                                 <label>Tipo De Pedido</label>
                                 <select class="form-control form-control-sm" name="tipoPedido"
-                                    [(ngModel)]="idTipoPedido">
+                                    [(ngModel)]="idTipoPedido" (change)="onChangeTipo($event.target.value)">
                                     <!-- formControlName="categoria"> -->
                                     <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
                                         {{tipo.tipo}}
@@ -174,7 +175,7 @@
                             <div class="form-group">
                                 <label>Estado</label>
                                 <select class="form-control form-control-sm" name="estadoPedido1"
-                                    [(ngModel)]="idEstadoPedido">
+                                    [(ngModel)]="idEstadoPedido" (change)="onChangeEstado($event.target.value)">
                                     <!-- formControlName="categoria"> -->
                                     <option [value]="estado.idestado_pedido" *ngFor="let estado of listaEstados">
                                         {{estado.estado}}

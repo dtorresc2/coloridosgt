@@ -128,11 +128,24 @@ export class OrdersComponent implements OnInit {
 
   enlazarPedido(pedido) {
     // console.log((<any>pedido).tipo);
+    // this.idPedidoAux = (<any>pedido).idpedido;
     this.nombreCliente = (<any>pedido).cliente;
     this.direccionPedido = (<any>pedido).direccion;
     this.idEmpleado = (<any>pedido).idusuario;
     this.idTipoPedido = (<any>pedido).idTipo;
     this.idEstadoPedido = (<any>pedido).idestado_pedido
+  }
+
+  onChangeEmpleado(deviceValue) {
+    console.log(deviceValue);
+  }
+
+  onChangeTipo(deviceValue) {
+    console.log(deviceValue);
+  }
+
+  onChangeEstado(deviceValue) {
+    console.log(deviceValue);
   }
 
 }
