@@ -24,6 +24,7 @@ export class OrdersComponent implements OnInit {
   idDetallePedidoAUX: any;
   idPedidoAux: any;
   urlCompAux: any;
+  seleccionado: boolean = false;
 
   nombreCliente: any = "-";
   direccionPedido: any = "-";
@@ -34,7 +35,7 @@ export class OrdersComponent implements OnInit {
   totalPedido: any = 0.00;
   fechaAUX: any = "-";
   idPedido_AUX: any = 0;
-  
+
   constructor(
     private modalService: NgbModal,
     private usersService: UsersService,
@@ -111,7 +112,7 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaPedidos = res;
-          console.log(res);
+          // console.log(res);
         },
         err => console.error(err)
       )
@@ -138,18 +139,62 @@ export class OrdersComponent implements OnInit {
     this.idEstadoPedido = (<any>pedido).idestado_pedido
     this.fechaAUX = (<any>pedido).fecha;
     this.idPedido_AUX = (<any>pedido).idpedido;
+    this.seleccionado = true;
   }
 
-  onChangeEmpleado(deviceValue) {
-    console.log(deviceValue);
+  onChangeEmpleado(idEmpleadoAux) {
+    // console.log(idEmpleadoAux);
+    
+    if (this.seleccionado){
+    this.pedidoService.actualizarEmpleadoPedido(this.idPedido_AUX, idEmpleadoAux, this.idUsuario)
+      .subscribe(
+        res => {
+          // this.listaDetallePedido = res;
+          // console.log(res);
+          this.obtenerListaPedidos();
+
+          // this.nombreCliente = "-";
+          // this.direccionPedido = "-";
+          // this.idEmpleado = 1;
+          // this.idTipoPedido = 1;
+          // this.idEstadoPedido = 1;
+          // this.numProductos = 0;
+          // this.totalPedido = 0.00;
+          // this.fechaAUX = "-";
+          // this.idPedido_AUX = 0;
+        },
+        err => console.error(err)
+      );
+    }
   }
 
-  onChangeTipo(deviceValue) {
-    console.log(deviceValue);
+  onChangeTipo(idTipo) {
+    console.log(idTipo);
   }
 
-  onChangeEstado(deviceValue) {
-    console.log(deviceValue);
+  onChangeEstado(idEstado) {
+    // console.log(idEstado);
+    if (this.seleccionado){
+      this.pedidoService.actualizarEstadoPedido(this.idPedido_AUX, idEstado, this.idUsuario)
+        .subscribe(
+          res => {
+            // this.listaDetallePedido = res;
+            // console.log(res);
+            this.obtenerListaPedidos();
+  
+            // this.nombreCliente = "-";
+            // this.direccionPedido = "-";
+            // this.idEmpleado = 1;
+            // this.idTipoPedido = 1;
+            // this.idEstadoPedido = 1;
+            // this.numProductos = 0;
+            // this.totalPedido = 0.00;
+            // this.fechaAUX = "-";
+            // this.idPedido_AUX = 0;
+          },
+          err => console.error(err)
+        );
+      }
   }
 
 }
