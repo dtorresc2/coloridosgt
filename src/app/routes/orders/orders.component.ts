@@ -149,19 +149,7 @@ export class OrdersComponent implements OnInit {
     this.pedidoService.actualizarEmpleadoPedido(this.idPedido_AUX, idEmpleadoAux, this.idUsuario)
       .subscribe(
         res => {
-          // this.listaDetallePedido = res;
-          // console.log(res);
           this.obtenerListaPedidos();
-
-          // this.nombreCliente = "-";
-          // this.direccionPedido = "-";
-          // this.idEmpleado = 1;
-          // this.idTipoPedido = 1;
-          // this.idEstadoPedido = 1;
-          // this.numProductos = 0;
-          // this.totalPedido = 0.00;
-          // this.fechaAUX = "-";
-          // this.idPedido_AUX = 0;
         },
         err => console.error(err)
       );
@@ -178,19 +166,7 @@ export class OrdersComponent implements OnInit {
       this.pedidoService.actualizarEstadoPedido(this.idPedido_AUX, idEstado, this.idUsuario)
         .subscribe(
           res => {
-            // this.listaDetallePedido = res;
-            // console.log(res);
             this.obtenerListaPedidos();
-  
-            // this.nombreCliente = "-";
-            // this.direccionPedido = "-";
-            // this.idEmpleado = 1;
-            // this.idTipoPedido = 1;
-            // this.idEstadoPedido = 1;
-            // this.numProductos = 0;
-            // this.totalPedido = 0.00;
-            // this.fechaAUX = "-";
-            // this.idPedido_AUX = 0;
           },
           err => console.error(err)
         );
