@@ -28,6 +28,7 @@ import { OrdersComponent } from './routes/orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FiltroUsuarioPipe } from './pipes/usuarios/filtro-usuario.pipe';
 import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
+import { FiltroPedidosPipe } from './pipes/pedidos/filtro-pedidos.pipe';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
     BitacoraUsersComponent,
     OrdersComponent,
     FiltroUsuarioPipe,
-    FiltroProductoPipe
+    FiltroProductoPipe,
+    FiltroPedidosPipe
   ],
   imports: [
     BrowserModule,
