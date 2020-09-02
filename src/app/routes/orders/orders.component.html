@@ -5,23 +5,42 @@
 <!-- <div class="row align-items-center" style="padding-top: 3%;"> -->
 <div class="row justify-content-center" style="padding-top: 3%;">
     <div class="col-md-8 text-center">
-        <table class="table table-hover table-striped table-sm table-responsive-sm">
-            <thead class="table-secondary">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Dirección</th>
-                    <!-- <th scope="col">Empleado</th> -->
-                    <th scope="col">T.Pedido</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let pedido of listaPedidos">
-                <tr>
-                    <!-- <td>Carl</td>
+        <div class="row">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" #filtro
+                            placeholder="Cliente o direccion de pedido a buscar" placement="top"
+                            ngbTooltip="Filtro de Productos">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                style="padding-top: 7%; padding-bottom: 0%;">
+                                <label><i class="fas fa-search"></i></label>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <table class="table table-hover table-striped table-sm table-responsive-sm">
+                <thead class="table-secondary">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Dirección</th>
+                        <!-- <th scope="col">Empleado</th> -->
+                        <th scope="col">T.Pedido</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let pedido of listaPedidos | filtroPedidos:filtro.value">
+                    <tr>
+                        <!-- <td>Carl</td>
                     <td>Zona 12</td>
                     <td>Envio</td>
                     <td>24/07/2020</td>
@@ -34,27 +53,28 @@
                         <button type="button" class="btn btn-info btn-sm"
                             (click)="openScrollableContent(longContent,1)" style="margin-left: 2%;"><i class="far fa-image"></i></button>
                     </td> -->
-                    <td> {{pedido.idpedido}} </td>
-                    <td> {{pedido.cliente}} </td>
-                    <td> {{pedido.direccion}} </td>
-                    <td> {{pedido.tipo}} </td>
-                    <td> {{pedido.fecha}} </td>
-                    <td> Q.{{pedido.total | number:'1.2-2'}} </td>
-                    <td> {{pedido.idTipo}}</td>
-                    <!-- url_comprobante -->
-                    <td>
-                        <button type="button" class="btn btn-success btn-sm pr-2 pl-2"
-                            (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
-                            ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i>
-                        </button>
-                        <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1" (click)="enlazarPedido(pedido)"
-                            placement="top" ngbTooltip="Gestionar Pedido"><i class="far fa-eye"></i>
-                        </button>
-                        <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
-                            (click)="abrirModalPedido(modalComprobante, pedido.idpedido, pedido.url_comprobante)"
-                            placement="top" ngbTooltip="Ver Comprobante"><i class="far fa-sticky-note"></i>
-                        </button>
-                        <!-- <div class="container">
+                        <td> {{pedido.idpedido}} </td>
+                        <td> {{pedido.cliente}} </td>
+                        <td> {{pedido.direccion}} </td>
+                        <td> {{pedido.tipo}} </td>
+                        <td> {{pedido.fecha}} </td>
+                        <td> Q.{{pedido.total | number:'1.2-2'}} </td>
+                        <td> {{pedido.idTipo}}</td>
+                        <!-- url_comprobante -->
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm pr-2 pl-2"
+                                (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
+                                ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i>
+                            </button>
+                            <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                                (click)="enlazarPedido(pedido)" placement="top" ngbTooltip="Gestionar Pedido"><i
+                                    class="far fa-eye"></i>
+                            </button>
+                            <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                                (click)="abrirModalPedido(modalComprobante, pedido.idpedido, pedido.url_comprobante)"
+                                placement="top" ngbTooltip="Ver Comprobante"><i class="far fa-sticky-note"></i>
+                            </button>
+                            <!-- <div class="container">
                             <div class="row">
                                 <div class="col-md-4">
                                     <button type="button" class="btn btn-info btn-sm pr-2 pl-2" placement="top"
@@ -82,11 +102,12 @@
                                 </div>
                             </div>
                         </div> -->
-                    </td>
-                    <!-- <i class="far fa-eye"></i> -->
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                        <!-- <i class="far fa-eye"></i> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div> -->
@@ -101,6 +122,8 @@
                 <form>
                     <h4 class="card-title text-center" style="padding-bottom: 1%;">
                         Gestion de Pedidos
+                        <a class="text-secondary" placement="top" ngbTooltip="Actualizar Pedidos" (click)="obtenerListaPedidos()">
+                            <i class="fas fa-sync-alt"></i></a>
                     </h4>
 
                     <div class="row">
