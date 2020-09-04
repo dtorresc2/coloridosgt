@@ -47,12 +47,14 @@
                                 <div class="row pb-1">
                                     <div class="col-sm-4">
                                         <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
-                                            (click)="abrirModalCantidad(modalCantidad,producto.idproducto)" ngbTooltip="Agregar Cantidad">
+                                            (click)="abrirModalCantidad(modalCantidad,producto.idproducto)"
+                                            ngbTooltip="Agregar Cantidad">
                                             <i class="fas fa-plus-square"></i></button>
                                     </div>
                                     <div class="col-sm-4 ml-1">
                                         <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
-                                            (click)="abrirModalCostos(modalCostos,producto.idproducto)" ngbTooltip="Ver Costos">
+                                            (click)="abrirModalCostos(modalCostos,producto.idproducto)"
+                                            ngbTooltip="Ver Costos">
                                             <i class="fas fa-search-dollar"></i></button>
                                     </div>
                                 </div>
@@ -182,7 +184,8 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Cantidad</label>
-                                <input class="form-control form-control-sm" type="text" formControlName="cantidad" disabled>
+                                <input class="form-control form-control-sm" type="text" formControlName="cantidad"
+                                    disabled>
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('cantidad').hasError('required') && product.get('cantidad').touched">
                                     Cantidad requerida
@@ -261,27 +264,38 @@
         </button>
     </div>
     <div class="modal-body">
-        <form>
+        <form novalidate (ngSubmit)="onSubmitCostoProducto()" [formGroup]="formCosto">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Cantidad</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="cantidad">
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('cantidad').hasError('required') && formCosto.get('cantidad').touched">
+                        Cantidad requerida
+                    </span>
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('cantidad').hasError('pattern') && formCosto.get('cantidad').touched">
+                        Cantidad invalida
+                    </span>
                 </div>
-                <div class=" form-group col-md-6">
-                    <label>Costo
-                        <!-- <a class="text-secondary" style="font-size: 12px;" placement="top"
-                            ngbTooltip="Actualizar Costos"><i class="fas fa-sync-alt"></i></a> -->
-                    </label>
-                    <input type="text" class="form-control">
-
-                    <!-- <select class="form-control">
-                        <option selected>Choose...</option>
-                        <option>Q. 12.75 - 123</option>
-                    </select> -->
+                <div class="form-group col-md-6">
+                    <label>Costo</label>
+                    <input type="text" class="form-control" formControlName="costo">
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('costo').hasError('required') && formCosto.get('costo').touched">
+                        Costo requerido
+                    </span>
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('costo').hasError('pattern') && formCosto.get('costo').touched">
+                        Costo invalido
+                    </span>
                 </div>
             </div>
-            <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;">
-                <span>Registrar Cantidad</span>
+            <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;"
+                [disabled]="formCosto.invalid || comprobadorCat">
+                <span *ngIf="this.comprobadorCat" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                <span *ngIf="!this.comprobadorCat">Registrar</span>
             </button>
         </form>
     </div>

@@ -22,8 +22,10 @@ export class DashProductsComponent implements OnInit {
   fileToUpload: File = null;
   nombreArchivo: any;
   base64Final: string = null;
+
   product: FormGroup;
   categoria: FormGroup;
+  formCosto: FormGroup;
 
   comprobador: boolean = false;
   comprobadorCat: boolean = false;
@@ -91,6 +93,11 @@ export class DashProductsComponent implements OnInit {
     this.categoria = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', Validators.required)
+    });
+
+    this.formCosto = new FormGroup({
+      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+      costo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')])
     });
 
     this.idUsuario = localStorage.getItem('idUsuario');
