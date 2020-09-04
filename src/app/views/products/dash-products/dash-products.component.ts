@@ -535,4 +535,30 @@ export class DashProductsComponent implements OnInit {
       );
   }
 
+  // GESTION DE COMPRAS ==================
+  onSubmitCostoProducto() {
+    this.comprobadorCat = true;
+
+    this.productoService.registrarCantidadProducto(
+      this.idObjetoAux,
+      this.formCosto.get('costo').value,
+      this.formCosto.get('cantidad').value,
+      this.idUsuario)
+      .subscribe(
+        res => {
+          setTimeout(() => {
+            this.comprobadorCat = false;
+          }, 1500);
+
+          setTimeout(() => {
+            if ((<any>res).CantidadRecuento && (<any>res).CostosDisponibles){
+              this.formCosto.reset();
+              this.obtenerListaProductos();
+            }
+          }, 1000);
+        },
+        err => console.error(err)
+      );
+  }
+
 }

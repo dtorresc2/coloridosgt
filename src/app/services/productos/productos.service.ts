@@ -29,7 +29,7 @@ export class ProductosService {
 
   registrarCantidadProducto(id, costo, cant, user) {
     return this.http.post(Servidor.API_URI + '/productos/compra',
-      { precioUnitario: costo, cantidad: cant, idUsuario: user, idProducto: id });
+      { precioUnitario: costo, cantidad: cant, idusuario: user, idProducto: id });
   }
 
 }
