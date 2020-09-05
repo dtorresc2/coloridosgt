@@ -1,43 +1,44 @@
 <div class="text-center" style="font-size: 28px;">
-   Control de Inventario para Producto # 19
+    Control de Inventario para Producto # 19
 </div>
 
 <div class="row justify-content-center text-center" style="padding-top: 3%;">
-   <table class="table table-hover table-sm table-responsive-sm table-bordered">
-       <thead class="table-secondary">
-           <tr class="">
-               <th scope="col" rowspan="2" class="align-middle">#</th>
-               <th scope="col" rowspan="2" class="align-middle">Fecha</th>
-               <th scope="col" rowspan="2" class="align-middle">Descripcion</th>
-               <th scope="col" rowspan="2" class="align-middle">Costo Unitario</th>
-               <th scope="col" colspan="2">Entradas</th>
-               <th scope="col" colspan="2">Salidas</th>
-               <th scope="col" colspan="2">Saldo</th>
-           </tr>
-           <tr>
-               <th scope="col">Cantidad</th>
-               <th scope="col">Valor</th>
-               <th scope="col">Cantidad</th>
-               <th scope="col">Valor</th>
-               <th scope="col">Cantidad</th>
-               <th scope="col">Valor</th>
-           </tr>
-       </thead>
-       <tbody *ngFor="let registro of kardexProducto">
-           <tr>
-               <th scope="row"> {{ registro.lineaSaldo }} </th>
-               <td> {{ registro.fecha }} </td>
-               <td> {{ registro.descripcion }} </td>
-               <td> {{ registro.precioSaldo == '0.00' ? '' :  registro.precioSaldo | number:'1.2-2' }} </td>
-               <td> {{ registro.cantidadE == '0.00' ? '' :  registro.cantidadE | number:'1.2-2' }} </td>
-               <td> {{ registro.totalE == '0.00' ? '' : registro.totalE | number:'1.2-2' }} </td>
-               <td> {{ registro.cantidadS == '0.00' ? '' : registro.cantidadS | number:'1.2-2' }} </td>
-               <td> {{ registro.totalS == '0.00' ? '' : registro.totalS | number:'1.2-2' }} </td>
-               <td> {{ registro.cantidadSaldo == '0.00' ? '' : registro.cantidadSaldo | number:'1.2-2' }} </td>
-               <td> {{ registro.totalSaldo == '0.00' ? '' : registro.totalSaldo | number:'1.2-2' }} </td>
-           </tr>
-       </tbody>
-       <!-- <tbody>
+    <table class="table table-hover table-sm table-responsive-sm table-bordered">
+        <thead class="table-secondary">
+            <tr class="">
+                <th scope="col" rowspan="2" class="align-middle">#</th>
+                <th scope="col" rowspan="2" class="align-middle">Fecha</th>
+                <th scope="col" rowspan="2" class="align-middle">Descripcion</th>
+                <th scope="col" rowspan="2" class="align-middle">Costo Unitario</th>
+                <th scope="col" colspan="2">Entradas</th>
+                <th scope="col" colspan="2">Salidas</th>
+                <th scope="col" colspan="2">Saldo</th>
+            </tr>
+            <tr>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Valor</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let registro of kardexProducto">
+            <tr>
+                <th scope="row"> {{ registro.lineaSaldo }} </th>
+                <td> {{ registro.fecha }} </td>
+                <td> {{ registro.descripcion }} </td>
+                <td> {{ registro.precioSaldo != '0.00' ? 'Q' : '' }} {{ registro.precioSaldo == '0.00' ? '' : registro.precioSaldo | number:'1.2-2' }} </td>
+                <td> {{ registro.cantidadE == '0' ? '' :  registro.cantidadE}} </td>
+                <td> {{ registro.totalE != '0.00' ? 'Q' : '' }} {{ registro.totalE == '0.00' ? '' : registro.totalE | number:'1.2-2' }} </td>
+                <td> {{ registro.cantidadS == '0' ? '' : registro.cantidadS }} </td>
+                <td> {{ registro.totalS != '0.00' ? 'Q' : '' }} {{ registro.totalS == '0.00' ? '' : registro.totalS | number:'1.2-2' }} </td>
+                <td> {{ registro.cantidadSaldo }} </td>
+                <td> Q.{{registro.totalSaldo | number:'1.2-2' }} </td>
+            </tr>
+        </tbody>
+
+        <!-- <tbody>
            <tr>
                <th> 1 </th>
                <td> 0.00 </td>
@@ -51,5 +52,5 @@
                <td> 0.00 </td>
            </tr>
        </tbody> -->
-   </table>
+    </table>
 </div>
