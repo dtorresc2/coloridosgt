@@ -32,6 +32,9 @@ export class ProductosService {
       { precioUnitario: costo, cantidad: cant, idusuario: user, idProducto: id });
   }
 
+  obtenerKardex(idProducto) {
+    return this.http.get(Servidor.API_URI + '/productos/' + idProducto + '/kardex');
+  }
 }
 
 // {

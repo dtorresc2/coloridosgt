@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductosService } from 'src/app/services/productos/productos.service';
 
 @Component({
   selector: 'app-detail-products',
@@ -10,8 +11,12 @@ export class DetailProductsComponent implements OnInit {
   idUsuario: any;
   ID: any;
 
+  kardexProducto: any = [];
+
   constructor(
-    private router: Router
+    private router: Router,
+    private activedRoute: ActivatedRoute,
+    private productoService: ProductosService
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +29,25 @@ export class DetailProductsComponent implements OnInit {
       this.ID = 'Inicie Sesion';
       this.router.navigate(['/singin']);
     }
+    
+    const params = this.activedRoute.snapshot.params;
+    if (params.id) {
+      this.productoService.obtenerKardex(params.id).subscribe(
+        res => {
+          this.kardexProducto = res;
+          console.log(res);
+        },
+        err => {
+          console.error(err);
+          this.router.navigate(['/users']);
+        }
+      );
+    }
+    else {
+      this.router.navigate(['/users']);
+    }
   }
+
+  
 
 }
