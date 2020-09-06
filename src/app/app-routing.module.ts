@@ -19,9 +19,9 @@ const routes: Routes = [
   { path: 'singup', component: SingupComponent },
   { path: 'singin', component: SinginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'log', component: LogComponent },
+  { path: 'log', component: LogComponent, canActivate: [AuthGuard] },
   {
-    path: 'order', component: OrderComponent,
+    path: 'order', component: OrderComponent, canActivateChild: [AuthGuard],
     children: [
       { path: '', component: CartComponent },
       { path: 'list', component: OrdersComponent }
