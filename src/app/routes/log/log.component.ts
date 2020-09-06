@@ -14,6 +14,11 @@ export class LogComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage['idUsuario']) {
       this.idUsuario = localStorage.getItem('idUsuario');
+      this.clientService.autenticado = true;
+      // this.router.navigate['/log'];
+    }
+    else {
+      this.clientService.autenticado = false;
     }
   }
 

@@ -19,10 +19,10 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         this.router.navigate(['/']);
       }
 
-      // rutaSolicitada = (<any>next)._routerState.url;
+      let rutaSolicitada = (<any>next)._routerState.url;
 
-      // if (rutaSolicitada == '/dashboard'){
-      //   this.router.navigate(['/dashboard']);
+      // if (rutaSolicitada == '/log'){
+      //   this.router.navigate(['/log']);
       // }
       
 
