@@ -18,9 +18,11 @@ export class DashboardComponent implements OnInit {
 
     if (this.idUsuario > 0) {
       this.ID = 'Registrado';
+      this.clientService.autenticado = true;
     }
     else {
       this.ID = 'Inicie Sesion';
+      this.clientService.autenticado = false;
       this.router.navigate(['/']);
     }
 

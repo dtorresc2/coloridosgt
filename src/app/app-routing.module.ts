@@ -10,14 +10,15 @@ import { OrderComponent } from './routes/order/order.component';
 import { CartComponent } from './views/order/cart/cart.component';
 import { OrdersComponent } from './views/order/orders/orders.component';
 import { LogComponent } from './routes/log/log.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch:'full'},
   { path: 'shop', component: ShopComponent },
   { path: 'about', component: AboutComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'singin', component: SinginComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'log', component: LogComponent },
   {
     path: 'order', component: OrderComponent,
