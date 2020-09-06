@@ -17,11 +17,7 @@ export class DashboardComponent implements OnInit {
 
     if (localStorage["idUsuario"]) {
       this.idUsuario = localStorage.getItem('idUsuario');
-      this.clientService.autenticado = true;
-    }
-    else {
-      console.log("No Existe");
-      this.clientService.autenticado = false;
+      // this.clientService.autenticado = true;
     }
 
   }

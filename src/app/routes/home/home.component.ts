@@ -18,11 +18,9 @@ export class HomeComponent implements OnInit {
 
     if (localStorage['idUsuario']) {
       this.router.navigate(['/dashboard']);
-      this.idUsuario = localStorage.getItem('idUsuario');
       this.clientService.autenticado = true;
     }
     else {
-      console.log("No existe");
       this.clientService.autenticado = false;
     }
 
