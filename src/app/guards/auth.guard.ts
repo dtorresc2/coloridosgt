@@ -8,39 +8,39 @@ import { ClientsService } from '../services/clientes/clients.service';
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-  constructor (private clientService: ClientsService, private router:Router) {}
+  constructor(private clientService: ClientsService, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      // console.log((<any>next)._routerState.url);
+    // console.log((<any>next)._routerState.url);
 
-      if (!this.clientService.autenticado) {
-        this.router.navigate(['/']);
-      }
+    if (!this.clientService.autenticado) {
+      this.router.navigate(['/']);
+    }
 
-      let rutaSolicitada = (<any>next)._routerState.url;
+    // let rutaSolicitada = (<any>next)._routerState.url;
 
-      // if (rutaSolicitada == '/log'){
-      //   this.router.navigate(['/log']);
-      // }
-      
+    // if (rutaSolicitada == '/log'){
+    //   this.router.navigate(['/log']);
+    // }
 
-      return this.clientService.autenticado;
-      // return true;
+
+    return this.clientService.autenticado;
+    // return true;
   }
 
   canActivateChild(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     // return this.permissions.canActivate(this.currentUser, route.params.id);
     // return true;
     if (!this.clientService.autenticado) {
       this.router.navigate(['/']);
     }
-    
+
     return this.clientService.autenticado;
   }
-  
+
 }

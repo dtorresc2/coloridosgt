@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { Router } from '@angular/router';
+import { ClientsService } from 'src/app/services/clientes/clients.service';
 
 @Component({
   selector: 'app-shop',
@@ -12,10 +13,17 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private productoService: ProductosService,
-    private router: Router
+    private router: Router,
+    private clientService: ClientsService
   ) { }
 
   ngOnInit(): void {
+    if (localStorage['idUsuario']) {
+      this.clientService.autenticado = true;
+    }
+    else {
+      this.clientService.autenticado = false;
+    }
     this.obtenerListaProductos();
   }
 
