@@ -15,10 +15,10 @@ export class HomeComponent implements OnInit {
   constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.idUsuario = localStorage.getItem('idUsuario');
 
     if (localStorage['idUsuario']) {
       this.router.navigate(['/dashboard']);
+      this.idUsuario = localStorage.getItem('idUsuario');
       this.clientService.autenticado = true;
     }
     else {

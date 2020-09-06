@@ -34,8 +34,8 @@ export class SinginComponent implements OnInit {
   constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
-    localStorage.clear();
-    this.clientService.autenticado = false;
+    // localStorage.clear();
+    // this.clientService.autenticado = false;
 
     this.user = new FormGroup(
       {
@@ -44,17 +44,13 @@ export class SinginComponent implements OnInit {
       }
     );
 
-    this.idUsuario = localStorage.getItem('idUsuario');
-
-    // if (this.idUsuario > 0) {
-    //   this.router.navigate(['/']);
-    //   this.clientService.autenticado = true;
-    // }
-    // else {
-    //   localStorage.clear();
-    //   this.clientService.autenticado = false;
-
-    // }
+    if (localStorage['idUsuario']) {
+      this.router.navigate(['/dashboard']);
+      this.clientService.autenticado = true;
+    }
+    else {
+      this.clientService.autenticado = false;
+    }
 
   }
 
