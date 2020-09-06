@@ -8,7 +8,7 @@ import { Servidor } from '../../config/config';
 })
 export class ClientsService {
 
-  autenticado : boolean = false;
+  autenticado : boolean;
 
   constructor(private http: HttpClient) { }
 

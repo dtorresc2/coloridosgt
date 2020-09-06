@@ -46,14 +46,15 @@ export class SinginComponent implements OnInit {
 
     this.idUsuario = localStorage.getItem('idUsuario');
 
-    if (this.idUsuario > 0) {
-      this.router.navigate(['/']);
-    }
-    else {
-      localStorage.clear();
-      this.clientService.autenticado = false;
+    // if (this.idUsuario > 0) {
+    //   this.router.navigate(['/']);
+    //   this.clientService.autenticado = true;
+    // }
+    // else {
+    //   localStorage.clear();
+    //   this.clientService.autenticado = false;
 
-    }
+    // }
 
   }
 

@@ -14,16 +14,18 @@ export class DashboardComponent implements OnInit {
   constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.idUsuario = localStorage.getItem('idUsuario');
 
-    if (this.idUsuario > 0) {
+    if (localStorage["idUsuario"]) {
+      console.log("Existe");
       this.ID = 'Registrado';
+      this.idUsuario = localStorage.getItem('idUsuario');
       this.clientService.autenticado = true;
     }
     else {
+      console.log("No Existe");
       this.ID = 'Inicie Sesion';
       this.clientService.autenticado = false;
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
     }
 
   }

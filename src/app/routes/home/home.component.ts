@@ -17,12 +17,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.idUsuario = localStorage.getItem('idUsuario');
 
-    if (this.idUsuario > 0) {
-      this.ID = 'Registrado';
+    if (localStorage['idUsuario']) {
       this.router.navigate(['/dashboard']);
+      this.clientService.autenticado = true;
     }
     else {
-      this.ID = 'Inicie Sesion';
+      console.log("No existe");
+      this.clientService.autenticado = false;
     }
 
   }
