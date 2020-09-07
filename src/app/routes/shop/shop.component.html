@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="row" *ngIf="producto.descuento > 0">
-                    <div class="col text-danger">
+                    <div class="col text-danger" style="text-decoration: line-through;">
                         Q.{{ producto.precio | number:'1.2-2' }}
                     </div>
                     <div class="col text-primary">
