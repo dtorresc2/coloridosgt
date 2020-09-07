@@ -18,7 +18,8 @@ import { DashboardComponent } from './routes/dashboard/dashboard.component';
 import { OrderComponent } from './routes/order/order.component';
 import { CartComponent } from './views/order/cart/cart.component';
 import { OrdersComponent } from './views/order/orders/orders.component';
-import { LogComponent } from './routes/log/log.component'
+import { LogComponent } from './routes/log/log.component';
+import { CartFormComponent } from './views/order/cart-form/cart-form.component'
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LogComponent } from './routes/log/log.component'
     OrderComponent,
     CartComponent,
     OrdersComponent,
-    LogComponent
+    LogComponent,
+    CartFormComponent
   ],
   imports: [
     BrowserModule,

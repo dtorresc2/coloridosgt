@@ -11,6 +11,7 @@ import { CartComponent } from './views/order/cart/cart.component';
 import { OrdersComponent } from './views/order/orders/orders.component';
 import { LogComponent } from './routes/log/log.component';
 import { AuthGuard } from './guards/auth.guard';
+import { CartFormComponent } from './views/order/cart-form/cart-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch:'full'},
@@ -24,7 +25,8 @@ const routes: Routes = [
     path: 'order', component: OrderComponent, canActivateChild: [AuthGuard],
     children: [
       { path: '', component: CartComponent },
-      { path: 'list', component: OrdersComponent }
+      { path: 'list', component: OrdersComponent },
+      { path: 'checkout', component: CartFormComponent }
     ]
   }
 ];
