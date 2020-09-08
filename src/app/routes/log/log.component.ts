@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-log',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LogComponent implements OnInit {
   idUsuario: any;
-  constructor(private clientService: ClientsService, private router: Router) { }
+  constructor(private clientService: ClientsService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario']) {
@@ -20,6 +20,8 @@ export class LogComponent implements OnInit {
     else {
       this.clientService.autenticado = false;
     }
+
+    console.log(this.activatedRoute.snapshot.data.log);
   }
 
 }

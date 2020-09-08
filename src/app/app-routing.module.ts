@@ -14,6 +14,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { CartFormComponent } from './views/order/cart-form/cart-form.component';
 
 import { ShopResolver } from './resolvers/shop.resolver';
+import { LogResolver } from './resolvers/log.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'singup', component: SingupComponent },
   { path: 'singin', component: SinginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'log', component: LogComponent, canActivate: [AuthGuard] },
+  { path: 'log', component: LogComponent, canActivate: [AuthGuard], resolve: {log: LogResolver} },
   {
     path: 'order', component: OrderComponent, canActivateChild: [AuthGuard],
     children: [
