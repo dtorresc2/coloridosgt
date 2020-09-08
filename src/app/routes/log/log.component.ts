@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LogComponent implements OnInit {
   idUsuario: any;
   show: boolean = true;
-  bitacora:any = [];
+  listaBitacora:any = [];
 
   constructor(private clientService: ClientsService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -25,13 +25,10 @@ export class LogComponent implements OnInit {
     }
 
     setTimeout(() => {
-      this.bitacora = this.activatedRoute.snapshot.data.log;
-      console.log(this.activatedRoute.snapshot.data.log);
+      this.listaBitacora = this.activatedRoute.snapshot.data.log;
       this.show = false;
     }, 1000);
 
-    // this.bitacora = this.activatedRoute.snapshot.data.log;
-    // console.log(this.activatedRoute.snapshot.data.log);
   }
 
 }
