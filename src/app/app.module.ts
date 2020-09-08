@@ -19,7 +19,8 @@ import { OrderComponent } from './routes/order/order.component';
 import { CartComponent } from './views/order/cart/cart.component';
 import { OrdersComponent } from './views/order/orders/orders.component';
 import { LogComponent } from './routes/log/log.component';
-import { CartFormComponent } from './views/order/cart-form/cart-form.component'
+import { CartFormComponent } from './views/order/cart-form/cart-form.component';
+import { LoaderComponent } from './components/loader/loader.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CartFormComponent } from './views/order/cart-form/cart-form.component'
     CartComponent,
     OrdersComponent,
     LogComponent,
-    CartFormComponent
+    CartFormComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
