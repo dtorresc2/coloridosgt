@@ -35,13 +35,25 @@ export class SingupComponent implements OnInit {
     // localStorage.clear();
     // this.clientService.autenticado = false;
 
+
+    // "name": "Usuario", 
+    // "lastname": "Prueba", 
+    // "nick": "prueba123@correo.com", 
+    // "password": "123",
+    // "telefono": "2545-5454",
+    // "nit": "1351132",
+    // "dpi": "121212121"
+
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
         name: new FormControl('', Validators.required),
         lastname: new FormControl('', Validators.required),
         password: new FormControl('', Validators.required),
-        confirmpass: new FormControl('', Validators.required)
+        confirmpass: new FormControl('', Validators.required),
+        telefono: new FormControl('', Validators.required),
+        nit: new FormControl('', Validators.required),
+        dpi: new FormControl('', Validators.required)
       },
       {
         validators: this.passwordMatchValidator
@@ -74,6 +86,9 @@ export class SingupComponent implements OnInit {
     this.cliente.lastname = this.user.get('lastname').value;
     this.cliente.nick = this.user.get('email').value;
     this.cliente.password = this.user.get('password').value;
+    this.cliente.telefono = this.user.get('telefono').value;
+    this.cliente.nit = this.user.get('nit').value;
+    this.cliente.dpi = this.user.get('dpi').value;
     // this.user.reset();
     // this.router.navigate(['/home']);
     // localStorage.setItem('','');
