@@ -13,9 +13,11 @@ import { LogComponent } from './routes/log/log.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CartFormComponent } from './views/order/cart-form/cart-form.component';
 
+import { ShopResolver } from './resolvers/shop/shop.resolver';
+
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch:'full'},
-  { path: 'shop', component: ShopComponent },
+  { path: 'shop', component: ShopComponent, resolve: {shop: ShopResolver} },
   { path: 'about', component: AboutComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'singin', component: SinginComponent },
