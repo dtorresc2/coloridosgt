@@ -11,9 +11,7 @@ export class ProductosService {
   constructor(private http: HttpClient) { }
 
   obtenerProductos() {
-    return this.http.get(Servidor.API_URI + '/productos').pipe(
-      delay(1000)
-    );
+    return this.http.get(Servidor.API_URI + '/productos/clientes');
   }
 
 }
