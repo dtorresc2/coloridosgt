@@ -14,11 +14,11 @@ export class LoaderComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart){
         this.show = true;
-        console.log("Entre");
+        // console.log("Entre");
       }
       else if (event instanceof NavigationEnd){
         this.show = false;
-        console.log("No entre");
+        // console.log("No entre");
       }
     })
   }

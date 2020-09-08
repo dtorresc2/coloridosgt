@@ -10,6 +10,7 @@ import { ClientsService } from 'src/app/services/clientes/clients.service';
 })
 export class ShopComponent implements OnInit {
   listaProductos: any = [];
+  show: boolean = true;
 
   constructor(
     private productoService: ProductosService,
@@ -25,9 +26,13 @@ export class ShopComponent implements OnInit {
     else {
       this.clientService.autenticado = false;
     }
-    // this.obtenerListaProductos();
-    // console.log(this.activatedRoute.snapshot.data.shop);
-    this.listaProductos = this.activatedRoute.snapshot.data.shop;
+
+    setTimeout(() => {
+      // this.obtenerListaProductos();
+      this.listaProductos = this.activatedRoute.snapshot.data.shop;
+      this.show = false;
+    }, 1000);
+
   }
 
   obtenerListaProductos() {
@@ -35,7 +40,7 @@ export class ShopComponent implements OnInit {
       .subscribe(
         res => {
           this.listaProductos = res;
-          // console.log(res);
+          this.show = false;
         },
         err => console.error(err)
       )

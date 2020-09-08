@@ -18,6 +18,7 @@ import { ShopResolver } from './resolvers/shop.resolver';
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'shop', component: ShopComponent, resolve: { shop: ShopResolver } },
+  // { path: 'shop', component: ShopComponent },
   { path: 'about', component: AboutComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'singin', component: SinginComponent },
