@@ -26,7 +26,7 @@ export class ShopComponent implements OnInit {
       this.clientService.autenticado = false;
     }
     this.obtenerListaProductos();
-    console.log(this.activatedRoute.snapshot.data);
+    console.log(this.activatedRoute.snapshot.data.shop);
   }
 
   obtenerListaProductos() {

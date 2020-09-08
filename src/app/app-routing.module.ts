@@ -13,15 +13,15 @@ import { LogComponent } from './routes/log/log.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CartFormComponent } from './views/order/cart-form/cart-form.component';
 
-import { ShopResolver } from './resolvers/shop/shop.resolver';
+import { ShopResolver } from './resolvers/shop.resolver';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch:'full'},
-  { path: 'shop', component: ShopComponent, resolve: {shop: ShopResolver} },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'shop', component: ShopComponent, resolve: { shop: ShopResolver } },
   { path: 'about', component: AboutComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'singin', component: SinginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'log', component: LogComponent, canActivate: [AuthGuard] },
   {
     path: 'order', component: OrderComponent, canActivateChild: [AuthGuard],
