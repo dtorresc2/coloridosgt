@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-shop',
@@ -16,7 +17,8 @@ export class ShopComponent implements OnInit {
     private productoService: ProductosService,
     private router: Router,
     private clientService: ClientsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,12 @@ export class ShopComponent implements OnInit {
           this.show = false;
         },
         err => console.error(err)
-      )
+      );
+  }
+
+  abrirModalCantidad(content, producto) {
+    console.log(producto);
+    this.modalService.open(content, { centered: true });
+    // console.log(id);
   }
 }

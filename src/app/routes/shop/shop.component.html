@@ -27,7 +27,7 @@
     <div class="col-sm-6 col-md-4 col-lg-3 pb-4" *ngFor="let producto of listaProductos">
         <div class="card text-center">
             <div *ngIf="this.clientService.autenticado" class="card-header d-flex justify-content-end align-items-center">
-                <button type="button" class="btn btn-info" placement="top" ngbTooltip="Agregar Producto"><i class="fas fa-shopping-bag"></i></button>
+                <button type="button" class="btn btn-info" (click)="abrirModalCantidad(modalCantidad,producto)" placement="top" ngbTooltip="Agregar Producto"><i class="fas fa-shopping-bag"></i></button>
             </div>
 
             <img [src]="producto.url_imagen" height="200">
@@ -54,3 +54,36 @@
     </div>
 
 </div>
+
+<!-- Modal para cantidad de producto -->
+<ng-template #modalCantidad let-modal>
+    <div class="modal-header">
+        <!-- <h4 class="modal-title">Costos de Producto #{{idObjetoAux}} </h4> -->
+        <h4 class="modal-title">Costos de Producto #</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="table table-hover table-striped table-sm table-responsive-md">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cant</th>
+                    <th scope="col">Categoria</th>
+                </tr>
+            </thead>
+            <!-- <tbody *ngFor="let producto of listaProductos | filtroProducto:filtro.value">
+                <tr>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.descripcion}}</td>
+                    <td>Q.{{producto.precio | number:'1.2-2'}}</td>
+                    <td>{{producto.cantidad}}</td>
+                    <td>{{producto.categoria_idcategoria}}</td>
+                </tr>
+            </tbody> -->
+        </table>
+    </div>
+</ng-template>
