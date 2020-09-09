@@ -32,18 +32,6 @@ export class SingupComponent implements OnInit {
   constructor(private clientService: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
-    // localStorage.clear();
-    // this.clientService.autenticado = false;
-
-
-    // "name": "Usuario", 
-    // "lastname": "Prueba", 
-    // "nick": "prueba123@correo.com", 
-    // "password": "123",
-    // "telefono": "2545-5454",
-    // "nit": "1351132",
-    // "dpi": "121212121"
-
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -96,8 +84,6 @@ export class SingupComponent implements OnInit {
     this.clientService.registrarCliente(this.cliente)
       .subscribe(
         res => {
-          console.log(res);
-
           this.respuesta = res;
 
           setTimeout(() => {
