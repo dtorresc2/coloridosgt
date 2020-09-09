@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import * as moment from 'moment';
+import 'moment-timezone';
+// https://stackoverflow.com/questions/38674835/how-to-include-moment-timezone-in-angular-2-app Link para incluir libreria de fechas
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +19,8 @@ export class CartComponent implements OnInit {
     if (localStorage['idUsuario']) {
       this.idUsuario = localStorage.getItem('idUsuario');
       this.listaPedidos = this.servicePedidos.fieldArray;
+      const fechaMoment = moment().tz("America/Guatemala").format('YYYY-MM-DD HH:mm:ss');
+      console.log(fechaMoment);
     }
   }
 
