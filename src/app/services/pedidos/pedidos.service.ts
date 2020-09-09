@@ -28,6 +28,7 @@ export class PedidosService {
 
   deleteFieldValue(index) {
     this.fieldArray.splice(index, 1);
+    this.cantidadItems = this.fieldArray.length;
     // this.fieldArray.findIndex();
   }
 

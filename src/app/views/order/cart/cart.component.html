@@ -37,15 +37,16 @@
     <table class="table table-hover table-responsive-sm">
         <thead class="table-primary">
             <tr>
+                <th scope="col">Linea</th>
                 <th scope="col">ID</th>
                 <th scope="col">Cantidad</th>
-                <th scope="col">Producto</th>
+                <th scope="col">Descripcion</th>
                 <th scope="col">P.Unidad</th>
                 <th scope="col">SubTotal</th>
                 <th scope="col">Accion</th>
             </tr>
         </thead>
-        <tbody>
+        <!-- <tbody>
             <tr>
                 <th>32</th>
                 <th>10</th>
@@ -59,15 +60,21 @@
                 </th>
                 
             </tr>
-        </tbody>
-        <!-- <tbody *ngFor="let bitacora of listaBitacora; let i=index">
+        </tbody> -->
+        <tbody *ngFor="let pedidos of listaPedidos; let i=index">
             <tr>
                 <th scope="row"> {{ i+1 }} </th>
-                <td> {{ bitacora.descripcion }} </td>
-                <td> {{ bitacora.fecha }} </td>
-                <td> {{ bitacora.hora }} </td>
-                <td> {{ bitacora.ip }} </td>
+                <td> {{ pedidos.idProducto }} </td>
+                <td> {{ pedidos.cantidad }} </td>
+                <td> {{ pedidos.desc }} - {{ pedidos.producto }} </td>
+                <td> Q.{{ pedidos.precio_unidad | number:'1.2-2' }} </td>
+                <td> Q.{{ pedidos.subtotal | number:'1.2-2' }} </td>
+                <td>
+                    <button class="btn btn-danger btn-sm pb-1" (click)="eliminarPedido(i)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </td>
             </tr>
-        </tbody> -->
+        </tbody>
     </table>
 </div>
