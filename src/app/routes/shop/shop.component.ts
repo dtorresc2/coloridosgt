@@ -27,7 +27,9 @@ export class ShopComponent implements OnInit {
     idProducto: 0,
     cantidad: 0,
     precio_unidad: 0.00,
-    subtotal: 0.00
+    subtotal: 0.00,
+    desc: '',
+    producto: ''
   }
 
   constructor(
@@ -72,16 +74,20 @@ export class ShopComponent implements OnInit {
     this.productoAux = producto.nombre;
     this.cantidadProducto = producto.cantidad;
     this.precioU = producto.precio;
+    
+    this.cantidadAux = 1;
     this.servicioModal = this.modalService.open(content, { centered: true });
     // this.servicioModal.close();
     // console.log(id);
   }
 
-  agregarCarrito(){
+  agregarCarrito() {
     this.detallePedido.idProducto = this.idProductoAux;
     this.detallePedido.cantidad = this.cantidadAux;
     this.detallePedido.precio_unidad = this.precioU;
     this.detallePedido.subtotal = this.precioU * this.cantidadAux;
+    this.detallePedido.producto = this.productoAux;
+    this.detallePedido.desc = 'Venta de Producto #'+ this.idProductoAux;
     // console.log(this.cantidadAux,'-', this.productoAux);
     // console.log(this.detallePedido);
 

@@ -3,6 +3,8 @@ export interface DetallePedido{
    precio_unidad?: number;
    subtotal?: number;
    idProducto?: number;
+   producto?: string;
+   desc?: string;
 }
 
 export interface Pedido {
