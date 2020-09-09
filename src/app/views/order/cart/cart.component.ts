@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   idUsuario: any;
   listaPedidos: any = [];
   fecha: any;
+  cantidadItems: any = 0;
 
   constructor(private servicePedidos: PedidosService) { }
 
@@ -22,6 +23,7 @@ export class CartComponent implements OnInit {
       this.listaPedidos = this.servicePedidos.fieldArray;
       // const fechaMoment = moment().tz("America/Guatemala").format('YYYY-MM-DD HH:mm:ss');
       this.fecha = moment().tz("America/Guatemala").format('DD/MM/YYYY');
+      this.cantidadItems = this.servicePedidos.cantidadItems;
       // console.log(fechaMoment);
     }
   }
@@ -29,6 +31,7 @@ export class CartComponent implements OnInit {
   eliminarPedido(index){
     this.servicePedidos.deleteFieldValue(index);
     this.listaPedidos = this.servicePedidos.fieldArray;
+    this.cantidadItems = this.servicePedidos.cantidadItems;
   }
 
   // cantidad?: number;

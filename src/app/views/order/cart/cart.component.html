@@ -17,14 +17,14 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Items</label>
-                            <input type="text" class="form-control" readonly>
+                            <input type="text" class="form-control" name="items" [(ngModel)]="cantidadItems" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Total</label>
                             <input type="text" class="form-control" readonly>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block">
+                    <button class="btn btn-primary btn-block" [disabled]="cantidadItems < 1">
                         <span>Ir al Checkout</span>
                     </button>
                 </form>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="row" style="padding-top: 3%;">
-    <table class="table table-hover table-responsive-sm">
+    <table class="table table-hover table-sm table-responsive-sm">
         <thead class="table-primary">
             <tr>
                 <th scope="col">#</th>
