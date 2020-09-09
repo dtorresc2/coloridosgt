@@ -43,14 +43,17 @@ export class PedidosService {
       filaAuxiliar.desc = this.fieldArray[index].desc;
       filaAuxiliar.producto = this.fieldArray[index].producto;
 
-      console.log(this.fieldArray[index]);
-      console.log(filaAuxiliar);
+      // console.log(this.fieldArray[index]);
+      // console.log(filaAuxiliar);
+      this.fieldArray.splice(index, 1, filaAuxiliar);
+    }
+    else {
+      // this.fieldArray.push
+      this.fieldArray.push(filaNueva);
     }
 
-    // this.fieldArray.push
-    this.fieldArray.push(filaNueva);
     this.cantidadItems = this.fieldArray.length;
-    console.log(this.fieldArray);
+    // console.log(this.fieldArray);
   }
 
   crearPedidoGeneral() {
