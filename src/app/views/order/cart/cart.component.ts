@@ -12,6 +12,7 @@ import 'moment-timezone';
 export class CartComponent implements OnInit {
   idUsuario: any;
   listaPedidos: any = [];
+  fecha: any;
 
   constructor(private servicePedidos: PedidosService) { }
 
@@ -19,8 +20,9 @@ export class CartComponent implements OnInit {
     if (localStorage['idUsuario']) {
       this.idUsuario = localStorage.getItem('idUsuario');
       this.listaPedidos = this.servicePedidos.fieldArray;
-      const fechaMoment = moment().tz("America/Guatemala").format('YYYY-MM-DD HH:mm:ss');
-      console.log(fechaMoment);
+      // const fechaMoment = moment().tz("America/Guatemala").format('YYYY-MM-DD HH:mm:ss');
+      this.fecha = moment().tz("America/Guatemala").format('DD/MM/YYYY');
+      // console.log(fechaMoment);
     }
   }
 
