@@ -12,6 +12,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ShopComponent implements OnInit {
   listaProductos: any = [];
   show: boolean = true;
+  servicioModal: any;
+
+  idProductoAux: any;
 
   constructor(
     private productoService: ProductosService,
@@ -49,8 +52,10 @@ export class ShopComponent implements OnInit {
   }
 
   abrirModalCantidad(content, producto) {
-    console.log(producto);
-    this.modalService.open(content, { centered: true });
+    // console.log(producto);
+    this.idProductoAux = producto.idproducto;
+    this.servicioModal = this.modalService.open(content, { centered: true });
+    // this.servicioModal.close();
     // console.log(id);
   }
 }
