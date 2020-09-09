@@ -8,6 +8,7 @@ export class PedidosService {
   fieldArray: Array<DetallePedido> = [];
   newAttribute: DetallePedido = {};
   pedido: Pedido;
+  cantidadItems: any = 0;
 
   constructor() { }
 
@@ -18,6 +19,7 @@ export class PedidosService {
     //   subtot : subtotal
     // };
     this.fieldArray.push(detallePedido);
+    this.cantidadItems = this.fieldArray.length;
   }
 
   crearPedidoGeneral() {
@@ -26,6 +28,7 @@ export class PedidosService {
 
   deleteFieldValue(index) {
     this.fieldArray.splice(index, 1);
+    // this.fieldArray.findIndex();
   }
 
 }

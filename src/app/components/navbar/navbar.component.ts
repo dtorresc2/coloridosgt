@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
 import { Router } from '@angular/router';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,12 +13,14 @@ export class NavbarComponent implements OnInit {
   idUsuario: any;
   sesion: boolean = false;
   intervalo;
+  items: any = 0;
 
-  constructor(private clientService: ClientsService, private router: Router) { }
+  constructor(private clientService: ClientsService, private router: Router, private pedidoService: PedidosService) { }
 
   ngOnInit(): void {
     this.intervalo = setInterval(() => {
       this.comprobarSesion();
+      this.items = this.pedidoService.cantidadItems;
     },1);
   }
 

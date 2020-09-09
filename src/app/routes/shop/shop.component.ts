@@ -83,7 +83,11 @@ export class ShopComponent implements OnInit {
     this.detallePedido.precio_unidad = this.precioU;
     this.detallePedido.subtotal = this.precioU * this.cantidadAux;
     // console.log(this.cantidadAux,'-', this.productoAux);
-    console.log(this.detallePedido);
+    // console.log(this.detallePedido);
+
+    this.pedidosService.agregarPedido(this.detallePedido);
+    // console.log(this.pedidosService.fieldArray.length);
+
     this.servicioModal.close();
   }
 }
