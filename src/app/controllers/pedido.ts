@@ -1,8 +1,8 @@
 export interface DetallePedido{
-   cantidad?: string;
-   precio_unidad?: string;
-   subtotal?: string;
-   idProducto?: string;
+   cantidad?: number;
+   precio_unidad?: number;
+   subtotal?: number;
+   idProducto?: number;
 }
 
 export interface Pedido {

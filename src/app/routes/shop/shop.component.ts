@@ -3,6 +3,8 @@ import { ProductosService } from 'src/app/services/productos/productos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { DetallePedido } from 'src/app/controllers/pedido';
 
 @Component({
   selector: 'app-shop',
@@ -14,16 +16,27 @@ export class ShopComponent implements OnInit {
   show: boolean = true;
   servicioModal: any;
 
+  // Variables auxiliares de productos
+  idProductoAux: any;
   productoAux: any;
   cantidadAux: any = 1;
   cantidadProducto: any = 0;
+  precioU: any;
+
+  detallePedido: DetallePedido = {
+    idProducto: 0,
+    cantidad: 0,
+    precio_unidad: 0.00,
+    subtotal: 0.00
+  }
 
   constructor(
     private productoService: ProductosService,
     private router: Router,
     private clientService: ClientsService,
     private activatedRoute: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private pedidosService: PedidosService
   ) { }
 
   ngOnInit(): void {
@@ -55,15 +68,22 @@ export class ShopComponent implements OnInit {
 
   abrirModalCantidad(content, producto) {
     // console.log(this.cantidadAux);
+    this.idProductoAux = producto.idproducto;
     this.productoAux = producto.nombre;
     this.cantidadProducto = producto.cantidad;
+    this.precioU = producto.precio;
     this.servicioModal = this.modalService.open(content, { centered: true });
     // this.servicioModal.close();
     // console.log(id);
   }
 
   agregarCarrito(){
-    console.log(this.cantidadAux,'-', this.productoAux);
+    this.detallePedido.idProducto = this.idProductoAux;
+    this.detallePedido.cantidad = this.cantidadAux;
+    this.detallePedido.precio_unidad = this.precioU;
+    this.detallePedido.subtotal = this.precioU * this.cantidadAux;
+    // console.log(this.cantidadAux,'-', this.productoAux);
+    console.log(this.detallePedido);
     this.servicioModal.close();
   }
 }

@@ -21,6 +21,8 @@ import { OrdersComponent } from './views/order/orders/orders.component';
 import { LogComponent } from './routes/log/log.component';
 import { CartFormComponent } from './views/order/cart-form/cart-form.component';
 import { LoaderComponent } from './components/loader/loader.component'
+import { ProductosService } from './services/productos/productos.service';
+import { PedidosService } from './services/pedidos/pedidos.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { LoaderComponent } from './components/loader/loader.component'
     NgbModule
   ],
   providers: [
-    ClientsService
+    ClientsService,
+    ProductosService,
+    PedidosService
   ],
   bootstrap: [AppComponent]
 })
