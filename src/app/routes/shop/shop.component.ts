@@ -89,7 +89,7 @@ export class ShopComponent implements OnInit {
     this.detallePedido.producto = this.productoAux;
     this.detallePedido.desc = 'Venta de Producto #'+ this.idProductoAux;
     // console.log(this.cantidadAux,'-', this.productoAux);
-    // console.log(this.detallePedido);
+    console.log(this.detallePedido);
 
     this.pedidosService.agregarPedido(this.detallePedido);
     // console.log(this.pedidosService.fieldArray.length);

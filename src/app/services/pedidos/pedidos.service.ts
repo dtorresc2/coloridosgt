@@ -18,6 +18,15 @@ export class PedidosService {
     //   desc : descripcion,
     //   subtot : subtotal
     // };
+ 
+    console.log('Servicio ', detallePedido);
+
+    if (this.fieldArray.findIndex(x => x.idProducto === detallePedido.idProducto) != -1){
+      let index = this.fieldArray.findIndex(x => x.idProducto === detallePedido.idProducto);
+      console.log(index);
+    }
+
+
     this.fieldArray.push(detallePedido);
     this.cantidadItems = this.fieldArray.length;
   }
