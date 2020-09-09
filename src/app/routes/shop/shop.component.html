@@ -26,9 +26,16 @@
     </div> -->
     <div class="col-sm-6 col-md-4 col-lg-3 pb-4" *ngFor="let producto of listaProductos">
         <div class="card text-center">
+            
+
             <div *ngIf="this.clientService.autenticado"
-                class="card-header d-flex justify-content-end align-items-center">
-                <button type="button" class="btn btn-info" (click)="abrirModalCantidad(modalCantidad,producto)"
+                class="card-header  align-items-center">
+
+                <div class="float-left pt-2" placement="top" ngbTooltip="Existencias">
+                    <i class="fas fa-boxes"></i> {{producto.cantidad}}
+                </div>
+
+                <button type="button" class="btn btn-info float-right" (click)="abrirModalCantidad(modalCantidad,producto)"
                     placement="top" ngbTooltip="Agregar Producto"><i class="fas fa-shopping-bag"></i></button>
             </div>
 
