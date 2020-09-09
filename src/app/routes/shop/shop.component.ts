@@ -16,6 +16,7 @@ export class ShopComponent implements OnInit {
 
   productoAux: any;
   cantidadAux: any = 1;
+  cantidadProducto: any = 0;
 
   constructor(
     private productoService: ProductosService,
@@ -55,6 +56,7 @@ export class ShopComponent implements OnInit {
   abrirModalCantidad(content, producto) {
     // console.log(this.cantidadAux);
     this.productoAux = producto.nombre;
+    this.cantidadProducto = producto.cantidad;
     this.servicioModal = this.modalService.open(content, { centered: true });
     // this.servicioModal.close();
     // console.log(id);
