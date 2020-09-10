@@ -28,7 +28,7 @@
                             <input type="text" class="form-control" name="total" [(ngModel)]="totalPedido" readonly>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block" [disabled]="cantidadItems < 1">
+                    <button class="btn btn-primary btn-block" (click)="irCheckout()" [disabled]="cantidadItems < 1">
                         <span>Ir al Checkout</span>
                     </button>
                 </form>

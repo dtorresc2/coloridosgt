@@ -1,73 +1,119 @@
 <div>
-   <div class="card">
-       <div class="card-body">
-           <form>
-               <h4 class="card-title text-center" style="padding-bottom: 1%;">
-                   Checkout
-               </h4>
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <h4 class="card-title text-center" style="padding-bottom: 1%;">
+                    Checkout
+                </h4>
 
-               <div class="form-group">
-                   <label for="nombreid" class="control-label">Nombre</label>
-                   <input type="text" class="form-control" id="nombreid" name="nombre" placeholder="Alejandro">
-               </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-group">
+                            <label for="nombreid" class="control-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombreid" name="nombre" placeholder="Alejandro">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-group">
+                            <label for="apellidoid" class="control-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellidoid" name="nombre" placeholder="Barreda">
+                        </div>
+                    </div>
+                </div>
 
-               <div class="form-group">
-                   <label for="apellidoid" class="control-label">Apellido</label>
-                   <input type="text" class="form-control" id="apellidoid" name="nombre" placeholder="Barreda">
-               </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <div class="form-group">
+                            <label for="nitid" class="control-label">NIT</label>
+                            <input type="text" class="form-control" id="nitid" name="nombre" placeholder="587946-8">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="form-group">
+                            <label for="nitid" class="control-label">DPI</label>
+                            <input type="text" class="form-control" id="nitid" name="nombre" placeholder="587946-8">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="form-group">
+                            <label for="nitid" class="control-label">Telefono</label>
+                            <input type="text" class="form-control" id="nitid" name="nombre" placeholder="587946-8">
+                        </div>
+                    </div>
+                </div>
 
-               <div class="form-group">
-                   <label for="nitid" class="control-label">NIT</label>
-                   <input type="text" class="form-control" id="nitid" name="nombre" placeholder="587946-8">
-               </div>
+                <div class="form-group">
+                    <label for="direccion1id" class="control-label">Dirección 1</label>
+                    <input type="text" class="form-control" id="direccion1id" name="direccion1"
+                        placeholder="6A Calle, 06-01, zona 1 Cdad. de Guatemala">
+                </div>
 
-               <div class="form-group">
-                   <label for="direccion1id" class="control-label">Dirección 1</label>
-                   <input type="text" class="form-control" id="direccion1id" name="direccion1"
-                       placeholder="6A Calle, 06-01, zona 1 Cdad. de Guatemala">
-               </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="direccion2id" class="control-label">Correo</label>
+                        <input type="text" class="form-control" id="direccion2id" name="direccion2"
+                            placeholder="Apartmento, edificio, piso, etc.">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="depaid" class="control-label">Departamento</label>
+                        <select class="form-control" id="depaid">
+                            <option value="1" selected>Ciudad</option>
+                            <option value="2">Interior</option>
+                        </select>
+                    </div>
+                </div>
 
-               <div class="form-group">
-                   <label for="direccion2id" class="control-label">Dirección 2</label>
-                   <input type="text" class="form-control" id="direccion2id" name="direccion2"
-                       placeholder="Apartmento, edificio, piso, etc.">
-               </div>
+                <!-- <div class="form-group">
+                    <label for="direccion2id" class="control-label">Correo</label>
+                    <input type="text" class="form-control" id="direccion2id" name="direccion2"
+                        placeholder="Apartmento, edificio, piso, etc.">
+                </div>
 
-               <div class="form-group">
-                   <label for="depaid" class="control-label">Departamento</label>
-                   <select class="form-control" id="depaid">
-                       <option value="">Alta Verapaz</option>
-                       <option value="">Baja Verapaz</option>
-                       <option value="">Chimaltenango</option>
-                       <option value="">Chiquimula</option>
-                       <option value="">El Progreso</option>
-                       <option value="">Escuintla</option>
-                       <option value="">Guatemala</option>
-                       <option value="">Huehuetenango</option>
-                       <option value="">Izabal</option>
-                       <option value="">Jalapa</option>
-                       <option value="">Jutiapa</option>
-                       <option value="">Petén</option>
-                       <option value="">Quetzaltenango</option>
-                       <option value="">Quiché</option>
-                       <option value="">Retalhuleu</option>
-                       <option value="">Sacatepéquez</option>
-                       <option value="">San Marcos</option>
-                       <option value="">Santa Rosa</option>
-                       <option value="">Sololá</option>
-                       <option value="">Suchitepéquez</option>
-                       <option value="">Totonicapán</option>
-                       <option value="">Zacapa</option>
-                   </select>
-               </div>
+                <div class="form-group">
+                    <label for="depaid" class="control-label">Departamento</label>
+                    <select class="form-control" id="depaid">
+                        <option value="1" selected>Ciudad</option>
+                        <option value="2">Interior</option>
+                    </select>
+                </div> -->
 
-               <div class="form-group">
-                   <button type="submit" class="btn btn-primary">Hacer Pedido</button>
-               </div>
+                <!-- <div class="form-group">
+                    <label for="depaid" class="control-label">Departamento</label>
+                    <select class="form-control" id="depaid">
+                        <option value="">Alta Verapaz</option>
+                        <option value="">Baja Verapaz</option>
+                        <option value="">Chimaltenango</option>
+                        <option value="">Chiquimula</option>
+                        <option value="">El Progreso</option>
+                        <option value="">Escuintla</option>
+                        <option value="">Guatemala</option>
+                        <option value="">Huehuetenango</option>
+                        <option value="">Izabal</option>
+                        <option value="">Jalapa</option>
+                        <option value="">Jutiapa</option>
+                        <option value="">Petén</option>
+                        <option value="">Quetzaltenango</option>
+                        <option value="">Quiché</option>
+                        <option value="">Retalhuleu</option>
+                        <option value="">Sacatepéquez</option>
+                        <option value="">San Marcos</option>
+                        <option value="">Santa Rosa</option>
+                        <option value="">Sololá</option>
+                        <option value="">Suchitepéquez</option>
+                        <option value="">Totonicapán</option>
+                        <option value="">Zacapa</option>
+                    </select>
+                </div> -->
 
-           </form>
-       </div>
-   </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span>Confirmar Pedido</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
 
 

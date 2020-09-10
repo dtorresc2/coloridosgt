@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-form',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pedidoService: PedidosService, private router: Router) { }
 
   ngOnInit(): void {
+    if (localStorage['idUsuario'] && this.pedidoService.cantidadItems > 0) {
+
+    }
+    // else {
+    //   this.router.navigate(['/dashboard']);
+    // }
   }
 
 }

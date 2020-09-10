@@ -12,6 +12,7 @@ export class PedidosService {
 
   constructor() { }
 
+  // Funciones para el carrito  =============================
   agregarPedido(detallePedido: DetallePedido) {
     let filaNueva: DetallePedido = {
       idProducto: detallePedido.idProducto,
@@ -54,6 +55,10 @@ export class PedidosService {
     }
 
     this.cantidadItems = this.fieldArray.length;
+
+    // localStorage.setItem('pedido', JSON.stringify(this.fieldArray.toString()));
+    // console.log(JSON.parse(localStorage.getItem('pedido')));
+    // localStorage.removeItem('pedido');
   }
 
   crearPedidoGeneral() {
@@ -65,5 +70,7 @@ export class PedidosService {
     this.cantidadItems = this.fieldArray.length;
     // this.fieldArray.findIndex();
   }
+
+  // PETICIONES HTTP =======================
 
 }
