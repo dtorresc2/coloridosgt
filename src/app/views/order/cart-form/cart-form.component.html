@@ -3,6 +3,10 @@
         <div class="card-body">
             <form>
                 <h4 class="card-title text-center" style="padding-bottom: 1%;">
+                    <!-- <div class="float-left pt-2" placement="top" ngbTooltip="Regresar al carrito"
+                        style="font-size: 20px;">
+                        <a routerLink='/order'><i class="fas fa-arrow-left"></i></a>
+                    </div> -->
                     Checkout
                 </h4>
 
@@ -48,11 +52,15 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label class="control-label">Correo</label>
-                        <input type="text" class="form-control" placeholder="Ingrese su correo">
+                        <input type="text" class="form-control" placeholder="Ingrese su correo" readonly>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Fecha del Pedido</label>
+                        <input type="text" class="form-control" placeholder="Ingrese una fecha" readonly>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label class="control-label">Lugar de Envio</label>
                         <select class="form-control">
                             <option value="1" selected>Ciudad</option>

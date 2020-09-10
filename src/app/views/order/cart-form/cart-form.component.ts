@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cart-form',
@@ -9,6 +10,7 @@ import { ClientsService } from 'src/app/services/clientes/clients.service';
   styleUrls: ['./cart-form.component.css']
 })
 export class CartFormComponent implements OnInit {
+  client: FormGroup;
 
   constructor(private pedidoService: PedidosService, private router: Router, private clienteService: ClientsService) { }
 
@@ -26,5 +28,8 @@ export class CartFormComponent implements OnInit {
     //   this.router.navigate(['/dashboard']);
     // }
   }
-
 }
+
+// this.firstName.valueChanges.subscribe(value => {
+//   console.log('name has changed:', value)
+// });
