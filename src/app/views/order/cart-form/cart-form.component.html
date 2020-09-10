@@ -53,10 +53,10 @@
                                 *ngIf="client.get('nit').hasError('required') && client.get('nit').touched">
                                 Nit requerido
                             </span>
-                            <span class="text-danger" style="font-size: 10px;"
-                                *ngIf="client.get('nit').hasError('maxLength') && client.get('nit').touched">
+                            <!-- <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nit').errors.maxlength && client.get('nit').touched">
                                 Nit invalido
-                            </span>
+                            </span> -->
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -67,10 +67,10 @@
                                 *ngIf="client.get('dpi').hasError('required') && client.get('dpi').touched">
                                 Dpi requerido
                             </span>
-                            <span class="text-danger" style="font-size: 10px;"
-                                *ngIf="client.get('dpi').hasError('maxLength') && client.get('dpi').touched">
+                            <!-- <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('dpi').hasError('maxlength') && client.get('dpi').touched">
                                 Dpi invalido
-                            </span>
+                            </span> -->
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -99,6 +99,7 @@
                         Direccion requerido
                     </span>
                 </div>
+
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
