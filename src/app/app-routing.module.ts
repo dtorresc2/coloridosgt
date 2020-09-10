@@ -26,8 +26,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'log', component: LogComponent, canActivate: [AuthGuard], resolve: {log: LogResolver} },
   {
-    // path: 'order', component: OrderComponent, canActivateChild: [AuthGuard],
-    path: 'order', component: OrderComponent,
+    path: 'order', component: OrderComponent, canActivateChild: [AuthGuard],
+    // path: 'order', component: OrderComponent,
     children: [
       { path: '', component: CartComponent },
       { path: 'list', component: OrdersComponent },

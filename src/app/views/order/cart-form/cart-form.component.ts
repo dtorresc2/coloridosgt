@@ -15,19 +15,23 @@ import 'moment-timezone';
 export class CartFormComponent implements OnInit {
   client: FormGroup;
   fecha: any;
+  contador: number = 0;
+  cambiado: boolean = false;
 
   constructor(private pedidoService: PedidosService, private router: Router, private clienteService: ClientsService) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario'] && this.pedidoService.cantidadItems > 0) {
+
       this.clienteService.obtenerCliente(localStorage.getItem('idUsuario'))
         .subscribe(
           res => {
-            console.log(res);
+            // console.log(res);
             this.cargarCliente(res);
           },
           err => console.error(err)
         );
+        
     }
     // else {
     //   this.router.navigate(['/dashboard']);
@@ -50,7 +54,14 @@ export class CartFormComponent implements OnInit {
     );
     // https://www.regextester.com/97987 TESTER DE EXPRESIONES REGULARES
 
-    this.fecha = moment().tz("America/Guatemala").format('DD/MM/YYYY');
+    this.fecha = moment().tz("America/Guatemala").format('YYYY/MM/DD');
+
+    this.client.valueChanges.subscribe(value => {
+      this.contador++;
+      if (this.contador > 7) {
+        this.cambiado = true;
+      }
+    });
   }
 
   cargarCliente(cliente) {
@@ -63,7 +74,7 @@ export class CartFormComponent implements OnInit {
     this.client.get('fecha').setValue(moment().tz("America/Guatemala").format('DD/MM/YYYY'));
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log("Entre");
   }
 }
