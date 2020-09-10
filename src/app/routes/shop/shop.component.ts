@@ -21,13 +21,15 @@ export class ShopComponent implements OnInit {
   productoAux: any;
   cantidadAux: any = 1;
   cantidadProducto: any = 0;
-  precioU: any;
+  precioU: any = 0.00;
+  descuentoAux: any = 0.00;
 
   detallePedido: DetallePedido = {
     idProducto: 0,
     cantidad: 0,
     precio_unidad: 0.00,
     subtotal: 0.00,
+    descuento: 0.00,
     desc: '',
     producto: ''
   }
@@ -52,6 +54,7 @@ export class ShopComponent implements OnInit {
     setTimeout(() => {
       // this.obtenerListaProductos();
       this.listaProductos = this.activatedRoute.snapshot.data.shop;
+      console.log(this.listaProductos);
       this.show = false;
     }, 1000);
 
@@ -74,6 +77,7 @@ export class ShopComponent implements OnInit {
     this.productoAux = producto.nombre;
     this.cantidadProducto = producto.cantidad;
     this.precioU = producto.precio;
+    this.descuentoAux = producto.descuento;
     
     this.cantidadAux = 1;
     this.servicioModal = this.modalService.open(content, { centered: true });
@@ -85,9 +89,12 @@ export class ShopComponent implements OnInit {
     this.detallePedido.idProducto = this.idProductoAux;
     this.detallePedido.cantidad = this.cantidadAux;
     this.detallePedido.precio_unidad = this.precioU;
-    this.detallePedido.subtotal = this.precioU * this.cantidadAux;
     this.detallePedido.producto = this.productoAux;
-    this.detallePedido.desc = 'Venta de Producto #'+ this.idProductoAux;
+
+    let descuentoReal = this.precioU - this.descuentoAux;
+    this.detallePedido.descuento = this.descuentoAux > 0 ? descuentoReal * this.cantidadAux : 0.00;
+    this.detallePedido.subtotal = this.descuentoAux > 0 ? (this.precioU - descuentoReal) * this.cantidadAux : (this.precioU * this.cantidadAux);
+    this.detallePedido.desc = this.descuentoAux > 0 ? this.productoAux + ' (-' + descuentoReal.toFixed(2).toString() + ' c/u)' : this.productoAux;
     // console.log(this.cantidadAux,'-', this.productoAux);
     // console.log(this.detallePedido);
 

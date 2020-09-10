@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
   listaPedidos: any = [];
   fecha: any;
   cantidadItems: any = 0;
+  totalPedido: any = 0.00;
 
   constructor(private servicePedidos: PedidosService) { }
 
@@ -25,13 +26,27 @@ export class CartComponent implements OnInit {
       this.fecha = moment().tz("America/Guatemala").format('DD/MM/YYYY');
       this.cantidadItems = this.servicePedidos.cantidadItems;
       // console.log(fechaMoment);
+
+      // array1.forEach(element => console.log(element));
+      this.generarTotal();
     }
   }
 
-  eliminarPedido(index){
+  eliminarPedido(index) {
     this.servicePedidos.deleteFieldValue(index);
     this.listaPedidos = this.servicePedidos.fieldArray;
     this.cantidadItems = this.servicePedidos.cantidadItems;
+    this.generarTotal();
+  }
+
+  generarTotal() {
+    let total: any = 0;
+    this.servicePedidos.fieldArray.forEach(element => {
+      total += element.subtotal;
+      console.log(total);
+    });
+    this.totalPedido = total;
+    this.totalPedido = parseFloat(this.totalPedido).toFixed(2);
   }
 
   // cantidad?: number;

@@ -19,7 +19,8 @@ export class PedidosService {
       precio_unidad: detallePedido.precio_unidad,
       subtotal: detallePedido.subtotal,
       desc: detallePedido.desc,
-      producto: detallePedido.producto
+      producto: detallePedido.producto,
+      descuento: detallePedido.descuento
     };
 
     let filaAuxiliar: DetallePedido = {
@@ -28,7 +29,8 @@ export class PedidosService {
       precio_unidad: 0.00,
       subtotal: 0.00,
       desc: '',
-      producto: ''
+      producto: '',
+      descuento: 0.00
     }
 
     // Funcion para detectar productos repetidos y actualizar la cantidad con el arreglo existente
@@ -39,9 +41,11 @@ export class PedidosService {
       let cantidadNueva = (this.fieldArray[index].cantidad + detallePedido.cantidad);
       filaAuxiliar.cantidad = cantidadNueva;
       filaAuxiliar.precio_unidad = this.fieldArray[index].precio_unidad;
-      filaAuxiliar.subtotal = (cantidadNueva * this.fieldArray[index].precio_unidad);
+      filaAuxiliar.subtotal = this.fieldArray[index].descuento > 0 ? (cantidadNueva * (this.fieldArray[index].precio_unidad - this.fieldArray[index].descuento)) : (cantidadNueva * this.fieldArray[index].precio_unidad);
       filaAuxiliar.desc = this.fieldArray[index].desc;
       filaAuxiliar.producto = this.fieldArray[index].producto;
+
+      filaAuxiliar.descuento = this.fieldArray[index].descuento * cantidadNueva;
 
       this.fieldArray.splice(index, 1, filaAuxiliar);
     }
