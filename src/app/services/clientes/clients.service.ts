@@ -21,10 +21,15 @@ export class ClientsService {
     return this.http.post(Servidor.API_URI + '/loginClient', cliente);
   }
 
+  obtenerCliente(id) {
+    return this.http.get(Servidor.API_URI + '/clientes/' + id);
+  }
+
   // /bitacora/2/cliente
   obtenerBitacora(id) {
     return this.http.get(Servidor.API_URI + '/bitacora/' + id + '/cliente');
   }
   
+
 
 }
