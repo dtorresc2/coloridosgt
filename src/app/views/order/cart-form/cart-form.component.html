@@ -1,7 +1,8 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <form>
+            <form novalidate (ngSubmit)="onSubmit()" [formGroup]="client">
+            <!-- <form novalidate [formGroup]="client"> -->
                 <h4 class="card-title text-center" style="padding-bottom: 1%;">
                     <!-- <div class="float-left pt-2" placement="top" ngbTooltip="Regresar al carrito"
                         style="font-size: 20px;">
@@ -14,13 +15,31 @@
                     <div class="form-group col-md-6">
                         <div class="form-group">
                             <label class="control-label">Nombre</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su nombre">
+                            <input type="text" class="form-control" placeholder="Ingrese su nombre"
+                                formControlName="nombre">
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nombre').hasError('required') && client.get('nombre').touched">
+                                Nombre requerido
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nombre').hasError('pattern') && client.get('nombre').touched">
+                                Nombre invalido
+                            </span>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <div class="form-group">
                             <label class="control-label">Apellido</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su apellido">
+                            <input type="text" class="form-control" placeholder="Ingrese su apellido"
+                                formControlName="apellido">
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('apellido').hasError('required') && client.get('apellido').touched">
+                                Apellido requerido
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('apellido').hasError('pattern') && client.get('apellido').touched">
+                                Apellido invalido
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -29,43 +48,91 @@
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label class="control-label">NIT</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su nit">
+                            <input type="text" class="form-control" placeholder="Ingrese su nit" formControlName="nit">
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nit').hasError('required') && client.get('nit').touched">
+                                Nit requerido
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nit').hasError('maxLength') && client.get('nit').touched">
+                                Nit invalido
+                            </span>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label class="control-label">DPI</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su dpi">
+                            <input type="text" class="form-control" placeholder="Ingrese su dpi" formControlName="dpi">
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('dpi').hasError('required') && client.get('dpi').touched">
+                                Dpi requerido
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('dpi').hasError('maxLength') && client.get('dpi').touched">
+                                Dpi invalido
+                            </span>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label class="control-label">Telefono</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su telefono">
+                            <input type="text" class="form-control" placeholder="Ingrese su telefono"
+                                formControlName="telefono">
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('telefono').hasError('required') && client.get('telefono').touched">
+                                Telefono requerido
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('telefono').hasError('pattern') && client.get('telefono').touched">
+                                Telefono invalido
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label">Dirección</label>
-                    <input type="text" class="form-control" placeholder="Ingrese su direccion">
+                    <input type="text" class="form-control" placeholder="Ingrese su direccion"
+                        formControlName="direccion">
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="client.get('direccion').hasError('required') && client.get('direccion').touched">
+                        Direccion requerido
+                    </span>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="control-label">Correo</label>
-                        <input type="text" class="form-control" placeholder="Ingrese su correo" readonly>
+                        <input type="text" class="form-control" placeholder="Ingrese su correo" formControlName="correo"
+                            readonly>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="client.get('correo').hasError('required') && client.get('correo').touched">
+                            Correo requerido
+                        </span>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="client.get('correo').hasError('email') && client.get('correo').touched">
+                            Correo invalido
+                        </span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label">Fecha del Pedido</label>
-                        <input type="text" class="form-control" placeholder="Ingrese una fecha" readonly>
+                        <input type="text" class="form-control" placeholder="Ingrese una fecha" formControlName="fecha"
+                            readonly>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="client.get('fecha').hasError('required') && client.get('fecha').touched">
+                            Fecha requerida
+                        </span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label">Lugar de Envio</label>
-                        <select class="form-control">
-                            <option value="1" selected>Ciudad</option>
+                        <select class="form-control" formControlName="envio">
+                            <option value="1">Ciudad</option>
                             <option value="2">Interior</option>
                         </select>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="client.get('envio').hasError('required') && client.get('envio').touched">
+                            Lugar requerido
+                        </span>
                     </div>
                 </div>
 
@@ -112,7 +179,7 @@
                 </div> -->
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button type="submit" class="btn btn-primary btn-block"  [disabled]="client.invalid">
                         <span>Confirmar Pedido</span>
                     </button>
                 </div>
