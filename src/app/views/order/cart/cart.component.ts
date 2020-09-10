@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
   fecha: any;
   cantidadItems: any = 0;
   totalPedido: any = 0.00;
+  descuentoPedido: any = 0.00;
 
   constructor(private servicePedidos: PedidosService) { }
 
@@ -41,12 +42,16 @@ export class CartComponent implements OnInit {
 
   generarTotal() {
     let total: any = 0;
+    let descuento: any = 0;
     this.servicePedidos.fieldArray.forEach(element => {
       total += element.subtotal;
-      console.log(total);
+      descuento += element.descuento;
+      // console.log(total);
     });
     this.totalPedido = total;
+    this.descuentoPedido = descuento;
     this.totalPedido = parseFloat(this.totalPedido).toFixed(2);
+    this.descuentoPedido = parseFloat(this.descuentoPedido).toFixed(2);
   }
 
   // cantidad?: number;
