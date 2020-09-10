@@ -37,11 +37,12 @@ export class CartFormComponent implements OnInit {
         telefono: new FormControl('', [Validators.required, Validators.maxLength(9)]),
         direccion: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         correo: new FormControl('', [Validators.required, Validators.email]),
-        fecha: new FormControl('', [Validators.required, Validators.pattern('^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$')]),
+        fecha: new FormControl('', Validators.required),
+        // fecha: new FormControl('', [Validators.required, Validators.pattern('^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$')]),
         envio: new FormControl('', Validators.required),
       }
     );
-
+    // https://www.regextester.com/97987 TESTER DE EXPRESIONES REGULARES
   }
 }
 
