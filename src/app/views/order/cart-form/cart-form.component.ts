@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clientes/clients.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cart-form',
@@ -27,6 +27,21 @@ export class CartFormComponent implements OnInit {
     // else {
     //   this.router.navigate(['/dashboard']);
     // }
+
+    this.client = new FormGroup(
+      {
+        nombre: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+\s{0,1}[A-Z]{1}[a-z]+$')]),
+        apellido: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+\s{0,1}[A-Z]{1}[a-z]+$')]),
+        nit: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+        dpi: new FormControl('', [Validators.required, Validators.maxLength(15)]),
+        telefono: new FormControl('', [Validators.required, Validators.maxLength(9)]),
+        direccion: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+        correo: new FormControl('', [Validators.required, Validators.email]),
+        fecha: new FormControl('', [Validators.required, Validators.pattern('^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$')]),
+        envio: new FormControl('', Validators.required),
+      }
+    );
+
   }
 }
 
