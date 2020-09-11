@@ -27,6 +27,8 @@ export class CartFormComponent implements OnInit {
   listaEnvios: any = [];
   arregloComprobacion: Array<ResultadoInventario> = [];
 
+  nickAuxiliar: any;
+
   comprobacion: ResultadoInventario = {
     idProducto: 0,
     cantidadDisp: 0,
@@ -36,13 +38,13 @@ export class CartFormComponent implements OnInit {
   };
 
   datosNuevos: ClienteActualizacion = {
-    nombre: '', 
+    nombre: '',
     apellido: '',
-    nit: '', 
-    telefono: '', 
+    nit: '',
+    telefono: '',
     dpi: '',
-    correo: '', 
-    nick: '' 
+    correo: '',
+    nick: ''
   }
 
   idEnvioAux: any = 0;
@@ -60,7 +62,7 @@ export class CartFormComponent implements OnInit {
       this.clienteService.obtenerCliente(localStorage.getItem('idUsuario'))
         .subscribe(
           res => {
-            // console.log(res);
+            console.log(res);
             this.cargarCliente(res);
           },
           err => console.error(err)
@@ -94,6 +96,7 @@ export class CartFormComponent implements OnInit {
       this.contador++;
       if (this.contador > 7) {
         this.cambiado = true;
+        this.enlazarClienteClase();
       }
     });
 
@@ -115,7 +118,7 @@ export class CartFormComponent implements OnInit {
     this.client.get('telefono').setValue((<any>cliente).telefono);
     this.client.get('correo').setValue((<any>cliente).correo);
     this.client.get('fecha').setValue(moment().tz("America/Guatemala").format('DD/MM/YYYY'));
-
+    this.nickAuxiliar = (<any>cliente).nick;
     // this.datosNuevos.nombre = (<any>cliente).nombre;
     // this.datosNuevos.apellido = (<any>cliente).apellido;
     // this.datosNuevos.nit = (<any>cliente).nit;
@@ -125,6 +128,10 @@ export class CartFormComponent implements OnInit {
 
   onSubmit(content) {
     // console.log("Entre");
+    if (this.cambiado) {
+      this.actualizarCliente();
+    }
+
     this.comprobarItems();
     this.modalService.open(content, { centered: true, scrollable: true, size: 'lg' });
   }
@@ -134,10 +141,10 @@ export class CartFormComponent implements OnInit {
     // console.log(idTipo);
   }
 
-   comprobarItems() {
+  comprobarItems() {
     this.pedidoService.fieldArray.forEach(async element => {
       let comprobacionAux: ResultadoInventario = {
-        idProducto : element.idProducto,
+        idProducto: element.idProducto,
         cantidadDisp: await this.obtenerProductoEspecifico(element.idProducto),
         cantidadPedida: element.cantidad,
         estado: 0,
@@ -180,6 +187,34 @@ export class CartFormComponent implements OnInit {
             err => console.error(err)
           );
       });
+  }
+
+  enlazarClienteClase() {
+    // datosNuevos: ClienteActualizacion = {
+    //   nombre: '',
+    //   apellido: '',
+    //   nit: '',
+    //   telefono: '',
+    //   dpi: '',
+    //   correo: '',
+    //   nick: ''
+    // }
+    this.datosNuevos.nombre = this.client.get('nombre').value;
+    this.datosNuevos.apellido = this.client.get('apellido').value;
+    this.datosNuevos.nit = this.client.get('nit').value;
+    this.datosNuevos.telefono = this.client.get('telefono').value;
+    this.datosNuevos.dpi = this.client.get('dpi').value;
+    this.datosNuevos.correo = this.client.get('correo').value;
+    this.datosNuevos.nick = this.nickAuxiliar;
+    // let auxNick = this.client.get('nick').value;
+  }
+
+  actualizarCliente() {
+    console.log(this.datosNuevos);
+  }
+
+  finalizarPedido() {
+
   }
 }
 
