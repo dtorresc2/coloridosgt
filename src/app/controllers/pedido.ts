@@ -24,5 +24,5 @@ export interface ResultadoInventario {
    idProducto?: number;
    cantidadPedida?: number;
    cantidadDisp?: number;
-   estado?: boolean;
+   estado?: number;
 }

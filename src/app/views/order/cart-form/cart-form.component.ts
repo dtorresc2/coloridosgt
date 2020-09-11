@@ -31,7 +31,7 @@ export class CartFormComponent implements OnInit {
     idProducto: 0,
     cantidadDisp: 0,
     cantidadPedida: 0,
-    estado: false
+    estado: 0
   };
 
   datosNuevos: ClienteActualizacion = {
@@ -124,7 +124,7 @@ export class CartFormComponent implements OnInit {
 
   onSubmit(content) {
     // console.log("Entre");
-    this.modalService.open(content, { centered: true, scrollable: true5 });
+    this.modalService.open(content, { centered: true, scrollable: true });
     this.comprobarItems();
   }
 
@@ -135,25 +135,31 @@ export class CartFormComponent implements OnInit {
 
    comprobarItems() {
     this.pedidoService.fieldArray.forEach(async element => {
-      let comprovacionAux: ResultadoInventario = {
+      let comprobacionAux: ResultadoInventario = {
         idProducto : element.idProducto,
         cantidadDisp: await this.obtenerProductoEspecifico(element.idProducto),
         cantidadPedida: element.cantidad,
-        estado: false
+        estado: 0
       };
 
       // this.comprobacion.idProducto = element.idProducto;
       // this.comprobacion.cantidadDisp = await this.obtenerProductoEspecifico(element.idProducto);
       // this.comprobacion.cantidadPedida = element.cantidad;
 
-      if (element.cantidad <= await this.obtenerProductoEspecifico(element.idProducto)) {
-        comprovacionAux.estado = true;
+      if (element.cantidad <= comprobacionAux.cantidadDisp) {
+        comprobacionAux.estado = 1;
       }
       else {
-        comprovacionAux.estado = false;
+        if (comprobacionAux.cantidadDisp < 1) {
+          comprobacionAux.estado = -1;
+        }
+        else {
+          comprobacionAux.estado = 0;
+          comprobacionAux.cantidadPedida = comprobacionAux.cantidadDisp;
+        }
       }
 
-      this.arregloComprobacion.push(comprovacionAux);
+      this.arregloComprobacion.push(comprobacionAux);
     });
 
     console.log(this.arregloComprobacion);
