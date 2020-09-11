@@ -217,6 +217,7 @@ export class CartFormComponent implements OnInit {
   }
 
   registrarPedido() {
+    
   }
 
   finalizarPedido() {

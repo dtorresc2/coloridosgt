@@ -25,12 +25,12 @@ export class ShopComponent implements OnInit {
   descuentoAux: any = 0.00;
 
   detallePedido: DetallePedido = {
-    idProducto: 0,
+    idproducto: 0,
     cantidad: 0,
     precio_unidad: 0.00,
     subtotal: 0.00,
     descuento: 0.00,
-    desc: '',
+    descripcion: '',
     producto: ''
   }
 
@@ -86,7 +86,7 @@ export class ShopComponent implements OnInit {
   }
 
   agregarCarrito() {
-    this.detallePedido.idProducto = this.idProductoAux;
+    this.detallePedido.idproducto = this.idProductoAux;
     this.detallePedido.cantidad = this.cantidadAux;
     this.detallePedido.precio_unidad = this.precioU;
     this.detallePedido.producto = this.productoAux;
@@ -94,7 +94,7 @@ export class ShopComponent implements OnInit {
     let descuentoReal = this.precioU - this.descuentoAux;
     this.detallePedido.descuento = this.descuentoAux > 0 ? descuentoReal * this.cantidadAux : 0.00;
     this.detallePedido.subtotal = this.descuentoAux > 0 ? (this.precioU - descuentoReal) * this.cantidadAux : (this.precioU * this.cantidadAux);
-    this.detallePedido.desc = this.descuentoAux > 0 ? this.productoAux + ' (-' + descuentoReal.toFixed(2).toString() + ' c/u)' : this.productoAux;
+    this.detallePedido.descripcion = this.descuentoAux > 0 ? this.productoAux + ' (-' + descuentoReal.toFixed(2).toString() + ' c/u)' : this.productoAux;
     // console.log(this.cantidadAux,'-', this.productoAux);
     // console.log(this.detallePedido);
 
