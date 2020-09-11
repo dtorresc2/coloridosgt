@@ -126,10 +126,10 @@ export class CartFormComponent implements OnInit {
     // this.datosNuevos.nombre = (<any>cliente).nombre;
   }
 
-  onSubmit(content) {
+  async onSubmit(content) {
     // console.log("Entre");
     if (this.cambiado) {
-      this.actualizarCliente();
+      await this.actualizarCliente();
     }
 
     this.comprobarItems();
@@ -190,15 +190,6 @@ export class CartFormComponent implements OnInit {
   }
 
   enlazarClienteClase() {
-    // datosNuevos: ClienteActualizacion = {
-    //   nombre: '',
-    //   apellido: '',
-    //   nit: '',
-    //   telefono: '',
-    //   dpi: '',
-    //   correo: '',
-    //   nick: ''
-    // }
     this.datosNuevos.nombre = this.client.get('nombre').value;
     this.datosNuevos.apellido = this.client.get('apellido').value;
     this.datosNuevos.nit = this.client.get('nit').value;
@@ -206,11 +197,22 @@ export class CartFormComponent implements OnInit {
     this.datosNuevos.dpi = this.client.get('dpi').value;
     this.datosNuevos.correo = this.client.get('correo').value;
     this.datosNuevos.nick = this.nickAuxiliar;
-    // let auxNick = this.client.get('nick').value;
   }
 
-  actualizarCliente() {
-    console.log(this.datosNuevos);
+  actualizarCliente(): Promise<boolean> {
+    return new Promise(
+      resolve => {
+        this.clienteService.actualizarCliente(localStorage.getItem('idUsuario'), this.datosNuevos)
+          .subscribe(
+            res => {
+              resolve(true);
+            },
+            err => {
+              console.error(err)
+              resolve(false);
+            }
+          );
+      });
   }
 
   finalizarPedido() {
