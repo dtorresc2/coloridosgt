@@ -205,15 +205,18 @@
     </div>
     <div class="modal-body">
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Dapibus ac facilisis in
-                <span class="float-right text-danger"><i class="fas fa-times"></i></span>
+            <li *ngIf="cambiado" class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="float-left"><i class="fas fa-user-edit mr-2"></i>Datos del usuario actualizados</span>
+                <!-- <i class="fas fa-user-edit"></i>  Dapibus ac facilisis in -->
+                <span class="float-right text-danger mr-1"><i class="fas fa-times"></i></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of arregloComprobacion">
-                {{item.producto}} - Inventario {{item.estado == '0' ? 'Ajustado ' : ''}}{{item.estado == '-1' ? 'Agotado ' : ''}} ({{item.cantidadPedida}}/{{item.cantidadDisp}})
+                <span class="float-left"><i class="fas fa-cart-plus mr-2"></i>
+                      {{item.producto}} - Inventario {{item.estado == '0' ? 'Ajustado ' : ''}}{{item.estado == '-1' ? 'Agotado ' : ''}} ({{item.cantidadPedida}}/{{item.cantidadDisp}})
+                </span>
                 <span *ngIf="item.estado == 1" class="float-right text-success"><i class="fas fa-check"></i></span>
                 <span *ngIf="item.estado == 0" class="float-right text-warning"><i class="fas fa-exclamation-triangle"></i></span>
-                <span *ngIf="item.estado == -1" class="float-right text-danger"><i class="fas fa-times"></i></span>
+                <span *ngIf="item.estado == -1" class="float-right text-danger mr-1"><i class="fas fa-times"></i></span>
             </li>
             <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
                 Morbi leo risus
