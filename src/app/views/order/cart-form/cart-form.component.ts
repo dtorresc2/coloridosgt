@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import * as moment from 'moment';
 import 'moment-timezone';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cart-form',
@@ -20,7 +21,9 @@ export class CartFormComponent implements OnInit {
 
   listaEnvios: any = [];
 
-  constructor(private pedidoService: PedidosService, private router: Router, private clienteService: ClientsService) { }
+  idEnvioAux: any = 0;
+
+  constructor(private pedidoService: PedidosService, private router: Router, private clienteService: ClientsService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario'] && this.pedidoService.cantidadItems > 0) {
@@ -85,11 +88,13 @@ export class CartFormComponent implements OnInit {
     this.client.get('fecha').setValue(moment().tz("America/Guatemala").format('DD/MM/YYYY'));
   }
 
-  onSubmit() {
+  onSubmit(content) {
     console.log("Entre");
+    this.modalService.open(content, { centered: true });
   }
 
   onChangeTipoEnvio(idTipo){
+    this.idEnvioAux = idTipo;
     console.log(idTipo);
   }
 }

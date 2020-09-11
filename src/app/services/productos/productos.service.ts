@@ -14,4 +14,8 @@ export class ProductosService {
     return this.http.get(Servidor.API_URI + '/productos/clientes');
   }
 
+  obtenerProductoEspecifico(id) {
+    return this.http.get(Servidor.API_URI + '/productos/' + id);
+  }
+
 }
