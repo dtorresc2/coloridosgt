@@ -28,6 +28,7 @@ export class CartFormComponent implements OnInit {
   arregloComprobacion: Array<ResultadoInventario> = [];
 
   nickAuxiliar: any;
+  servicioModalAux: any;
 
   comprobacion: ResultadoInventario = {
     idProducto: 0,
@@ -134,7 +135,7 @@ export class CartFormComponent implements OnInit {
     }
 
     this.comprobarItems();
-    this.modalService.open(content, { centered: true, scrollable: true, size: 'lg' });
+    this.servicioModalAux = this.modalService.open(content, { centered: true, scrollable: true, size: 'lg' });
   }
 
   onChangeTipoEnvio(idTipo) {
@@ -217,12 +218,30 @@ export class CartFormComponent implements OnInit {
   }
 
   registrarPedido() {
+    return new Promise(
+      resolve => {
+        this.pedidoService.registrarPedido(this.pedidoService.pedido)
+          .subscribe(
+            res => {
+              resolve(true);
+            },
+            err => {
+              console.error(err)
+              resolve(false);
+            }
+          );
+      });
+  }
+
+  async finalizarPedido() {
+    this.servicioModalAux.close();
+    this.pedidoService.crearPedidoGeneral(
+      this.client.get('direccion').value, moment().tz("America/Guatemala").format('YYYY/MM/DD'), 
+      this.idEnvioAux, localStorage.getItem('idUsuario'));
     
+    await this.registrarPedido();
   }
 
-  finalizarPedido() {
-
-  }
 }
 
 // this.firstName.valueChanges.subscribe(value => {

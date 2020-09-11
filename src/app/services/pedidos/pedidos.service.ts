@@ -3,6 +3,7 @@ import { DetallePedido, Pedido } from '../../controllers/pedido';
 import { HttpClient } from '@angular/common/http';
 import { Servidor } from 'src/app/config/config';
 import { ClienteActualizacion } from 'src/app/controllers/cliente';
+import { ProductosService } from '../productos/productos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { ClienteActualizacion } from 'src/app/controllers/cliente';
 export class PedidosService {
   fieldArray: Array<DetallePedido> = [];
   newAttribute: DetallePedido;
+
   pedido: Pedido = {
     fecha: '',
     direccion: '',
@@ -22,17 +24,6 @@ export class PedidosService {
     idusuario: 0,
     detalle_pedido: new Array<DetallePedido>()
   }
-
-
-  // fecha?: string,
-  //  direccion?: string,
-  //  total?: number,
-  //  url_comprobante?:string,
-  //  idtipo_pedido?: number,
-  //  idcliente?: number,
-  //  idestado_pedido?: number,
-  //  idusuario?: number,
-  //  detalle_pedido?: Array<DetallePedido> 
 
   cantidadItems: any = 0;
 
@@ -87,8 +78,26 @@ export class PedidosService {
     // localStorage.removeItem('pedido');
   }
 
-  crearPedidoGeneral(cliente: ClienteActualizacion, direccion, total, descuento) {
+  crearPedidoGeneral(direccion, fecha, idtipo, idcliente) {
+    let total: any = 0;
+    let descuento: any = 0;
+    this.fieldArray.forEach(element => {
+      total += element.subtotal;
+      descuento += element.descuento;
+    });
+
+    this.pedido.direccion = direccion;
+    this.pedido.fecha = fecha;
+    this.pedido.total = total;
+    this.pedido.descuento = descuento;
+    this.pedido.idtipo_pedido = idtipo;
+    this.pedido.idcliente = idcliente;
+    this.pedido.idestado_pedido = 1;
+    this.pedido.idusuario = 1;
     this.pedido.detalle_pedido = this.fieldArray;
+    // console.log(fecha, '-', direccion, '-', descuento, '-', total, '-', idtipo, '-', idcliente, '-',  1);
+    // console.log(this.pedido.detalle_pedido);
+    console.log(this.pedido);
   }
 
   deleteFieldValue(index) {
