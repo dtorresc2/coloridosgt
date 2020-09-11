@@ -96,7 +96,7 @@ export class PedidosService {
     this.pedido.idusuario = 1;
     this.pedido.detalle_pedido = this.fieldArray;
     // console.log(fecha, '-', direccion, '-', descuento, '-', total, '-', idtipo, '-', idcliente, '-',  1);
-    // console.log(this.pedido.detalle_pedido);
+    console.log(this.pedido.detalle_pedido);
     console.log(this.pedido);
   }
 

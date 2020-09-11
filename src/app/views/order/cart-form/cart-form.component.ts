@@ -10,7 +10,7 @@ import 'moment-timezone';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResultadoInventario, DetallePedido } from 'src/app/controllers/pedido';
 import { ProductosService } from 'src/app/services/productos/productos.service';
-import { min } from 'rxjs/operators';
+import { elementAt, min } from 'rxjs/operators';
 import { Cliente, ClienteActualizacion } from 'src/app/controllers/cliente';
 
 @Component({
@@ -145,9 +145,11 @@ export class CartFormComponent implements OnInit {
 
   comprobarItems() {
     this.pedidoService.fieldArray.forEach(async element => {
+      const { cantidad } = await this.obtenerProductoEspecifico(element.idproducto);
       let comprobacionAux: ResultadoInventario = {
         idProducto: element.idproducto,
-        cantidadDisp: await this.obtenerProductoEspecifico(element.idproducto),
+        // cantidadDisp: await this.obtenerProductoEspecifico(element.idproducto),
+        cantidadDisp: cantidad,
         cantidadPedida: element.cantidad,
         estado: 0,
         producto: element.producto
@@ -184,7 +186,7 @@ export class CartFormComponent implements OnInit {
             res => {
               // this.listaEnvios = res;
               // console.log((<any>res).cantidad);
-              resolve((<any>res).cantidad);
+              resolve({ cantidad: (<any>res).cantidad, descuento: (<any>res).descuento, precio: (<any>res).precio});
             },
             err => console.error(err)
           );
@@ -217,7 +219,7 @@ export class CartFormComponent implements OnInit {
       });
   }
 
-  registrarPedido() {
+  registrarPedido(): Promise<boolean> {
     return new Promise(
       resolve => {
         this.pedidoService.registrarPedido(this.pedidoService.pedido)
@@ -233,13 +235,58 @@ export class CartFormComponent implements OnInit {
       });
   }
 
+  registrarVentas(cantidad, id): Promise<boolean> {
+    return new Promise(
+      resolve => {
+        this.productoService.registrarVenta(cantidad, id)
+          .subscribe(
+            res => {
+              resolve(true);
+            },
+            err => {
+              console.error(err)
+              resolve(false);
+            }
+          );
+      });
+  }
+
+  ajustarDetallePedido() {
+    this.arregloComprobacion.forEach(async element => {
+      // let filaAuxiliar: DetallePedido = {
+      //   idproducto: 0,
+      //   cantidad: 0,
+      //   precio_unidad: 0.00,
+      //   subtotal: 0.00,
+      //   descripcion: '',
+      //   producto: '',
+      //   descuento: 0.00
+      // }
+
+      if (this.pedidoService.fieldArray.findIndex(x => x.idproducto === element.idProducto) != -1) {
+        let index = this.pedidoService.fieldArray.findIndex(x => x.idproducto === element.idProducto);
+        this.pedidoService.fieldArray[index].cantidad = element.cantidadPedida;
+        const { descuento, precio } = await this.obtenerProductoEspecifico(element.idProducto);
+        let descuentoReal = precio - descuento;
+        this.pedidoService.fieldArray[index].descuento = descuento > 0 ? (descuentoReal * element.cantidadPedida) : 0.00;
+        this.pedidoService.fieldArray[index].subtotal = descuento > 0 ? (precio - descuentoReal) * element.cantidadPedida : (precio * element.cantidadPedida);
+      }
+
+    });
+  }
+
   async finalizarPedido() {
     this.servicioModalAux.close();
+    this.ajustarDetallePedido();
     this.pedidoService.crearPedidoGeneral(
-      this.client.get('direccion').value, moment().tz("America/Guatemala").format('YYYY/MM/DD'), 
+      this.client.get('direccion').value, moment().tz("America/Guatemala").format('YYYY/MM/DD'),
       this.idEnvioAux, localStorage.getItem('idUsuario'));
-    
-    await this.registrarPedido();
+
+    // await this.registrarPedido();
+
+    // this.arregloComprobacion.forEach(async element => {
+    //   await this.registrarVentas(element.cantidadPedida, element.idProducto);
+    // });
   }
 
 }
