@@ -69,9 +69,9 @@
         <tbody *ngFor="let pedidos of listaPedidos; let i=index">
             <tr>
                 <th scope="row"> {{ i+1 }} </th>
-                <td> {{ pedidos.idProducto }} </td>
+                <td> {{ pedidos.idproducto }} </td>
                 <td> {{ pedidos.cantidad }} </td>
-                <td> {{ pedidos.desc }}</td>
+                <td> {{ pedidos.descripcion }}</td>
                 <td> Q.{{ pedidos.precio_unidad | number:'1.2-2' }} </td>
                 <td> Q.{{ pedidos.descuento | number:'1.2-2' }} </td>
                 <td> Q.{{ pedidos.subtotal | number:'1.2-2' }} </td>

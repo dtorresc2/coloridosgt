@@ -10,7 +10,6 @@ import 'moment-timezone';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResultadoInventario, DetallePedido } from 'src/app/controllers/pedido';
 import { ProductosService } from 'src/app/services/productos/productos.service';
-import { elementAt, min } from 'rxjs/operators';
 import { Cliente, ClienteActualizacion } from 'src/app/controllers/cliente';
 
 @Component({
@@ -49,6 +48,9 @@ export class CartFormComponent implements OnInit {
   }
 
   idEnvioAux: any = 0;
+  totalAux: any = 0;
+  descuentoAux: any = 0;
+
 
   constructor(
     private pedidoService: PedidosService,
@@ -186,7 +188,7 @@ export class CartFormComponent implements OnInit {
             res => {
               // this.listaEnvios = res;
               // console.log((<any>res).cantidad);
-              resolve({ cantidad: (<any>res).cantidad, descuento: (<any>res).descuento, precio: (<any>res).precio});
+              resolve({ cantidad: (<any>res).cantidad, descuento: (<any>res).descuento, precio: (<any>res).precio });
             },
             err => console.error(err)
           );
@@ -253,16 +255,6 @@ export class CartFormComponent implements OnInit {
 
   ajustarDetallePedido() {
     this.arregloComprobacion.forEach(async element => {
-      // let filaAuxiliar: DetallePedido = {
-      //   idproducto: 0,
-      //   cantidad: 0,
-      //   precio_unidad: 0.00,
-      //   subtotal: 0.00,
-      //   descripcion: '',
-      //   producto: '',
-      //   descuento: 0.00
-      // }
-
       if (this.pedidoService.fieldArray.findIndex(x => x.idproducto === element.idProducto) != -1) {
         let index = this.pedidoService.fieldArray.findIndex(x => x.idproducto === element.idProducto);
         this.pedidoService.fieldArray[index].cantidad = element.cantidadPedida;
@@ -275,12 +267,23 @@ export class CartFormComponent implements OnInit {
     });
   }
 
-  async finalizarPedido() {
+  finalizarPedido() {
     this.servicioModalAux.close();
     this.ajustarDetallePedido();
-    this.pedidoService.crearPedidoGeneral(
-      this.client.get('direccion').value, moment().tz("America/Guatemala").format('YYYY/MM/DD'),
-      this.idEnvioAux, localStorage.getItem('idUsuario'));
+
+    setTimeout(() => {
+      let total: any = 0;
+      let descuento: any = 0;
+      this.pedidoService.fieldArray.forEach(element => {
+        total += element.subtotal;
+        descuento += element.descuento;
+      });
+
+      this.pedidoService.crearPedidoGeneral(
+        this.client.get('direccion').value, moment().tz("America/Guatemala").format('YYYY/MM/DD'),
+        this.idEnvioAux, localStorage.getItem('idUsuario'), total, descuento);
+    }, 1000);
+
 
     // await this.registrarPedido();
 

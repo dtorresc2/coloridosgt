@@ -78,13 +78,10 @@ export class PedidosService {
     // localStorage.removeItem('pedido');
   }
 
-  crearPedidoGeneral(direccion, fecha, idtipo, idcliente) {
-    let total: any = 0;
-    let descuento: any = 0;
-    this.fieldArray.forEach(element => {
-      total += element.subtotal;
-      descuento += element.descuento;
-    });
+  crearPedidoGeneral(direccion, fecha, idtipo, idcliente, total, descuento) {
+    
+
+    console.log(total, '-', descuento);
 
     this.pedido.direccion = direccion;
     this.pedido.fecha = fecha;
@@ -96,7 +93,7 @@ export class PedidosService {
     this.pedido.idusuario = 1;
     this.pedido.detalle_pedido = this.fieldArray;
     // console.log(fecha, '-', direccion, '-', descuento, '-', total, '-', idtipo, '-', idcliente, '-',  1);
-    console.log(this.pedido.detalle_pedido);
+    // console.log(this.pedido.detalle_pedido);
     console.log(this.pedido);
   }
 
