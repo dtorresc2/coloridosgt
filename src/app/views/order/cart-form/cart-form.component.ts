@@ -94,9 +94,10 @@ export class CartFormComponent implements OnInit {
 
     this.client.valueChanges.subscribe(value => {
       this.contador++;
+      this.enlazarClienteClase();
       if (this.contador > 7) {
         this.cambiado = true;
-        this.enlazarClienteClase();
+        // this.enlazarClienteClase();
       }
     });
 
@@ -144,8 +145,8 @@ export class CartFormComponent implements OnInit {
   comprobarItems() {
     this.pedidoService.fieldArray.forEach(async element => {
       let comprobacionAux: ResultadoInventario = {
-        idProducto: element.idProducto,
-        cantidadDisp: await this.obtenerProductoEspecifico(element.idProducto),
+        idProducto: element.idproducto,
+        cantidadDisp: await this.obtenerProductoEspecifico(element.idproducto),
         cantidadPedida: element.cantidad,
         estado: 0,
         producto: element.producto
@@ -213,6 +214,9 @@ export class CartFormComponent implements OnInit {
             }
           );
       });
+  }
+
+  registrarPedido() {
   }
 
   finalizarPedido() {

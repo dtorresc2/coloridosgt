@@ -18,4 +18,8 @@ export class ProductosService {
     return this.http.get(Servidor.API_URI + '/productos/' + id);
   }
 
+  registrarVenta(_cantidad, _idproducto) {
+    return this.http.post(Servidor.API_URI + '/productos/venta', { cantidad: _cantidad, idProducto: _idproducto });
+  }
+
 }

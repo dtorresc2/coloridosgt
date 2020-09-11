@@ -2,15 +2,16 @@ export interface DetallePedido{
    cantidad?: number;
    precio_unidad?: number;
    subtotal?: number;
-   idProducto?: number;
+   idproducto?: number;
    descuento?: number;
    producto?: string;
-   desc?: string;
+   descripcion?: string;
 }
 
 export interface Pedido {
    fecha?: string,
    direccion?: string,
+   descuento?: number,
    total?: number,
    url_comprobante?:string,
    idtipo_pedido?: number,
