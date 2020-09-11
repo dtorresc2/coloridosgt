@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DetallePedido, Pedido } from '../../controllers/pedido';
+import { HttpClient } from '@angular/common/http';
+import { Servidor } from 'src/app/config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class PedidosService {
   pedido: Pedido;
   cantidadItems: any = 0;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   // Funciones para el carrito  =============================
   agregarPedido(detallePedido: DetallePedido) {
@@ -72,5 +74,8 @@ export class PedidosService {
   }
 
   // PETICIONES HTTP =======================
+  obtenerTiposEnvio() {
+    return this.http.get(Servidor.API_URI + '/tipoPedido');
+  }
 
 }

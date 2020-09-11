@@ -18,6 +18,8 @@ export class CartFormComponent implements OnInit {
   contador: number = 0;
   cambiado: boolean = false;
 
+  listaEnvios: any = [];
+
   constructor(private pedidoService: PedidosService, private router: Router, private clienteService: ClientsService) { }
 
   ngOnInit(): void {
@@ -62,6 +64,15 @@ export class CartFormComponent implements OnInit {
         this.cambiado = true;
       }
     });
+
+    this.pedidoService.obtenerTiposEnvio()
+    .subscribe(
+      res => {
+        this.listaEnvios = res;
+        console.log(res);
+      },
+      err => console.error(err)
+    )
   }
 
   cargarCliente(cliente) {
@@ -77,24 +88,12 @@ export class CartFormComponent implements OnInit {
   onSubmit() {
     console.log("Entre");
   }
+
+  onChangeTipoEnvio(idTipo){
+    console.log(idTipo);
+  }
 }
 
 // this.firstName.valueChanges.subscribe(value => {
 //   console.log('name has changed:', value)
 // });
-
-// apellido: "Claros"
-// ​
-// correo: "correo1@correo.com"
-// ​
-// dpi: null
-// ​
-// idcliente: 2
-// ​
-// nick: "correo1"
-// ​
-// nit: "CF"
-// ​
-// nombre: "Roberto"
-// ​
-// telefono: "0000-0000"

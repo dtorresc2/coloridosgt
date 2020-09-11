@@ -126,9 +126,14 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label">Lugar de Envio</label>
-                        <select class="form-control" formControlName="envio">
+                        <!-- <select class="form-control" formControlName="envio">
                             <option value="1">Ciudad</option>
                             <option value="2">Interior</option>
+                        </select> -->
+                        <select class="form-control" formControlName="envio" (change)="onChangeTipoEnvio($event.target.value)"> 
+                            <option [value]="tipoEnvio.idtipo_pedido" *ngFor="let tipoEnvio of listaEnvios">
+                                {{tipoEnvio.tipo}}
+                            </option>
                         </select>
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="client.get('envio').hasError('required') && client.get('envio').touched">
