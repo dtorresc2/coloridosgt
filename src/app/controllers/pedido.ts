@@ -19,3 +19,10 @@ export interface Pedido {
    idusuario?: number,
    detalle_pedido?: Array<DetallePedido> 
 }
+
+export interface ResultadoInventario {
+   idProducto?: number;
+   cantidadPedida?: number;
+   cantidadDisp?: number;
+   estado?: boolean;
+}
