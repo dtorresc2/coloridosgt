@@ -54,7 +54,7 @@ export class ShopComponent implements OnInit {
     setTimeout(() => {
       // this.obtenerListaProductos();
       this.listaProductos = this.activatedRoute.snapshot.data.shop;
-      console.log(this.listaProductos);
+      // console.log(this.listaProductos);
       this.show = false;
     }, 1000);
 

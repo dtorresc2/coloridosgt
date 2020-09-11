@@ -8,6 +8,16 @@ export interface Cliente{
     dpi?: string;
 }
 
+export interface ClienteActualizacion {
+    nombre?: string; 
+    apellido?: string;
+    nit?: string; 
+    telefono?: string; 
+    dpi?: string;
+    correo?: string; 
+    nick?: string; 
+}
+
 // "name": "Usuario", 
 // "lastname": "Prueba", 
 // "nick": "prueba123@correo.com", 

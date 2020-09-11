@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cliente } from '../../controllers/cliente';
+import { Cliente, ClienteActualizacion } from '../../controllers/cliente';
 import { Servidor } from '../../config/config';
 
 @Injectable({
@@ -23,6 +23,10 @@ export class ClientsService {
 
   obtenerCliente(id) {
     return this.http.get(Servidor.API_URI + '/clientes/' + id);
+  }
+
+  actualizarCliente(id, cliente:ClienteActualizacion) {
+    return this.http.put(Servidor.API_URI + '/clientes/' + id, cliente);
   }
 
   // /bitacora/2/cliente

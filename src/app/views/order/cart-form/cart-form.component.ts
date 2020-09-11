@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResultadoInventario, DetallePedido } from 'src/app/controllers/pedido';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { min } from 'rxjs/operators';
+import { Cliente, ClienteActualizacion } from 'src/app/controllers/cliente';
 
 @Component({
   selector: 'app-cart-form',
@@ -32,6 +33,16 @@ export class CartFormComponent implements OnInit {
     cantidadPedida: 0,
     estado: false
   };
+
+  datosNuevos: ClienteActualizacion = {
+    nombre: '', 
+    apellido: '',
+    nit: '', 
+    telefono: '', 
+    dpi: '',
+    correo: '', 
+    nick: '' 
+  }
 
   idEnvioAux: any = 0;
 
@@ -55,9 +66,9 @@ export class CartFormComponent implements OnInit {
         );
 
     }
-    // else {
-    //   this.router.navigate(['/dashboard']);
-    // }
+    else {
+      this.router.navigate(['/dashboard']);
+    }
 
     this.client = new FormGroup(
       {
@@ -103,11 +114,17 @@ export class CartFormComponent implements OnInit {
     this.client.get('telefono').setValue((<any>cliente).telefono);
     this.client.get('correo').setValue((<any>cliente).correo);
     this.client.get('fecha').setValue(moment().tz("America/Guatemala").format('DD/MM/YYYY'));
+
+    // this.datosNuevos.nombre = (<any>cliente).nombre;
+    // this.datosNuevos.apellido = (<any>cliente).apellido;
+    // this.datosNuevos.nit = (<any>cliente).nit;
+    // this.datosNuevos.dpi = (<any>cliente).dpi;
+    // this.datosNuevos.nombre = (<any>cliente).nombre;
   }
 
   onSubmit(content) {
     // console.log("Entre");
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, { centered: true, scrollable: true5 });
     this.comprobarItems();
   }
 
