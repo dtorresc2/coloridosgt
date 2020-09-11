@@ -31,7 +31,8 @@ export class CartFormComponent implements OnInit {
     idProducto: 0,
     cantidadDisp: 0,
     cantidadPedida: 0,
-    estado: 0
+    estado: 0,
+    producto: ''
   };
 
   datosNuevos: ClienteActualizacion = {
@@ -124,8 +125,8 @@ export class CartFormComponent implements OnInit {
 
   onSubmit(content) {
     // console.log("Entre");
-    this.modalService.open(content, { centered: true, scrollable: true });
     this.comprobarItems();
+    this.modalService.open(content, { centered: true, scrollable: true, size: 'lg' });
   }
 
   onChangeTipoEnvio(idTipo) {
@@ -139,7 +140,8 @@ export class CartFormComponent implements OnInit {
         idProducto : element.idProducto,
         cantidadDisp: await this.obtenerProductoEspecifico(element.idProducto),
         cantidadPedida: element.cantidad,
-        estado: 0
+        estado: 0,
+        producto: element.producto
       };
 
       // this.comprobacion.idProducto = element.idProducto;

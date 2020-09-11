@@ -25,4 +25,5 @@ export interface ResultadoInventario {
    cantidadPedida?: number;
    cantidadDisp?: number;
    estado?: number;
+   producto?: string;
 }
