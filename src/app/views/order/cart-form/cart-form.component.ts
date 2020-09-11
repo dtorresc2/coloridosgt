@@ -227,6 +227,7 @@ export class CartFormComponent implements OnInit {
         this.pedidoService.registrarPedido(this.pedidoService.pedido)
           .subscribe(
             res => {
+              console.log(res);
               resolve(true);
             },
             err => {
@@ -271,7 +272,7 @@ export class CartFormComponent implements OnInit {
     this.servicioModalAux.close();
     this.ajustarDetallePedido();
 
-    setTimeout(() => {
+    setTimeout(async () => {
       let total: any = 0;
       let descuento: any = 0;
       this.pedidoService.fieldArray.forEach(element => {
@@ -282,14 +283,16 @@ export class CartFormComponent implements OnInit {
       this.pedidoService.crearPedidoGeneral(
         this.client.get('direccion').value, moment().tz("America/Guatemala").format('YYYY/MM/DD'),
         this.idEnvioAux, localStorage.getItem('idUsuario'), total, descuento);
+
+      await this.registrarPedido();
+
+      this.arregloComprobacion.forEach(async element => {
+        await this.registrarVentas(element.cantidadPedida, element.idProducto);
+      });
     }, 1000);
 
 
-    // await this.registrarPedido();
 
-    // this.arregloComprobacion.forEach(async element => {
-    //   await this.registrarVentas(element.cantidadPedida, element.idProducto);
-    // });
   }
 
 }

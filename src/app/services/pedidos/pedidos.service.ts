@@ -79,10 +79,6 @@ export class PedidosService {
   }
 
   crearPedidoGeneral(direccion, fecha, idtipo, idcliente, total, descuento) {
-    
-
-    console.log(total, '-', descuento);
-
     this.pedido.direccion = direccion;
     this.pedido.fecha = fecha;
     this.pedido.total = total;
@@ -94,7 +90,7 @@ export class PedidosService {
     this.pedido.detalle_pedido = this.fieldArray;
     // console.log(fecha, '-', direccion, '-', descuento, '-', total, '-', idtipo, '-', idcliente, '-',  1);
     // console.log(this.pedido.detalle_pedido);
-    console.log(this.pedido);
+    // console.log(this.pedido);
   }
 
   deleteFieldValue(index) {
@@ -109,7 +105,7 @@ export class PedidosService {
   }
 
   registrarPedido(pedido: Pedido) {
-    return this.http.post(Servidor.API_URI + '/tipoPedido', pedido);
+    return this.http.post(Servidor.API_URI + '/pedidos', pedido);
   }
 
 }
