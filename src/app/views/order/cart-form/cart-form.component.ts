@@ -289,24 +289,25 @@ export class CartFormComponent implements OnInit {
       this.arregloComprobacion.forEach(async element => {
         await this.registrarVentas(element.cantidadPedida, element.idProducto);
       });
+
+      this.pedidoService.pedido = {
+        fecha: '',
+        direccion: '',
+        descuento: 0.00,
+        total: 0.00,
+        url_comprobante: 'www.s3.coloridosgt.com',
+        idtipo_pedido: 0,
+        idcliente: 0,
+        idestado_pedido: 0,
+        idusuario: 0,
+        detalle_pedido: new Array<DetallePedido>()
+      }
+  
+      this.pedidoService.cantidadItems = 0;
+      this.pedidoService.fieldArray.splice(0, this.pedidoService.fieldArray.length);
+      this.router.navigate(['/shop']);
     }, 1000);
 
-    this.pedidoService.pedido = {
-      fecha: '',
-      direccion: '',
-      descuento: 0.00,
-      total: 0.00,
-      url_comprobante: 'www.s3.coloridosgt.com',
-      idtipo_pedido: 0,
-      idcliente: 0,
-      idestado_pedido: 0,
-      idusuario: 0,
-      detalle_pedido: new Array<DetallePedido>()
-    }
-
-    this.pedidoService.cantidadItems = 0;
-    this.pedidoService.fieldArray.splice(0, this.pedidoService.fieldArray.length);
-    this.router.navigate(['/shop']);
   }
 
 }
