@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class OrdersComponent implements OnInit {
   idUsuario: any;
   listaPedidos: any = [];
 
-  constructor(private pedidosServicio:PedidosService) { }
+  constructor(private pedidosServicio: PedidosService, private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario']) {
@@ -21,12 +22,16 @@ export class OrdersComponent implements OnInit {
 
   obtenerPedidos() {
     this.pedidosServicio.obtenerPedidosCliente(this.idUsuario)
-    .subscribe(
-      res => {
-        this.listaPedidos = res;
-      },
-      err => console.error(err)
-    );
+      .subscribe(
+        res => {
+          this.listaPedidos = res;
+        },
+        err => console.error(err)
+      );
+  }
+
+  verDetalle(id) {
+    this.router.navigate(['order/list', id, 'detail']);
   }
 
 }

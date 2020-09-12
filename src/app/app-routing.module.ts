@@ -15,6 +15,7 @@ import { CartFormComponent } from './views/order/cart-form/cart-form.component';
 
 import { ShopResolver } from './resolvers/shop.resolver';
 import { LogResolver } from './resolvers/log.resolver';
+import { OrdersDetailComponent } from './views/order/orders-detail/orders-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -32,7 +33,7 @@ const routes: Routes = [
       { path: '', component: CartComponent },
       { path: 'list', component: OrdersComponent },
       { path: 'checkout', component: CartFormComponent },
-      { path: 'list/:id/detail', component: CartFormComponent }
+      { path: 'list/:id/detail', component: OrdersDetailComponent }
     ]
   }
 ];

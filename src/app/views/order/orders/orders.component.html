@@ -16,7 +16,7 @@
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody *ngFor="let pedido of listaPedidos; let i=index">
+        <tbody *ngFor="let pedido of listaPedidos">
             <tr>
                 <!-- <th scope="row"> {{ i+1 }} </th> -->
                 <td> {{ pedido.idpedido }} </td>
@@ -28,7 +28,8 @@
                 <td> {{ pedido.idestado_pedido }} </td>
                 <td>
                     <button type="button" class="btn btn-success btn-sm pr-2 pl-2" placement="top"
-                        ngbTooltip="Ver Detalle Pedido"><i class="fas fa-clipboard-list"></i>
+                        (click)="verDetalle(pedido.idpedido)" ngbTooltip="Ver Detalle Pedido"><i
+                            class="fas fa-clipboard-list"></i>
                     </button>
                 </td>
             </tr>

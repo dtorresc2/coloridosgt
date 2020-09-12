@@ -105,4 +105,8 @@ export class PedidosService {
     return this.http.get(Servidor.API_URI + '/pedidos/' + id + '/cliente');
   }
 
+  obtenerDetallePedido(id) {
+    return this.http.get(Servidor.API_URI + '/pedidos/' + id);
+  }
+
 }
