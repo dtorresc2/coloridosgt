@@ -19,11 +19,12 @@
          <tr>
             <!-- <th scope="row"> {{ detalle.linea }} </th> -->
             <th> {{ detalle.linea }} </th>
-            <th> {{ detalle.linea }} </th>
+            <th> {{ detalle.idproducto }} </th>
+            
             <td> {{ detalle.cantidad }} </td>
-            <td> {{ detalle.producto }} </td>
+            <td> {{ detalle.descripcion }} </td>
             <td> Q.{{ detalle.precio_unidad | number: '1.2-2' }} </td>
-            <td> Q.{{ detalle.precio_unidad | number: '1.2-2' }} </td>
+            <td> Q.{{ detalle.descuento | number: '1.2-2' }} </td>
             <td> Q.{{ detalle.subtotal | number: '1.2-2'}} </td>
          </tr>
       </tbody>
