@@ -72,10 +72,6 @@ export class PedidosService {
     }
 
     this.cantidadItems = this.fieldArray.length;
-
-    // localStorage.setItem('pedido', JSON.stringify(this.fieldArray.toString()));
-    // console.log(JSON.parse(localStorage.getItem('pedido')));
-    // localStorage.removeItem('pedido');
   }
 
   crearPedidoGeneral(direccion, fecha, idtipo, idcliente, total, descuento) {
@@ -88,9 +84,6 @@ export class PedidosService {
     this.pedido.idestado_pedido = 1;
     this.pedido.idusuario = 1;
     this.pedido.detalle_pedido = this.fieldArray;
-    // console.log(fecha, '-', direccion, '-', descuento, '-', total, '-', idtipo, '-', idcliente, '-',  1);
-    // console.log(this.pedido.detalle_pedido);
-    // console.log(this.pedido);
   }
 
   deleteFieldValue(index) {
@@ -106,6 +99,10 @@ export class PedidosService {
 
   registrarPedido(pedido: Pedido) {
     return this.http.post(Servidor.API_URI + '/pedidos', pedido);
+  }
+
+  obtenerPedidosCliente(id) {
+    return this.http.get(Servidor.API_URI + '/pedidos/' + id + '/cliente');
   }
 
 }

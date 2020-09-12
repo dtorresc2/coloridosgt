@@ -23,6 +23,7 @@ import { CartFormComponent } from './views/order/cart-form/cart-form.component';
 import { LoaderComponent } from './components/loader/loader.component'
 import { ProductosService } from './services/productos/productos.service';
 import { PedidosService } from './services/pedidos/pedidos.service';
+import { OrdersDetailComponent } from './views/order/orders-detail/orders-detail.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PedidosService } from './services/pedidos/pedidos.service';
     OrdersComponent,
     LogComponent,
     CartFormComponent,
-    LoaderComponent
+    LoaderComponent,
+    OrdersDetailComponent
   ],
   imports: [
     BrowserModule,

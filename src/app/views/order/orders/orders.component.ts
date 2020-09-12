@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 
 @Component({
   selector: 'app-orders',
@@ -7,12 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
   idUsuario: any;
-  constructor() { }
+  listaPedidos: any = [];
+
+  constructor(private pedidosServicio:PedidosService) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario']) {
       this.idUsuario = localStorage.getItem('idUsuario');
     }
+    this.obtenerPedidos();
+  }
+
+  obtenerPedidos() {
+    this.pedidosServicio.obtenerPedidosCliente(this.idUsuario)
+    .subscribe(
+      res => {
+        this.listaPedidos = res;
+      },
+      err => console.error(err)
+    );
   }
 
 }
