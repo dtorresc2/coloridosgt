@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
   cerrarSesion() {
     this.sesion = false;
     this.clientService.autenticado = false;
+    
     localStorage.clear();
     this.router.navigate(['/']);
   }
