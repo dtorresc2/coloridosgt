@@ -10,7 +10,7 @@ import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 export class OrdersDetailComponent implements OnInit {
   idUsuario: any;
   idPedido: any;
-  detalle: any = [];
+  listaDetalle: any = [];
 
   constructor(private pedidosServicio:PedidosService, private activatedRoute: ActivatedRoute) { }
 
@@ -21,6 +21,7 @@ export class OrdersDetailComponent implements OnInit {
 
     if (this.activatedRoute.snapshot.params.id){
       this.idPedido = this.activatedRoute.snapshot.params.id;
+      this.obtenerDetallePedido();
     }
   }
 
@@ -28,7 +29,7 @@ export class OrdersDetailComponent implements OnInit {
     this.pedidosServicio.obtenerDetallePedido(this.idPedido)
     .subscribe(
       res => {
-        this.detalle = res;
+        this.listaDetalle = res;
         console.log(res);
       },
       err => console.error(err)

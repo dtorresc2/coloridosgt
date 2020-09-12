@@ -6,32 +6,24 @@
    <table class="table table-hover table-sm table-responsive-sm">
       <thead class="table-primary">
          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">T.Pedido</th>
-            <th scope="col">No. Productos</th>
+            <th scope="col">#</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Precio Unidad</th>
+            <th scope="col">Descuento</th>
             <th scope="col">Total</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
          </tr>
       </thead>
-      <!-- <tbody *ngFor="let pedido of detalle; let i=index">
+      <tbody *ngFor="let detalle of listaDetalle; let i=index">
          <tr>
-            <th scope="row"> {{ i+1 }} </th>
-            <td> {{ pedido.idpedido }} </td>
-            <td> {{ pedido.fecha }} </td>
-            <td> {{ pedido.direccion }} </td>
-            <td> {{ pedido.tipo }} </td>
-            <td> {{ pedido.items }} </td>
-            <td> {{ pedido.total | number: '1.2-2' }} </td>
-            <td> {{ pedido.idestado_pedido }} </td>
-            <td>
-               <button type="button" class="btn btn-success btn-sm pr-2 pl-2" placement="top"
-                  (click)="verDetalle(pedido.id)" ngbTooltip="Ver Detalle Pedido"><i class="fas fa-clipboard-list"></i>
-               </button>
-            </td>
+            <!-- <th scope="row"> {{ detalle.linea }} </th> -->
+            <th> {{ detalle.linea }} </th>
+            <td> {{ detalle.cantidad }} </td>
+            <td> {{ detalle.producto }} </td>
+            <td> Q.{{ detalle.precio_unidad | number: '1.2-2' }} </td>
+            <td> Q.{{ detalle.precio_unidad | number: '1.2-2' }} </td>
+            <td> Q.{{ detalle.subtotal | number: '1.2-2'}} </td>
          </tr>
-      </tbody> -->
+      </tbody>
    </table>
 </div>
