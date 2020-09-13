@@ -81,9 +81,9 @@ export class DashProductsComponent implements OnInit {
     this.product = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', Validators.required),
-      precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+      precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
-      descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')]),
+      descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
       cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
       categoria: new FormControl('', Validators.required)
       // imagen: new FormControl('', Validators.required)
@@ -97,7 +97,7 @@ export class DashProductsComponent implements OnInit {
 
     this.formCosto = new FormGroup({
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
-      costo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})?$')])
+      costo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')])
     });
 
     this.idUsuario = localStorage.getItem('idUsuario');
