@@ -7,6 +7,7 @@ import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { NotificacionService } from 'src/app/services/toasts/toasts.service';
 
 declare var $: any; // jQuery
 
@@ -57,7 +58,8 @@ export class DashUsersComponent implements OnInit {
     private usersService: UsersService,
     private router: Router,
     private modalService: NgbModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private notificacionService: NotificacionService
   ) { }
 
   ngOnInit(): void {
@@ -406,12 +408,14 @@ export class DashUsersComponent implements OnInit {
             $('#modalPass').modal('hide')
             this.obtenerListaClientes();
 
-            this.toastr.success('Actualizacion Realizada!', '', {
-              closeButton: true,
-              toastClass: 'ngx-toastr bg-primary',
-              titleClass: 'toast-title text-white',
-              timeOut: 1000
-            });
+            // this.toastr.success('Actualizacion Realizada!', '', {
+            //   closeButton: true,
+            //   toastClass: 'ngx-toastr bg-primary',
+            //   titleClass: 'toast-title text-white',
+            //   timeOut: 1000
+            // });
+
+            this.notificacionService.getToastSuccess('Actualizacion realizada');
 
             // this.creado();
           }
@@ -420,12 +424,15 @@ export class DashUsersComponent implements OnInit {
             // $('.alert').alert('close');
             // this.passUpdate.reset();
 
-            this.toastr.error('Fallo en actualizacion de permisos', '', {
-              closeButton: true,
-              toastClass: 'ngx-toastr bg-danger',
-              titleClass: 'toast-title text-white',
-              timeOut: 1000
-            });
+            this.notificacionService.getToastError('Fallo en actualizacion de permisos');
+
+
+            // this.toastr.error('Fallo en actualizacion de permisos', '', {
+            //   closeButton: true,
+            //   toastClass: 'ngx-toastr bg-danger',
+            //   titleClass: 'toast-title text-white',
+            //   timeOut: 1000
+            // });
 
           }
           this.passUpdate.reset();

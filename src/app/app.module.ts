@@ -16,6 +16,7 @@ import { UsersService } from './services/usuarios/users.service';
 import { CategoriasService } from './services/productos/categorias.service';
 import { ProductosService } from './services/productos/productos.service';
 import { PedidosService } from './services/pedidos/pedidos.service';
+import { NotificacionService } from './services/toasts/toasts.service'
 
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
@@ -65,7 +66,7 @@ import { FiltroPedidosPipe } from './pipes/pedidos/filtro-pedidos.pipe';
     CategoriasService,
     ProductosService,
     PedidosService,
-    ToastrService
+    NotificacionService
   ],
   bootstrap: [AppComponent]
 })
