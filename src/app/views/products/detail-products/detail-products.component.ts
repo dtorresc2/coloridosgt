@@ -12,6 +12,7 @@ export class DetailProductsComponent implements OnInit {
   ID: any;
 
   kardexProducto: any = [];
+  codigoProducto: any = 0;
 
   constructor(
     private router: Router,
@@ -35,7 +36,8 @@ export class DetailProductsComponent implements OnInit {
       this.productoService.obtenerKardex(params.id).subscribe(
         res => {
           this.kardexProducto = res;
-          console.log(res);
+          this.codigoProducto = params.id;
+          // console.log(res);
         },
         err => {
           console.error(err);
