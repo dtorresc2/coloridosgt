@@ -8,7 +8,7 @@ import { UsersService } from '../services/usuarios/users.service';
 })
 export class GuardPermitsGuard implements CanActivate, CanActivateChild {
 
-  constructor(private router:Router, private users:UsersService){}
+  constructor(private router: Router, private users: UsersService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -17,18 +17,22 @@ export class GuardPermitsGuard implements CanActivate, CanActivateChild {
 
     if ((<any>next)._routerState.url == '/products' && !this.users.moduloProductos) {
       this.router.navigate(['/home']);
+      // return true;
     }
 
     if ((<any>next)._routerState.url == '/orders' && !this.users.moduloPedidos) {
       this.router.navigate(['/home']);
+      // return true;
     }
 
     if ((<any>next)._routerState.url == '/users' && !this.users.moduloUsuarios) {
       this.router.navigate(['/home']);
+      // return true;
     }
 
     return true;
   }
+
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
