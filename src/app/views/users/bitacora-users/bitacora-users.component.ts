@@ -12,6 +12,10 @@ export class BitacoraUsersComponent implements OnInit {
   ID: any;
   listaBitacora: any = [];
 
+  // Paginacion
+  page = 1;
+  pageSize = 10;
+
   constructor(private router: Router, private activedRoute: ActivatedRoute, private usersService: UsersService) { }
 
   ngOnInit(): void {
