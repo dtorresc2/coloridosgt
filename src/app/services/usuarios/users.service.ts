@@ -9,6 +9,11 @@ import { Usuario } from '../../controllers/usuario';
 export class UsersService {
   autenticado: boolean = false;
   userName: any = "usuario";
+  
+  moduloUsuarios: boolean = false;
+  moduloPedidos: boolean = false;
+  moduloProductos: boolean = false;
+  moduloFinanzas: boolean = false;
 
   constructor(private http: HttpClient) { }
 

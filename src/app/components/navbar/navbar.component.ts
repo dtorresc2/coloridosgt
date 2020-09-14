@@ -14,6 +14,11 @@ export class NavbarComponent implements OnInit {
   intervalo;
   userName: any = "username"
 
+  moduloUsuarios: boolean = false;
+  moduloPedidos: boolean = false;
+  moduloProductos: boolean = false;
+  moduloFinanzas: boolean = false;
+
   constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,6 +29,11 @@ export class NavbarComponent implements OnInit {
 
   comprobarSesion() {
     this.idUsuario = localStorage.getItem('idUsuario');
+    this.sesion = this.usersService.autenticado;
+    this.moduloUsuarios = this.usersService.moduloUsuarios;
+    this.moduloPedidos = this.usersService.moduloPedidos;
+    this.moduloProductos = this.usersService.moduloProductos;
+    this.moduloFinanzas = this.usersService.moduloFinanzas;
     this.sesion = this.usersService.autenticado;
     this.userName = localStorage.getItem('userName');
   }

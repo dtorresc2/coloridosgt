@@ -11,7 +11,7 @@
 
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul *ngIf="sesion || this.idUsuario > 0"  class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="moduloProductos">
                 <a class="nav-link" routerLink="/products" routerLinkActive="active">Productos</a>
             </li>
             <li class="nav-item">
