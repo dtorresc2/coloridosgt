@@ -11,6 +11,8 @@ import { DashUsersComponent } from './views/users/dash-users/dash-users.componen
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 import { OrdersComponent } from './routes/orders/orders.component';
 
+import { GuardPermitsGuard } from './guards/guard-permits.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -18,7 +20,7 @@ const routes: Routes = [
   { path: 'accounts', component: AccountsComponent },
   { path: 'orders', component: OrdersComponent },
   {
-    path: 'products', component: ProductsComponent,
+    path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
     children: [
       { path: '', component: DashProductsComponent },
       { path: ':id', component: DetailProductsComponent },

@@ -12,6 +12,8 @@ export class NavbarComponent implements OnInit {
   idUsuario: any;
   sesion: boolean = false;
   intervalo;
+
+  intervalo2;
   userName: any = "username"
 
   moduloUsuarios: boolean = false;
@@ -24,18 +26,39 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.intervalo = setInterval(() => {
       this.comprobarSesion();
-    },1);
+    }, 1);
+
+    this.intervalo = setInterval(() => {
+      if (localStorage['idUsuario']) {
+        this.usersService.obtenerPermisos(localStorage.getItem('idUsuario'))
+          .subscribe(
+            res => {
+              // console.log((<any>res[0]).bitacora_y_usuario);
+              this.moduloUsuarios = (<any>res[0]).bitacora_y_usuario == 1 ? true : false;
+              this.moduloPedidos = (<any>res[0]).ventas == 1 ? true : false;
+              this.moduloProductos = (<any>res[0]).inventario == 1 ? true : false;
+              // this.moduloUsuarios = (<any>res).
+              // console.log(res);
+            },
+            err => console.error(err)
+          );
+      }
+    }, 1000);
   }
 
   comprobarSesion() {
     this.idUsuario = localStorage.getItem('idUsuario');
     this.sesion = this.usersService.autenticado;
-    this.moduloUsuarios = this.usersService.moduloUsuarios;
-    this.moduloPedidos = this.usersService.moduloPedidos;
-    this.moduloProductos = this.usersService.moduloProductos;
-    this.moduloFinanzas = this.usersService.moduloFinanzas;
+    // this.moduloUsuarios = this.usersService.moduloUsuarios;
+    // this.moduloPedidos = this.usersService.moduloPedidos;
+    // this.moduloProductos = this.usersService.moduloProductos;
+    // this.moduloFinanzas = this.usersService.moduloFinanzas;
     this.sesion = this.usersService.autenticado;
     this.userName = localStorage.getItem('userName');
+  }
+
+  obtenerPermisos() {
+
   }
 
   cerrarSesion() {

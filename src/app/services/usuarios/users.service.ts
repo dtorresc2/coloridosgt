@@ -9,7 +9,7 @@ import { Usuario } from '../../controllers/usuario';
 export class UsersService {
   autenticado: boolean = false;
   userName: any = "usuario";
-  
+
   moduloUsuarios: boolean = false;
   moduloPedidos: boolean = false;
   moduloProductos: boolean = false;
@@ -49,6 +49,10 @@ export class UsersService {
   // /users/:id/permits
   actualizarPermisos(id, _usuario, _inventario, _ventas, _bitacora_y_usuario) {
     return this.http.put(Servidor.API_URI + '/users/' + id + '/permits', { inventario: _inventario, ventas: _ventas, bitacora_y_usuario: _bitacora_y_usuario, usuario: _usuario });
+  }
+
+  obtenerPermisos(id){
+    return this.http.get(Servidor.API_URI + '/users/' + id + '/permits');
   }
 
   public getIPAddress() {
