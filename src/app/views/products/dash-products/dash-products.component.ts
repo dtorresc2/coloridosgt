@@ -47,6 +47,10 @@ export class DashProductsComponent implements OnInit {
   listaCategorias: any = [];
   listaProductos: any = [];
 
+  // Paginacion
+  page = 1;
+  pageSize = 10;
+
   respuesta: RespuestaUsuario = {
     EstadoInsert: '',
     Id: 0,

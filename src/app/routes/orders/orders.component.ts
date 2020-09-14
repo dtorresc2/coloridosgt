@@ -36,6 +36,10 @@ export class OrdersComponent implements OnInit {
   fechaAUX: any = "-";
   idPedido_AUX: any = 0;
 
+  page = 1;
+  pageSize = 10;
+
+
   constructor(
     private modalService: NgbModal,
     private usersService: UsersService,
