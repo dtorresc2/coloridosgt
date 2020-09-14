@@ -216,6 +216,7 @@ export class DashUsersComponent implements OnInit {
               // localStorage.setItem('idUsuario', this.respuesta.Id.toString());
               // this.clientService.autenticado = true;
               // this.router.navigate(['/dashboard']);
+              this.notificacionService.getToastSuccess('Cliente registrado', '');
             }
             else {
               this.respuesta.Id = 0;
@@ -224,6 +225,7 @@ export class DashUsersComponent implements OnInit {
               this.user.get('email').setValue(null);
               this.user.get('password').setValue(null);
               this.user.get('confirmpass').setValue(null);
+              this.notificacionService.getToastError('Fallo en registro del cliente','');
             }
           }, 1000);
         },
@@ -257,12 +259,14 @@ export class DashUsersComponent implements OnInit {
               if (this.usuario.usuario == this.idUsuarioAUX){
                 localStorage.setItem('userName', this.usuario.nombrerol);
               }
-
+              this.notificacionService.getToastSuccess('Actualizacion realizada','');
             }
             else {
               this.update.EstadoUpdate = '';
               // this.respuesta.EstadoInsert = '';
               $('.alert').alert('close');
+              this.notificacionService.getToastError('Fallo en actualizacion del usuario','');
+
               // this.user.get('email').setValue(null);
               // this.user.get('password').setValue(null);
               // this.user.get('confirmpass').setValue(null);
@@ -290,11 +294,13 @@ export class DashUsersComponent implements OnInit {
               this.user.reset();
               this.obtenerListaClientes();
               this.creado();
+              this.notificacionService.getToastSuccess('Usuario eliminado','');
             }
             else {
               this.update.EstadoUpdate = '';
               $('.alert').alert('close');
               this.user.reset();
+              this.notificacionService.getToastError('Fallo en eliminacion de usuario','');
             }
           }, 1000);
         },
@@ -355,12 +361,14 @@ export class DashUsersComponent implements OnInit {
               $('#modalPass').modal('hide')
               this.obtenerListaClientes();
 
-              this.toastr.success('Actualizacion Realizada!', '', {
-                closeButton: true,
-                toastClass: 'ngx-toastr bg-primary',
-                titleClass: 'toast-title text-white',
-                timeOut: 1000
-              });
+              this.notificacionService.getToastSuccess('Actualizacion realizada','');
+
+              // this.toastr.success('Actualizacion Realizada!', '', {
+              //   closeButton: true,
+              //   toastClass: 'ngx-toastr bg-primary',
+              //   titleClass: 'toast-title text-white',
+              //   timeOut: 1000
+              // });
 
               // this.creado();
             }
@@ -368,13 +376,15 @@ export class DashUsersComponent implements OnInit {
               this.update.EstadoUpdate = '';
               // $('.alert').alert('close');
               this.passUpdate.reset();
+              this.notificacionService.getToastError('Fallo en actualizacion de contraseña','');
 
-              this.toastr.error('Fallo en actualizacion de credenciales', '', {
-                closeButton: true,
-                toastClass: 'ngx-toastr bg-danger',
-                titleClass: 'toast-title text-white',
-                timeOut: 1000
-              });
+
+              // this.toastr.error('Fallo en actualizacion de credenciales', '', {
+              //   closeButton: true,
+              //   toastClass: 'ngx-toastr bg-danger',
+              //   titleClass: 'toast-title text-white',
+              //   timeOut: 1000
+              // });
 
             }
             this.passUpdate.reset();
@@ -415,8 +425,7 @@ export class DashUsersComponent implements OnInit {
             //   timeOut: 1000
             // });
 
-            this.notificacionService.getToastSuccess('Actualizacion realizada');
-
+            this.notificacionService.getToastSuccess('Actualizacion realizada','');
             // this.creado();
           }
           else {
@@ -424,7 +433,7 @@ export class DashUsersComponent implements OnInit {
             // $('.alert').alert('close');
             // this.passUpdate.reset();
 
-            this.notificacionService.getToastError('Fallo en actualizacion de permisos');
+            this.notificacionService.getToastError('Fallo en actualizacion de permisos','');
 
 
             // this.toastr.error('Fallo en actualizacion de permisos', '', {

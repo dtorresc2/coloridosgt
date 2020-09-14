@@ -8,8 +8,8 @@ export class NotificacionService {
 
   constructor(private toastr: ToastrService) { }
 
-  getToastSuccess(title) {
-    this.toastr.success(title, '', {
+  getToastSuccess(title, desc) {
+    this.toastr.success(title, desc, {
       closeButton: true,
       toastClass: 'ngx-toastr bg-success',
       titleClass: 'toast-title text-white',
@@ -17,10 +17,19 @@ export class NotificacionService {
     });
   }
 
-  getToastError(title) {
-    this.toastr.error(title, '', {
+  getToastError(title, desc) {
+    this.toastr.error(title, desc, {
       closeButton: true,
       toastClass: 'ngx-toastr bg-danger',
+      titleClass: 'toast-title text-white',
+      timeOut: 2000
+    });
+  }
+
+  getToastCaution(title, desc) {
+    this.toastr.warning(title, desc, {
+      closeButton: true,
+      toastClass: 'ngx-toastr bg-warning',
       titleClass: 'toast-title text-white',
       timeOut: 2000
     });
