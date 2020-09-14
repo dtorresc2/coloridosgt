@@ -22,3 +22,28 @@ button span {
    padding-bottom: 1%;
    /* width: 30%; */
 }
+
+ngb-pagination ::ng-deep .page-link {
+   background: white;
+   border-color: #d3d8dd;
+   color: #958d89
+}
+
+ngb-pagination ::ng-deep .page-link .page-link:disabled{
+   background-color: yellow;
+}
+
+ngb-pagination /deep/ .page-item.disabled .page-link {
+   background-color: #ebbec0;
+   border-color: #ebbec0;
+}
+ 
+ngb-pagination ::ng-deep .page-item.active .page-link {
+   border-color: #f3969a;
+   background-color: #f3969a;
+   color: white;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus {
+   box-shadow: 0 0 1px #c17c7f;
+}
