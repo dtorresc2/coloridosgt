@@ -37,6 +37,10 @@ export class NavbarComponent implements OnInit {
               this.moduloUsuarios = (<any>res[0]).bitacora_y_usuario == 1 ? true : false;
               this.moduloPedidos = (<any>res[0]).ventas == 1 ? true : false;
               this.moduloProductos = (<any>res[0]).inventario == 1 ? true : false;
+
+              this.usersService.moduloUsuarios = this.moduloUsuarios;
+              this.usersService.moduloPedidos = this.moduloPedidos;
+              this.usersService.moduloProductos = this.moduloProductos
               // this.moduloUsuarios = (<any>res).
               // console.log(res);
             },

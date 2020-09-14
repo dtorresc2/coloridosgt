@@ -19,6 +19,14 @@ export class GuardPermitsGuard implements CanActivate, CanActivateChild {
       this.router.navigate(['/home']);
     }
 
+    if ((<any>next)._routerState.url == '/orders' && !this.users.moduloPedidos) {
+      this.router.navigate(['/home']);
+    }
+
+    if ((<any>next)._routerState.url == '/users' && !this.users.moduloUsuarios) {
+      this.router.navigate(['/home']);
+    }
+
     return true;
   }
   canActivateChild(
