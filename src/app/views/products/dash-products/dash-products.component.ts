@@ -8,6 +8,7 @@ import { CategoriasService } from 'src/app/services/productos/categorias.service
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { NotificacionService } from 'src/app/services/toasts/toasts.service';
 
 declare var $: any; // jQuery
 
@@ -73,7 +74,8 @@ export class DashProductsComponent implements OnInit {
     private categoriaService: CategoriasService,
     private router: Router,
     private modalService: NgbModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private notifiacionService: NotificacionService
   ) { }
 
   ngOnInit(): void {
@@ -156,9 +158,9 @@ export class DashProductsComponent implements OnInit {
 
     this.product.get('nombre').setValue(productoParametro.nombre);
     this.product.get('descripcion').setValue(productoParametro.descripcion);
-    this.product.get('precio').setValue(productoParametro.precio);
+    this.product.get('precio').setValue(parseFloat(productoParametro.precio).toFixed(2));
     this.product.get('cantidad').setValue(productoParametro.cantidad);
-    this.product.get('descuento').setValue(productoParametro.descuento);
+    this.product.get('descuento').setValue(parseFloat(productoParametro.descuento).toFixed(2));
     this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
   }
 

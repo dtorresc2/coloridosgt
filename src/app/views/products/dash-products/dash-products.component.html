@@ -4,21 +4,23 @@
 <div class="row justify-content-center" style="padding-top: 3%;">
     <div class="col-md-6">
         <div class="row">
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" #filtro
-                            placeholder="Producto o caracteristica de producto a buscar" placement="top"
-                            ngbTooltip="Filtro de Productos">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                style="padding-top: 7%; padding-bottom: 0%;">
-                                <label><i class="fas fa-search"></i></label>
-                            </button>
+            <div class="col-md-12">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" #filtro
+                                placeholder="Producto o caracteristica de producto a buscar" placement="top"
+                                ngbTooltip="Filtro de Productos">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    style="padding-top: 7%; padding-bottom: 0%;">
+                                    <label><i class="fas fa-search"></i></label>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
 
         <div class="row">
@@ -52,10 +54,14 @@
                                             <i class="fas fa-plus-square"></i></button>
                                     </div>
                                     <div class="col-sm-4 ml-1">
-                                        <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
+                                        <button type="button" class="btn btn-info btn-sm pb-1"
+                                            (click)="inventario(producto.idproducto)" placement="top"
+                                            ngbTooltip="Inventario">
+                                            <i class="fas fa-boxes"></i></button>
+                                        <!-- <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
                                             (click)="abrirModalCostos(modalCostos,producto.idproducto)"
                                             ngbTooltip="Ver Costos">
-                                            <i class="fas fa-search-dollar"></i></button>
+                                            <i class="fas fa-search-dollar"></i></button> -->
                                     </div>
                                 </div>
                                 <div class="row pb-1">
@@ -74,17 +80,21 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <button type="button" class="btn btn-info btn-sm pb-1"
+                                        <!-- <button type="button" class="btn btn-info btn-sm pb-1"
                                             (click)="inventario(producto.idproducto)" placement="top"
                                             ngbTooltip="Inventario">
-                                            <i class="fas fa-boxes"></i></button>
-                                    </div>
-                                    <div class="col-sm-4 ml-1">
+                                            <i class="fas fa-boxes"></i></button> -->
                                         <button type="button" class="btn btn-danger btn-sm pb-1"
                                             (click)="eliminado(producto.idproducto,producto)" placement="top"
                                             ngbTooltip="Eliminar Producto">
                                             <i class="fas fa-trash"></i></button>
                                     </div>
+                                    <!-- <div class="col-sm-4 ml-1">
+                                        <button type="button" class="btn btn-danger btn-sm pb-1"
+                                            (click)="eliminado(producto.idproducto,producto)" placement="top"
+                                            ngbTooltip="Eliminar Producto">
+                                            <i class="fas fa-trash"></i></button>
+                                    </div> -->
                                 </div>
 
                                 <!-- <button type="button" class="btn btn-info btn-sm"
