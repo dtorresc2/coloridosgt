@@ -11,21 +11,26 @@
                         placeholder="Usuario o correo a buscar">
                 </div>
             </form> -->
-
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" #filtro placeholder="Usuario o correo a buscar"
-                            placement="top" ngbTooltip="Filtro de Usuarios">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                style="padding-top: 7%; padding-bottom: 0%;">
-                                <label><i class="fas fa-search"></i></label>
-                            </button>
+            <div class="col-md-8">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" #filtro placeholder="Usuario o correo a buscar"
+                                placement="top" ngbTooltip="Filtro de Usuarios">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    style="padding-top: 7%; padding-bottom: 0%;">
+                                    <label><i class="fas fa-search"></i></label>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <ngb-pagination [collectionSize]="listaClientes.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                    [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+            </div>
         </div>
 
         <div class="row">
@@ -38,7 +43,7 @@
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let user of listaClientes | filtroUsuario:filtro.value">
+                <tbody *ngFor="let user of listaClientes | filtroUsuario:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                     <tr>
                         <th scope="row"> {{user.idusuario}} </th>
                         <td>{{user.nombrerol}}</td>
