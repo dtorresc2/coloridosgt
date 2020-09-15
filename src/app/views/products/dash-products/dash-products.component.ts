@@ -168,6 +168,7 @@ export class DashProductsComponent implements OnInit {
     this.product.get('cantidad').setValue(productoParametro.cantidad);
     this.product.get('descuento').setValue(parseFloat(productoParametro.descuento).toFixed(2));
     this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
+    this.product.get('categoria').setValue(productoParametro.idcategoria);
   }
 
   eliminado(id, productoParametro) {
@@ -188,7 +189,7 @@ export class DashProductsComponent implements OnInit {
     this.product.get('cantidad').setValue(productoParametro.cantidad);
     this.product.get('descuento').setValue(parseFloat(productoParametro.descuento).toFixed(2));
     this.product.get('cantidad_minima').setValue(productoParametro.cantidad_minima);
-    this.product.get('categoria').setValue(productoParametro.categoria_idcategoria);
+    this.product.get('categoria').setValue(productoParametro.idcategoria);
   }
 
   inventario(id) {

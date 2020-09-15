@@ -269,8 +269,9 @@
 <!-- Modal para gestion de productos -->
 <ng-template #modalProductos let-modal>
     <div class="modal-header">
-        <!-- <h4 class="modal-title">Imagen de Producto #{{idObjetoAux}} </h4> -->
         <h4 class="modal-title" *ngIf="isNew">Producto Nuevo</h4>
+        <h4 class="modal-title" *ngIf="isEdit">Edicion de Producto #{{idUsuarioAUX}} </h4>
+        <h4 class="modal-title" *ngIf="isDelete">Eliminacion de Producto #{{idUsuarioAUX}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
