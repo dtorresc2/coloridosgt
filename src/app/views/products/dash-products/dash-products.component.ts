@@ -51,6 +51,9 @@ export class DashProductsComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
+  // Modal Form
+  modalFormProducto: any;
+
   respuesta: RespuestaUsuario = {
     EstadoInsert: '',
     Id: 0,
@@ -257,7 +260,7 @@ export class DashProductsComponent implements OnInit {
             if (this.respuesta.Conteo == 0) {
               this.product.reset();
               this.obtenerListaProductos();
-              this.notifiacionService.getToastSuccess('Producto registrado correctamente','');
+              this.notifiacionService.getToastSuccess('Producto registrado correctamente', '');
             }
             else {
               this.respuesta.Id = 0;
@@ -265,7 +268,7 @@ export class DashProductsComponent implements OnInit {
               this.respuesta.Conteo = 0;
               $('.alert').alert('close');
               this.product.reset();
-              this.notifiacionService.getToastError('Fallo al registrar producto','');
+              this.notifiacionService.getToastError('Fallo al registrar producto', '');
             }
           }, 1000);
         },
@@ -308,13 +311,13 @@ export class DashProductsComponent implements OnInit {
               this.product.reset();
               this.obtenerListaProductos();
               this.creado();
-              this.notifiacionService.getToastSuccess('Producto actualizado correctamente','');
+              this.notifiacionService.getToastSuccess('Producto actualizado correctamente', '');
             }
             else {
               this.respuestaUpdate.EstadoUpdate = '';
               $('.alert').alert('close');
               this.product.reset();
-              this.notifiacionService.getToastError('Fallo al actualizar producto','');
+              this.notifiacionService.getToastError('Fallo al actualizar producto', '');
             }
           }, 1000);
         },
@@ -348,13 +351,13 @@ export class DashProductsComponent implements OnInit {
               this.product.reset();
               this.obtenerListaProductos();
               this.creado()
-              this.notifiacionService.getToastSuccess('Producto eliminado correctamente','');
+              this.notifiacionService.getToastSuccess('Producto eliminado correctamente', '');
             }
             else {
               this.respuestaUpdate.EstadoUpdate = '';
               $('.alert').alert('close');
               this.product.reset();
-              this.notifiacionService.getToastError('Fallo al eliminar producto','');
+              this.notifiacionService.getToastError('Fallo al eliminar producto', '');
             }
           }, 1000);
         },
@@ -382,6 +385,10 @@ export class DashProductsComponent implements OnInit {
     this.idObjetoAux = id;
     this.modalService.open(content, { centered: true, size: 'lg' });
     // console.log(id);
+  }
+
+  abrirModalForm(content) {
+    this.modalFormProducto = this.modalService.open(content, { centered: true, size: 'lg', scrollable: true });
   }
 
   showSuccess() {
@@ -510,11 +517,11 @@ export class DashProductsComponent implements OnInit {
             this.categoria.reset();
             this.obtenerListaCategorias();
             this.creadoCat();
-            this.notifiacionService.getToastSuccess('Categoria actualizada correctamente','');
+            this.notifiacionService.getToastSuccess('Categoria actualizada correctamente', '');
           }
           else {
             this.respuestaUpdate.EstadoUpdate = '';
-            this.notifiacionService.getToastError('Fallo al actualizar categoria','');
+            this.notifiacionService.getToastError('Fallo al actualizar categoria', '');
             // $('.alert').alert('close');
             // this.product.reset();
           }
@@ -539,11 +546,11 @@ export class DashProductsComponent implements OnInit {
               this.categoria.reset();
               this.obtenerListaCategorias();
               this.creado()
-              this.notifiacionService.getToastSuccess('Categoria eliminada correctamente','');
+              this.notifiacionService.getToastSuccess('Categoria eliminada correctamente', '');
             }
             else {
               this.respuestaUpdate.EstadoUpdate = '';
-              this.notifiacionService.getToastError('Fallo al eliminar categoria','');
+              this.notifiacionService.getToastError('Fallo al eliminar categoria', '');
               // $('.alert').alert('close');
               // this.product.reset();
             }
@@ -569,13 +576,13 @@ export class DashProductsComponent implements OnInit {
           }, 1500);
 
           setTimeout(() => {
-            if ((<any>res).CantidadRecuento && (<any>res).CostosDisponibles){
+            if ((<any>res).CantidadRecuento && (<any>res).CostosDisponibles) {
               this.formCosto.reset();
               this.obtenerListaProductos();
-              this.notifiacionService.getToastSuccess('Mercaderia almacenada correctamente','');
+              this.notifiacionService.getToastSuccess('Mercaderia almacenada correctamente', '');
             }
             else {
-              this.notifiacionService.getToastError('Fallo al almacenar mercaderia','');
+              this.notifiacionService.getToastError('Fallo al almacenar mercaderia', '');
             }
           }, 1000);
         },
