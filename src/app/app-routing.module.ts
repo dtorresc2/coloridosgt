@@ -13,6 +13,8 @@ import { OrdersComponent } from './routes/orders/orders.component';
 
 import { GuardPermitsGuard } from './guards/guard-permits.guard';
 
+import { ProductResolver } from './functions/products.resolver';
+
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -22,9 +24,9 @@ const routes: Routes = [
   {
     path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
     children: [
-      { path: '', component: DashProductsComponent },
+      { path: '', component: DashProductsComponent, resolve: { products: ProductResolver } },
       { path: ':id', component: DetailProductsComponent },
-      { path: '**', component: DashProductsComponent }
+      { path: '**', redirectTo: '' }
     ]
   },
   {
@@ -32,7 +34,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashUsersComponent },
       { path: ':id/log', component: BitacoraUsersComponent },
-      { path: '**', component: DashUsersComponent }
+      { path: '**', redirectTo: '' }
     ]
   }
 ];

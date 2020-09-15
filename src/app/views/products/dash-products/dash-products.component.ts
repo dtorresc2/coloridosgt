@@ -5,7 +5,7 @@ import { Producto } from 'src/app/controllers/producto';
 import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { NotificacionService } from 'src/app/services/toasts/toasts.service';
@@ -82,7 +82,8 @@ export class DashProductsComponent implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private notifiacionService: NotificacionService
+    private notifiacionService: NotificacionService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -114,7 +115,8 @@ export class DashProductsComponent implements OnInit {
     if (this.idUsuario > 0) {
       this.ID = 'Registrado';
       this.obtenerListaCategorias();
-      this.obtenerListaProductos();
+      // this.obtenerListaProductos();
+      this.listaProductos = this.activatedRoute.snapshot.data.products;
     }
     else {
       this.ID = 'Inicie Sesion';
