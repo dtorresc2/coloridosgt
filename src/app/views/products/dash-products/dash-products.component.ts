@@ -117,11 +117,12 @@ export class DashProductsComponent implements OnInit {
 
     if (this.idUsuario > 0) {
       this.ID = 'Registrado';
-      this.obtenerListaCategorias();
+      // this.obtenerListaCategorias();
       // this.obtenerListaProductos();
 
       setTimeout(() => {
         this.listaProductos = this.activatedRoute.snapshot.data.products;
+        this.listaCategorias = this.activatedRoute.snapshot.data.categories;
         this.show = false;
       }, 1000);
 

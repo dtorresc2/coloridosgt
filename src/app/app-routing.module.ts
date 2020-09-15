@@ -14,6 +14,7 @@ import { OrdersComponent } from './routes/orders/orders.component';
 import { GuardPermitsGuard } from './guards/guard-permits.guard';
 
 import { ProductResolver } from './functions/products.resolver';
+import { CategoryResolver } from './functions/categories.resolver';
 
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
@@ -24,7 +25,7 @@ const routes: Routes = [
   {
     path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
     children: [
-      { path: '', component: DashProductsComponent, resolve: { products: ProductResolver } },
+      { path: '', component: DashProductsComponent, resolve: { products: ProductResolver, categories: CategoryResolver } },
       { path: ':id', component: DetailProductsComponent },
       { path: '**', redirectTo: '' }
     ]
