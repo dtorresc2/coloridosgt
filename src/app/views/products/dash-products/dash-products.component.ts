@@ -54,6 +54,9 @@ export class DashProductsComponent implements OnInit {
   // Modal Form
   modalFormProducto: any;
 
+  // Loader
+  show: boolean = true;
+
   respuesta: RespuestaUsuario = {
     EstadoInsert: '',
     Id: 0,
@@ -116,7 +119,12 @@ export class DashProductsComponent implements OnInit {
       this.ID = 'Registrado';
       this.obtenerListaCategorias();
       // this.obtenerListaProductos();
-      this.listaProductos = this.activatedRoute.snapshot.data.products;
+
+      setTimeout(() => {
+        this.listaProductos = this.activatedRoute.snapshot.data.products;
+        this.show = false;
+      }, 1000);
+
     }
     else {
       this.ID = 'Inicie Sesion';
