@@ -30,8 +30,9 @@ export class DashUsersComponent implements OnInit {
   isNew: boolean = true;
 
   moduloProductos: boolean = false;
-  moduloPedidos: boolean = true;
+  moduloPedidos: boolean = false;
   moduloUsuarios: boolean = false;
+  moduloFinanzas: boolean = false;
 
   idUsuarioAUX: any;
   filtro = '';
@@ -189,7 +190,7 @@ export class DashUsersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaClientes = res;
-          // console.log(res);
+          console.log(res);
         },
         err => console.error(err)
       )
@@ -326,13 +327,14 @@ export class DashUsersComponent implements OnInit {
     // console.log(event);
   }
 
-  abrirModalPermisos(content, id, inventario, ventas, bitacora_y_usuario) {
+  abrirModalPermisos(content, id, inventario, ventas, bitacora_y_usuario, finanzas) {
     // this.urlAUX = url;
 
     // let moduloProductosAux = this.moduloProductos == true ? 1 : 0;
     this.moduloProductos = inventario == 1 ? true : false;
     this.moduloPedidos = ventas == 1 ? true : false;
     this.moduloUsuarios = bitacora_y_usuario == 1 ? true : false;
+    this.moduloFinanzas = finanzas == 1 ? true : false;
     // let moduloPedidosAux = this.moduloPedidos == true ? 1 : 0;
     // let moduloUsuariosAux = this.moduloUsuarios == true ? 1 : 0;
 
@@ -402,13 +404,14 @@ export class DashUsersComponent implements OnInit {
     let moduloProductosAux = this.moduloProductos == true ? 1 : 0;
     let moduloPedidosAux = this.moduloPedidos == true ? 1 : 0;
     let moduloUsuariosAux = this.moduloUsuarios == true ? 1 : 0;
+    let moduloFinanzasAux = this.moduloFinanzas == true ? 1 : 0;
 
     this.comprobador2 = true;
 
     this.usersService.actualizarPermisos(
       this.idObjetoAux, this.idUsuario,
       moduloProductosAux, moduloPedidosAux,
-      moduloUsuariosAux
+      moduloUsuariosAux, moduloFinanzasAux
     ).subscribe(
       res => {
 

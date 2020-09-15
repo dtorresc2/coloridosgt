@@ -43,7 +43,8 @@
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let user of listaClientes | filtroUsuario:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                <tbody
+                    *ngFor="let user of listaClientes | filtroUsuario:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                     <tr>
                         <th scope="row"> {{user.idusuario}} </th>
                         <td>{{user.nombrerol}}</td>
@@ -55,7 +56,7 @@
 
                             <button type="button" class="btn btn-success btn-sm"
                                 style="margin-left: 1%; padding-bottom: 2%;"
-                                (click)="abrirModalPermisos(modalPermisos,user.idusuario,user.inventario,user.ventas,user.bitacora_y_usuario)"
+                                (click)="abrirModalPermisos(modalPermisos,user.idusuario,user.inventario,user.ventas,user.bitacora_y_usuario,user.finanzas)"
                                 placement="top" ngbTooltip="Gestionar Permisos"><i
                                     class="fas fa-user-lock"></i></button>
 
@@ -190,6 +191,11 @@
                 <input type="checkbox" class="custom-control-input" id="moduloUsuariosCheck"
                     [(ngModel)]="moduloUsuarios">
                 <label class="custom-control-label" for="moduloUsuariosCheck">Modulo Usuarios</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="moduloFinanzasCheck"
+                    [(ngModel)]="moduloFinanzas">
+                <label class="custom-control-label" for="moduloFinanzasCheck">Modulo Finanzas</label>
             </div>
         </div>
         <button class="btn btn-secondary btn-block pb-0" (click)="actualizarPermisos()" [disabled]="this.comprobador2">

@@ -47,8 +47,8 @@ export class UsersService {
   }
 
   // /users/:id/permits
-  actualizarPermisos(id, _usuario, _inventario, _ventas, _bitacora_y_usuario) {
-    return this.http.put(Servidor.API_URI + '/users/' + id + '/permits', { inventario: _inventario, ventas: _ventas, bitacora_y_usuario: _bitacora_y_usuario, usuario: _usuario });
+  actualizarPermisos(id, _usuario, _inventario, _ventas, _bitacora_y_usuario, _finanzas) {
+    return this.http.put(Servidor.API_URI + '/users/' + id + '/permits', { inventario: _inventario, ventas: _ventas, bitacora_y_usuario: _bitacora_y_usuario, usuario: _usuario, finanzas: _finanzas });
   }
 
   obtenerPermisos(id){
