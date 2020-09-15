@@ -16,6 +16,9 @@ export class BitacoraUsersComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
+    // Loader
+    show: boolean = true;
+
   constructor(private router: Router, private activedRoute: ActivatedRoute, private usersService: UsersService) { }
 
   ngOnInit(): void {
@@ -23,6 +26,11 @@ export class BitacoraUsersComponent implements OnInit {
 
     if (this.idUsuario > 0) {
       this.ID = 'Registrado';
+
+      setTimeout(() => {
+        this.listaBitacora = this.activedRoute.snapshot.data.log;
+        this.show = false;
+      }, 1000);
     }
     else {
       this.ID = 'Inicie Sesion';
