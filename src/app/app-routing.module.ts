@@ -17,6 +17,7 @@ import { ProductResolver } from './functions/products/products.resolver';
 import { CategoryResolver } from './functions/products/categories.resolver';
 import { UsersResolver } from './functions/users/users.resolver';
 import { LogResolver } from './functions/users/log.resolver';
+import { OrdersResolver } from './functions/orders/orders.resolver';
 
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'singin', component: SinginComponent },
   { path: 'accounts', component: AccountsComponent, canActivate: [GuardPermitsGuard] },
-  { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard], resolve : {orders: OrdersResolver} },
   {
     path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
     children: [
