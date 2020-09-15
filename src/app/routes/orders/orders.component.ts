@@ -4,6 +4,7 @@ import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { NotificacionService } from 'src/app/services/toasts/toasts.service';
 
 
 @Component({
@@ -44,7 +45,9 @@ export class OrdersComponent implements OnInit {
     private modalService: NgbModal,
     private usersService: UsersService,
     private pedidoService: PedidosService,
-    private router: Router) { }
+    private router: Router,
+    private notifiacionService: NotificacionService
+  ) { }
 
   ngOnInit(): void {
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -150,15 +153,19 @@ export class OrdersComponent implements OnInit {
 
   onChangeEmpleado(idEmpleadoAux) {
     // console.log(idEmpleadoAux);
-    
-    if (this.seleccionado){
-    this.pedidoService.actualizarEmpleadoPedido(this.idPedido_AUX, idEmpleadoAux, this.idUsuario)
-      .subscribe(
-        res => {
-          this.obtenerListaPedidos();
-        },
-        err => console.error(err)
-      );
+
+    if (this.seleccionado) {
+      this.pedidoService.actualizarEmpleadoPedido(this.idPedido_AUX, idEmpleadoAux, this.idUsuario)
+        .subscribe(
+          res => {
+            this.obtenerListaPedidos();
+            this.notifiacionService.getToastSuccess('Empleado asignado correctamente','');
+          },
+          err => {
+            console.error(err);
+            this.notifiacionService.getToastError('Fallo al asignar empleado', '');
+          }
+        );
     }
   }
 
@@ -168,15 +175,19 @@ export class OrdersComponent implements OnInit {
 
   onChangeEstado(idEstado) {
     // console.log(idEstado);
-    if (this.seleccionado){
+    if (this.seleccionado) {
       this.pedidoService.actualizarEstadoPedido(this.idPedido_AUX, idEstado, this.idUsuario)
         .subscribe(
           res => {
             this.obtenerListaPedidos();
+            this.notifiacionService.getToastSuccess('Estado actualizado correctamente','');
           },
-          err => console.error(err)
+          err => {
+            console.error(err)
+            this.notifiacionService.getToastError('Fallo al actualizar estado', '');
+          }
         );
-      }
+    }
   }
 
 }
