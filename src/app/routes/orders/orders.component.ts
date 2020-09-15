@@ -116,7 +116,7 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaPedidos = res;
-          // console.log(res);
+          console.log(res);
         },
         err => console.error(err)
       )
@@ -143,6 +143,8 @@ export class OrdersComponent implements OnInit {
     this.idEstadoPedido = (<any>pedido).idestado_pedido
     this.fechaAUX = (<any>pedido).fecha;
     this.idPedido_AUX = (<any>pedido).idpedido;
+    this.totalPedido = parseFloat((<any>pedido).total).toFixed(2);
+    this.numProductos = (<any>pedido).items;
     this.seleccionado = true;
   }
 

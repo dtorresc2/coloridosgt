@@ -4,7 +4,7 @@
 
 <!-- <div class="row align-items-center" style="padding-top: 3%;"> -->
 <div class="row justify-content-center" style="padding-top: 3%;">
-    <div class="col-md-8 text-center">
+    <div class="col-md-8 text-center mr-2">
         <div class="row">
             <div class="col-md-8">
                 <form>
@@ -12,7 +12,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" #filtro
                                 placeholder="Cliente o direccion de pedido a buscar" placement="top"
-                                ngbTooltip="Filtro de Productos">
+                                ngbTooltip="Filtro de Pedidos">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button"
                                     style="padding-top: 7%; padding-bottom: 0%;">
@@ -66,7 +66,7 @@
                         <td> {{pedido.tipo}} </td>
                         <td> {{pedido.fecha}} </td>
                         <td> Q.{{pedido.total | number:'1.2-2'}} </td>
-                        <td> {{pedido.idTipo}}</td>
+                        <td> {{pedido.estado}}</td>
                         <!-- url_comprobante -->
                         <td>
                             <button type="button" class="btn btn-success btn-sm pr-2 pl-2"
@@ -119,7 +119,7 @@
 
 
     <!-- <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div> -->
-    <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
+    <div class="col-md-3 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <!-- <div class="card-header d-flex justify-content-end">
                 <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)">
@@ -190,7 +190,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label>No. Productos</label>
+                                <label>Items</label>
                                 <input class="form-control form-control-sm" type="text" name="noProd"
                                     [(ngModel)]="numProductos" readonly>
                             </div>
@@ -229,7 +229,7 @@
                             <div class="form-group">
                                 <label>Estado</label>
                                 <select class="form-control form-control-sm" name="estadoPedido1"
-                                    [(ngModel)]="idEstadoPedido" (change)="onChangeEstado($event.target.value)">
+                                    [(ngModel)]="idEstadoPedido" (change)="onChangeEstado($event.target.value)" [disabled]="idEstadoPedido > 2">
                                     <!-- formControlName="categoria"> -->
                                     <option [value]="estado.idestado_pedido" *ngFor="let estado of listaEstados">
                                         {{estado.estado}}
