@@ -2,7 +2,7 @@
     Mantenimiento Productos
 </div>
 <div class="row justify-content-center" style="padding-top: 3%;">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="row">
             <div class="col-md-8">
                 <form>
@@ -22,7 +22,8 @@
                 </form>
             </div>
             <div class="col-md-4">
-                <ngb-pagination [collectionSize]="listaProductos.length" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+                <ngb-pagination [collectionSize]="listaProductos.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                    [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
             </div>
         </div>
 
@@ -39,7 +40,8 @@
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let producto of listaProductos | filtroProducto:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                <tbody
+                    *ngFor="let producto of listaProductos | filtroProducto:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                     <tr>
                         <td>{{producto.nombre}}</td>
                         <td>{{producto.descripcion}}</td>
@@ -48,8 +50,8 @@
                         <!-- <td>{{producto.cantidad_minima}}</td> -->
                         <td>{{producto.categoria_idcategoria}}</td>
                         <td>
-                            <div class="container text-center">
-                                <div class="row pb-1">
+                            <!-- <div class="container text-center">
+                                 <div class="row pb-1">
                                     <div class="col-sm-4">
                                         <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
                                             (click)="abrirModalCantidad(modalCantidad,producto.idproducto)"
@@ -61,10 +63,6 @@
                                             (click)="inventario(producto.idproducto)" placement="top"
                                             ngbTooltip="Inventario">
                                             <i class="fas fa-boxes"></i></button>
-                                        <!-- <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
-                                            (click)="abrirModalCostos(modalCostos,producto.idproducto)"
-                                            ngbTooltip="Ver Costos">
-                                            <i class="fas fa-search-dollar"></i></button> -->
                                     </div>
                                 </div>
                                 <div class="row pb-1">
@@ -83,43 +81,37 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <!-- <button type="button" class="btn btn-info btn-sm pb-1"
-                                            (click)="inventario(producto.idproducto)" placement="top"
-                                            ngbTooltip="Inventario">
-                                            <i class="fas fa-boxes"></i></button> -->
                                         <button type="button" class="btn btn-danger btn-sm pb-1"
                                             (click)="eliminado(producto.idproducto,producto)" placement="top"
                                             ngbTooltip="Eliminar Producto">
                                             <i class="fas fa-trash"></i></button>
                                     </div>
-                                    <!-- <div class="col-sm-4 ml-1">
-                                        <button type="button" class="btn btn-danger btn-sm pb-1"
-                                            (click)="eliminado(producto.idproducto,producto)" placement="top"
-                                            ngbTooltip="Eliminar Producto">
-                                            <i class="fas fa-trash"></i></button>
-                                    </div> -->
-                                </div>
+                                </div> 
+                            </div> -->
+                            <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
+                                (click)="abrirModalCantidad(modalCantidad,producto.idproducto)"
+                                ngbTooltip="Agregar Cantidad">
+                                <i class="fas fa-plus-square"></i></button>
 
-                                <!-- <button type="button" class="btn btn-info btn-sm"
-                                    (click)="editado(producto.idproducto,producto)" placement="top"
-                                    ngbTooltip="Editar Producto">
-                                    <i class="fas fa-pencil-alt"></i></button>
+                            <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
+                                (click)="editado(producto.idproducto,producto)" placement="top"
+                                ngbTooltip="Editar Producto">
+                                <i class="fas fa-pencil-alt"></i></button>
 
-                                <button type="button" class="btn btn-info btn-sm"
-                                    (click)="openScrollableContent(modalImagen,producto.url_imagen)"
-                                    style="margin-left: 1%;" placement="top" ngbTooltip="Ver Imagen">
-                                    <i class="far fa-image"></i></button>
+                            <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
+                                (click)="openScrollableContent(modalImagen,producto.url_imagen)" placement="top"
+                                ngbTooltip="Ver Imagen">
+                                <i class="far fa-image"></i></button>
 
-                                <button type="button" class="btn btn-info btn-sm" style="margin-top: 2%;"
-                                    (click)="inventario(producto.idproducto)" placement="top" ngbTooltip="Inventario">
-                                    <i class="fas fa-boxes"></i></button>
+                            <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
+                                (click)="inventario(producto.idproducto)" placement="top" ngbTooltip="Inventario">
+                                <i class="fas fa-boxes"></i></button>
 
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    (click)="eliminado(producto.idproducto,producto)"
-                                    style="margin-left: 2%; margin-top: 2%;" placement="top"
-                                    ngbTooltip="Eliminar Producto">
-                                    <i class="fas fa-trash"></i></button> -->
-                            </div>
+                            <button type="button" class="btn btn-danger btn-sm ml-1 pb-1"
+                                (click)="eliminado(producto.idproducto,producto)" placement="top"
+                                ngbTooltip="Eliminar Producto">
+                                <i class="fas fa-trash"></i></button>
+
                         </td>
                     </tr>
                 </tbody>
@@ -128,7 +120,7 @@
 
 
     </div>
-    <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
+    <!-- <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
@@ -240,7 +232,6 @@
                             <option [value]="categoria.idcategoria" *ngFor="let categoria of listaCategorias">
                                 {{categoria.nombre}}
                             </option>
-                            <!-- <option selected>Choose...</option> -->
                         </select>
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="product.get('categoria').hasError('required') && product.get('categoria').touched">
@@ -264,7 +255,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- Modal para agregar cantidad -->
