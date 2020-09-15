@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { NotificacionService } from 'src/app/services/toasts/toasts.service';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 
 declare var $: any; // jQuery
 
@@ -86,7 +87,8 @@ export class DashProductsComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private notifiacionService: NotificacionService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private ng2ImgMax: Ng2ImgMaxService
   ) { }
 
   ngOnInit(): void {
@@ -232,13 +234,29 @@ export class DashProductsComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     const reader = new FileReader();
-    reader.readAsDataURL(this.fileToUpload);
-    reader.onload = () => {
-      // console.log(reader.result);
-      const base64str = reader.result.toString();
-      this.base64Final = base64str.replace(/^data:image\/\w+;base64,/, '');
-      // console.log(this.base64Final);
-    };
+    let uploadedImage;
+
+    // reader.readAsDataURL(this.fileToUpload);
+    // reader.onload = () => {
+    //   const base64str = reader.result.toString();
+    //   this.base64Final = base64str.replace(/^data:image\/\w+;base64,/, '');
+    // };
+
+    this.ng2ImgMax.compressImage(this.fileToUpload, 0.075).subscribe(
+      result => {
+        // uploadedImage = result;
+        // uploadedImage = new File([result], result.name);
+        // console.log(uploadedImage);
+        reader.readAsDataURL(result);
+        reader.onload = () => {
+          const base64str = reader.result.toString();
+          this.base64Final = base64str.replace(/^data:image\/\w+;base64,/, '');
+        };
+      },
+      error => {
+        console.log('😢 Oh no!', error);
+      }
+    );
   }
 
   // Registrar Cliente

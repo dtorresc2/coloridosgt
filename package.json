@@ -29,6 +29,7 @@
     "bootstrap": "^4.5.0",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
+    "ng2-img-max": "^2.2.4",
     "ngx-toastr": "^13.0.0",
     "path": "^0.12.7",
     "rxjs": "~6.5.5",

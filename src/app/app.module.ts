@@ -26,10 +26,12 @@ import { DetailProductsComponent } from './views/products/detail-products/detail
 import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 import { OrdersComponent } from './routes/orders/orders.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FiltroUsuarioPipe } from './pipes/usuarios/filtro-usuario.pipe';
 import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
 import { FiltroPedidosPipe } from './pipes/pedidos/filtro-pedidos.pipe';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { FiltroPedidosPipe } from './pipes/pedidos/filtro-pedidos.pipe';
     ReactiveFormsModule,
     NgbModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    Ng2ImgMaxModule
   ],
   providers: [
     UsersService,
