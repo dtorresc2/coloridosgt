@@ -141,7 +141,6 @@ export class DashProductsComponent implements OnInit {
       console.log("Voy a eliminar");
       this.eliminarProducto();
     }
-
   }
 
   creado() {
@@ -254,6 +253,7 @@ export class DashProductsComponent implements OnInit {
 
           setTimeout(() => {
             this.comprobador = false;
+            this.modalFormProducto.close();
           }, 1500);
 
           setTimeout(() => {
@@ -304,6 +304,7 @@ export class DashProductsComponent implements OnInit {
 
           setTimeout(() => {
             this.comprobador = false;
+            this.modalFormProducto.close();
           }, 1500);
 
           setTimeout(() => {
@@ -344,6 +345,7 @@ export class DashProductsComponent implements OnInit {
 
           setTimeout(() => {
             this.comprobador = false;
+            this.modalFormProducto.close();
           }, 1500);
 
           setTimeout(() => {

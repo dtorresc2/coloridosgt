@@ -111,12 +111,12 @@
                                 <i class="far fa-image"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
-                                (click)="editado(producto.idproducto,producto)" placement="top"
+                                (click)="editado(producto.idproducto,producto); abrirModalForm(modalProductos)" placement="top"
                                 ngbTooltip="Editar Producto">
                                 <i class="fas fa-pencil-alt"></i></button>
 
                             <button type="button" class="btn btn-danger btn-sm ml-1 pb-1"
-                                (click)="eliminado(producto.idproducto,producto)" placement="top"
+                                (click)="eliminado(producto.idproducto,producto); abrirModalForm(modalProductos)" placement="top"
                                 ngbTooltip="Eliminar Producto">
                                 <i class="fas fa-trash"></i></button>
 
