@@ -15,6 +15,8 @@ import { GuardPermitsGuard } from './guards/guard-permits.guard';
 
 import { ProductResolver } from './functions/products/products.resolver';
 import { CategoryResolver } from './functions/products/categories.resolver';
+import { UsersResolver } from './functions/users/users.resolver';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
@@ -33,7 +35,7 @@ const routes: Routes = [
   {
     path: 'users', component: UsersComponent, canActivate: [GuardPermitsGuard],
     children: [
-      { path: '', component: DashUsersComponent },
+      { path: '', component: DashUsersComponent, resolve: { users: UsersResolver } },
       { path: ':id/log', component: BitacoraUsersComponent },
       { path: '**', redirectTo: '' }
     ]

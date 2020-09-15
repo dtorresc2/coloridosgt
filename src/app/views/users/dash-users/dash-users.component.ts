@@ -4,7 +4,7 @@ import { Usuario } from 'src/app/controllers/usuario';
 import { RespuestaUsuario } from 'src/app/controllers/respuestaUsuario';
 import { RespuestaUpdate } from 'src/app/controllers/respuestaUpdate';
 import { UsersService } from 'src/app/services/usuarios/users.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { NotificacionService } from 'src/app/services/toasts/toasts.service';
@@ -59,12 +59,16 @@ export class DashUsersComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
+  // Loader
+  show: boolean = true;
+
   constructor(
     private usersService: UsersService,
     private router: Router,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private notificacionService: NotificacionService
+    private notificacionService: NotificacionService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -95,7 +99,11 @@ export class DashUsersComponent implements OnInit {
 
     if (this.idUsuario > 0) {
       // this.ID = 'Registrado';
-      this.obtenerListaClientes();
+      // this.obtenerListaClientes();
+      setTimeout(() => {
+        this.listaClientes = this.activatedRoute.snapshot.data.users;
+        this.show = false;
+      }, 1000);
     }
     else {
       // this.ID = 'Inicie Sesion';
