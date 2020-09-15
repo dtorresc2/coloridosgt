@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +16,7 @@ import { UsersService } from './services/usuarios/users.service';
 import { CategoriasService } from './services/productos/categorias.service';
 import { ProductosService } from './services/productos/productos.service';
 import { PedidosService } from './services/pedidos/pedidos.service';
+import { NotificacionService } from './services/toasts/toasts.service'
 
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
@@ -23,9 +26,13 @@ import { DetailProductsComponent } from './views/products/detail-products/detail
 import { DashUsersComponent } from './views/users/dash-users/dash-users.component';
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 import { OrdersComponent } from './routes/orders/orders.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FiltroUsuarioPipe } from './pipes/usuarios/filtro-usuario.pipe';
 import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
+import { FiltroPedidosPipe } from './pipes/pedidos/filtro-pedidos.pipe';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +50,8 @@ import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
     BitacoraUsersComponent,
     OrdersComponent,
     FiltroUsuarioPipe,
-    FiltroProductoPipe
+    FiltroProductoPipe,
+    FiltroPedidosPipe
   ],
   imports: [
     BrowserModule,
@@ -51,13 +59,17 @@ import { FiltroProductoPipe } from './pipes/productos/filtro-producto.pipe';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    Ng2ImgMaxModule
   ],
   providers: [
     UsersService,
     CategoriasService,
     ProductosService,
-    PedidosService
+    PedidosService,
+    NotificacionService
   ],
   bootstrap: [AppComponent]
 })

@@ -89,8 +89,14 @@ export class SinginComponent implements OnInit {
         setTimeout(() => {
           if (this.respuesta.USUARIO > 0) {
             localStorage.setItem('idUsuario', this.respuesta.USUARIO.toString());
+            localStorage.setItem('userName', (<any>res).USERNAME);
             this.usersService.autenticado = true;
-            console.log(this.usersService.autenticado);
+            let permisos = (<any>res).PERMISOS;
+            this.usersService.moduloUsuarios = (<any>permisos[0]).bitacora_y_usuario;
+            this.usersService.moduloPedidos = (<any>permisos[0]).ventas;
+            this.usersService.moduloProductos = (<any>permisos[0]).inventario;
+
+            // console.log((<any>permisos[0]).ventas);
             this.router.navigate(['/home']);
           }
           else {

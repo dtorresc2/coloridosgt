@@ -8,6 +8,12 @@ import { Usuario } from '../../controllers/usuario';
 })
 export class UsersService {
   autenticado: boolean = false;
+  userName: any = "usuario";
+
+  moduloUsuarios: boolean = false;
+  moduloPedidos: boolean = false;
+  moduloProductos: boolean = false;
+  moduloFinanzas: boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +39,20 @@ export class UsersService {
 
   obtenerBitacora(id) {
     return this.http.get(Servidor.API_URI + '/bitacora/' + id);
+  }
+
+  // /users/:id/pass
+  actualizarPass(id, _usuario, pass) {
+    return this.http.put(Servidor.API_URI + '/users/' + id + '/pass', { password: pass, usuario: _usuario });
+  }
+
+  // /users/:id/permits
+  actualizarPermisos(id, _usuario, _inventario, _ventas, _bitacora_y_usuario, _finanzas) {
+    return this.http.put(Servidor.API_URI + '/users/' + id + '/permits', { inventario: _inventario, ventas: _ventas, bitacora_y_usuario: _bitacora_y_usuario, usuario: _usuario, finanzas: _finanzas });
+  }
+
+  obtenerPermisos(id){
+    return this.http.get(Servidor.API_URI + '/users/' + id + '/permits');
   }
 
   public getIPAddress() {

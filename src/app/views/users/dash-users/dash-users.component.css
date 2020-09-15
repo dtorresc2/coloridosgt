@@ -35,3 +35,75 @@ button span {
    padding-left: 3%;
 
 } */
+
+/* https://stackoverflow.com/questions/37493852/how-can-i-change-the-color-of-bootstrap-checkbox */
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+   background-color: #f1959b!important;
+}
+ 
+.custom-checkbox .custom-control-input:checked:focus ~ .custom-control-label::before {
+   box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #f1959b
+}
+
+.custom-checkbox .custom-control-input:focus ~ .custom-control-label::before {
+   box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25)
+}
+
+.custom-checkbox .custom-control-input:active ~ .custom-control-label::before {
+   background-color: #eec9cb; 
+}
+
+ngb-pagination ::ng-deep .page-link {
+   background: white;
+   border-color: #d3d8dd;
+   color: #958d89
+}
+
+ngb-pagination ::ng-deep .page-link .page-link:disabled{
+   background-color: yellow;
+}
+
+ngb-pagination /deep/ .page-item.disabled .page-link {
+   background-color: #ebbec0;
+   border-color: #ebbec0;
+}
+ 
+ngb-pagination ::ng-deep .page-item.active .page-link {
+   border-color: #f3969a;
+   background-color: #f3969a;
+   color: white;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus {
+   box-shadow: 0 0 1px #c17c7f;
+}
+
+/* Loader */
+:host{
+   display: block;
+}
+
+.container {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(white, .5);
+   
+}
+
+.loader {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+   width: 100px;
+   height: 100px;
+   background-image: url(^assets/spinner-rosado.gif);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+}

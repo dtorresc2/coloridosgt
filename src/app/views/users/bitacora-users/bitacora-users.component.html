@@ -1,21 +1,31 @@
-<div class="text-center" style="font-size: 28px;">
+<div class="container" *ngIf="show">
+    <div class="loader"></div>
+</div>
+
+<div class="text-center" style="font-size: 28px;" *ngIf="!show">
     Bitacora De Usuarios
 </div>
 
-<div class="row" style="padding-top: 3%;">
+<div class="row mt-4" *ngIf="!show">
+    <ngb-pagination [collectionSize]="listaBitacora.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                    [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+</div>
+
+
+<div class="row" style="padding-top: 3%;" *ngIf="!show">
     <table class="table table-hover table-responsive-sm">
         <thead class="table-secondary">
             <tr>
-                <th scope="col">#</th>
+                <!-- <th scope="col">#</th> -->
                 <th scope="col">Descripcion</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Hora</th>
                 <th scope="col">IP</th>
             </tr>
         </thead>
-        <tbody *ngFor="let bitacora of listaBitacora; let i=index">
+        <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
             <tr>
-                <th scope="row"> {{ i+1 }} </th>
+                <!-- <th scope="row"> {{ i+1 }} </th> -->
                 <td> {{ bitacora.descripcion }} </td>
                 <td> {{ bitacora.fecha }} </td>
                 <td> {{ bitacora.hora }} </td>

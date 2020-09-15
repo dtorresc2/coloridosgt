@@ -11,26 +11,35 @@ import { DashUsersComponent } from './views/users/dash-users/dash-users.componen
 import { BitacoraUsersComponent } from './views/users/bitacora-users/bitacora-users.component';
 import { OrdersComponent } from './routes/orders/orders.component';
 
+import { GuardPermitsGuard } from './guards/guard-permits.guard';
+
+import { ProductResolver } from './functions/products/products.resolver';
+import { CategoryResolver } from './functions/products/categories.resolver';
+import { UsersResolver } from './functions/users/users.resolver';
+import { LogResolver } from './functions/users/log.resolver';
+import { OrdersResolver } from './functions/orders/orders.resolver';
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'singin', component: SinginComponent },
-  { path: 'accounts', component: AccountsComponent },
-  { path: 'orders', component: OrdersComponent },
+  { path: 'accounts', component: AccountsComponent, canActivate: [GuardPermitsGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard]},
   {
-    path: 'products', component: ProductsComponent,
+    path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
     children: [
-      { path: '', component: DashProductsComponent },
+      { path: '', component: DashProductsComponent, resolve: { products: ProductResolver, categories: CategoryResolver } },
       { path: ':id', component: DetailProductsComponent },
-      { path: '**', component: DashProductsComponent }
+      { path: '**', redirectTo: '' }
     ]
   },
   {
-    path: 'users', component: UsersComponent,
+    path: 'users', component: UsersComponent, canActivate: [GuardPermitsGuard],
     children: [
-      { path: '', component: DashUsersComponent},
-      { path: ':id/log', component: BitacoraUsersComponent},
-      { path: '**', component: DashUsersComponent}
+      { path: '', component: DashUsersComponent, resolve: { users: UsersResolver } },
+      { path: ':id/log', component: BitacoraUsersComponent },
+      { path: '**', redirectTo: '' }
     ]
   }
 ];

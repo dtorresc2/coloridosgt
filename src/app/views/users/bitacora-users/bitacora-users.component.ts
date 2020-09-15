@@ -12,6 +12,13 @@ export class BitacoraUsersComponent implements OnInit {
   ID: any;
   listaBitacora: any = [];
 
+  // Paginacion
+  page = 1;
+  pageSize = 10;
+
+  // Loader
+  show: boolean = true;
+
   constructor(private router: Router, private activedRoute: ActivatedRoute, private usersService: UsersService) { }
 
   ngOnInit(): void {
@@ -19,29 +26,36 @@ export class BitacoraUsersComponent implements OnInit {
 
     if (this.idUsuario > 0) {
       this.ID = 'Registrado';
+
+      setTimeout(() => {
+        // this.listaBitacora = this.activedRoute.snapshot.data.log;
+        const params = this.activedRoute.snapshot.params;
+        if (params.id) {
+          this.obtenerBitacora(params.id);
+        }
+        else {
+          this.router.navigate(['/users']);
+        }
+        // this.obtenerBitacora();
+        this.show = false;
+      }, 1000);
     }
     else {
       this.ID = 'Inicie Sesion';
       this.router.navigate(['/singin']);
     }
+  }
 
-    const params = this.activedRoute.snapshot.params;
-    if (params.id) {
-      this.usersService.obtenerBitacora(params.id).subscribe(
-        res => {
-          this.listaBitacora = res;
-        },
-        err => {
-          console.error(err);
-          this.router.navigate(['/users']);
-        }
-      );
-    }
-    else {
-      this.router.navigate(['/users']);
-    }
-
-
+  obtenerBitacora(id) {
+    this.usersService.obtenerBitacora(id).subscribe(
+      res => {
+        this.listaBitacora = res;
+      },
+      err => {
+        console.error(err);
+        this.router.navigate(['/users']);
+      }
+    );
   }
 
 }

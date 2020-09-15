@@ -11,13 +11,13 @@
 
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul *ngIf="sesion || this.idUsuario > 0"  class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="moduloProductos">
                 <a class="nav-link" routerLink="/products" routerLinkActive="active">Productos</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="moduloFinanzas">
                 <a class="nav-link" routerLink="/accounts" routerLinkActive="active">Finanzas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="moduloPedidos">
                 <a class="nav-link" routerLink="/orders" routerLinkActive="active">Pedidos</a>
             </li>
             <!-- <li class="nav-item">
@@ -28,13 +28,13 @@
             </li> -->
         </ul>
         <ul *ngIf="sesion || this.idUsuario > 0"  class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="moduloUsuarios">
                 <a class="nav-link" routerLink="/users" routerLinkActive="active">Usuarios</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" routerLinkActive="active" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    @USUARIO
+                    @{{userName}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <!-- <a class="dropdown-item" routerLink="/singin"><i class="fas fa-user"></i> Iniciar

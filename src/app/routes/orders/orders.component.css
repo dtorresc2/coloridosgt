@@ -1,3 +1,80 @@
-.text-center{
+/* .text-center{
     text-align: center;
+} */
+
+ngb-pagination ::ng-deep .page-link {
+    background: white;
+    border-color: #d3d8dd;
+    color: #958d89
+
 }
+
+ngb-pagination ::ng-deep .page-link .page-link:disabled{
+    background-color: yellow;
+}
+
+ngb-pagination /deep/ .page-item.disabled .page-link {
+    background-color: #ebbec0;
+    border-color: #ebbec0;
+}
+  
+ngb-pagination ::ng-deep .page-item.active .page-link {
+    border-color: #f3969a;
+    background-color: #f3969a;
+    color: white;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus {
+    box-shadow: 0 0 1px #c17c7f;
+}
+  
+/* ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.1rem #c17c7f;
+} */
+  
+/* ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.1rem #c17c7f;
+} */
+
+/* box-shadow: 0 0 0 0.1rem dimgrey; */
+
+/* ngb-pagination ::ng-deep .page-item.active .page-link:focus {
+    border-color: black;
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 1px #c17c7f;
+} */
+
+/* ngb-pagination ::ng-deep a {
+    color: rgb(160, 158, 158) !important;
+} */
+
+/* Loader */
+:host{
+    display: block;
+ }
+ 
+ .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(white, .5);
+    
+ }
+ 
+ .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    background-image: url(^assets/spinner-rosado.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+ }

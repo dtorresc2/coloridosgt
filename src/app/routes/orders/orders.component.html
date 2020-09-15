@@ -1,27 +1,58 @@
-<div class="text-center" style="font-size: 28px;">
+<div class="container" *ngIf="show">
+    <div class="loader"></div>
+</div>
+
+
+<div class="text-center" style="font-size: 28px;" *ngIf="!show">
     Mantenimiento Pedidos
 </div>
 
 <!-- <div class="row align-items-center" style="padding-top: 3%;"> -->
-<div class="row" style="padding-top: 3%;">
-    <div class="col-md-6 text-center">
-        <table class="table table-hover table-striped table-sm table-responsive-sm">
-            <thead class="table-secondary">
-                <tr>
-                    <!-- <th scope="col">Codigo</th> -->
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Dirección</th>
-                    <!-- <th scope="col">Empleado</th> -->
-                    <th scope="col">T.Pedido</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Total</th>
-                    <!-- <th scope="col">Estado</th> -->
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let pedido of listaPedidos">
-                <tr>
-                    <!-- <td>Carl</td>
+<div class="row justify-content-center" style="padding-top: 3%;" *ngIf="!show">
+    <div class="col-md-8 text-center mr-2">
+        <div class="row">
+            <div class="col-md-8">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" #filtro
+                                placeholder="Cliente o direccion de pedido a buscar" placement="top"
+                                ngbTooltip="Filtro de Pedidos">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    style="padding-top: 7%; padding-bottom: 0%;">
+                                    <label><i class="fas fa-search"></i></label>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <ngb-pagination class="bg-info" [collectionSize]="listaPedidos.length" [(page)]="page" [maxSize]="10"
+                    [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table table-hover table-striped table-sm table-responsive-sm">
+                <thead class="table-secondary">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Dirección</th>
+                        <!-- <th scope="col">Empleado</th> -->
+                        <th scope="col">T.Pedido</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody
+                    *ngFor="let pedido of listaPedidos | filtroPedidos:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                    <tr>
+                        <!-- <td>Carl</td>
                     <td>Zona 12</td>
                     <td>Envio</td>
                     <td>24/07/2020</td>
@@ -34,26 +65,66 @@
                         <button type="button" class="btn btn-info btn-sm"
                             (click)="openScrollableContent(longContent,1)" style="margin-left: 2%;"><i class="far fa-image"></i></button>
                     </td> -->
-                    <td> {{pedido.cliente}} </td>
-                    <td> {{pedido.direccion}} </td>
-                    <td> {{pedido.tipo}} </td>
-                    <td> {{pedido.fecha}} </td>
-                    <td> Q.{{pedido.total | number:'1.2-2'}} </td>
-                    <td>
-                        <button type="button" class="btn btn-info btn-sm"
-                            (click)="abrirDetallePedido(longContent,pedido.idpedido)"
-                            style="padding-left: 10%; padding-right: 10%;" placement="top"
-                            ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i></button>
-                        <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm" style="margin-left: 2%;" placement="top"
-                            ngbTooltip="Ver Comprobante"><i class="far fa-image"></i></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <td> {{pedido.idpedido}} </td>
+                        <td> {{pedido.cliente}} </td>
+                        <td> {{pedido.direccion}} </td>
+                        <td> {{pedido.tipo}} </td>
+                        <td> {{pedido.fecha}} </td>
+                        <td> Q.{{pedido.total | number:'1.2-2'}} </td>
+                        <td> {{pedido.estado}}</td>
+                        <!-- url_comprobante -->
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm pr-2 pl-2"
+                                (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
+                                ngbTooltip="Ver Detalle Pedido"><i class="fas fa-list-ol"></i>
+                            </button>
+                            <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                                (click)="enlazarPedido(pedido)" placement="top" ngbTooltip="Gestionar Pedido"><i
+                                    class="far fa-eye"></i>
+                            </button>
+                            <button *ngIf="pedido.idTipo == 2" type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                                (click)="abrirModalPedido(modalComprobante, pedido.idpedido, pedido.url_comprobante)"
+                                placement="top" ngbTooltip="Ver Comprobante"><i class="far fa-sticky-note"></i>
+                            </button>
+                            <!-- <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-info btn-sm pr-2 pl-2" placement="top"
+                                        ngbTooltip="Gestionar Pedido">
+                                        <i class="far fa-eye"></i>
+                                    </button>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-info btn-sm pr-2 pl-2 ml-1"
+                                        (click)="abrirDetallePedido(longContent,pedido.idpedido)" placement="top"
+                                        ngbTooltip="Ver Detalle"><i class="fas fa-list-ol"></i>
+                                    </button>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="col-md-4">
+                                    <button *ngIf="pedido.idTipo == 2" type="button"
+                                        class="btn btn-info btn-sm pr-2 pl-2" placement="top"
+                                        ngbTooltip="Ver Comprobante"><i class="far fa-image"></i>
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                        </div> -->
+                        </td>
+                        <!-- <i class="far fa-eye"></i> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
-    <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
+
+    <!-- <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div> -->
+    <div class="col-md-3 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <!-- <div class="card-header d-flex justify-content-end">
                 <button type="button" class="btn btn-secondary btn-sm" (click)="openScrollableContent(longContent,1)">
@@ -63,24 +134,43 @@
             <div class="card-body">
                 <form>
                     <h4 class="card-title text-center" style="padding-bottom: 1%;">
-                        Ingresar Pedido
+                        Gestion de Pedidos
+                        <a class="text-secondary" placement="top" ngbTooltip="Actualizar Pedidos"
+                            (click)="obtenerListaPedidos()">
+                            <i class="fas fa-sync-alt"></i></a>
                     </h4>
-                    <div class="form-group">
-                        <label>Cliente</label>
-                        <input class="form-control form-control-sm" type="text">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>ID</label>
+                                <input class="form-control form-control-sm" type="text" name="id_pedido"
+                                    [(ngModel)]="idPedido_AUX" readonly>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input class="form-control form-control-sm" type="text" name="fechaPedido"
+                                    [(ngModel)]="fechaAUX" readonly>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
+                        <label>Cliente</label>
+                        <input class="form-control form-control-sm" type="text" name="nomCliente"
+                            [(ngModel)]="nombreCliente" readonly>
+                    </div>
+
+                    <!-- <div class="form-group">
                         <label>Empleado</label>
-                        <!-- <select class="form-control form-control-sm" id="exampleFormControlSelect1">
-                        </select> -->
-                        <select class="form-control form-control-sm">
-                            <!-- formControlName="categoria"> -->
+                        <select class="form-control form-control-sm" name="Empleado" [(ngModel)]="idEmpleado" (change)="onChangeEmpleado($event.target.value)">
                             <option [value]="empleado.idusuario" *ngFor="let empleado of listaEmpleados">
                                 {{empleado.nombrerol}}
                             </option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <!-- <div class="form-group">
                         <label>Tipo De Pedido</label>
@@ -93,7 +183,8 @@
 
                     <div class="form-group">
                         <label>Dirección</label>
-                        <input class="form-control form-control-sm" type="text">
+                        <input class="form-control form-control-sm" type="text" name="direccionPed"
+                            [(ngModel)]="direccionPedido" readonly>
                     </div>
 
                     <!-- <div class="form-group">
@@ -104,26 +195,37 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label>No. Productos</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <label>Items</label>
+                                <input class="form-control form-control-sm" type="text" name="noProd"
+                                    [(ngModel)]="numProductos" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label>Total</label>
-                                <input class="form-control form-control-sm" type="text">
+                                <input class="form-control form-control-sm" type="text" name="totalPed"
+                                    [(ngModel)]="totalPedido" readonly>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Tipo De Pedido</label>
-                                <select class="form-control form-control-sm">
-                                    <!-- formControlName="categoria"> -->
+                                <select class="form-control form-control-sm" name="tipoPedido"
+                                    [(ngModel)]="idTipoPedido" (change)="onChangeTipo($event.target.value)">
                                     <option [value]="tipo.idtipo_pedido" *ngFor="let tipo of listaTipos">
                                         {{tipo.tipo}}
+                                    </option>
+                                </select>
+                            </div> -->
+                            <div class="form-group">
+                                <label>Empleado</label>
+                                <select class="form-control form-control-sm" name="Empleado" [(ngModel)]="idEmpleado"
+                                    (change)="onChangeEmpleado($event.target.value)">
+                                    <option [value]="empleado.idusuario" *ngFor="let empleado of listaEmpleados">
+                                        {{empleado.nombrerol}}
                                     </option>
                                 </select>
                             </div>
@@ -131,7 +233,9 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Estado</label>
-                                <select class="form-control form-control-sm">
+                                <select class="form-control form-control-sm" name="estadoPedido1"
+                                    [(ngModel)]="idEstadoPedido" (change)="onChangeEstado($event.target.value)"
+                                    [disabled]="idEstadoPedido > 2">
                                     <!-- formControlName="categoria"> -->
                                     <option [value]="estado.idestado_pedido" *ngFor="let estado of listaEstados">
                                         {{estado.estado}}
@@ -141,18 +245,19 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-secondary btn-block" disabled>
+                    <!-- <button class="btn btn-secondary btn-block" disabled>
                         <span>Registrar</span>
-                    </button>
+                    </button> -->
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal Detalle de Pedido -->
 <ng-template #longContent let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Detalle de Pedido # {{idDetallePedidoAUX}} </h4>
+        <h4 class="modal-title">Detalle de Pedido #{{idDetallePedidoAUX}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -181,6 +286,24 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+            <span>Cerrar</span>
+        </button>
+    </div> -->
+</ng-template>
+
+<ng-template #modalComprobante let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Comprobante de Pedido #{{idPedidoAux}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <img src='https://s3.amazonaws.com/coloridosgt/not.jpg' class="rounded mx-auto d-block" width="300"
+            height="300">
     </div>
     <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">

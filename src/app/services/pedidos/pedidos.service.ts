@@ -24,4 +24,12 @@ export class PedidosService {
   obtenerDetallePedido(id) {
     return this.http.get(Servidor.API_URI + '/pedidos/' + id);
   }
+
+  actualizarEstadoPedido(id, _idestado, _idusuario) {
+    return this.http.put(Servidor.API_URI + '/pedidos/' + id + '/estado', { idestado_pedido: _idestado, usuario: _idusuario });
+  }
+
+  actualizarEmpleadoPedido(id, _idempleado, _idusuario) {
+    return this.http.put(Servidor.API_URI + '/pedidos/' + id + '/empleado', { idusuario: _idempleado, usuario: _idusuario });
+  }
 }

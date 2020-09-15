@@ -1,8 +1,12 @@
-<div class="text-center" style="font-size: 28px;">
+<div class="container" *ngIf="show">
+    <div class="loader"></div>
+</div>
+
+<div class="text-center" style="font-size: 28px;" *ngIf="!show">
     Mantenimiento Usuarios
 </div>
 
-<div class="row" style="padding-top: 3%;">
+<div class="row justify-content-center" style="padding-top: 3%;" *ngIf="!show">
     <div class="col-md-6">
         <div class="row">
             <!-- <form>
@@ -11,24 +15,29 @@
                         placeholder="Usuario o correo a buscar">
                 </div>
             </form> -->
-
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" #filtro placeholder="Usuario o correo a buscar"
-                            placement="top" ngbTooltip="Filtro de Usuarios">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                style="padding-top: 7%; padding-bottom: 0%;">
-                                <label><i class="fas fa-search"></i></label>
-                            </button>
+            <div class="col-md-8">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" #filtro placeholder="Usuario o correo a buscar"
+                                placement="top" ngbTooltip="Filtro de Usuarios">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    style="padding-top: 7%; padding-bottom: 0%;">
+                                    <label><i class="fas fa-search"></i></label>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <ngb-pagination [collectionSize]="listaClientes.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                    [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+            </div>
         </div>
 
-        <div class="row text-center">
+        <div class="row">
             <table class="table table-hover table-striped table-sm table-responsive-md">
                 <thead class="table-secondary">
                     <tr>
@@ -38,23 +47,37 @@
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let user of listaClientes | filtroUsuario:filtro.value">
+                <tbody
+                    *ngFor="let user of listaClientes | filtroUsuario:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                     <tr>
                         <th scope="row"> {{user.idusuario}} </th>
                         <td>{{user.nombrerol}}</td>
                         <td>{{user.correo}}</td>
                         <td>
-                            <button type="button" class="btn btn-success btn-sm"
-                                style="padding-left: 8%; padding-right: 8%;" (click)="bitacora(user.idusuario)"
-                                placement="top" ngbTooltip="Ver Bitacora"><i class="fas fa-map-pin fa-sm"></i></button>
+                            <button type="button" class="btn btn-success btn-sm" (click)="bitacora(user.idusuario)"
+                                style="padding-bottom: 2%;" placement="top" ngbTooltip="Ver Bitacora"><i
+                                    class="fas fa-stream"></i></button>
 
-                            <button type="button" class="btn btn-info btn-sm" style="margin-left: 1%;"
-                                (click)="editado(user.idusuario,user)" placement="top" ngbTooltip="Editar Usuario"><i
+                            <button type="button" class="btn btn-success btn-sm"
+                                style="margin-left: 1%; padding-bottom: 2%;"
+                                (click)="abrirModalPermisos(modalPermisos,user.idusuario,user.inventario,user.ventas,user.bitacora_y_usuario,user.finanzas)"
+                                placement="top" ngbTooltip="Gestionar Permisos"><i
+                                    class="fas fa-user-lock"></i></button>
+
+                            <button type="button" class="btn btn-info btn-sm"
+                                style="margin-left: 1%; padding-bottom: 2%;" (click)="editado(user.idusuario,user)"
+                                placement="top" ngbTooltip="Editar Usuario"><i
                                     class="fas fa-pencil-alt fa-sm"></i></button>
-                                    
-                            <button type="button" class="btn btn-danger btn-sm" style="margin-left: 1%;"
-                                (click)="eliminado(user.idusuario,user)" placement="top"
-                                ngbTooltip="Eliminar Usuario"><i class="fas fa-trash fa-sm"></i></button>
+
+                            <button type="button" class="btn btn-info btn-sm"
+                                style="margin-left: 1%; padding-bottom: 2%;"
+                                (click)="abrirModalPass(modalPass,user.idusuario)" placement="top"
+                                ngbTooltip="Actualizar Contraseña"><i class="fas fa-key"></i></button>
+
+                            <button *ngIf="user.idusuario != 1" type="button" class="btn btn-danger btn-sm"
+                                style="margin-left: 1%; padding-bottom: 2%;" (click)="eliminado(user.idusuario,user)"
+                                placement="top" ngbTooltip="Eliminar Usuario"><i
+                                    class="fas fa-trash fa-sm"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -146,3 +169,86 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para Permisos de Usuario -->
+<ng-template #modalPermisos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Permisos de Usuario #{{idObjetoAux}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck1" checked=""> -->
+                <input type="checkbox" class="custom-control-input" id="moduloProductosCheck"
+                    [(ngModel)]="moduloProductos">
+                <label class="custom-control-label" for="moduloProductosCheck">Modulo Productos</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck2"> -->
+                <input type="checkbox" class="custom-control-input" id="moduloPedidosCheck" [(ngModel)]="moduloPedidos">
+                <label class="custom-control-label" for="moduloPedidosCheck">Modulo Pedidos</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="moduloUsuariosCheck"
+                    [(ngModel)]="moduloUsuarios">
+                <label class="custom-control-label" for="moduloUsuariosCheck">Modulo Usuarios</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="moduloFinanzasCheck"
+                    [(ngModel)]="moduloFinanzas">
+                <label class="custom-control-label" for="moduloFinanzasCheck">Modulo Finanzas</label>
+            </div>
+        </div>
+        <button class="btn btn-secondary btn-block pb-0" (click)="actualizarPermisos()" [disabled]="this.comprobador2">
+            <span *ngIf="this.comprobador2" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+            <label *ngIf="!this.comprobador2" id="labelCarga">Actualizar</label>
+        </button>
+    </div>
+</ng-template>
+
+<!-- Modal para Actualizar Contraseña -->
+<ng-template #modalPass let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Actualizacion de Contraseña - Usuario #{{idObjetoAux}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form novalidate (ngSubmit)="ejecutarActualizacionPass()" [formGroup]="passUpdate">
+            <div class="form-group">
+                <label>Contraseña Nueva</label>
+                <input type="password" class="form-control" formControlName="password"
+                    placeholder="Ingrese su contraseña nueva">
+                <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="passUpdate.get('password').hasError('required') && passUpdate.get('password').touched">
+                    Contraseña requerida
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Confirmar Contraseña</label>
+                <input type="password" class="form-control" formControlName="confirmpass"
+                    placeholder="Confirme su contraseña nueva">
+                <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="passUpdate.get('confirmpass').hasError('required') && passUpdate.get('confirmpass').touched">
+                    Contraseña requerida
+                </span>
+                <span class="text-danger" style="font-size: 10px;" *ngIf="passUpdate.errors?.invalid">
+                    Contraseña sin coincidir
+                </span>
+            </div>
+            <button class="btn btn-secondary btn-block" [disabled]="passUpdate.invalid || this.comprobador2">
+                <span *ngIf="this.comprobador2" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                <label *ngIf="!this.comprobador2" id="labelCarga">Actualizar</label>
+            </button>
+        </form>
+        <!-- <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;" [disabled]="passUpdate.invalid">
+            <span>Actualizar Contraseña</span>
+        </button> -->
+    </div>
+</ng-template>

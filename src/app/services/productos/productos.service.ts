@@ -27,4 +27,19 @@ export class ProductosService {
     return this.http.put(Servidor.API_URI + '/productos', producto);
   }
 
+  registrarCantidadProducto(id, costo, cant, user) {
+    return this.http.post(Servidor.API_URI + '/productos/compra',
+      { precioUnitario: costo, cantidad: cant, idusuario: user, idProducto: id });
+  }
+
+  obtenerKardex(idProducto) {
+    return this.http.get(Servidor.API_URI + '/productos/' + idProducto + '/kardex');
+  }
 }
+
+// {
+//   "cantidad": 15,
+//   "precioUnitario": 21,
+//   "idProducto": 20,
+//   "idusuario": 10
+// }

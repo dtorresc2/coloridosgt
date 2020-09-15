@@ -1,69 +1,129 @@
-<div class="text-center" style="font-size: 28px;">
+<div class="container" *ngIf="show">
+    <div class="loader"></div>
+</div>
+
+<div class="text-center" style="font-size: 28px;" *ngIf="!show">
     Mantenimiento Productos
 </div>
-<div class="row" style="padding-top: 3%;">
-    <div class="col-md-6">
+<div class="row justify-content-center" style="padding-top: 3%;" *ngIf="!show">
+    <div class="col-md-12">
         <div class="row">
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" #filtro
-                            placeholder="Producto o caracteristica de producto a buscar" placement="top"
-                            ngbTooltip="Filtro de Productos">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                style="padding-top: 7%; padding-bottom: 0%;">
-                                <label><i class="fas fa-search"></i></label>
-                            </button>
+            <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" #filtro
+                                placeholder="Producto o caracteristica de producto a buscar" placement="top"
+                                ngbTooltip="Filtro de Productos">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    style="padding-top: 7%; padding-bottom: 0%;">
+                                    <label><i class="fas fa-search"></i></label>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-secondary" (click)="creado(); abrirModalForm(modalProductos)"
+                    style="padding-top: 2%; padding-bottom: 2%;">
+                    <span>Nuevo Producto</span>
+                </button>
+            </div>
+            <div class="col-md-3">
+                <ngb-pagination [collectionSize]="listaProductos.length" [(page)]="page" [maxSize]="10" [rotate]="true"
+                    [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+            </div>
         </div>
 
         <div class="row">
-            <table class="table table-hover table-striped table-sm table-responsive-md">
+            <table class="table table-hover table-striped table-sm table-responsive-sm">
                 <thead class="table-secondary">
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Cant</th>
-                        <!-- <th scope="col">#Min</th> -->
+                        <th scope="col">Cant Min</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let producto of listaProductos | filtroProducto:filtro.value">
+                <tbody
+                    *ngFor="let producto of listaProductos | filtroProducto:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                     <tr>
+                        <td>{{producto.idproducto}}</td>
                         <td>{{producto.nombre}}</td>
                         <td>{{producto.descripcion}}</td>
                         <td>Q.{{producto.precio | number:'1.2-2'}}</td>
                         <td>{{producto.cantidad}}</td>
-                        <!-- <td>{{producto.cantidad_minima}}</td> -->
+                        <td>{{producto.cantidad_minima}}</td>
                         <td>{{producto.categoria_idcategoria}}</td>
                         <td>
-                            <div class="text-center">
-                                <button type="button" class="btn btn-info btn-sm"
-                                    (click)="editado(producto.idproducto,producto)" placement="top"
-                                    ngbTooltip="Editar Producto">
-                                    <i class="fas fa-pencil-alt"></i></button>
+                            <!-- <div class="container text-center">
+                                 <div class="row pb-1">
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
+                                            (click)="abrirModalCantidad(modalCantidad,producto.idproducto)"
+                                            ngbTooltip="Agregar Cantidad">
+                                            <i class="fas fa-plus-square"></i></button>
+                                    </div>
+                                    <div class="col-sm-4 ml-1">
+                                        <button type="button" class="btn btn-info btn-sm pb-1"
+                                            (click)="inventario(producto.idproducto)" placement="top"
+                                            ngbTooltip="Inventario">
+                                            <i class="fas fa-boxes"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-info btn-sm pb-1"
+                                            (click)="editado(producto.idproducto,producto)" placement="top"
+                                            ngbTooltip="Editar Producto">
+                                            <i class="fas fa-pencil-alt"></i></button>
+                                    </div>
+                                    <div class="col-sm-4 ml-1">
+                                        <button type="button" class="btn btn-info btn-sm pb-1"
+                                            (click)="openScrollableContent(modalImagen,producto.url_imagen,producto.idproducto)"
+                                            placement="top" ngbTooltip="Ver Imagen">
+                                            <i class="far fa-image"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <button type="button" class="btn btn-danger btn-sm pb-1"
+                                            (click)="eliminado(producto.idproducto,producto)" placement="top"
+                                            ngbTooltip="Eliminar Producto">
+                                            <i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div> 
+                            </div> -->
+                            <button type="button" class="btn btn-success btn-sm pb-1" placement="top"
+                                (click)="abrirModalCantidad(modalCantidad,producto.idproducto)"
+                                ngbTooltip="Agregar Cantidad">
+                                <i class="fas fa-plus-square"></i></button>
 
-                                <button type="button" class="btn btn-info btn-sm"
-                                    (click)="openScrollableContent(modalImagen,producto.url_imagen)"
-                                    style="margin-left: 1%;" placement="top" ngbTooltip="Ver Imagen">
-                                    <i class="far fa-image"></i></button>
+                            <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
+                                (click)="inventario(producto.idproducto)" placement="top" ngbTooltip="Inventario">
+                                <i class="fas fa-boxes"></i></button>
 
-                                <button type="button" class="btn btn-info btn-sm" style="margin-top: 2%;"
-                                    (click)="inventario(producto.idproducto)" placement="top" ngbTooltip="Inventario">
-                                    <i class="fas fa-boxes"></i></button>
+                            <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
+                                (click)="openScrollableContent(modalImagen,producto.url_imagen,producto.idproducto)"
+                                placement="top" ngbTooltip="Ver Imagen">
+                                <i class="far fa-image"></i></button>
 
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    (click)="eliminado(producto.idproducto,producto)"
-                                    style="margin-left: 2%; margin-top: 2%;" placement="top"
-                                    ngbTooltip="Eliminar Producto">
-                                    <i class="fas fa-trash"></i></button>
-                            </div>
+                            <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
+                                (click)="editado(producto.idproducto,producto); abrirModalForm(modalProductos)" placement="top"
+                                ngbTooltip="Editar Producto">
+                                <i class="fas fa-pencil-alt"></i></button>
+
+                            <button type="button" class="btn btn-danger btn-sm ml-1 pb-1"
+                                (click)="eliminado(producto.idproducto,producto); abrirModalForm(modalProductos)" placement="top"
+                                ngbTooltip="Eliminar Producto">
+                                <i class="fas fa-trash"></i></button>
+
                         </td>
                     </tr>
                 </tbody>
@@ -72,7 +132,7 @@
 
 
     </div>
-    <div class="col-sm-1 d-none d-md-block d-lg-block d-xl-block"></div>
+    <!-- <div class="col-md-1 d-none d-md-block d-lg-block d-xl-block"></div>
     <div class="col-md-4 d-none d-md-block d-lg-block d-xl-block">
         <div class="card">
             <div class="card-header d-flex justify-content-end">
@@ -141,7 +201,8 @@
                         <div class="col">
                             <div class="form-group">
                                 <label>Cantidad</label>
-                                <input class="form-control form-control-sm" type="text" formControlName="cantidad">
+                                <input class="form-control form-control-sm" type="text" formControlName="cantidad"
+                                    readonly>
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('cantidad').hasError('required') && product.get('cantidad').touched">
                                     Cantidad requerida
@@ -195,6 +256,151 @@
                         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
                     </div>
 
+                    <button class="btn btn-secondary btn-block" [disabled]="product.invalid || this.comprobador">
+                        <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
+                        <label *ngIf="!this.comprobador && this.isNew" id="labelCarga">Registrar</label>
+                        <label *ngIf="!this.comprobador && this.isEdit" id="labelCarga">Actualizar</label>
+                        <label *ngIf="!this.comprobador && this.isDelete" id="labelCarga">Eliminar</label>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div> -->
+</div>
+
+<!-- Modal para gestion de productos -->
+<ng-template #modalProductos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" *ngIf="isNew">Producto Nuevo</h4>
+        <h4 class="modal-title" *ngIf="isEdit">Edicion de Producto #{{idUsuarioAUX}} </h4>
+        <h4 class="modal-title" *ngIf="isDelete">Eliminacion de Producto #{{idUsuarioAUX}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card">
+            <!-- <div class="card-header d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="creado()">
+                    <span>Nuevo Producto</span>
+                </button>
+            </div> -->
+
+            <div class="card-body">
+                <form novalidate (ngSubmit)="onSubmit()" [formGroup]="product">
+                    <!-- <h4 class="card-title text-center" style="padding-bottom: 1%;">
+                        Ingresar Producto
+                    </h4> -->
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input class="form-control form-control-sm" type="text" formControlName="nombre">
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('nombre').hasError('required') && product.get('nombre').touched">
+                            Nombre requerido
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripcion</label>
+                        <input class="form-control form-control-sm" type="text" formControlName="descripcion">
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('descripcion').hasError('required') && product.get('descripcion').touched">
+                            Descripcion requerida
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <input class="form-control form-control-sm" type="text" formControlName="precio">
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('precio').hasError('required') && product.get('precio').touched">
+                                    Precio requerido
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('precio').hasError('pattern') && product.get('precio').touched">
+                                    Precio invalido
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Descuento</label>
+                                <input class="form-control form-control-sm" type="text" formControlName="descuento">
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('descuento').hasError('required') && product.get('descuento').touched">
+                                    Descuento requerido
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('descuento').hasError('pattern') && product.get('descuento').touched">
+                                    Descuento invalido
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Cantidad</label>
+                                <input class="form-control form-control-sm" type="text" formControlName="cantidad"
+                                    readonly>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad').hasError('required') && product.get('cantidad').touched">
+                                    Cantidad requerida
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad').hasError('pattern') && product.get('cantidad').touched">
+                                    Cantidad invalida
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Cantidad Minima</label>
+                                <input class="form-control form-control-sm" type="text"
+                                    formControlName="cantidad_minima">
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad_minima').hasError('required') && product.get('cantidad_minima').touched">
+                                    Cantidad requerida
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad_minima').hasError('pattern') && product.get('cantidad_minima').touched">
+                                    Cantidad invalida
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="width: max-content;">Categoria
+                            <a (click)="obtenerListaCategorias()" class="text-secondary" style="font-size: 12px;"
+                                placement="top" ngbTooltip="Actualizar Categorias"><i class="fas fa-sync-alt"></i></a>
+                            |
+                            <a (click)="abrirMantenimientosCat(modalCategorias)" class="text-secondary"
+                                style="font-size: 12px;" placement="top" ngbTooltip="Mantenimientos"><i
+                                    class="fas fa-wrench"></i></a>
+                        </label>
+                        <select class="form-control form-control-sm" id="exampleFormControlSelect1"
+                            formControlName="categoria">
+                            <option [value]="categoria.idcategoria" *ngFor="let categoria of listaCategorias">
+                                {{categoria.nombre}}
+                            </option>
+                        </select>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('categoria').hasError('required') && product.get('categoria').touched">
+                            Categoria requerida
+                        </span>
+                    </div>
+                    <div class="form-group custom-file" style="margin-bottom: 3%;">
+                        <input type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/*"
+                            (change)="handleFileInput($event.target.files)">
+                        <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                    </div>
 
                     <button class="btn btn-secondary btn-block" [disabled]="product.invalid || this.comprobador">
                         <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status"
@@ -208,12 +414,93 @@
             </div>
         </div>
     </div>
-</div>
+</ng-template>
+
+<!-- Modal para agregar cantidad -->
+<ng-template #modalCantidad let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Cantidad para Producto #{{idObjetoAux}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form novalidate (ngSubmit)="onSubmitCostoProducto()" [formGroup]="formCosto">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Cantidad</label>
+                    <input type="text" class="form-control" formControlName="cantidad">
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('cantidad').hasError('required') && formCosto.get('cantidad').touched">
+                        Cantidad requerida
+                    </span>
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('cantidad').hasError('pattern') && formCosto.get('cantidad').touched">
+                        Cantidad invalida
+                    </span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Costo</label>
+                    <input type="text" class="form-control" formControlName="costo">
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('costo').hasError('required') && formCosto.get('costo').touched">
+                        Costo requerido
+                    </span>
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('costo').hasError('pattern') && formCosto.get('costo').touched">
+                        Costo invalido
+                    </span>
+                </div>
+            </div>
+            <button class="btn btn-secondary btn-block" style="padding-bottom: 1%;"
+                [disabled]="formCosto.invalid || comprobadorCat">
+                <span *ngIf="this.comprobadorCat" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                <span *ngIf="!this.comprobadorCat">Registrar</span>
+            </button>
+        </form>
+    </div>
+</ng-template>
+
+<!-- Modal para tabla de costos -->
+<ng-template #modalCostos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Costos de Producto #{{idObjetoAux}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="table table-hover table-striped table-sm table-responsive-md">
+            <thead class="table-secondary">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cant</th>
+                    <!-- <th scope="col">#Min</th> -->
+                    <th scope="col">Categoria</th>
+                    <!-- <th scope="col">Acciones</th> -->
+                </tr>
+            </thead>
+            <tbody *ngFor="let producto of listaProductos | filtroProducto:filtro.value">
+                <tr>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.descripcion}}</td>
+                    <td>Q.{{producto.precio | number:'1.2-2'}}</td>
+                    <td>{{producto.cantidad}}</td>
+                    <!-- <td>{{producto.cantidad_minima}}</td> -->
+                    <td>{{producto.categoria_idcategoria}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-template>
 
 <!-- Modal para vista previa de imagen -->
 <ng-template #modalImagen let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Imagen de Producto #123</h4>
+        <h4 class="modal-title">Imagen de Producto #{{idObjetoAux}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -221,11 +508,6 @@
     <div class="modal-body">
         <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300">
     </div>
-    <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
-            <span>Cerrar</span>
-        </button>
-    </div> -->
 </ng-template>
 
 <!-- Modal para mantenimiento de categorias -->
@@ -246,7 +528,8 @@
                             Categoria
                         </div>
                         <div class="col-4">
-                            <button type="button" class="btn btn-secondary btn-sm" (click)="creadoCat()" style="padding-top: 0.4%;">
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="creadoCat()"
+                                style="padding-top: 0.4%;">
                                 <span>Nueva Categoria</span>
                             </button>
                         </div>
@@ -273,13 +556,15 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <button class="btn btn-secondary btn-block"
-                                    [disabled]="categoria.invalid">
+                                <button class="btn btn-secondary btn-block" [disabled]="categoria.invalid">
                                     <span *ngIf="this.comprobadorCat" class="spinner-border spinner-border-sm"
                                         role="status" aria-hidden="true"></span>
-                                    <label *ngIf="!this.comprobadorCat && this.isNewCat" id="labelCarga">Registrar</label>
-                                    <label *ngIf="!this.comprobadorCat && this.isEditCat" id="labelCarga">Actualizar</label>
-                                    <label *ngIf="!this.comprobadorCat && this.isDeleteCat" id="labelCarga">Eliminar</label>
+                                    <label *ngIf="!this.comprobadorCat && this.isNewCat"
+                                        id="labelCarga">Registrar</label>
+                                    <label *ngIf="!this.comprobadorCat && this.isEditCat"
+                                        id="labelCarga">Actualizar</label>
+                                    <label *ngIf="!this.comprobadorCat && this.isDeleteCat"
+                                        id="labelCarga">Eliminar</label>
                                 </button>
                             </div>
                         </form>
