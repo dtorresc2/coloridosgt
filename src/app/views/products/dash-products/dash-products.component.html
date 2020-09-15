@@ -31,11 +31,12 @@
             <table class="table table-hover table-striped table-sm table-responsive-sm">
                 <thead class="table-secondary">
                     <tr>
+                        <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Precio</th>
                         <th scope="col">Cant</th>
-                        <!-- <th scope="col">#Min</th> -->
+                        <th scope="col">Cant Min</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -43,11 +44,12 @@
                 <tbody
                     *ngFor="let producto of listaProductos | filtroProducto:filtro.value | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                     <tr>
+                        <td>{{producto.idproducto}}</td>
                         <td>{{producto.nombre}}</td>
                         <td>{{producto.descripcion}}</td>
                         <td>Q.{{producto.precio | number:'1.2-2'}}</td>
                         <td>{{producto.cantidad}}</td>
-                        <!-- <td>{{producto.cantidad_minima}}</td> -->
+                        <td>{{producto.cantidad_minima}}</td>
                         <td>{{producto.categoria_idcategoria}}</td>
                         <td>
                             <!-- <div class="container text-center">
@@ -98,8 +100,8 @@
                                 <i class="fas fa-boxes"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
-                                (click)="openScrollableContent(modalImagen,producto.url_imagen)" placement="top"
-                                ngbTooltip="Ver Imagen">
+                                (click)="openScrollableContent(modalImagen,producto.url_imagen,producto.idproducto)"
+                                placement="top" ngbTooltip="Ver Imagen">
                                 <i class="far fa-image"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
@@ -257,6 +259,19 @@
         </div>
     </div> -->
 </div>
+
+<!-- Modal para gestion de productos -->
+<ng-template #modalProductos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Imagen de Producto #{{idObjetoAux}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300">
+    </div>
+</ng-template>
 
 <!-- Modal para agregar cantidad -->
 <ng-template #modalCantidad let-modal>

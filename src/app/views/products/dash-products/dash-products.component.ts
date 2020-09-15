@@ -209,7 +209,7 @@ export class DashProductsComponent implements OnInit {
       .subscribe(
         res => {
           this.listaProductos = res;
-          // console.log(res);
+          console.log(res);
         },
         err => console.error(err)
       )
