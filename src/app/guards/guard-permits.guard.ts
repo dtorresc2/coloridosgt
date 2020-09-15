@@ -17,17 +17,18 @@ export class GuardPermitsGuard implements CanActivate, CanActivateChild {
 
     if ((<any>next)._routerState.url == '/products' && !this.users.moduloProductos) {
       this.router.navigate(['/home']);
-      // return true;
     }
 
     if ((<any>next)._routerState.url == '/orders' && !this.users.moduloPedidos) {
       this.router.navigate(['/home']);
-      // return true;
     }
 
     if ((<any>next)._routerState.url == '/users' && !this.users.moduloUsuarios) {
       this.router.navigate(['/home']);
-      // return true;
+    }
+
+    if ((<any>next)._routerState.url == '/accounts' && !this.users.moduloFinanzas) {
+      this.router.navigate(['/home']);
     }
 
     return true;
