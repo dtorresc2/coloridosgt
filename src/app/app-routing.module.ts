@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'singin', component: SinginComponent },
-  { path: 'accounts', component: AccountsComponent },
+  { path: 'accounts', component: AccountsComponent, canActivate: [GuardPermitsGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard] },
   {
     path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
