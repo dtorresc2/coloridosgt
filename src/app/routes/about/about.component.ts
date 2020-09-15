@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientsService } from 'src/app/services/clientes/clients.service';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private clientService: ClientsService) { }
 
   ngOnInit(): void {
+    if (localStorage['idUsuario']) {
+      // this.idUsuario = localStorage.getItem('idUsuario');
+      this.clientService.autenticado = true;
+      // this.router.navigate['/log'];
+    }
+    else {
+      this.clientService.autenticado = false;
+    }
   }
 
 }

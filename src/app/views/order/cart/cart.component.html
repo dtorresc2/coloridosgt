@@ -1,177 +1,86 @@
-<div _ngcontent-uwd-c107="" class="text-center" style="font-size: 28px;"> Lista de Carrito Actual
+<div class="text-center" style="font-size: 28px;">
+    Carrito de Compras
 </div>
 
-<div _ngcontent-eyj-c107="" class="row" style="padding-top: 3%;">
-    <div _ngcontent-eyj-c107="" class="col-md-12">
-        <div _ngcontent-eyj-c107="" class="row">
-            <form _ngcontent-eyj-c107="" novalidate="" class="ng-untouched ng-pristine ng-valid">
-                <div _ngcontent-eyj-c107="" class="form-group">
-                </div>
-            </form>
-        </div>
-        <div _ngcontent-eyj-c107="" class="row">
-            <table _ngcontent-eyj-c107="" class="table table-hover table-striped table-sm table-responsive-md">
-                <thead _ngcontent-eyj-c107="" class="table-primary">
-                    <tr _ngcontent-eyj-c107="">
-                        <th _ngcontent-eyj-c107="" scope="col">ID</th>
-                        <th _ngcontent-eyj-c107="" scope="col">Producto</th>
-                        <th _ngcontent-eyj-c107="" scope="col">Cantidad</th>
-                        <th _ngcontent-eyj-c107="" scope="col">Precio Unidad</th>
-                        <th _ngcontent-eyj-c107="" scope="col">Subtotal</th>
-                        <th _ngcontent-eyj-c107="" scope="col">Eliminar</th>
-                    </tr>
-                </thead>
-
-                <tbody _ngcontent-eyj-c107="">
-                    <tr _ngcontent-eyj-c107="">
-                        <td _ngcontent-eyj-c107="">245</td>
-                        <td _ngcontent-eyj-c107="">Marcadores Mapped Mate</td>
-                        <td _ngcontent-eyj-c107="">12</td>
-                        <td _ngcontent-eyj-c107="">Q100.00</td>
-                        <td _ngcontent-eyj-c107="">Q1,200.00</td>
-                        <td _ngcontent-eyj-c107="" type="button" placement="top" ngbtooltip="Eliminar Producto"
-                            style="align-items: center; padding-bottom: 0%" class="btn btn-danger btn-sm; " ng-reflect-placement="top"
-                            ng-reflect-ngb-tooltip="Eliminar Producto">
-                            <h4 style="color:aliceblue; text-align: center;"><i class="far fa-times-circle"></i></h4>
-
-                        </td>
-                    </tr>
-                </tbody>
-
-                <tbody _ngcontent-eyj-c107="">
-                    <tr _ngcontent-eyj-c107="">
-                        <td _ngcontent-eyj-c107="">310</td>
-                        <td _ngcontent-eyj-c107="">Marcadores a base de agua Tucan</td>
-                        <td _ngcontent-eyj-c107="">20</td>
-                        <td _ngcontent-eyj-c107="">Q65.00</td>
-                        <td _ngcontent-eyj-c107="">Q1,300.00</td>
-                        <td _ngcontent-eyj-c107="" type="button" placement="top" ngbtooltip="Eliminar Producto"
-                            style="align-items: center; padding-bottom: 0%" class="btn btn-danger btn-sm; " ng-reflect-placement="top"
-                            ng-reflect-ngb-tooltip="Eliminar Producto">
-                            <h4 style="color:aliceblue; text-align: center;"><i class="far fa-times-circle"></i></h4>
-
-                        </td>
-                    </tr>
-                </tbody>
-
-                <tbody _ngcontent-eyj-c107="">
-                    <tr _ngcontent-eyj-c107="">
-                        <td _ngcontent-eyj-c107="">79</td>
-                        <td _ngcontent-eyj-c107="">Respuesto para marcadores Sharpie grande</td>
-                        <td _ngcontent-eyj-c107="">10</td>
-                        <td _ngcontent-eyj-c107="">Q35.00</td>
-                        <td _ngcontent-eyj-c107="">Q350.00</td>
-                        <td _ngcontent-eyj-c107="" type="button" placement="top" ngbtooltip="Eliminar Producto"
-                            style="align-items: center; padding-bottom: 0%" class="btn btn-danger btn-sm; " ng-reflect-placement="top"
-                            ng-reflect-ngb-tooltip="Eliminar Producto">
-                            <h4 style="color:aliceblue; text-align: center;"><i class="far fa-times-circle"></i></h4>
-
-                        </td>
-                </tbody>
-
-                <!--bindings={"ng-reflect-ng-for-of": "[object Object],[object Object"}-->
-            </table>
+<div class="row mt-4">
+    <div class="col-12" style="padding: 0%;">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title text-center">
+                    <p>Detalle del Pedido</p>
+                </h4>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Fecha</label>
+                            <input type="text" class="form-control" name="fecha" [(ngModel)]="fecha" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Items</label>
+                            <input type="text" class="form-control" name="items" [(ngModel)]="cantidadItems" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Descuento</label>
+                            <input type="text" class="form-control" name="descuento" [(ngModel)]="descuentoPedido" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Total</label>
+                            <input type="text" class="form-control" name="total" [(ngModel)]="totalPedido" readonly>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block" (click)="irCheckout()" [disabled]="cantidadItems < 1">
+                        <span>Ir al Checkout</span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-    <div _ngcontent-eyj-c107="" class="col-sm-1 d-none d-md-block d-lg-block d-xl-block">
-    </div>
 </div>
-<br>
-<br>
 
-
-<div class="row">
-    <div align-items-right class="col-sm-7">
-        <!-- PEDAZO PARA CODIGO PROMOCIONAL -->
-        <!-- <th _ngcontent-eyj-c107="" scope="col">CODIGO PROMOCIONAL: </th>
-        <p><input type="text" name="precio" /></p> -->
-    </div>
-    <div align-items-center class="col-sm-1"></div>
-    <div align-items-right class="col-sm-2">
-        <th _ngcontent-eyj-c107="" scope="col">DESCUENTO: </th>
-        <tbody _ngcontent-eyj-c107="">
-            <tr _ngcontent-eyj-c107="">
-                <td _ngcontent-eyj-c107="">Q 00.00</td>
+<div class="row" style="padding-top: 3%;">
+    <table class="table table-hover table-sm table-responsive-sm">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">P.Unidad</th>
+                <th scope="col">Descuento</th>
+                <th scope="col">SubTotal</th>
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        <!-- <tbody>
+            <tr>
+                <th>32</th>
+                <th>10</th>
+                <th>Marcadores</th>
+                <th>Q.10.00</th>
+                <th>Q.30.00</th>
+                <th>
+                    <button class="btn btn-danger btn-sm pb-1">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </th>
+                
+            </tr>
+        </tbody> -->
+        <tbody *ngFor="let pedidos of listaPedidos; let i=index">
+            <tr>
+                <th scope="row"> {{ i+1 }} </th>
+                <td> {{ pedidos.idproducto }} </td>
+                <td> {{ pedidos.cantidad }} </td>
+                <td> {{ pedidos.descripcion }}</td>
+                <td> Q.{{ pedidos.precio_unidad | number:'1.2-2' }} </td>
+                <td> Q.{{ pedidos.descuento | number:'1.2-2' }} </td>
+                <td> Q.{{ pedidos.subtotal | number:'1.2-2' }} </td>
+                <td>
+                    <button class="btn btn-danger btn-sm pb-1" (click)="eliminarPedido(i)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
-    </div>
-    <div align-items-center class="col-sm-2">
-        <th _ngcontent-eyj-c107="" scope="col">TOTAL: </th>
-        <tbody _ngcontent-eyj-c107="">
-            <tr _ngcontent-eyj-c107="">
-                <td _ngcontent-eyj-c107="">Q 2,800.00</td>
-            </tr>
-        </tbody>
-    </div>
+    </table>
 </div>
-
-
-<div>
-<br>
-<br>
-<h3>Detalles de Pedido</h3>
-<form>
-    <div class="form-group"> <!-- label para nombre -->
-        <label for="nombreid" class="control-label">Nombre</label>
-        <input type="text" class="form-control" id="nombreid" name="nombre" placeholder="Alejandro">
-    </div>    
-
-    <div class="form-group"> <!-- label de apellido -->
-        <label for="apellidoid" class="control-label">Apellido</label>
-        <input type="text" class="form-control" id="apellidoid" name="nombre" placeholder="Barreda">
-    </div>
-
-    <div class="form-group"> <!-- label de nit -->
-        <label for="nitid" class="control-label">NIT</label>
-        <input type="text" class="form-control" id="nitid" name="nombre" placeholder="587946-8">
-    </div>
-
-    <div class="form-group"> <!-- label de direccion 1 -->
-        <label for="direccion1id" class="control-label">Dirección 1</label>
-        <input type="text" class="form-control" id="direccion1id" name="direccion1" placeholder="6A Calle, 06-01, zona 1 Cdad. de Guatemala">
-    </div>                    
-                            
-    <div class="form-group"> <!-- label de direccion 2 -->
-        <label for="direccion2id" class="control-label">Dirección 2</label>
-        <input type="text" class="form-control" id="direccion2id" name="direccion2" placeholder="Apartmento, edificio, piso, etc.">
-    </div>    
-                                  
-                            
-    <div class="form-group"> <!-- Departamento -->
-        <label for="depaid" class="control-label">Departamento</label>
-        <select class="form-control" id="depaid">
-            <option value="">Alta Verapaz</option>
-            <option value="">Baja Verapaz</option>
-            <option value="">Chimaltenango</option>
-            <option value="">Chiquimula</option>
-            <option value="">El Progreso</option>
-            <option value="">Escuintla</option>
-            <option value="">Guatemala</option>
-            <option value="">Huehuetenango</option>
-            <option value="">Izabal</option>
-            <option value="">Jalapa</option>
-            <option value="">Jutiapa</option>
-            <option value="">Petén</option>
-            <option value="">Quetzaltenango</option>
-            <option value="">Quiché</option>
-            <option value="">Retalhuleu</option>
-            <option value="">Sacatepéquez</option>
-            <option value="">San Marcos</option>
-            <option value="">Santa Rosa</option>
-            <option value="">Sololá</option>
-            <option value="">Suchitepéquez</option>
-            <option value="">Totonicapán</option>
-            <option value="">Zacapa</option>
-        </select>                    
-    </div>
-         
-    
-    <div class="form-group"> <!-- boton hacer pedido -->
-        <button type="submit" class="btn btn-primary">Hacer Pedido</button>
-    </div>     
-    
-</form>
-
-</div>
-
-

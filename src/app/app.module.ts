@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,12 @@ import { DashboardComponent } from './routes/dashboard/dashboard.component';
 import { OrderComponent } from './routes/order/order.component';
 import { CartComponent } from './views/order/cart/cart.component';
 import { OrdersComponent } from './views/order/orders/orders.component';
-import { LogComponent } from './routes/log/log.component'
+import { LogComponent } from './routes/log/log.component';
+import { CartFormComponent } from './views/order/cart-form/cart-form.component';
+import { LoaderComponent } from './components/loader/loader.component'
+import { ProductosService } from './services/productos/productos.service';
+import { PedidosService } from './services/pedidos/pedidos.service';
+import { OrdersDetailComponent } from './views/order/orders-detail/orders-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,17 +38,23 @@ import { LogComponent } from './routes/log/log.component'
     OrderComponent,
     CartComponent,
     OrdersComponent,
-    LogComponent
+    LogComponent,
+    CartFormComponent,
+    LoaderComponent,
+    OrdersDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
-    ClientsService
+    ClientsService,
+    ProductosService,
+    PedidosService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cliente } from '../../controllers/cliente';
+import { Cliente, ClienteActualizacion } from '../../controllers/cliente';
 import { Servidor } from '../../config/config';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Servidor } from '../../config/config';
 })
 export class ClientsService {
 
-  autenticado : boolean = false;
+  autenticado : boolean;
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +20,20 @@ export class ClientsService {
   autenticarCliente(cliente: Cliente) {
     return this.http.post(Servidor.API_URI + '/loginClient', cliente);
   }
+
+  obtenerCliente(id) {
+    return this.http.get(Servidor.API_URI + '/clientes/' + id);
+  }
+
+  actualizarCliente(id, cliente:ClienteActualizacion) {
+    return this.http.put(Servidor.API_URI + '/clientes/' + id, cliente);
+  }
+
+  // /bitacora/2/cliente
+  obtenerBitacora(id) {
+    return this.http.get(Servidor.API_URI + '/bitacora/' + id + '/cliente');
+  }
   
+
 
 }

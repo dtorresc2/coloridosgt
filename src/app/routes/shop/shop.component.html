@@ -1,3 +1,7 @@
+<div class="container" *ngIf="show">
+    <div class="loader"></div>
+</div>
+
 <div class="row">
     <!-- <div class="col-md-3 pb-4">
         <div class="card text-center">
@@ -20,9 +24,18 @@
             </div>
         </div>
     </div> -->
-    <div class="col-md-3 pb-4" *ngFor="let producto of listaProductos">
+    <div class="col-sm-6 col-md-4 col-lg-3 pb-4" *ngFor="let producto of listaProductos">
         <div class="card text-center">
-            <img [src]="producto.url_imagen" height="200" width = “200”>
+            <div *ngIf="this.clientService.autenticado" class="card-header  align-items-center">
+                <div class="float-left pt-2" placement="top" ngbTooltip="Existencias">
+                    <i class="fas fa-boxes"></i> {{producto.cantidad}}
+                </div>
+                <button type="button" class="btn btn-info float-right"
+                    (click)="abrirModalCantidad(modalCantidad,producto)" placement="top"
+                    ngbTooltip="Agregar Producto"><i class="fas fa-shopping-bag"></i></button>
+            </div>
+
+            <img [src]="producto.url_imagen" height="200">
             <div class="card-body">
                 <h4 class="card-title"> {{producto.nombre}} </h4>
                 <p class="card-text">{{producto.descripcion}}</p>
@@ -30,11 +43,11 @@
             <div class="card-footer text-muted">
                 <div class="row" *ngIf="producto.descuento == 0">
                     <div class="col">
-                      Q.{{ producto.precio | number:'1.2-2' }}
+                        Q.{{ producto.precio | number:'1.2-2' }}
                     </div>
                 </div>
                 <div class="row" *ngIf="producto.descuento > 0">
-                    <div class="col text-danger">
+                    <div class="col text-danger" style="text-decoration: line-through;">
                         Q.{{ producto.precio | number:'1.2-2' }}
                     </div>
                     <div class="col text-primary">
@@ -44,4 +57,35 @@
             </div>
         </div>
     </div>
+
 </div>
+
+<!-- Modal para cantidad de producto -->
+<ng-template #modalCantidad let-modal>
+    <div class="modal-header">
+        <!-- <h4 class="modal-title">Costos de Producto #{{idObjetoAux}} </h4> -->
+        <!-- <h4 class="modal-title">Añadir al Carrito - Producto #</h4> -->
+        <h4 class="modal-title">Añadir al Carrito</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Cantidad</label>
+                    <input type="number" min="1" class="form-control" name="cantidad1"
+                        [(ngModel)]="cantidadAux">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Producto</label>
+                    <input type="text" class="form-control" name="producto1" [(ngModel)]="productoAux" readonly>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" (click)="agregarCarrito()" [disabled]="cantidadAux > cantidadProducto">
+                <span>Agregar</span>
+            </button>
+        </form>
+    </div>
+</ng-template>

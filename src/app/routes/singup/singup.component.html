@@ -40,9 +40,61 @@
                             Correo invalido
                         </span>
                     </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Nombres</label>
+                            <input class="form-control" type="text" formControlName="name" placeholder="Sus nombres"
+                                autofocus>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="user.get('name').hasError('required') && user.get('name').touched">
+                                Nombre requerido
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Apellidos</label>
+                            <input class="form-control" type="text" formControlName="lastname"
+                                placeholder="Sus apellidos" autofocus>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="user.get('lastname').hasError('required') && user.get('lastname').touched">
+                                Apellido requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Telefono</label>
+                            <input class="form-control" type="text" formControlName="telefono" placeholder="Su telefono"
+                                autofocus>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="user.get('telefono').hasError('required') && user.get('telefono').touched">
+                                Telefono requerido
+                            </span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Nit</label>
+                            <input class="form-control" type="text" formControlName="nit" placeholder="Su nit"
+                                autofocus>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="user.get('nit').hasError('required') && user.get('nit').touched">
+                                Nit requerido
+                            </span>
+                        </div>
+                    </div>
                     <div class="form-group">
+                        <label>DPI</label>
+                        <input class="form-control" type="text" formControlName="dpi"
+                            placeholder="Ingrese su dpi" autofocus>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="user.get('dpi').hasError('required') && user.get('dpi').touched">
+                            DPI requerido
+                        </span>
+                    </div>
+
+                    <!-- <div class="form-group">
                         <label>Nombres</label>
-                        <input class="form-control" type="text" formControlName="name" placeholder="Ingrese su correo"
+                        <input class="form-control" type="text" formControlName="name" placeholder="Ingrese su nombre"
                             autofocus>
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="user.get('name').hasError('required') && user.get('name').touched">
@@ -52,12 +104,12 @@
                     <div class="form-group">
                         <label>Apellidos</label>
                         <input class="form-control" type="text" formControlName="lastname"
-                            placeholder="Ingrese su correo" autofocus>
+                            placeholder="Ingrese su apellido" autofocus>
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="user.get('lastname').hasError('required') && user.get('lastname').touched">
                             Apellido requerido
                         </span>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label>Contraseña</label>
                         <input class="form-control" type="password" formControlName="password"
@@ -81,9 +133,11 @@
                     </div>
                     <div class="card-subtitle mb-2 text-center p-4">¿Tienes cuenta? <a routerLink="/singin"
                             class="text-primary ">Pulsa aca</a></div>
-                            
-                    <button class="btn btn-primary btn-block" [disabled]="user.invalid || this.comprobador" style="padding-bottom: 0%;">
-                        <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+                    <button class="btn btn-primary btn-block" [disabled]="user.invalid || this.comprobador"
+                        style="padding-bottom: 0%;">
+                        <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
                         <label *ngIf="!this.comprobador">Registrar</label>
                     </button>
                 </form>

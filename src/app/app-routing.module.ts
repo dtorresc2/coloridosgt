@@ -10,20 +10,30 @@ import { OrderComponent } from './routes/order/order.component';
 import { CartComponent } from './views/order/cart/cart.component';
 import { OrdersComponent } from './views/order/orders/orders.component';
 import { LogComponent } from './routes/log/log.component';
+import { AuthGuard } from './guards/auth.guard';
+import { CartFormComponent } from './views/order/cart-form/cart-form.component';
+
+import { ShopResolver } from './resolvers/shop.resolver';
+import { LogResolver } from './resolvers/log.resolver';
+import { OrdersDetailComponent } from './views/order/orders-detail/orders-detail.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'shop', component: ShopComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'shop', component: ShopComponent, resolve: { shop: ShopResolver } },
+  // { path: 'shop', component: ShopComponent },
   { path: 'about', component: AboutComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'singin', component: SinginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'log', component: LogComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'log', component: LogComponent, canActivate: [AuthGuard], resolve: {log: LogResolver} },
   {
-    path: 'order', component: OrderComponent,
+    path: 'order', component: OrderComponent, canActivateChild: [AuthGuard],
+    // path: 'order', component: OrderComponent,
     children: [
       { path: '', component: CartComponent },
-      { path: 'list', component: OrdersComponent }
+      { path: 'list', component: OrdersComponent },
+      { path: 'checkout', component: CartFormComponent },
+      { path: 'list/:id/detail', component: OrdersDetailComponent }
     ]
   }
 ];
