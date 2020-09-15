@@ -12,7 +12,7 @@ export class LogResolver implements Resolve<Observable<any>> {
    
    resolve() {
       // route.firstChild.snapshot.params['id']
-      console.log(this.activatedRoute.firstChild.snapshot.params);
+      console.log(this.activatedRoute.snapshot.params);
       return this.usersService.obtenerBitacora(this.activatedRoute.snapshot.params.id);
    }
 }
