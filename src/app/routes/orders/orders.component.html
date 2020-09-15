@@ -24,8 +24,8 @@
                 </form>
             </div>
             <div class="col-md-4">
-                <ngb-pagination class="bg-info" [collectionSize]="listaPedidos.length" [(page)]="page" [maxSize]="10" [rotate]="true"
-                    [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+                <ngb-pagination class="bg-info" [collectionSize]="listaPedidos.length" [(page)]="page" [maxSize]="10"
+                    [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
             </div>
         </div>
 
@@ -229,7 +229,8 @@
                             <div class="form-group">
                                 <label>Estado</label>
                                 <select class="form-control form-control-sm" name="estadoPedido1"
-                                    [(ngModel)]="idEstadoPedido" (change)="onChangeEstado($event.target.value)" [disabled]="idEstadoPedido > 2">
+                                    [(ngModel)]="idEstadoPedido" (change)="onChangeEstado($event.target.value)"
+                                    [disabled]="idEstadoPedido > 2">
                                     <!-- formControlName="categoria"> -->
                                     <option [value]="estado.idestado_pedido" *ngFor="let estado of listaEstados">
                                         {{estado.estado}}
