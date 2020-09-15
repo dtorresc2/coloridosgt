@@ -1,9 +1,14 @@
-<div class="text-center" style="font-size: 28px;">
+<div class="container" *ngIf="show">
+    <div class="loader"></div>
+</div>
+
+
+<div class="text-center" style="font-size: 28px;" *ngIf="!show">
     Mantenimiento Pedidos
 </div>
 
 <!-- <div class="row align-items-center" style="padding-top: 3%;"> -->
-<div class="row justify-content-center" style="padding-top: 3%;">
+<div class="row justify-content-center" style="padding-top: 3%;" *ngIf="!show">
     <div class="col-md-8 text-center mr-2">
         <div class="row">
             <div class="col-md-8">

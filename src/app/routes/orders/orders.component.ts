@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/services/usuarios/users.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriasService } from 'src/app/services/productos/categorias.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { NotificacionService } from 'src/app/services/toasts/toasts.service';
@@ -40,13 +40,16 @@ export class OrdersComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
+  // Loader
+  show: boolean = true;
 
   constructor(
     private modalService: NgbModal,
     private usersService: UsersService,
     private pedidoService: PedidosService,
     private router: Router,
-    private notifiacionService: NotificacionService
+    private notifiacionService: NotificacionService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +64,10 @@ export class OrdersComponent implements OnInit {
     }
 
     // this.idEmpleado = 10;
+
+    setTimeout(() => {
+      this.show = false;
+    }, 1000);
 
     this.obtenerListaEmpleados();
     this.obtenerListaEstados();
@@ -119,7 +126,7 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaPedidos = res;
-          console.log(res);
+          // console.log(res);
         },
         err => console.error(err)
       )

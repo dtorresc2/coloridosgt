@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'singin', component: SinginComponent },
   { path: 'accounts', component: AccountsComponent, canActivate: [GuardPermitsGuard] },
-  { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard], resolve : {orders: OrdersResolver} },
+  { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard]},
   {
     path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
     children: [

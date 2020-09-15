@@ -48,3 +48,33 @@ ngb-pagination ::ng-deep .page-item.active .page-link:focus {
 /* ngb-pagination ::ng-deep a {
     color: rgb(160, 158, 158) !important;
 } */
+
+/* Loader */
+:host{
+    display: block;
+ }
+ 
+ .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(white, .5);
+    
+ }
+ 
+ .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    background-image: url(^assets/spinner-rosado.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+ }
