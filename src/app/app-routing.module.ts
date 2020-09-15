@@ -13,8 +13,8 @@ import { OrdersComponent } from './routes/orders/orders.component';
 
 import { GuardPermitsGuard } from './guards/guard-permits.guard';
 
-import { ProductResolver } from './functions/products.resolver';
-import { CategoryResolver } from './functions/categories.resolver';
+import { ProductResolver } from './functions/products/products.resolver';
+import { CategoryResolver } from './functions/products/categories.resolver';
 
 const routes: Routes = [
   { path: '', redirectTo: 'singin', pathMatch: 'full' },

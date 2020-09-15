@@ -1,7 +1,7 @@
 import { Resolve, ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductosService } from '../services/productos/productos.service';
+import { ProductosService } from '../../services/productos/productos.service';
 
 @Injectable({
    providedIn: 'root'
