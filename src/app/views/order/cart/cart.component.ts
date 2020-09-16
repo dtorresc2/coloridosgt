@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import * as moment from 'moment';
 import 'moment-timezone';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
+import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
 // https://stackoverflow.com/questions/38674835/how-to-include-moment-timezone-in-angular-2-app Link para incluir libreria de fechas
 
 @Component({
@@ -18,7 +19,7 @@ export class CartComponent implements OnInit {
   totalPedido: any = 0.00;
   descuentoPedido: any = 0.00;
 
-  constructor(private servicePedidos: PedidosService, private router:Router) { }
+  constructor(private servicePedidos: PedidosService, private router: Router, private notificacionService: NotificacionService) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario']) {
@@ -39,6 +40,7 @@ export class CartComponent implements OnInit {
     this.listaPedidos = this.servicePedidos.fieldArray;
     this.cantidadItems = this.servicePedidos.cantidadItems;
     this.generarTotal();
+    this.notificacionService.getToastSuccess('Elemento eliminado correctamente','');
   }
 
   generarTotal() {
