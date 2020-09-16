@@ -5,6 +5,7 @@ import { ClientsService } from 'src/app/services/clientes/clients.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { DetallePedido } from 'src/app/controllers/pedido';
+import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
 
 @Component({
   selector: 'app-shop',
@@ -40,7 +41,8 @@ export class ShopComponent implements OnInit {
     private clientService: ClientsService,
     private activatedRoute: ActivatedRoute,
     private modalService: NgbModal,
-    private pedidosService: PedidosService
+    private pedidosService: PedidosService,
+    private notificacionService: NotificacionService
   ) { }
 
   ngOnInit(): void {
@@ -100,7 +102,7 @@ export class ShopComponent implements OnInit {
 
     this.pedidosService.agregarPedido(this.detallePedido);
     // console.log(this.pedidosService.fieldArray.length);
-
+    this.notificacionService.getToastSuccess('Producto agregado correctamente','');
     this.servicioModal.close();
   }
 }
