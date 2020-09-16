@@ -179,6 +179,7 @@ export class CartFormComponent implements OnInit {
   }
 
   comprobarItems() {
+    this.arregloComprobacion.splice(0, this.arregloComprobacion.length);
     this.pedidoService.fieldArray.forEach(async element => {
       const { cantidad } = await this.obtenerProductoEspecifico(element.idproducto);
       let comprobacionAux: ResultadoInventario = {
