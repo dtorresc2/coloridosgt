@@ -80,6 +80,9 @@
                                 *ngIf="user.get('nit').hasError('required') && user.get('nit').touched">
                                 Nit requerido
                             </span>
+                            <span class="text-danger" style="font-size: 10px;" *ngIf="user.errors?.nitInvalido">
+                                Nit sin coincidir
+                            </span>
                         </div>
                     </div>
                     <div class="form-group">
