@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResultadoInventario, DetallePedido } from 'src/app/controllers/pedido';
 import { ProductosService } from 'src/app/services/productos/productos.service';
 import { Cliente, ClienteActualizacion } from 'src/app/controllers/cliente';
+import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
 
 @Component({
   selector: 'app-cart-form',
@@ -57,7 +58,9 @@ export class CartFormComponent implements OnInit {
     private router: Router,
     private clienteService: ClientsService,
     private modalService: NgbModal,
-    private productoService: ProductosService) { }
+    private productoService: ProductosService,
+    private notificacionService: NotificacionService
+    ) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario'] && this.pedidoService.cantidadItems > 0) {
@@ -332,6 +335,8 @@ export class CartFormComponent implements OnInit {
         idusuario: 0,
         detalle_pedido: new Array<DetallePedido>()
       }
+
+      this.notificacionService.getToastSuccess('Pedido confirmado correctamente','');
   
       this.pedidoService.cantidadItems = 0;
       this.pedidoService.fieldArray.splice(0, this.pedidoService.fieldArray.length);
