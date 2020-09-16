@@ -24,6 +24,7 @@ import { LoaderComponent } from './components/loader/loader.component'
 import { ProductosService } from './services/productos/productos.service';
 import { PedidosService } from './services/pedidos/pedidos.service';
 import { OrdersDetailComponent } from './views/order/orders-detail/orders-detail.component';
+import { NotificacionService } from './services/notificaciones/notificacion.service';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -59,7 +60,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     ClientsService,
     ProductosService,
-    PedidosService
+    PedidosService,
+    NotificacionService
   ],
   bootstrap: [AppComponent]
 })
