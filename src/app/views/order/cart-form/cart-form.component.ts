@@ -92,6 +92,9 @@ export class CartFormComponent implements OnInit {
         fecha: new FormControl('', Validators.required),
         // fecha: new FormControl('', [Validators.required, Validators.pattern('^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$')]),
         envio: new FormControl('', Validators.required),
+      },
+      {
+        validators: this.nitMatchValidator
       }
     );
     // https://www.regextester.com/97987 TESTER DE EXPRESIONES REGULARES
@@ -145,6 +148,60 @@ export class CartFormComponent implements OnInit {
         },
         err => console.error(err)
       )
+  }
+
+  nitMatchValidator(g: FormGroup): { nitInvalido: boolean } {
+    let txtN = g.get('nit').value;
+    // console.log(txtN);
+
+    // http://mariobatres7.blogspot.com/2008/02/validar-el-nit-con-modulo-11.html
+    if (txtN != '') {
+      txtN = txtN.toUpperCase();
+
+      if (txtN == "CF" || txtN == "C/F") return null;
+
+      var nit = txtN;
+      var pos = nit.indexOf("-");
+
+      if (pos < 0) {
+        var correlativo = txtN.substr(0, txtN.length - 1);
+        correlativo = correlativo + "-";
+
+        var pos2 = correlativo.length - 2;
+        var digito = txtN.substr(pos2 + 1);
+        nit = correlativo + digito;
+        pos = nit.indexOf("-");
+        txtN = nit;
+      }
+
+      var Correlativo = nit.substr(0, pos);
+      var DigitoVerificador = nit.substr(pos + 1);
+      var Factor = Correlativo.length + 1;
+      var Suma = 0;
+      var Valor = 0;
+
+      for (let x = 0; x <= (pos - 1); x++) {
+        Valor = eval(nit.substr(x, 1));
+        // var Multiplicacion = eval(Valor * Factor);
+        var Multiplicacion = Valor * Factor;
+        // Suma = eval(Suma + Multiplicacion);
+        Suma = Suma + Multiplicacion;
+        Factor = Factor - 1;
+      }
+
+      var xMOd11 = 0;
+      xMOd11 = (11 - (Suma % 11)) % 11;
+      var s = xMOd11;
+
+      if ((xMOd11 == 10 && DigitoVerificador == "K") || (s == DigitoVerificador)) {
+        return null;
+      }
+      else {
+        return { nitInvalido: true };
+      }
+    }
+    // return { nitInvalido: true }
+    // return g.get('password').value === g.get('confirmpass').value ? null : { nitInvalido: true };
   }
 
   cargarCliente(cliente) {

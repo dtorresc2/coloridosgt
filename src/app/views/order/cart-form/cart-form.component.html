@@ -53,6 +53,9 @@
                                 *ngIf="client.get('nit').hasError('required') && client.get('nit').touched">
                                 Nit requerido
                             </span>
+                            <span class="text-danger" style="font-size: 10px;" *ngIf="client.errors?.nitInvalido">
+                                Nit invalido
+                            </span>
                             <!-- <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('nit').errors.maxlength && client.get('nit').touched">
                                 Nit invalido
