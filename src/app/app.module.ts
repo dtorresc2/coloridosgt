@@ -25,6 +25,9 @@ import { ProductosService } from './services/productos/productos.service';
 import { PedidosService } from './services/pedidos/pedidos.service';
 import { OrdersDetailComponent } from './views/order/orders-detail/orders-detail.component';
 
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +52,9 @@ import { OrdersDetailComponent } from './views/order/orders-detail/orders-detail
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [
     ClientsService,

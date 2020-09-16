@@ -65,7 +65,7 @@ export class CartFormComponent implements OnInit {
       this.clienteService.obtenerCliente(localStorage.getItem('idUsuario'))
         .subscribe(
           res => {
-            console.log(res);
+            // console.log(res);
             this.cargarCliente(res);
           },
           err => console.error(err)
@@ -109,7 +109,7 @@ export class CartFormComponent implements OnInit {
         this.cambiado = true;
       }
     });
-    
+
     this.client.get('apellido').valueChanges.subscribe (value => {
       if (this.contador > 7) {
         this.cambiado = true;
