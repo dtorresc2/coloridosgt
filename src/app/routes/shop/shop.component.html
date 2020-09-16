@@ -3,6 +3,13 @@
 </div>
 
 <div class="row">
+    <div class="col-md-8">
+        <ngb-pagination class="bg-info" [collectionSize]="listaProductos.length" [(page)]="page" [maxSize]="12"
+            [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+</div>
+
+<div class="row">
     <!-- <div class="col-md-3 pb-4">
         <div class="card text-center">
             <img src="http://hp-api.herokuapp.com/images/mcgonagall.jpg" height="200">
@@ -24,7 +31,7 @@
             </div>
         </div>
     </div> -->
-    <div class="col-sm-6 col-md-4 col-lg-3 pb-4" *ngFor="let producto of listaProductos">
+    <div class="col-sm-6 col-md-4 col-lg-3 pb-4" *ngFor="let producto of listaProductos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
         <div class="card text-center">
             <div *ngIf="this.clientService.autenticado" class="card-header bg-primary text-white align-items-center">
                 <div class="float-left pt-2" placement="top" ngbTooltip="Existencias">

@@ -35,6 +35,9 @@ export class ShopComponent implements OnInit {
     producto: ''
   }
 
+  page = 1;
+  pageSize = 10;
+
   constructor(
     private productoService: ProductosService,
     private router: Router,
