@@ -12,6 +12,9 @@ export class LogComponent implements OnInit {
   show: boolean = true;
   listaBitacora:any = [];
 
+  page = 1;
+  pageSize = 10;
+
   constructor(private clientService: ClientsService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
