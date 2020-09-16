@@ -1,0 +1,25 @@
+ngb-pagination ::ng-deep .page-link {
+   background: white;
+   border-color: #d3d8dd;
+   color: #958d89
+
+}
+
+ngb-pagination ::ng-deep .page-link .page-link:disabled{
+   background-color: yellow;
+}
+
+ngb-pagination /deep/ .page-item.disabled .page-link {
+   background-color: #cce8e0;
+   border-color: #cce8e0;
+}
+ 
+ngb-pagination ::ng-deep .page-item.active .page-link {
+   border-color: #78c2ad;
+   background-color: #78c2ad;
+   color: white;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus {
+   box-shadow: 0 0 1px #629e8d;
+}

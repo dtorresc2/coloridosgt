@@ -2,7 +2,14 @@
     Historial de Pedidos
 </div>
 
-<div class="row" style="padding-top: 3%;">
+<div class="row mt-2">
+    <div class="col-md-8">
+        <ngb-pagination class="bg-info" [collectionSize]="listaPedidos.length" [(page)]="page" [maxSize]="10"
+            [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+</div>
+
+<div class="row mt-3">
     <table class="table table-hover table-sm table-responsive-sm">
         <thead class="table-primary">
             <tr>
@@ -16,7 +23,7 @@
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody *ngFor="let pedido of listaPedidos">
+        <tbody *ngFor="let pedido of listaPedidos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
             <tr>
                 <!-- <th scope="row"> {{ i+1 }} </th> -->
                 <td> {{ pedido.idpedido }} </td>
