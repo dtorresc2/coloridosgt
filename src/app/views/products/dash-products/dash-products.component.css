@@ -53,7 +53,7 @@ ngb-pagination ::ng-deep .page-item.active .page-link:focus {
    display: block;
 }
 
-.container {
+.container1 {
    position: fixed;
    top: 0;
    left: 0;

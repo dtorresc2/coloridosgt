@@ -439,7 +439,7 @@ export class DashProductsComponent implements OnInit {
   // CATEGORIAS ====================================
   abrirMantenimientosCat(content) {
     // this.urlAUX = url;
-    this.modalService.open(content, { centered: true, size: 'lg', scrollable: true });
+    this.modalService.open(content, {size: 'lg', scrollable: true });
     this.categoria.reset();
     // console.log(id);
   }

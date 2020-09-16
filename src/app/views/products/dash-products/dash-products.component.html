@@ -1,4 +1,4 @@
-<div class="container" *ngIf="show">
+<div class="container1" *ngIf="show">
     <div class="loader"></div>
 </div>
 
@@ -30,6 +30,12 @@
                     style="padding-top: 2%; padding-bottom: 2%;">
                     <span>Nuevo Producto</span>
                 </button>
+                <!-- <button type="button" class="btn btn-secondary ml-1" (click)="abrirMantenimientosCat(modalCategorias)"
+                    style="padding-top: 2%; padding-bottom: 2%;" placement="top" ngbTooltip="Mantenimiento Categorias">
+                    <i class="fas fa-wrench"></i>
+                </button> -->
+                <!-- <a (click)="abrirMantenimientosCat(modalCategorias)" class="text-secondary" style="font-size: 12px;"
+                    placement="top" ngbTooltip="Mantenimientos"><i class="fas fa-wrench"></i></a> -->
             </div>
             <div class="col-md-3">
                 <ngb-pagination [collectionSize]="listaProductos.length" [(page)]="page" [maxSize]="10" [rotate]="true"
@@ -115,13 +121,13 @@
                                 <i class="far fa-image"></i></button>
 
                             <button type="button" class="btn btn-info btn-sm ml-1 pb-1"
-                                (click)="editado(producto.idproducto,producto); abrirModalForm(modalProductos)" placement="top"
-                                ngbTooltip="Editar Producto">
+                                (click)="editado(producto.idproducto,producto); abrirModalForm(modalProductos)"
+                                placement="top" ngbTooltip="Editar Producto">
                                 <i class="fas fa-pencil-alt"></i></button>
 
                             <button type="button" class="btn btn-danger btn-sm ml-1 pb-1"
-                                (click)="eliminado(producto.idproducto,producto); abrirModalForm(modalProductos)" placement="top"
-                                ngbTooltip="Eliminar Producto">
+                                (click)="eliminado(producto.idproducto,producto); abrirModalForm(modalProductos)"
+                                placement="top" ngbTooltip="Eliminar Producto">
                                 <i class="fas fa-trash"></i></button>
 
                         </td>
@@ -519,15 +525,16 @@
         </button>
     </div>
     <div class="modal-body">
+        <!-- hola -->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="card">
 
                     <div class="card-header d-flex justify-content-end">
-                        <div class="col-4" style="padding-top: 0.4%;">
+                        <div class="col-md-4" style="padding-top: 0.4%;">
                             Categoria
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <button type="button" class="btn btn-secondary btn-sm" (click)="creadoCat()"
                                 style="padding-top: 0.4%;">
                                 <span>Nueva Categoria</span>
@@ -573,7 +580,6 @@
             </div>
 
             <div class="row" style="padding-top: 2%;">
-                <!-- <table class="table table-hover table-striped table-sm table-responsive-sm"> -->
                 <div class="container">
                     <table class="table table-hover table-striped table-sm table-responsive-sm">
                         <thead class="table-secondary">
