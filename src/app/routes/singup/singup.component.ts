@@ -35,13 +35,13 @@ export class SingupComponent implements OnInit {
     this.user = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
-        name: new FormControl('', Validators.required),
-        lastname: new FormControl('', Validators.required),
+        name: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$')]),
+        lastname: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$')]),
         password: new FormControl('', Validators.required),
         confirmpass: new FormControl('', Validators.required),
-        telefono: new FormControl('', Validators.required),
+        telefono: new FormControl('', [Validators.required, Validators.pattern('^[2-8]{1}[0-9]{3}[-][0-9]{4}$')]),
         nit: new FormControl('', Validators.required),
-        dpi: new FormControl('', Validators.required)
+        dpi: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{13}$')])
       },
       {
         validators: [this.passwordMatchValidator, this.nitMatchValidator]
@@ -72,9 +72,12 @@ export class SingupComponent implements OnInit {
     let txtN = g.get('nit').value;
     // console.log(txtN);
 
+    // http://mariobatres7.blogspot.com/2008/02/validar-el-nit-con-modulo-11.html
     if (txtN != '') {
       txtN = txtN.toUpperCase();
+
       if (txtN == "CF" || txtN == "C/F") return null;
+
       var nit = txtN;
       var pos = nit.indexOf("-");
 
