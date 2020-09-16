@@ -98,9 +98,39 @@ export class CartFormComponent implements OnInit {
     this.client.valueChanges.subscribe(value => {
       this.contador++;
       this.enlazarClienteClase();
+      // if (this.contador > 7) {
+      //   this.cambiado = true;
+      //   this.enlazarClienteClase();
+      // }
+    });
+
+    this.client.get('nombre').valueChanges.subscribe (value => {
       if (this.contador > 7) {
         this.cambiado = true;
-        // this.enlazarClienteClase();
+      }
+    });
+    
+    this.client.get('apellido').valueChanges.subscribe (value => {
+      if (this.contador > 7) {
+        this.cambiado = true;
+      }
+    });
+
+    this.client.get('nit').valueChanges.subscribe (value => {
+      if (this.contador > 7) {
+        this.cambiado = true;
+      }
+    });
+
+    this.client.get('dpi').valueChanges.subscribe (value => {
+      if (this.contador > 7) {
+        this.cambiado = true;
+      }
+    });
+
+    this.client.get('telefono').valueChanges.subscribe (value => {
+      if (this.contador > 7) {
+        this.cambiado = true;
       }
     });
 
@@ -227,7 +257,7 @@ export class CartFormComponent implements OnInit {
         this.pedidoService.registrarPedido(this.pedidoService.pedido)
           .subscribe(
             res => {
-              console.log(res);
+              // console.log(res);
               resolve(true);
             },
             err => {
