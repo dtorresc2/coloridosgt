@@ -6,7 +6,6 @@ ngb-pagination ::ng-deep .page-link {
     background: white;
     border-color: #d3d8dd;
     color: #958d89
-
 }
 
 ngb-pagination ::ng-deep .page-link .page-link:disabled{
