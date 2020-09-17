@@ -38,5 +38,71 @@
 </form>
 
 <hr>
+<!-- 
 <pre>From date model: {{ fromDate | json }}</pre>
-<pre>To date model: {{ toDate | json }}</pre>
+<pre>To date model: {{ toDate | json }}</pre> -->
+
+<div class="row mt-1" *ngIf="!show">
+   <div class="col-md-4">
+      <div class="row">
+         <div class="text-center">
+            Tabla de Ingresos
+         </div>
+      </div>
+      <div class="row mt-1">
+         <table class="table table-hover table-responsive-sm">
+            <thead class="table-secondary">
+               <tr>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Hora</th>
+                  <th scope="col">IP</th>
+               </tr>
+            </thead>
+            <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
+               <tr>
+                  <td> {{ bitacora.descripcion }} </td>
+                  <td> {{ bitacora.fecha }} </td>
+                  <td> {{ bitacora.hora }} </td>
+                  <td> {{ bitacora.ip }} </td>
+               </tr>
+            </tbody> -->
+         </table>
+      </div>
+   </div>
+
+   <div class="col-md-2">
+
+   </div>
+
+   <div class="col-md-4">
+      <div class="row">
+         <div class="text-center">
+            Tabla de Ingresos
+         </div>
+      </div>
+
+      <div class="row mt-1">
+         <table class="table table-hover table-responsive-sm">
+            <thead class="table-secondary">
+               <tr>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Hora</th>
+                  <th scope="col">IP</th>
+               </tr>
+            </thead>
+            <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
+               <tr>
+                  <td> {{ bitacora.descripcion }} </td>
+                  <td> {{ bitacora.fecha }} </td>
+                  <td> {{ bitacora.hora }} </td>
+                  <td> {{ bitacora.ip }} </td>
+               </tr>
+            </tbody> -->
+         </table>
+      </div>
+
+   </div>
+
+</div>
