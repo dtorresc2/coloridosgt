@@ -124,8 +124,20 @@ export class AccountsComponent implements OnInit {
   }
 
   obtenerTotales() {
-    this.obtenerTotalesIng();
-    this.obtenerTotalesGast();
+    let total = 0;
+    this.listaIngresos.forEach(element => {
+      total += element.total;
+    });
+    this.totalIngresos = parseFloat(total.toString()).toFixed(2);
+
+    let total1 = 0;
+    this.listaGastos.forEach(element => {
+      total1 += element.total;
+    });
+    this.totalGastos = parseFloat(total1.toString()).toFixed(2);
+
+    let totalFinal = total - total1;
+    this.totalSaldos = parseFloat(totalFinal.toString()).toString(2);
   }
 
   obtenerTotalesIng() {
