@@ -47,6 +47,7 @@ export class AccountsComponent implements OnInit {
       this.toDate = null;
       this.fromDate = date;
     }
+    console.log(this.toDate, '-', this.fromDate);
   }
 
   isHovered(date: NgbDate) {
