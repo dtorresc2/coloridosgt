@@ -2,14 +2,14 @@
     <div class="loader"></div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="!show">
     <div class="col-md-8">
         <ngb-pagination class="bg-info" [collectionSize]="listaProductos.length" [(page)]="page" [maxSize]="10"
             [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
     </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="!show">
     <!-- <div class="col-md-3 pb-4">
         <div class="card text-center">
             <img src="http://hp-api.herokuapp.com/images/mcgonagall.jpg" height="200">
