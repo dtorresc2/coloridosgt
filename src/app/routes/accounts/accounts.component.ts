@@ -20,6 +20,10 @@ export class AccountsComponent implements OnInit {
   listaIngresos: any = [];
   listaGastos: any = [];
 
+  totalIngresos: any = "0.00";
+  totalGastos: any = "0.00";
+  totalSaldos: any = "0.00";
+
   constructor(
     private usersService: UsersService,
     private router: Router,
@@ -46,13 +50,15 @@ export class AccountsComponent implements OnInit {
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
+    }
+    else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
       this.toDate = date;
-    } else {
+    }
+    else {
       this.toDate = null;
       this.fromDate = date;
     }
-    console.log(this.toDate, '-', this.fromDate);
+    // console.log(this.toDate, '-', this.fromDate);
   }
 
   isHovered(date: NgbDate) {
@@ -72,34 +78,72 @@ export class AccountsComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  obtenerIngresosyGastos() {
+  async obtenerIngresosyGastos() {
     if (this.toDate != null && this.fromDate != null) {
       let fechaFinal = this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day;
       let fechaInicial = this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day;
-      console.log(fechaInicial, '-', fechaFinal);
-      this.obtenerGastos(fechaInicial, fechaFinal);
-      this.obtenerIngresos(fechaInicial, fechaFinal);
+      // console.log(fechaInicial, '-', fechaFinal);
+      await this.obtenerIngresos(fechaInicial, fechaFinal);
+      await this.obtenerGastos(fechaInicial, fechaFinal);
+      this.obtenerTotales();
     }
   }
 
-  obtenerIngresos(_fechaInicial, _fechaFinal) {
-    this.finazaServices.obtenerIngresos(_fechaInicial, _fechaFinal).subscribe(
-      res => {
-        this.listaIngresos = res;
-        console.log(res);
-      },
-      err => console.error(err)
-    )
+  obtenerIngresos(_fechaInicial, _fechaFinal): Promise<any> {
+    return new Promise(
+      resolve => {
+        this.finazaServices.obtenerIngresos(_fechaInicial, _fechaFinal).subscribe(
+          res => {
+            this.listaIngresos = res;
+            // console.log(res);
+            resolve(true);
+          },
+          err => {
+            console.error(err);
+            resolve(false);
+          }
+        )
+      });
   }
 
-  obtenerGastos(_fechaInicial, _fechaFinal) {
-    this.finazaServices.obtenerGastos(_fechaInicial, _fechaFinal).subscribe(
-      res => {
-        this.listaGastos = res;
-        console.log(res);
-      },
-      err => console.error(err)
-    )
+  obtenerGastos(_fechaInicial, _fechaFinal): Promise<any> {
+    return new Promise(
+      resolve => {
+        this.finazaServices.obtenerGastos(_fechaInicial, _fechaFinal).subscribe(
+          res => {
+            this.listaGastos = res;
+            // console.log(res);
+            resolve(true);
+          },
+          err => {
+            console.error(err);
+            resolve(false);
+          }
+        )
+      });
+  }
+
+  obtenerTotales() {
+    this.obtenerTotalesIng();
+    this.obtenerTotalesGast();
+  }
+
+  obtenerTotalesIng() {
+    let total = 0;
+    this.listaIngresos.forEach(element => {
+      total += element.total;
+    });
+    // console.log(total);
+    this.totalIngresos = parseFloat(total.toString()).toFixed(2);
+  }
+
+  obtenerTotalesGast() {
+    let total = 0;
+    this.listaGastos.forEach(element => {
+      total += element.total;
+    });
+    // console.log(total);
+    this.totalGastos = parseFloat(total.toString()).toFixed(2);
   }
 
 }

@@ -51,16 +51,16 @@
 <form>
    <div class="form-row">
       <div class="form-group col-md-4">
-         <label for="inputEmail4">Ingresos</label>
-         <input type="email" class="form-control" id="inputEmail4" readonly>
+         <label>Ingresos</label>
+         <input type="text" class="form-control" name="ingresos" [(ngModel)]="totalIngresos" readonly>
       </div>
       <div class="form-group col-md-4">
-         <label for="inputPassword1">Gastos</label>
-         <input type="email" class="form-control" id="inputPassword4" readonly>
+         <label>Gastos</label>
+         <input type="text" class="form-control" name="gastos" [(ngModel)]="totalGastos" readonly>
       </div>
       <div class="form-group col-md-4">
-         <label for="inputPassword2">Saldo</label>
-         <input type="email" class="form-control" id="inputPassword5" readonly>
+         <label>Saldo</label>
+         <input type="text" class="form-control" name="saldo" [(ngModel)]="totalSaldos"  readonly>
       </div>
    </div>
 </form>
@@ -73,31 +73,27 @@
          Control de Ingresos
       </div>
 
-      <table class="table table-hover mt-3">
-         <thead class="table-secondary">
-            <tr>
-               <th scope="col">Fecha</th>
-               <th scope="col">Descripcion</th>
-               <th scope="col">Total</th>
-               <!-- <th scope="col">IP</th> -->
-            </tr>
-         </thead>
-         <!-- <tbody>
-            <tr>
-               <td>213132</td>
-               <td>213132</td>
-               <td>213132</td>
-            </tr>
-         </tbody> -->
-         <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+         <table class="table table-hover mt-3">
+            <thead class="table-secondary">
                <tr>
-                  <td> {{ bitacora.descripcion }} </td>
-                  <td> {{ bitacora.fecha }} </td>
-                  <td> {{ bitacora.hora }} </td>
-                  <td> {{ bitacora.ip }} </td>
+                  <th scope="col">No.</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Total</th>
                </tr>
-            </tbody> -->
-      </table>
+            </thead>
+
+            <tbody *ngFor="let registro of listaIngresos; let i=index">
+               <tr>
+                  <td scope="row"> {{i+1}} </td>
+                  <td> {{ registro.fecha }} </td>
+                  <td> {{ registro.descripcion }} </td>
+                  <td> Q.{{ registro.total | number: '1.2-2' }} </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
    </div>
 
    <div class="col-md-6">
@@ -106,29 +102,27 @@
       </div>
 
       <!-- <table class="table table-hover table-responsive-sm mt-3"> -->
-      <table class="table table-hover mt-3">
-         <thead class="table-secondary">
-            <tr>
-               <th scope="col">Fecha</th>
-               <th scope="col">Descripcion</th>
-               <th scope="col">Total</th>
-            </tr>
-         </thead>
-         <!-- <tbody>
-            <tr>
-               <td>213132</td>
-               <td>213132</td>
-               <td>213132</td>
-            </tr>
-         </tbody> -->
-         <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+         <table class="table table-hover mt-3">
+            <thead class="table-secondary">
                <tr>
-                  <td> {{ bitacora.descripcion }} </td>
-                  <td> {{ bitacora.fecha }} </td>
-                  <td> {{ bitacora.hora }} </td>
-                  <td> {{ bitacora.ip }} </td>
+                  <th scope="col">No.</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Total</th>
                </tr>
-            </tbody> -->
-      </table>
+            </thead>
+
+            <tbody *ngFor="let registro of listaGastos; let i=index">
+               <tr>
+                  <td scope="row"> {{i+1}} </td>
+
+                  <td> {{ registro.fecha }} </td>
+                  <td> {{ registro.descripcion }} </td>
+                  <td> Q.{{ registro.total | number: '1.2-2' }} </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
    </div>
 </div>

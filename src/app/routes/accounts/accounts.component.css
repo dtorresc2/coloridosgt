@@ -24,3 +24,12 @@
 .custom-day.faded {
   background-color: rgba(2, 117, 216, 0.5);
 }
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 500px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
