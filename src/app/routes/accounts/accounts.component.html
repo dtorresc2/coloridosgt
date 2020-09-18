@@ -1,4 +1,4 @@
-<form class="form-inline">
+<form class="form-inline justify-content-center">
    <div class="form-group hidden">
       <div class="input-group">
          <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'"
@@ -35,64 +35,42 @@
          </div>
       </div>
    </div>
+   <div class="form-group ml-2">
+      <div class="input-group">
+         <label>Ingresos</label>
+         <input  class="form-control ml-2" placeholder="yyyy-mm-dd" name="dpToDate"
+            value="Hola">
+      </div>
+   </div>
 </form>
 
 <hr>
-<!-- 
-<pre>From date model: {{ fromDate | json }}</pre>
-<pre>To date model: {{ toDate | json }}</pre> -->
 
-<div class="row mt-1" *ngIf="!show">
-   <div class="col-md-4">
-      <div class="row">
-         <div class="text-center">
-            Tabla de Ingresos
-         </div>
-      </div>
-      <div class="row mt-1">
-         <table class="table table-hover table-responsive-sm">
-            <thead class="table-secondary">
-               <tr>
-                  <th scope="col">Descripcion</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Hora</th>
-                  <th scope="col">IP</th>
-               </tr>
-            </thead>
-            <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
-               <tr>
-                  <td> {{ bitacora.descripcion }} </td>
-                  <td> {{ bitacora.fecha }} </td>
-                  <td> {{ bitacora.hora }} </td>
-                  <td> {{ bitacora.ip }} </td>
-               </tr>
-            </tbody> -->
-         </table>
-      </div>
-   </div>
 
-   <div class="col-md-2">
-
-   </div>
-
-   <div class="col-md-4">
-      <div class="row">
-         <div class="text-center">
-            Tabla de Ingresos
-         </div>
+<div class="row mt-1 justify-content-centers">
+   <div class="col-md-6">
+      <div class="text-center" style="font-size: 28px;">
+         Control de Ingresos
       </div>
 
-      <div class="row mt-1">
-         <table class="table table-hover table-responsive-sm">
-            <thead class="table-secondary">
-               <tr>
-                  <th scope="col">Descripcion</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Hora</th>
-                  <th scope="col">IP</th>
-               </tr>
-            </thead>
-            <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
+      <table class="table table-hover mt-3">
+         <thead class="table-secondary">
+            <tr>
+               <th scope="col">Descripcion</th>
+               <th scope="col">Fecha</th>
+               <th scope="col">Hora</th>
+               <th scope="col">IP</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>213132</td>
+               <td>213132</td>
+               <td>213132</td>
+               <td>213132</td>
+            </tr>
+         </tbody>
+         <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
                <tr>
                   <td> {{ bitacora.descripcion }} </td>
                   <td> {{ bitacora.fecha }} </td>
@@ -100,9 +78,40 @@
                   <td> {{ bitacora.ip }} </td>
                </tr>
             </tbody> -->
-         </table>
-      </div>
-
+      </table>
    </div>
 
+   <div class="col-md-6">
+      <div class="text-center" style="font-size: 28px;">
+         Control de Gastos
+      </div>
+
+      <!-- <table class="table table-hover table-responsive-sm mt-3"> -->
+      <table class="table table-hover mt-3">
+         <thead class="table-secondary">
+            <tr>
+               <th scope="col">Descripcion</th>
+               <th scope="col">Fecha</th>
+               <th scope="col">Hora</th>
+               <th scope="col">IP</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>213132</td>
+               <td>213132</td>
+               <td>213132</td>
+               <td>213132</td>
+            </tr>
+         </tbody>
+         <!-- <tbody *ngFor="let bitacora of listaBitacora | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i=index">
+               <tr>
+                  <td> {{ bitacora.descripcion }} </td>
+                  <td> {{ bitacora.fecha }} </td>
+                  <td> {{ bitacora.hora }} </td>
+                  <td> {{ bitacora.ip }} </td>
+               </tr>
+            </tbody> -->
+      </table>
+   </div>
 </div>
