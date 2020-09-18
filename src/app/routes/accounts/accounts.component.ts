@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/usuarios/users.service';
 import { Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { FinanzaService } from 'src/app/services/finanzas/finanza.service';
 
 @Component({
   selector: 'app-accounts',
@@ -16,11 +17,15 @@ export class AccountsComponent implements OnInit {
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
 
+  listaIngresos: any = [];
+  listaGastos: any = [];
+
   constructor(
     private usersService: UsersService,
     private router: Router,
     private calendar: NgbCalendar,
-    public formatter: NgbDateParserFormatter
+    public formatter: NgbDateParserFormatter,
+    public finazaServices: FinanzaService
   ) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
@@ -67,12 +72,34 @@ export class AccountsComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  obtenerGastos() {
+  obtenerIngresosyGastos() {
     if (this.toDate != null && this.fromDate != null) {
       let fechaFinal = this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day;
       let fechaInicial = this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day;
       console.log(fechaInicial, '-', fechaFinal);
+      this.obtenerGastos(fechaInicial, fechaFinal);
+      this.obtenerIngresos(fechaInicial, fechaFinal);
     }
+  }
+
+  obtenerIngresos(_fechaInicial, _fechaFinal) {
+    this.finazaServices.obtenerIngresos(_fechaInicial, _fechaFinal).subscribe(
+      res => {
+        this.listaIngresos = res;
+        console.log(res);
+      },
+      err => console.error(err)
+    )
+  }
+
+  obtenerGastos(_fechaInicial, _fechaFinal) {
+    this.finazaServices.obtenerGastos(_fechaInicial, _fechaFinal).subscribe(
+      res => {
+        this.listaGastos = res;
+        console.log(res);
+      },
+      err => console.error(err)
+    )
   }
 
 }

@@ -17,6 +17,7 @@ import { CategoriasService } from './services/productos/categorias.service';
 import { ProductosService } from './services/productos/productos.service';
 import { PedidosService } from './services/pedidos/pedidos.service';
 import { NotificacionService } from './services/toasts/toasts.service'
+import { FinanzaService } from './services/finanzas/finanza.service'
 
 import { ProductsComponent } from './routes/products/products.component';
 import { AccountsComponent } from './routes/accounts/accounts.component';
@@ -69,7 +70,8 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     CategoriasService,
     ProductosService,
     PedidosService,
-    NotificacionService
+    NotificacionService,
+    FinanzaService
   ],
   bootstrap: [AppComponent]
 })
