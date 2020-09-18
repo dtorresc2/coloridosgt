@@ -67,4 +67,12 @@ export class AccountsComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
+  obtenerGastos() {
+    if (this.toDate != null && this.fromDate != null) {
+      let fechaFinal = this.toDate.year + '/' + this.toDate.month + '/' + this.toDate.day;
+      let fechaInicial = this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day;
+      console.log(fechaInicial, '-', fechaFinal);
+    }
+  }
+
 }
