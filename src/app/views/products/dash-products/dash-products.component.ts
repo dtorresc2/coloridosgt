@@ -107,9 +107,9 @@ export class DashProductsComponent implements OnInit {
   ngOnInit(): void {
     // Form de productos
     this.product = new FormGroup({
-      nombre: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      descripcion: new FormControl('', Validators.required),
-      precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(25)]),
+      descripcion: new FormControl('',[Validators.required, Validators.maxLength(25)]),
+      precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)]),
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
       descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
       cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),

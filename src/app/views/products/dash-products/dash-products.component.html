@@ -44,7 +44,7 @@
         </div>
 
         <div class="row">
-            <table class="table table-hover table-striped table-sm table-responsive-sm">
+            <table class="table table-hover table-striped table-sm table-responsive">
                 <thead class="table-secondary">
                     <tr>
                         <th scope="col">ID</th>
@@ -302,7 +302,8 @@
 
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input class="form-control form-control-sm" type="text" formControlName="nombre" maxlength="45" (focusin)="isNombre = true" (focusout)="isNombre = false">
+                        <input class="form-control form-control-sm" type="text" formControlName="nombre" maxlength="25"
+                            (focusin)="isNombre = true" (focusout)="isNombre = false">
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="product.get('nombre').hasError('required') && product.get('nombre').touched">
                             Nombre requerido
@@ -313,23 +314,35 @@
                         </span>
                         <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                             *ngIf="isNombre">
-                            Max: 10 caracteres
+                            Max: 25 caracteres
                         </span>
                     </div>
 
                     <div class="form-group">
                         <label>Descripcion</label>
-                        <input class="form-control form-control-sm" type="text" formControlName="descripcion">
+                        <input class="form-control form-control-sm" type="text" formControlName="descripcion"
+                            maxlength="25" (focusin)="isDesc = true" (focusout)="isDesc = false">
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="product.get('descripcion').hasError('required') && product.get('descripcion').dirty">
                             Descripcion requerida
+                        </span>
+                        <span class="text-danger" style="font-size: 10px;"
+                            *ngIf="product.get('descripcion').hasError('maxlength')">
+                            Tamaño de caracteres invalido
+                        </span>
+                        <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                            *ngIf="isDesc">
+                            Max: 25 caracteres
                         </span>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                <label>Precio</label>
+                                <label>Precio
+                                    <span class="text-active" style="font-size: 12px;" placement="top"
+                                        ngbTooltip="Ej: #####.##"><i class="fas fa-info-circle"></i></span>
+                                </label>
                                 <input class="form-control form-control-sm" type="text" formControlName="precio">
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('precio').hasError('required') && product.get('precio').touched">
