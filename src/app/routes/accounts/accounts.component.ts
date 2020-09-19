@@ -137,7 +137,7 @@ export class AccountsComponent implements OnInit {
     this.totalGastos = parseFloat(total1.toString()).toFixed(2);
 
     let totalFinal = total - total1;
-    this.totalSaldos = parseFloat(totalFinal.toString()).toString(2);
+    this.totalSaldos = parseFloat(totalFinal.toString()).toFixed(2);
   }
 
   obtenerTotalesIng() {
