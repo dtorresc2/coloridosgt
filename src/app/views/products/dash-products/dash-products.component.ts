@@ -80,6 +80,19 @@ export class DashProductsComponent implements OnInit {
     EstadoUpdate: ''
   }
 
+  // Variables para el form
+
+  isNombre: boolean = false;
+  isDesc: boolean = false;
+
+  // nombre: new FormControl('', [Validators.required]),
+  //     descripcion: new FormControl('', Validators.required),
+  //     precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
+  //     cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
+  //     descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
+  //     cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+  //     categoria: new FormControl('', Validators.required)
+
   constructor(
     private productoService: ProductosService,
     private categoriaService: CategoriasService,
@@ -94,7 +107,7 @@ export class DashProductsComponent implements OnInit {
   ngOnInit(): void {
     // Form de productos
     this.product = new FormGroup({
-      nombre: new FormControl('', [Validators.required]),
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       descripcion: new FormControl('', Validators.required),
       precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
