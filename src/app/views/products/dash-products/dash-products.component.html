@@ -304,6 +304,10 @@
                         <label>Nombre</label>
                         <input class="form-control form-control-sm" type="text" formControlName="nombre" maxlength="25"
                             (focusin)="isNombre = true" (focusout)="isNombre = false">
+                        <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                            *ngIf="isNombre">
+                            Max: 25 caracteres
+                        </span>
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="product.get('nombre').hasError('required') && product.get('nombre').touched">
                             Nombre requerido
@@ -312,16 +316,16 @@
                             *ngIf="product.get('nombre').hasError('maxlength')">
                             Tamaño de caracteres invalido
                         </span>
-                        <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
-                            *ngIf="isNombre">
-                            Max: 25 caracteres
-                        </span>
                     </div>
 
                     <div class="form-group">
                         <label>Descripcion</label>
                         <input class="form-control form-control-sm" type="text" formControlName="descripcion"
                             maxlength="25" (focusin)="isDesc = true" (focusout)="isDesc = false">
+                        <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                            *ngIf="isDesc">
+                            Max: 25 caracteres
+                        </span>
                         <span class="text-danger" style="font-size: 10px;"
                             *ngIf="product.get('descripcion').hasError('required') && product.get('descripcion').dirty">
                             Descripcion requerida
@@ -330,10 +334,6 @@
                             *ngIf="product.get('descripcion').hasError('maxlength')">
                             Tamaño de caracteres invalido
                         </span>
-                        <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
-                            *ngIf="isDesc">
-                            Max: 25 caracteres
-                        </span>
                     </div>
 
                     <div class="row">
@@ -341,9 +341,14 @@
                             <div class="form-group">
                                 <label>Precio
                                     <span class="text-active" style="font-size: 12px;" placement="top"
-                                        ngbTooltip="Ej: #####.##"><i class="fas fa-info-circle"></i></span>
+                                        ngbTooltip="Ej: ####.##"><i class="fas fa-info-circle"></i></span>
                                 </label>
-                                <input class="form-control form-control-sm" type="text" formControlName="precio">
+                                <input class="form-control form-control-sm" type="text" formControlName="precio"
+                                    maxlength="6" (focusin)="isPrecio = true" (focusout)="isPrecio = false">
+                                <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                    *ngIf="isPrecio">
+                                    Max: 4 enteros y 2 decimales
+                                </span>
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('precio').hasError('required') && product.get('precio').touched">
                                     Precio requerido
@@ -351,6 +356,10 @@
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('precio').hasError('pattern') && product.get('precio').touched">
                                     Precio invalido
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('precio').hasError('maxlength')">
+                                    Tamaño de caracteres invalido
                                 </span>
                             </div>
                         </div>

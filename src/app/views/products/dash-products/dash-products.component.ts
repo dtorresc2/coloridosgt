@@ -84,6 +84,7 @@ export class DashProductsComponent implements OnInit {
 
   isNombre: boolean = false;
   isDesc: boolean = false;
+  isPrecio: boolean = false;
 
   // nombre: new FormControl('', [Validators.required]),
   //     descripcion: new FormControl('', Validators.required),
@@ -111,7 +112,7 @@ export class DashProductsComponent implements OnInit {
       descripcion: new FormControl('',[Validators.required, Validators.maxLength(25)]),
       precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)]),
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
-      descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
+      descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)]),
       cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
       categoria: new FormControl('', Validators.required)
       // imagen: new FormControl('', Validators.required)
