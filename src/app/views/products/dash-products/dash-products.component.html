@@ -365,8 +365,16 @@
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label>Descuento</label>
-                                <input class="form-control form-control-sm" type="text" formControlName="descuento">
+                                <label>Descuento
+                                    <span class="text-active" style="font-size: 12px;" placement="top"
+                                        ngbTooltip="El descuento debe ser menor que el precio"><i class="fas fa-info-circle"></i></span>
+                                </label>
+                                <input class="form-control form-control-sm" type="text" formControlName="descuento"
+                                    maxlength="6" (focusin)="isDescu = true" (focusout)="isDescu = false">
+                                <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                    *ngIf="isDescu">
+                                    Max: 4 enteros y 2 decimales
+                                </span>
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('descuento').hasError('required') && product.get('descuento').touched">
                                     Descuento requerido
@@ -374,6 +382,10 @@
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('descuento').hasError('pattern') && product.get('descuento').touched">
                                     Descuento invalido
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.errors?.descuentoInvalido && product.get('descuento').touched">
+                                    Descuento incorrecto
                                 </span>
                             </div>
                         </div>

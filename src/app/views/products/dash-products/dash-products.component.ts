@@ -85,6 +85,7 @@ export class DashProductsComponent implements OnInit {
   isNombre: boolean = false;
   isDesc: boolean = false;
   isPrecio: boolean = false;
+  isDescu: boolean = false;
 
   // nombre: new FormControl('', [Validators.required]),
   //     descripcion: new FormControl('', Validators.required),
@@ -109,14 +110,17 @@ export class DashProductsComponent implements OnInit {
     // Form de productos
     this.product = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(25)]),
-      descripcion: new FormControl('',[Validators.required, Validators.maxLength(25)]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(25)]),
       precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)]),
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
       descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)]),
       cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
       categoria: new FormControl('', Validators.required)
       // imagen: new FormControl('', Validators.required)
-    });
+    },
+      {
+        validators: this.validacionPrecioDescuento
+      });
 
     // Form de categorias
     this.categoria = new FormGroup({
@@ -149,6 +153,13 @@ export class DashProductsComponent implements OnInit {
     }
 
     this.product.get('cantidad').setValue(0);
+  }
+
+  // Funcion de confirmacion de usuarios
+  validacionPrecioDescuento(g: FormGroup): { descuentoInvalido: boolean } {
+    // console.log(g.get('descuento').value);
+    // return { descuentoInvalido: true }
+    return g.get('descuento').value < g.get('precio').value ? null : { descuentoInvalido: true };
   }
 
   onSubmit() {
