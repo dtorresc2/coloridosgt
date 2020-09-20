@@ -367,7 +367,8 @@
                             <div class="form-group">
                                 <label>Descuento
                                     <span class="text-active" style="font-size: 12px;" placement="top"
-                                        ngbTooltip="El descuento debe ser menor que el precio"><i class="fas fa-info-circle"></i></span>
+                                        ngbTooltip="El descuento debe ser menor que el precio"><i
+                                            class="fas fa-info-circle"></i></span>
                                 </label>
                                 <input class="form-control form-control-sm" type="text" formControlName="descuento"
                                     maxlength="6" (focusin)="isDescu = true" (focusout)="isDescu = false">
@@ -386,6 +387,10 @@
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.errors?.descuentoInvalido && product.get('descuento').touched">
                                     Descuento incorrecto
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('descuento').hasError('maxlength')">
+                                    Tamaño de caracteres invalido
                                 </span>
                             </div>
                         </div>
@@ -411,7 +416,11 @@
                             <div class="form-group">
                                 <label>Cantidad Minima</label>
                                 <input class="form-control form-control-sm" type="text"
-                                    formControlName="cantidad_minima">
+                                    formControlName="cantidad_minima" maxlength="11" (focusin)="isCantMin = true"
+                                    (focusout)="isCantMin = false">
+                                <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                    *ngIf="isCantMin">
+                                    Max: 11 caracteres</span>
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('cantidad_minima').hasError('required') && product.get('cantidad_minima').touched">
                                     Cantidad requerida
@@ -419,6 +428,10 @@
                                 <span class="text-danger" style="font-size: 10px;"
                                     *ngIf="product.get('cantidad_minima').hasError('pattern') && product.get('cantidad_minima').touched">
                                     Cantidad invalida
+                                </span>
+                                <span class="text-danger" style="font-size: 10px;"
+                                    *ngIf="product.get('cantidad_minima').hasError('maxlength')">
+                                    Tamaño de caracteres invalido
                                 </span>
                             </div>
                         </div>

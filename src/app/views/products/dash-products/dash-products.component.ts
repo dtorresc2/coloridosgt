@@ -86,6 +86,7 @@ export class DashProductsComponent implements OnInit {
   isDesc: boolean = false;
   isPrecio: boolean = false;
   isDescu: boolean = false;
+  isCantMin: boolean = false;
 
   // nombre: new FormControl('', [Validators.required]),
   //     descripcion: new FormControl('', Validators.required),
@@ -114,7 +115,7 @@ export class DashProductsComponent implements OnInit {
       precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)]),
       cantidad: new FormControl('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]),
       descuento: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)]),
-      cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
+      cantidad_minima: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$'), Validators.maxLength(11)]),
       categoria: new FormControl('', Validators.required)
       // imagen: new FormControl('', Validators.required)
     },
@@ -250,7 +251,7 @@ export class DashProductsComponent implements OnInit {
       .subscribe(
         res => {
           this.listaProductos = res;
-          console.log(res);
+          // console.log(res);
         },
         err => console.error(err)
       )
@@ -356,6 +357,7 @@ export class DashProductsComponent implements OnInit {
       .subscribe(
         res => {
           this.respuestaUpdate = res;
+          console.log(res);
 
           setTimeout(() => {
             this.comprobador = false;
@@ -628,12 +630,15 @@ export class DashProductsComponent implements OnInit {
       this.idUsuario)
       .subscribe(
         res => {
+          
+          console.log(res);
+
           setTimeout(() => {
             this.comprobadorCat = false;
           }, 1500);
 
           setTimeout(() => {
-            if ((<any>res).CantidadRecuento && (<any>res).CostosDisponibles) {
+            if ((<any>res).CostosDisponibles) {
               this.formCosto.reset();
               this.obtenerListaProductos();
               this.notifiacionService.getToastSuccess('Mercaderia almacenada correctamente', '');
