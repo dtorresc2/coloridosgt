@@ -88,6 +88,11 @@ export class DashProductsComponent implements OnInit {
   isDescu: boolean = false;
   isCantMin: boolean = false;
 
+  isNombreCat: boolean = false;
+  isDescCat: boolean = false;
+
+
+
   // nombre: new FormControl('', [Validators.required]),
   //     descripcion: new FormControl('', Validators.required),
   //     precio: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')]),
@@ -125,13 +130,13 @@ export class DashProductsComponent implements OnInit {
 
     // Form de categorias
     this.categoria = new FormGroup({
-      nombre: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', Validators.required)
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(25)]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(25)])
     });
 
     this.formCosto = new FormGroup({
-      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]),
-      costo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$')])
+      cantidad: new FormControl('', [Validators.required, Validators.pattern('^[1-9][0-9]*$'), Validators.maxLength(6)]),
+      costo: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]{2})$'), Validators.maxLength(6)])
     });
 
     this.idUsuario = localStorage.getItem('idUsuario');
@@ -357,7 +362,7 @@ export class DashProductsComponent implements OnInit {
       .subscribe(
         res => {
           this.respuestaUpdate = res;
-          console.log(res);
+          // console.log(res);
 
           setTimeout(() => {
             this.comprobador = false;
@@ -631,7 +636,7 @@ export class DashProductsComponent implements OnInit {
       .subscribe(
         res => {
           
-          console.log(res);
+          // console.log(res);
 
           setTimeout(() => {
             this.comprobadorCat = false;

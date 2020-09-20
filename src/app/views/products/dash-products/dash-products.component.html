@@ -585,35 +585,58 @@
             <div class="row justify-content-center">
                 <div class="card">
 
-                    <div class="card-header d-flex justify-content-end">
-                        <div class="col-md-4" style="padding-top: 0.4%;">
+                    <div class="card-header text-center">
+                        <!-- <div class="card-header d-flex justify-content-end"> -->
+                        <!-- <div class="col-md-4" style="padding-top: 0.4%;">
                             Categoria
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-secondary btn-sm" (click)="creadoCat()"
-                                style="padding-top: 0.4%;">
-                                <span>Nueva Categoria</span>
-                            </button>
-                        </div>
+
+                        </div> -->
+                        <button type="button" class="btn btn-secondary btn-sm float-right" (click)="creadoCat()"
+                            style="padding-top: 0.4%; padding-bottom: 0.4%">
+                            <span>Nueva Categoria</span>
+                        </button>
+                        <!-- <div class="float-right">
+                            
+                        </div> -->
                     </div>
 
                     <div class="card-body">
+                        <!-- <h4 class="card-title text-center">Categoria</h4> -->
+
                         <form novalidate (ngSubmit)="onSubmitCategoria()" [formGroup]="categoria">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Nombre</label>
-                                    <input type="text" class="form-control" formControlName="nombre">
+                                    <input type="text" class="form-control" formControlName="nombre" maxlength="25"
+                                        (focusin)="isNombreCat = true" (focusout)="isNombreCat = false">
+                                    <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                        *ngIf="isNombreCat">
+                                        Max: 25 caracteres
+                                    </span>
                                     <span class="text-danger" style="font-size: 10px;"
                                         *ngIf="categoria.get('nombre').hasError('required') && categoria.get('nombre').touched">
                                         Nombre requerido
                                     </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                        *ngIf="categoria.get('nombre').hasError('maxlength')">
+                                        Tamaño de caracteres invalido
+                                    </span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Descripcion</label>
-                                    <input type="text" class="form-control" formControlName="descripcion">
+                                    <input type="text" class="form-control" formControlName="descripcion" maxlength="25"
+                                        (focusin)="isDescCat = true" (focusout)="isDescCat = false">
+                                    <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                        *ngIf="isDescCat">
+                                        Max: 25 caracteres
+                                    </span>
                                     <span class="text-danger" style="font-size: 10px;"
                                         *ngIf="categoria.get('descripcion').hasError('required') && categoria.get('descripcion').touched">
                                         Descripcion requerida
+                                    </span>
+                                    <span class="text-danger" style="font-size: 10px;"
+                                        *ngIf="categoria.get('descripcion').hasError('maxlength')">
+                                        Tamaño de caracteres invalido
                                     </span>
                                 </div>
                             </div>
@@ -656,7 +679,7 @@
                                         ngbTooltip="Editar Categoria">
                                         <i class="fas fa-pencil-alt"></i></button>
 
-                                    <button type="button" class="btn btn-danger btn-sm" style="margin-left: 2%;"
+                                    <button type="button" class="btn btn-danger btn-sm ml-2"
                                         (click)="eliminadoCat(categoria.idcategoria,categoria)" placement="top"
                                         ngbTooltip="Eliminar Categoria">
                                         <i class="fas fa-trash"></i></button>
