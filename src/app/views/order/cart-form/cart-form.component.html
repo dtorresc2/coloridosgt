@@ -66,8 +66,8 @@
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label class="control-label">NIT</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su nit" formControlName="nit" maxlength="11" (focusin)="isNit = true"
-                            (focusout)="isNit = false">
+                            <input type="text" class="form-control" placeholder="Ingrese su nit" formControlName="nit"
+                                maxlength="11" (focusin)="isNit = true" (focusout)="isNit = false">
                             <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                                 *ngIf="isNit">
                                 Max: 11 caracteres
@@ -92,8 +92,8 @@
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label class="control-label">DPI</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su dpi" formControlName="dpi" maxlength="13" (focusin)="isDpi = true"
-                            (focusout)="isDpi = false">
+                            <input type="text" class="form-control" placeholder="Ingrese su dpi" formControlName="dpi"
+                                maxlength="13" (focusin)="isDpi = true" (focusout)="isDpi = false">
                             <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                                 *ngIf="isDpi">
                                 Max: 13 caracteres
@@ -116,7 +116,12 @@
                         <div class="form-group">
                             <label class="control-label">Telefono</label>
                             <input type="text" class="form-control" placeholder="Ingrese su telefono"
-                                formControlName="telefono">
+                                formControlName="telefono" maxlength="9" (focusin)="isTel = true"
+                                (focusout)="isTel = false">
+                            <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                *ngIf="isTel">
+                                Max: 9 caracteres
+                            </span>
                             <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('telefono').hasError('required') && client.get('telefono').touched">
                                 Telefono requerido
@@ -125,6 +130,10 @@
                                 *ngIf="client.get('telefono').hasError('pattern') && client.get('telefono').touched">
                                 Telefono invalido
                             </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('telefono').hasError('maxlength')">
+                                Tamaño de caracteres invalido
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -132,13 +141,21 @@
                 <div class="form-group">
                     <label class="control-label">Dirección</label>
                     <input type="text" class="form-control" placeholder="Ingrese su direccion"
-                        formControlName="direccion">
+                        formControlName="direccion" maxlength="100" (focusin)="isDireccion = true"
+                        (focusout)="isDireccion = false">
+                    <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                        *ngIf="isDireccion">
+                        Max: 100 caracteres
+                    </span>
                     <span class="text-danger" style="font-size: 10px;"
                         *ngIf="client.get('direccion').hasError('required') && client.get('direccion').touched">
                         Direccion requerido
                     </span>
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="client.get('direccion').hasError('maxlength')">
+                        Tamaño de caracteres invalido
+                    </span>
                 </div>
-
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
