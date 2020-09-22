@@ -91,7 +91,7 @@ export class CartFormComponent implements OnInit {
         nombre: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$'), Validators.maxLength(40)]),
         apellido: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$'), Validators.maxLength(40)]),
         nit: new FormControl('', [Validators.required, Validators.maxLength(11)]),
-        dpi: new FormControl('', [Validators.required, Validators.maxLength(11)]),
+        dpi: new FormControl('', [Validators.required, Validators.maxLength(13), Validators.pattern('^[0-9]{13}$')]),
         // telefono: new FormControl('', [Validators.required, Validators.pattern('^[2-8]{1}[0-9]{3}[-][0-9]{4}$')]),
         telefono: new FormControl('', [Validators.required, Validators.pattern('^[2-8]{1}[0-9]{3}[-][0-9]{4}$')]),
         direccion: new FormControl('', [Validators.required, Validators.maxLength(100)]),

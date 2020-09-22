@@ -69,7 +69,7 @@
                             <input type="text" class="form-control" placeholder="Ingrese su nit" formControlName="nit" maxlength="11" (focusin)="isNit = true"
                             (focusout)="isNit = false">
                             <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
-                                *ngIf="isApellido">
+                                *ngIf="isNit">
                                 Max: 11 caracteres
                             </span>
                             <span class="text-danger" style="font-size: 10px;"
@@ -92,15 +92,24 @@
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label class="control-label">DPI</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su dpi" formControlName="dpi">
+                            <input type="text" class="form-control" placeholder="Ingrese su dpi" formControlName="dpi" maxlength="13" (focusin)="isDpi = true"
+                            (focusout)="isDpi = false">
+                            <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                *ngIf="isDpi">
+                                Max: 13 caracteres
+                            </span>
                             <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('dpi').hasError('required') && client.get('dpi').touched">
                                 Dpi requerido
                             </span>
-                            <!-- <span class="text-danger" style="font-size: 10px;"
-                                *ngIf="client.get('dpi').hasError('maxlength') && client.get('dpi').touched">
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('dpi').hasError('pattern')">
                                 Dpi invalido
-                            </span> -->
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('dpi').hasError('maxlength')">
+                                Tamaño de caracteres invalido
+                            </span>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
