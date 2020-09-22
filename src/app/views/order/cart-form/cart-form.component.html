@@ -43,7 +43,7 @@
                                 formControlName="apellido" maxlength="40" (focusin)="isApellido = true"
                                 (focusout)="isApellido = false">
                             <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
-                                *ngIf="isNombre">
+                                *ngIf="isApellido">
                                 Max: 40 caracteres
                             </span>
                             <span class="text-danger" style="font-size: 10px;"
@@ -55,7 +55,7 @@
                                 Apellido invalido
                             </span>
                             <span class="text-danger" style="font-size: 10px;"
-                                *ngIf="client.get('nombre').hasError('maxlength')">
+                                *ngIf="client.get('apellido').hasError('maxlength')">
                                 Tamaño de caracteres invalido
                             </span>
                         </div>
@@ -66,13 +66,22 @@
                     <div class="form-group col-md-4">
                         <div class="form-group">
                             <label class="control-label">NIT</label>
-                            <input type="text" class="form-control" placeholder="Ingrese su nit" formControlName="nit">
+                            <input type="text" class="form-control" placeholder="Ingrese su nit" formControlName="nit" maxlength="11" (focusin)="isNit = true"
+                            (focusout)="isNit = false">
+                            <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                *ngIf="isApellido">
+                                Max: 11 caracteres
+                            </span>
                             <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('nit').hasError('required') && client.get('nit').touched">
                                 Nit requerido
                             </span>
                             <span class="text-danger" style="font-size: 10px;" *ngIf="client.errors?.nitInvalido">
                                 Nit invalido
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nit').hasError('maxlength')">
+                                Tamaño de caracteres invalido
                             </span>
                             <!-- <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('nit').errors.maxlength && client.get('nit').touched">
