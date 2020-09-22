@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'singin', component: SinginComponent },
   { path: 'accounts', component: AccountsComponent, canActivate: [GuardPermitsGuard] },
-  { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard]},
+  { path: 'orders', component: OrdersComponent, canActivate: [GuardPermitsGuard] },
   {
     path: 'products', component: ProductsComponent, canActivate: [GuardPermitsGuard],
     children: [
@@ -35,7 +35,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'users', component: UsersComponent, canActivate: [GuardPermitsGuard],
+    path: 'users', component: UsersComponent, /*canActivate: [GuardPermitsGuard],*/
     children: [
       { path: '', component: DashUsersComponent, resolve: { users: UsersResolver } },
       { path: ':id/log', component: BitacoraUsersComponent },
