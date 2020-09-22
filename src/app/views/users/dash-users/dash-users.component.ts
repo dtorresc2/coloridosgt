@@ -62,6 +62,10 @@ export class DashUsersComponent implements OnInit {
   // Loader
   show: boolean = true;
 
+  // Validacicones de inputs
+  isUser: boolean = false;
+  isEmail: boolean = false;
+
   constructor(
     private usersService: UsersService,
     private router: Router,
@@ -74,8 +78,8 @@ export class DashUsersComponent implements OnInit {
   ngOnInit(): void {
     this.user = new FormGroup(
       {
-        email: new FormControl('', [Validators.required, Validators.email]),
-        username: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(60)]),
+        username: new FormControl('', [Validators.required, Validators.maxLength(15)]),
         password: new FormControl('', Validators.required),
         confirmpass: new FormControl('', Validators.required)
       },
@@ -214,7 +218,7 @@ export class DashUsersComponent implements OnInit {
     this.usersService.registrarUsuario(this.usuario)
       .subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
 
           this.respuesta = res;
 
