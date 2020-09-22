@@ -490,7 +490,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Cantidad</label>
-                    <input type="text" class="form-control" formControlName="cantidad">
+                    <input type="text" class="form-control" formControlName="cantidad" maxlength="6"
+                        (focusin)="isCantMod = true" (focusout)="isCantMod = false">
+                    <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                        *ngIf="isCantMod">
+                        Max: 6 caracteres</span>
                     <span class="text-danger" style="font-size: 10px;"
                         *ngIf="formCosto.get('cantidad').hasError('required') && formCosto.get('cantidad').touched">
                         Cantidad requerida
@@ -499,10 +503,18 @@
                         *ngIf="formCosto.get('cantidad').hasError('pattern') && formCosto.get('cantidad').touched">
                         Cantidad invalida
                     </span>
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('cantidad').hasError('maxlength')">
+                        Tamaño de caracteres invalido
+                    </span>
                 </div>
                 <div class="form-group col-md-6">
                     <label>Costo</label>
-                    <input type="text" class="form-control" formControlName="costo">
+                    <input type="text" class="form-control" formControlName="costo" maxlength="6"
+                    (focusin)="isCostoMod = true" (focusout)="isCostoMod = false">
+                    <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                        *ngIf="isCostoMod">
+                        Max: 6 caracteres</span>
                     <span class="text-danger" style="font-size: 10px;"
                         *ngIf="formCosto.get('costo').hasError('required') && formCosto.get('costo').touched">
                         Costo requerido
@@ -510,6 +522,10 @@
                     <span class="text-danger" style="font-size: 10px;"
                         *ngIf="formCosto.get('costo').hasError('pattern') && formCosto.get('costo').touched">
                         Costo invalido
+                    </span>
+                    <span class="text-danger" style="font-size: 10px;"
+                        *ngIf="formCosto.get('costo').hasError('maxlength')">
+                        Tamaño de caracteres invalido
                     </span>
                 </div>
             </div>
@@ -640,7 +656,7 @@
                                     </span>
                                 </div>
                             </div>
-                            
+
                             <div class="form-row">
                                 <button class="btn btn-secondary btn-block" [disabled]="categoria.invalid">
                                     <span *ngIf="this.comprobadorCat" class="spinner-border spinner-border-sm"

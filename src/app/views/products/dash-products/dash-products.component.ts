@@ -91,7 +91,12 @@ export class DashProductsComponent implements OnInit {
   isNombreCat: boolean = false;
   isDescCat: boolean = false;
 
+  isCostoMod: boolean = false;
+  isCantMod: boolean = false;
 
+  modalCantidad: any;
+  modalEditarProducto: any;
+  modalCategoria: any;
 
   // nombre: new FormControl('', [Validators.required]),
   //     descripcion: new FormControl('', Validators.required),
@@ -172,17 +177,17 @@ export class DashProductsComponent implements OnInit {
     this.comprobador = true;
 
     if (this.isNew) {
-      console.log("Voy a crear")
+      // console.log("Voy a crear")
       this.guardarProducto();
     }
 
     if (this.isEdit) {
-      console.log("Voy a editar")
+      // console.log("Voy a editar")
       this.editarProducto();
     }
 
     if (this.isDelete) {
-      console.log("Voy a eliminar");
+      // console.log("Voy a eliminar");
       this.eliminarProducto();
     }
   }
@@ -362,7 +367,7 @@ export class DashProductsComponent implements OnInit {
       .subscribe(
         res => {
           this.respuestaUpdate = res;
-          // console.log(res);
+          console.log(res);
 
           setTimeout(() => {
             this.comprobador = false;
@@ -372,6 +377,7 @@ export class DashProductsComponent implements OnInit {
           setTimeout(() => {
             if (this.respuestaUpdate.EstadoUpdate == 'Correcto') {
               this.product.reset();
+              // this.modalEditarProducto.close();
               this.obtenerListaProductos();
               this.creado();
               this.notifiacionService.getToastSuccess('Producto actualizado correctamente', '');
@@ -433,14 +439,14 @@ export class DashProductsComponent implements OnInit {
   openScrollableContent(longContent, url, id) {
     this.urlAUX = url;
     this.idObjetoAux = id;
-    this.modalService.open(longContent, { centered: true });
+    this.modalEditarProducto = this.modalService.open(longContent, { centered: true });
     // console.log(id);
   }
 
   abrirModalCantidad(content, id) {
     // this.urlAUX = url;
     this.idObjetoAux = id;
-    this.modalService.open(content, { centered: true });
+    this.modalCantidad = this.modalService.open(content, { centered: true });
     // console.log(id);
   }
 
@@ -645,6 +651,7 @@ export class DashProductsComponent implements OnInit {
           setTimeout(() => {
             if ((<any>res).CostosDisponibles) {
               this.formCosto.reset();
+              this.modalCantidad.close();
               this.obtenerListaProductos();
               this.notifiacionService.getToastSuccess('Mercaderia almacenada correctamente', '');
             }
