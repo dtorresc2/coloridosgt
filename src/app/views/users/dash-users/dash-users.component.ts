@@ -65,9 +65,13 @@ export class DashUsersComponent implements OnInit {
   // Validacicones de inputs
   isUser: boolean = false;
   isEmail: boolean = false;
-
   isPass: boolean = false;
   isConfirmPass: boolean = false;
+
+  // Modales de permisos
+  modalPermiso : any;
+  modalPass: any;
+  modalEditar: any;
 
   constructor(
     private usersService: UsersService,
@@ -354,14 +358,14 @@ export class DashUsersComponent implements OnInit {
     // let moduloUsuariosAux = this.moduloUsuarios == true ? 1 : 0;
 
     this.idObjetoAux = id;
-    this.modalService.open(content, { centered: true });
+    this.modalPermiso = this.modalService.open(content, { centered: true });
     // console.log(id);
   }
 
   abrirModalPass(content, id) {
     // this.urlAUX = url;
     this.idObjetoAux = id;
-    this.modalService.open(content, { centered: true });
+    this.modalPass = this.modalService.open(content, { centered: true });
     // console.log(id);
   }
 
@@ -379,34 +383,15 @@ export class DashUsersComponent implements OnInit {
           setTimeout(() => {
             if ((<any>res).EstadoUpdate == 'Correcto') {
               this.passUpdate.reset();
-              $('#modalPass').modal('hide')
+              this.modalPass.close();
               this.obtenerListaClientes();
 
               this.notificacionService.getToastSuccess('Actualizacion realizada', '');
-
-              // this.toastr.success('Actualizacion Realizada!', '', {
-              //   closeButton: true,
-              //   toastClass: 'ngx-toastr bg-primary',
-              //   titleClass: 'toast-title text-white',
-              //   timeOut: 1000
-              // });
-
-              // this.creado();
             }
             else {
               this.update.EstadoUpdate = '';
-              // $('.alert').alert('close');
               this.passUpdate.reset();
               this.notificacionService.getToastError('Fallo en actualizacion de contraseña', '');
-
-
-              // this.toastr.error('Fallo en actualizacion de credenciales', '', {
-              //   closeButton: true,
-              //   toastClass: 'ngx-toastr bg-danger',
-              //   titleClass: 'toast-title text-white',
-              //   timeOut: 1000
-              // });
-
             }
             this.passUpdate.reset();
           }, 1000);
@@ -437,34 +422,13 @@ export class DashUsersComponent implements OnInit {
         setTimeout(() => {
           if ((<any>res).EstadoUpdate == 'Correcto') {
             this.passUpdate.reset();
-            $('#modalPass').modal('hide')
+            this.modalPermiso.close();
             this.obtenerListaClientes();
-
-            // this.toastr.success('Actualizacion Realizada!', '', {
-            //   closeButton: true,
-            //   toastClass: 'ngx-toastr bg-primary',
-            //   titleClass: 'toast-title text-white',
-            //   timeOut: 1000
-            // });
-
             this.notificacionService.getToastSuccess('Actualizacion realizada', '');
-            // this.creado();
           }
           else {
             this.update.EstadoUpdate = '';
-            // $('.alert').alert('close');
-            // this.passUpdate.reset();
-
             this.notificacionService.getToastError('Fallo en actualizacion de permisos', '');
-
-
-            // this.toastr.error('Fallo en actualizacion de permisos', '', {
-            //   closeButton: true,
-            //   toastClass: 'ngx-toastr bg-danger',
-            //   titleClass: 'toast-title text-white',
-            //   timeOut: 1000
-            // });
-
           }
           this.passUpdate.reset();
         }, 1000);
