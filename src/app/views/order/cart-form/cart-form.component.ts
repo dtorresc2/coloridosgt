@@ -52,6 +52,13 @@ export class CartFormComponent implements OnInit {
   totalAux: any = 0;
   descuentoAux: any = 0;
 
+  // Variables de Inputs
+  isNombre: boolean = false;
+  isApellido: boolean = false;
+  isNit: boolean = false;
+  isDpi: boolean = false;
+  isTel: boolean = false;
+  isDireccion: boolean = false;
 
   constructor(
     private pedidoService: PedidosService,
@@ -60,7 +67,7 @@ export class CartFormComponent implements OnInit {
     private modalService: NgbModal,
     private productoService: ProductosService,
     private notificacionService: NotificacionService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario'] && this.pedidoService.cantidadItems > 0) {
@@ -81,8 +88,8 @@ export class CartFormComponent implements OnInit {
 
     this.client = new FormGroup(
       {
-        nombre: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$')]),
-        apellido: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$')]),
+        nombre: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$'), Validators.maxLength(40)]),
+        apellido: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z]+([" "]{0,1}[A-Z]{1}[a-z]+){0,1}$'), Validators.maxLength(40)]),
         nit: new FormControl('', [Validators.required]),
         dpi: new FormControl('', [Validators.required]),
         // telefono: new FormControl('', [Validators.required, Validators.pattern('^[2-8]{1}[0-9]{3}[-][0-9]{4}$')]),
@@ -110,31 +117,31 @@ export class CartFormComponent implements OnInit {
       // }
     });
 
-    this.client.get('nombre').valueChanges.subscribe (value => {
+    this.client.get('nombre').valueChanges.subscribe(value => {
       if (this.contador > 7) {
         this.cambiado = true;
       }
     });
 
-    this.client.get('apellido').valueChanges.subscribe (value => {
+    this.client.get('apellido').valueChanges.subscribe(value => {
       if (this.contador > 7) {
         this.cambiado = true;
       }
     });
 
-    this.client.get('nit').valueChanges.subscribe (value => {
+    this.client.get('nit').valueChanges.subscribe(value => {
       if (this.contador > 7) {
         this.cambiado = true;
       }
     });
 
-    this.client.get('dpi').valueChanges.subscribe (value => {
+    this.client.get('dpi').valueChanges.subscribe(value => {
       if (this.contador > 7) {
         this.cambiado = true;
       }
     });
 
-    this.client.get('telefono').valueChanges.subscribe (value => {
+    this.client.get('telefono').valueChanges.subscribe(value => {
       if (this.contador > 7) {
         this.cambiado = true;
       }
@@ -394,8 +401,8 @@ export class CartFormComponent implements OnInit {
         detalle_pedido: new Array<DetallePedido>()
       }
 
-      this.notificacionService.getToastSuccess('Pedido confirmado correctamente','');
-  
+      this.notificacionService.getToastSuccess('Pedido confirmado correctamente', '');
+
       this.pedidoService.cantidadItems = 0;
       this.pedidoService.fieldArray.splice(0, this.pedidoService.fieldArray.length);
       this.router.navigate(['/shop']);

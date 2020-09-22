@@ -16,7 +16,12 @@
                         <div class="form-group">
                             <label class="control-label">Nombre</label>
                             <input type="text" class="form-control" placeholder="Ingrese su nombre"
-                                formControlName="nombre">
+                                formControlName="nombre" maxlength="40" (focusin)="isNombre = true"
+                                (focusout)="isNombre = false">
+                            <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                *ngIf="isNombre">
+                                Max: 40 caracteres
+                            </span>
                             <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('nombre').hasError('required') && client.get('nombre').touched">
                                 Nombre requerido
@@ -25,13 +30,22 @@
                                 *ngIf="client.get('nombre').hasError('pattern') && client.get('nombre').touched">
                                 Nombre invalido
                             </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nombre').hasError('maxlength')">
+                                Tamaño de caracteres invalido
+                            </span>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <div class="form-group">
                             <label class="control-label">Apellido</label>
                             <input type="text" class="form-control" placeholder="Ingrese su apellido"
-                                formControlName="apellido">
+                                formControlName="apellido" maxlength="40" (focusin)="isApellido = true"
+                                (focusout)="isApellido = false">
+                            <span class="bg-primary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                                *ngIf="isNombre">
+                                Max: 40 caracteres
+                            </span>
                             <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('apellido').hasError('required') && client.get('apellido').touched">
                                 Apellido requerido
@@ -39,6 +53,10 @@
                             <span class="text-danger" style="font-size: 10px;"
                                 *ngIf="client.get('apellido').hasError('pattern') && client.get('apellido').touched">
                                 Apellido invalido
+                            </span>
+                            <span class="text-danger" style="font-size: 10px;"
+                                *ngIf="client.get('nombre').hasError('maxlength')">
+                                Tamaño de caracteres invalido
                             </span>
                         </div>
                     </div>
@@ -214,12 +232,16 @@
                 <!-- <span class="float-right text-danger mr-1"><i class="fas fa-times"></i></span> -->
                 <span class="float-right text-success"><i class="fas fa-check"></i></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of arregloComprobacion">
+            <li class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="let item of arregloComprobacion">
                 <span class="float-left"><i class="fas fa-cart-plus mr-2"></i>
-                      {{item.producto}} - Inventario {{item.estado == '0' ? 'Ajustado ' : ''}}{{item.estado == '-1' ? 'Agotado ' : ''}} ({{item.cantidadPedida}}/{{item.cantidadDisp}})
+                    {{item.producto}} - Inventario
+                    {{item.estado == '0' ? 'Ajustado ' : ''}}{{item.estado == '-1' ? 'Agotado ' : ''}}
+                    ({{item.cantidadPedida}}/{{item.cantidadDisp}})
                 </span>
                 <span *ngIf="item.estado == 1" class="float-right text-success"><i class="fas fa-check"></i></span>
-                <span *ngIf="item.estado == 0" class="float-right text-warning"><i class="fas fa-exclamation-triangle"></i></span>
+                <span *ngIf="item.estado == 0" class="float-right text-warning"><i
+                        class="fas fa-exclamation-triangle"></i></span>
                 <span *ngIf="item.estado == -1" class="float-right text-danger mr-1"><i class="fas fa-times"></i></span>
             </li>
             <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -257,9 +279,9 @@
 </ul>
  -->
 
- <!-- arregloComprobacion -->
+<!-- arregloComprobacion -->
 
- <!-- 
+<!-- 
      cantidadDisp: 15
 ​​
 cantidadPedida: 1

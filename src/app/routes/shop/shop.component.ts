@@ -36,7 +36,7 @@ export class ShopComponent implements OnInit {
   }
 
   page = 1;
-  pageSize = 12;
+  pageSize = 10;
 
   constructor(
     private productoService: ProductosService,
