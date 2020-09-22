@@ -35,7 +35,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'users', component: UsersComponent, /*canActivate: [GuardPermitsGuard],*/
+    path: 'users', component: UsersComponent, canActivate: [GuardPermitsGuard],
     children: [
       { path: '', component: DashUsersComponent, resolve: { users: UsersResolver } },
       { path: ':id/log', component: BitacoraUsersComponent },
