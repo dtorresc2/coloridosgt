@@ -66,6 +66,9 @@ export class DashUsersComponent implements OnInit {
   isUser: boolean = false;
   isEmail: boolean = false;
 
+  isPass: boolean = false;
+  isConfirmPass: boolean = false;
+
   constructor(
     private usersService: UsersService,
     private router: Router,
@@ -90,8 +93,8 @@ export class DashUsersComponent implements OnInit {
 
     this.passUpdate = new FormGroup(
       {
-        password: new FormControl('', Validators.required),
-        confirmpass: new FormControl('', Validators.required),
+        password: new FormControl('', [Validators.required, Validators.maxLength(15)]),
+        confirmpass: new FormControl('', [Validators.required, Validators.maxLength(15)]),
       }
       ,
       {

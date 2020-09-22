@@ -57,22 +57,25 @@
                             <button type="button" class="btn btn-success btn-sm pb-1" (click)="bitacora(user.idusuario)"
                                 placement="top" ngbTooltip="Ver Bitacora"><i class="fas fa-stream"></i></button>
 
-                            <button *ngIf="user.idusuario != 1 || idUsuario == 1" type="button" class="btn btn-success btn-sm ml-1 pb-1"
+                            <button *ngIf="user.idusuario != 1 || idUsuario == 1" type="button"
+                                class="btn btn-success btn-sm ml-1 pb-1"
                                 (click)="abrirModalPermisos(modalPermisos,user.idusuario,user.inventario,user.ventas,user.bitacora_y_usuario,user.finanzas)"
                                 placement="top" ngbTooltip="Gestionar Permisos"><i
                                     class="fas fa-user-lock"></i></button>
 
-                            <button *ngIf="user.idusuario != 1 || idUsuario == 1" type="button" class="btn btn-info btn-sm ml-1 pb-1"
-                                (click)="editado(user.idusuario,user)" placement="top" ngbTooltip="Editar Usuario"><i
+                            <button *ngIf="user.idusuario != 1 || idUsuario == 1" type="button"
+                                class="btn btn-info btn-sm ml-1 pb-1" (click)="editado(user.idusuario,user)"
+                                placement="top" ngbTooltip="Editar Usuario"><i
                                     class="fas fa-pencil-alt fa-sm"></i></button>
 
-                            <button *ngIf="user.idusuario != 1 || idUsuario == 1" type="button" class="btn btn-info btn-sm ml-1 pb-1"
-                                (click)="abrirModalPass(modalPass,user.idusuario)" placement="top"
-                                ngbTooltip="Actualizar Contraseña"><i class="fas fa-key"></i></button>
+                            <button *ngIf="user.idusuario != 1 || idUsuario == 1" type="button"
+                                class="btn btn-info btn-sm ml-1 pb-1" (click)="abrirModalPass(modalPass,user.idusuario)"
+                                placement="top" ngbTooltip="Actualizar Contraseña"><i class="fas fa-key"></i></button>
 
-                            <button *ngIf="user.idusuario != 1 && idUsuario != user.idusuario" type="button" class="btn btn-danger btn-sm ml-1 pb-1"
-                                (click)="eliminado(user.idusuario,user)" placement="top"
-                                ngbTooltip="Eliminar Usuario"><i class="fas fa-trash fa-sm"></i></button>
+                            <button *ngIf="user.idusuario != 1 && idUsuario != user.idusuario" type="button"
+                                class="btn btn-danger btn-sm ml-1 pb-1" (click)="eliminado(user.idusuario,user)"
+                                placement="top" ngbTooltip="Eliminar Usuario"><i
+                                    class="fas fa-trash fa-sm"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -110,13 +113,13 @@
                     <div class="form-group">
                         <label>Usuario</label>
                         <input class="form-control" type="text" formControlName="username" maxlength="15"
-                        (focusin)="isUser = true" (focusout)="isUser = false">
+                            (focusin)="isUser = true" (focusout)="isUser = false">
                         <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                             *ngIf="isUser">
                             Max: 15 caracteres
                         </span>
                         <span class="text-danger" style="font-size: 10px;"
-                            *ngIf="user.get('username').hasError('required') && user.get('username').touched" >
+                            *ngIf="user.get('username').hasError('required') && user.get('username').touched">
                             Usuario requerido
                         </span>
                         <span class="text-danger" style="font-size: 10px;"
@@ -128,7 +131,7 @@
                     <div class="form-group">
                         <label>Correo</label>
                         <input class="form-control" type="email" formControlName="email" maxlength="60"
-                        (focusin)="isEmail = true" (focusout)="isEmail = false">
+                            (focusin)="isEmail = true" (focusout)="isEmail = false">
                         <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                             *ngIf="isEmail">
                             Max: 60 caracteres
@@ -236,22 +239,39 @@
             <div class="form-group">
                 <label>Contraseña Nueva</label>
                 <input type="password" class="form-control" formControlName="password"
-                    placeholder="Ingrese su contraseña nueva">
+                    placeholder="Ingrese su contraseña nueva" maxlength="15" (focusin)="isPass = true"
+                    (focusout)="isPass = false">
+                <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;" *ngIf="isPass">
+                    Max: 15 caracteres
+                </span>
                 <span class="text-danger" style="font-size: 10px;"
                     *ngIf="passUpdate.get('password').hasError('required') && passUpdate.get('password').touched">
                     Contraseña requerida
+                </span>
+                <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="passUpdate.get('password').hasError('maxlength')">
+                    Tamaño de caracteres invalido
                 </span>
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Confirmar Contraseña</label>
                 <input type="password" class="form-control" formControlName="confirmpass"
-                    placeholder="Confirme su contraseña nueva">
+                    placeholder="Confirme su contraseña nueva" maxlength="15" (focusin)="isConfirmPass = true"
+                    (focusout)="isConfirmPass = false">
+                <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
+                    *ngIf="isConfirmPass">
+                    Max: 15 caracteres
+                </span>
                 <span class="text-danger" style="font-size: 10px;"
                     *ngIf="passUpdate.get('confirmpass').hasError('required') && passUpdate.get('confirmpass').touched">
                     Contraseña requerida
                 </span>
                 <span class="text-danger" style="font-size: 10px;" *ngIf="passUpdate.errors?.invalid">
                     Contraseña sin coincidir
+                </span>
+                <span class="text-danger" style="font-size: 10px;"
+                    *ngIf="passUpdate.get('confirmpass').hasError('maxlength')">
+                    Tamaño de caracteres invalido
                 </span>
             </div>
             <button class="btn btn-secondary btn-block" [disabled]="passUpdate.invalid || this.comprobador2">
