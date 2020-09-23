@@ -209,7 +209,7 @@ export class DashUsersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaClientes = res;
-          console.log(res);
+          // console.log(res);
         },
         err => console.error(err)
       )

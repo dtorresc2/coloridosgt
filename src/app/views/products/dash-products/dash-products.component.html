@@ -3,7 +3,9 @@
 </div>
 
 <div class="text-center" style="font-size: 28px;" *ngIf="!show">
-    Mantenimiento Productos
+    Mantenimiento Productos <a class="text-secondary" placement="top" ngbTooltip="Actualizar Productos"
+        (click)="obtenerListaProductos()">
+        <i class="fas fa-sync-alt"></i></a>
 </div>
 <div class="row justify-content-center" style="padding-top: 3%;" *ngIf="!show">
     <div class="col-md-12">
@@ -511,7 +513,7 @@
                 <div class="form-group col-md-6">
                     <label>Costo</label>
                     <input type="text" class="form-control" formControlName="costo" maxlength="6"
-                    (focusin)="isCostoMod = true" (focusout)="isCostoMod = false">
+                        (focusin)="isCostoMod = true" (focusout)="isCostoMod = false">
                     <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                         *ngIf="isCostoMod">
                         Max: 6 caracteres</span>
