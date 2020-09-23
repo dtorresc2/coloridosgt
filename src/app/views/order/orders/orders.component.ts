@@ -28,6 +28,7 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaPedidos = res;
+          console.log(res);
         },
         err => console.error(err)
       );

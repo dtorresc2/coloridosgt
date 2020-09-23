@@ -17,7 +17,7 @@
                 <th scope="col">Fecha</th>
                 <th scope="col">Direccion</th>
                 <th scope="col">T.Pedido</th>
-                <th scope="col">No. Productos</th>
+                <th scope="col">Items</th>
                 <th scope="col">Total</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
@@ -32,11 +32,20 @@
                 <td> {{ pedido.tipo }} </td>
                 <td> {{ pedido.items }} </td>
                 <td> Q.{{ pedido.total | number: '1.2-2' }} </td>
-                <td> {{ pedido.idestado_pedido }} </td>
                 <td>
-                    <button type="button" class="btn btn-success btn-sm pr-2 pl-2" placement="top"
-                        (click)="verDetalle(pedido.idpedido)" ngbTooltip="Ver Detalle Pedido"><i
-                            class="fas fa-clipboard-list"></i>
+                    <div class="btn btn-sm"
+                        [ngClass]="{'btn-info': pedido.idestado_pedido == 1, 'btn-warning': pedido.idestado_pedido == 2, 'btn-success': pedido.idestado_pedido == 3, 'btn-secondary': pedido.idestado_pedido == 4}">
+                        <span>{{ pedido.estado }}</span>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm pr-2 pl-2" placement="top"
+                        (click)="verDetalle(pedido.idpedido)" ngbTooltip="Ver Detalle Pedido">
+                        <i class="fas fa-clipboard-list"></i>
+                    </button>
+                    <button type="button" class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
+                        (click)="verDetalle(pedido.idpedido)" ngbTooltip="Adjuntar Comprobante">
+                        <i class="far fa-file-image"></i>
                     </button>
                 </td>
             </tr>
