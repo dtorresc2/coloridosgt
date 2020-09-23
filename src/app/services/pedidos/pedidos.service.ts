@@ -58,7 +58,7 @@ export class PedidosService {
       let index = this.fieldArray.findIndex(x => x.idproducto === detallePedido.idproducto);
 
       filaAuxiliar.idproducto = this.fieldArray[index].idproducto;
-      
+
       let cantidadNueva = (this.fieldArray[index].cantidad + detallePedido.cantidad);
 
       filaAuxiliar.cantidad = cantidadNueva;
@@ -116,6 +116,10 @@ export class PedidosService {
 
   obtenerDetallePedido(id) {
     return this.http.get(Servidor.API_URI + '/pedidos/' + id);
+  }
+
+  actualiazarComprobante(id, _buffer, _usuario) {
+    return this.http.put(Servidor.API_URI_LOCAL + '/pedidos/' + id + '/comprobante', { buffer: _buffer, usuario: _usuario });
   }
 
 }

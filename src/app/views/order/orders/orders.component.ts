@@ -13,6 +13,7 @@ export class OrdersComponent implements OnInit {
   idUsuario: any;
   listaPedidos: any = [];
   servicioModal: any;
+  comprobador: boolean = false;
 
   page = 1;
   pageSize = 10;
@@ -21,6 +22,7 @@ export class OrdersComponent implements OnInit {
   nombreArchivo: any;
   base64Final: string = null;
   urlAUX: any;
+  idPedidoAUX: any;
 
   constructor(private pedidosServicio: PedidosService, private router: Router, private modalService: NgbModal) { }
 
@@ -47,10 +49,12 @@ export class OrdersComponent implements OnInit {
   }
 
   abrirModalComprobante(content, idPedido) {
+    this.idPedidoAUX = idPedido;
     this.servicioModal = this.modalService.open(content, { centered: true });
   }
 
-  abrirModalImagen(content, url){
+  abrirModalImagen(content, url, id) {
+    this.idPedidoAUX = id;
     this.urlAUX = url;
     this.modalService.open(content, { centered: true });
   }
@@ -66,19 +70,42 @@ export class OrdersComponent implements OnInit {
       this.nombreArchivo = this.fileToUpload.name;
       this.base64Final = base64str.replace(/^data:image\/\w+;base64,/, '');
     };
+  }
 
-    // this.ng2ImgMax.compressImage(this.fileToUpload, 0.075).subscribe(
-    //   result => {
-    //     reader.readAsDataURL(result);
-    //     reader.onload = () => {
-    //       const base64str = reader.result.toString();
-    //       this.base64Final = base64str.replace(/^data:image\/\w+;base64,/, '');
-    //     };
-    //   },
-    //   error => {
-    //     console.log('😢 Oh no!', error);
-    //   }
-    // );
+  enviarComprobante() {
+    if (this.base64Final != null) {
+      this.comprobador = true;
+
+      this.pedidosServicio.actualiazarComprobante(this.idPedidoAUX, this.base64Final, this.idUsuario)
+        .subscribe(
+          res => {
+            console.log(res);
+
+            setTimeout(() => {
+              this.comprobador = false;
+              this.servicioModal.close();
+            }, 1500);
+
+            // setTimeout(() => {
+            //   if (this.respuesta.Conteo == 0) {
+            //     this.product.reset();
+            //     this.obtenerListaProductos();
+            //     this.notifiacionService.getToastSuccess('Producto registrado correctamente', '');
+            //   }
+            //   else {
+            //     this.respuesta.Id = 0;
+            //     this.respuesta.EstadoInsert = '';
+            //     this.respuesta.Conteo = 0;
+            //     $('.alert').alert('close');
+            //     this.product.reset();
+            //     this.notifiacionService.getToastError('Fallo al registrar producto', '');
+            //   }
+            // }, 1000);
+
+          },
+          err => console.error(err)
+        );
+    }
   }
 
 }

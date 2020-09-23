@@ -51,8 +51,9 @@
                     </button>
                     <button *ngIf="pedido.idestado_pedido < 2 || idTipo == 2" type="button"
                         class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
-                        (click)="abrirModalImagen(modalImagen,2)" ngbTooltip="Ver Comprobante">
+                        (click)="abrirModalImagen(modalImagen,pedido.url_comprobante,pedido.idpedido)" ngbTooltip="Ver Comprobante">
                         <i class="fas fa-eye"></i>
+                        <!-- url_comprobante -->
                     </button>
                 </td>
             </tr>
@@ -80,9 +81,12 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-block" (click)="agregarCarrito()"
-                [disabled]="cantidadAux > cantidadProducto">
-                <span>Actualizar Imagen</span>
+            <button type="button" class="btn btn-primary btn-block" (click)="enviarComprobante()"
+                [disabled]="this.comprobador">
+                <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                <span *ngIf="!this.comprobador" id="labelCarga">Enviar Comprobante</span>
+                <!-- <span>Actualizar Imagen</span> -->
             </button>
         </form>
     </div>
@@ -91,13 +95,13 @@
 <!-- Modal para vista previa de imagen -->
 <ng-template #modalImagen let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Imagen de Producto #{{idObjetoAux}} </h4>
+        <h4 class="modal-title">Imagen de Producto #{{idPedidoAUX}} </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <!-- <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300"> -->
-        <img [src]='' class="rounded mx-auto d-block" width="300" height="300">
+        <!-- <img [src]='url_comprobante' class="rounded mx-auto d-block" width="300" height="300"> -->
+        <img [src]='this.urlAUX' class="rounded mx-auto d-block" width="300" height="300">
     </div>
 </ng-template>
