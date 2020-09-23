@@ -1,5 +1,7 @@
 <div class="text-center" style="font-size: 28px;">
-    Historial de Pedidos
+    Historial de Pedidos <a class="text-primary" placement="top" ngbTooltip="Actualizar Pedidos"
+        (click)="obtenerPedidos()">
+        <i class="fas fa-sync-alt"></i></a>
 </div>
 
 <div class="row mt-2">
@@ -43,15 +45,16 @@
                         (click)="verDetalle(pedido.idpedido)" ngbTooltip="Ver Detalle Pedido">
                         <i class="fas fa-clipboard-list"></i>
                     </button>
-                    <button *ngIf="pedido.idestado_pedido < 2 || idTipo == 2" type="button"
-                        class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
+                    <button *ngIf="(pedido.idestado_pedido == 1 || pedido.idestado_pedido == 2) && pedido.idTipo == 2"
+                        type="button" class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
                         (click)="abrirModalComprobante(modalComprobante,pedido.idpedido)"
                         ngbTooltip="Adjuntar Comprobante">
                         <i class="far fa-file-image"></i>
                     </button>
-                    <button *ngIf="pedido.idestado_pedido < 2 || idTipo == 2" type="button"
-                        class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
-                        (click)="abrirModalImagen(modalImagen,pedido.url_comprobante,pedido.idpedido)" ngbTooltip="Ver Comprobante">
+                    <button *ngIf="(pedido.idestado_pedido == 1 || pedido.idestado_pedido == 2) && pedido.idTipo == 2"
+                        type="button" class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
+                        (click)="abrirModalImagen(modalImagen,pedido.url_comprobante,pedido.idpedido)"
+                        ngbTooltip="Ver Comprobante">
                         <i class="fas fa-eye"></i>
                         <!-- url_comprobante -->
                     </button>

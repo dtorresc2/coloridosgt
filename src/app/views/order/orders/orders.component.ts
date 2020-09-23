@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { read } from '@popperjs/core';
+import { NotificacionService } from 'src/app/services/notificaciones/notificacion.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class OrdersComponent implements OnInit {
   urlAUX: any;
   idPedidoAUX: any;
 
-  constructor(private pedidosServicio: PedidosService, private router: Router, private modalService: NgbModal) { }
+  constructor(private pedidosServicio: PedidosService, private router: Router, private modalService: NgbModal, private notifiacionService: NotificacionService) { }
 
   ngOnInit(): void {
     if (localStorage['idUsuario']) {
@@ -49,6 +50,8 @@ export class OrdersComponent implements OnInit {
   }
 
   abrirModalComprobante(content, idPedido) {
+    this.base64Final = null;
+    this.nombreArchivo = '';
     this.idPedidoAUX = idPedido;
     this.servicioModal = this.modalService.open(content, { centered: true });
   }
@@ -86,21 +89,16 @@ export class OrdersComponent implements OnInit {
               this.servicioModal.close();
             }, 1500);
 
-            // setTimeout(() => {
-            //   if (this.respuesta.Conteo == 0) {
-            //     this.product.reset();
-            //     this.obtenerListaProductos();
-            //     this.notifiacionService.getToastSuccess('Producto registrado correctamente', '');
-            //   }
-            //   else {
-            //     this.respuesta.Id = 0;
-            //     this.respuesta.EstadoInsert = '';
-            //     this.respuesta.Conteo = 0;
-            //     $('.alert').alert('close');
-            //     this.product.reset();
-            //     this.notifiacionService.getToastError('Fallo al registrar producto', '');
-            //   }
-            // }, 1000);
+            setTimeout(() => {
+              if ((<any>res).EstadoUpdate == 'Correcto') {
+                this.notifiacionService.getToastSuccess('Producto registrado correctamente', '');
+              }
+              else {
+                this.notifiacionService.getToastError('Fallo al registrar producto', '');
+              }
+              this.obtenerPedidos();
+
+            }, 1000);
 
           },
           err => console.error(err)
