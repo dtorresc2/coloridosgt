@@ -38,7 +38,8 @@ export class PedidosService {
       subtotal: detallePedido.subtotal,
       descripcion: detallePedido.descripcion,
       producto: detallePedido.producto,
-      descuento: detallePedido.descuento
+      descuento: detallePedido.descuento,
+      descuento_real: detallePedido.descuento_real
     };
 
     let filaAuxiliar: DetallePedido = {
@@ -48,7 +49,8 @@ export class PedidosService {
       subtotal: 0.00,
       descripcion: '',
       producto: '',
-      descuento: 0.00
+      descuento: 0.00,
+      descuento_real: 0.00
     }
 
     // Funcion para detectar productos repetidos y actualizar la cantidad con el arreglo existente
@@ -56,16 +58,23 @@ export class PedidosService {
       let index = this.fieldArray.findIndex(x => x.idproducto === detallePedido.idproducto);
 
       filaAuxiliar.idproducto = this.fieldArray[index].idproducto;
+      
       let cantidadNueva = (this.fieldArray[index].cantidad + detallePedido.cantidad);
+
       filaAuxiliar.cantidad = cantidadNueva;
       filaAuxiliar.precio_unidad = this.fieldArray[index].precio_unidad;
-      filaAuxiliar.subtotal = this.fieldArray[index].descuento > 0 ? (cantidadNueva * (this.fieldArray[index].precio_unidad - this.fieldArray[index].descuento)) : (cantidadNueva * this.fieldArray[index].precio_unidad);
+      filaAuxiliar.subtotal = this.fieldArray[index].descuento > 0 ? (cantidadNueva * (this.fieldArray[index].precio_unidad - this.fieldArray[index].descuento_real)) : (cantidadNueva * this.fieldArray[index].precio_unidad);
       filaAuxiliar.descripcion = this.fieldArray[index].descripcion;
       filaAuxiliar.producto = this.fieldArray[index].producto;
+      filaAuxiliar.descuento_real = this.fieldArray[index].descuento_real;
 
-      filaAuxiliar.descuento = this.fieldArray[index].descuento * cantidadNueva;
+      // console.log(this.fieldArray[index].descuento_real, '-', cantidadNueva);
+      filaAuxiliar.descuento = this.fieldArray[index].descuento_real * cantidadNueva;
+      // console.log(filaAuxiliar.descuento);
+      // console.log(this.fieldArray[index].descuento);
 
       this.fieldArray.splice(index, 1, filaAuxiliar);
+      // console.log(this.fieldArray[index]);
     }
     else {
       this.fieldArray.push(filaNueva);

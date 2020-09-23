@@ -6,6 +6,7 @@ export interface DetallePedido{
    descuento?: number;
    producto?: string;
    descripcion?: string;
+   descuento_real?: number;
 }
 
 export interface Pedido {

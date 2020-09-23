@@ -32,7 +32,8 @@ export class ShopComponent implements OnInit {
     subtotal: 0.00,
     descuento: 0.00,
     descripcion: '',
-    producto: ''
+    producto: '',
+    descuento_real: 0.00
   }
 
   page = 1;
@@ -97,6 +98,8 @@ export class ShopComponent implements OnInit {
     this.detallePedido.producto = this.productoAux;
 
     let descuentoReal = this.precioU - this.descuentoAux;
+    // console.log(descuentoReal);
+    this.detallePedido.descuento_real = descuentoReal;
     this.detallePedido.descuento = this.descuentoAux > 0 ? descuentoReal * this.cantidadAux : 0.00;
     this.detallePedido.subtotal = this.descuentoAux > 0 ? (this.precioU - descuentoReal) * this.cantidadAux : (this.precioU * this.cantidadAux);
     this.detallePedido.descripcion = this.descuentoAux > 0 ? this.productoAux + ' (-' + descuentoReal.toFixed(2).toString() + ' c/u)' : this.productoAux;
