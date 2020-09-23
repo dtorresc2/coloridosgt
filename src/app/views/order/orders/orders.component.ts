@@ -20,6 +20,7 @@ export class OrdersComponent implements OnInit {
   fileToUpload: File = null;
   nombreArchivo: any;
   base64Final: string = null;
+  urlAUX: any;
 
   constructor(private pedidosServicio: PedidosService, private router: Router, private modalService: NgbModal) { }
 
@@ -47,6 +48,11 @@ export class OrdersComponent implements OnInit {
 
   abrirModalComprobante(content, idPedido) {
     this.servicioModal = this.modalService.open(content, { centered: true });
+  }
+
+  abrirModalImagen(content, url){
+    this.urlAUX = url;
+    this.modalService.open(content, { centered: true });
   }
 
   handleFileInput(files: FileList) {
