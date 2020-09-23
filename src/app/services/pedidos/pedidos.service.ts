@@ -119,7 +119,7 @@ export class PedidosService {
   }
 
   actualiazarComprobante(id, _buffer, _usuario) {
-    return this.http.put(Servidor.API_URI_LOCAL + '/pedidos/' + id + '/comprobante', { buffer: _buffer, usuario: _usuario });
+    return this.http.put(Servidor.API_URI + '/pedidos/' + id + '/comprobante', { buffer: _buffer, usuario: _usuario });
   }
 
 }
