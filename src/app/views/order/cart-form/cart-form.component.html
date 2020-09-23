@@ -286,10 +286,26 @@
         </ul>
     </div>
     <div class="modal-footer">
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-danger btn-block" (click)="servicioModalAux.close()">
+                    <span>Cancelar</span>
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-primary btn-block" (click)="finalizarPedido()" [disabled] = "detalleAceptado > 0">
+                    <span>Confirmar</span>
+                </button>
+            </div>
+        </div>
         <!-- <button type="button" class="btn btn-primary btn-block" (click)="modal.close('Close click')"> -->
-        <button type="button" class="btn btn-primary btn-block" (click)="finalizarPedido()">
+            <!-- servicioModalAux.close() -->
+        <!-- <button type="button" class="btn btn-primary btn-block" (click)="finalizarPedido()" [disabled] = "detalleAceptado > 0">
             <span>Finalizar Pedido</span>
         </button>
+        <button type="button" class="btn btn-primary btn-block" (click)="finalizarPedido()" [disabled] = "detalleAceptado > 0">
+            <span>Finalizar Pedido</span>
+        </button> -->
     </div>
 </ng-template>
 

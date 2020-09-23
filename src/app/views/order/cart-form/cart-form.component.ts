@@ -52,6 +52,8 @@ export class CartFormComponent implements OnInit {
   totalAux: any = 0;
   descuentoAux: any = 0;
 
+  detalleAceptado: any = 0;
+
   // Variables de Inputs
   isNombre: boolean = false;
   isApellido: boolean = false;
@@ -275,7 +277,7 @@ export class CartFormComponent implements OnInit {
       this.arregloComprobacion.push(comprobacionAux);
     });
 
-    console.log(this.arregloComprobacion);
+    // console.log(this.arregloComprobacion);
   }
 
   obtenerProductoEspecifico(id): Promise<any> {
@@ -361,6 +363,10 @@ export class CartFormComponent implements OnInit {
         let descuentoReal = precio - descuento;
         this.pedidoService.fieldArray[index].descuento = descuento > 0 ? (descuentoReal * element.cantidadPedida) : 0.00;
         this.pedidoService.fieldArray[index].subtotal = descuento > 0 ? (precio - descuentoReal) * element.cantidadPedida : (precio * element.cantidadPedida);
+
+        if (element.estado != -1) {
+          this.detalleAceptado++;
+        }
       }
 
     });
