@@ -43,12 +43,14 @@
                         (click)="verDetalle(pedido.idpedido)" ngbTooltip="Ver Detalle Pedido">
                         <i class="fas fa-clipboard-list"></i>
                     </button>
-                    <button *ngIf="pedido.idestado_pedido < 2 || idTipo == 2" type="button" class="btn btn-info btn-sm ml-1 pr-2 pl-2"
-                        placement="top" (click)="verDetalle(pedido.idpedido)" ngbTooltip="Adjuntar Comprobante">
+                    <button *ngIf="pedido.idestado_pedido < 2 || idTipo == 2" type="button"
+                        class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top" (click)="verDetalle(pedido.idpedido)"
+                        ngbTooltip="Adjuntar Comprobante">
                         <i class="far fa-file-image"></i>
                     </button>
-                    <button *ngIf="pedido.idestado_pedido < 2 || idTipo == 2" type="button" class="btn btn-info btn-sm ml-1 pr-2 pl-2"
-                        placement="top" (click)="verDetalle(pedido.idpedido)" ngbTooltip="Ver Comprobante">
+                    <button *ngIf="pedido.idestado_pedido < 2 || idTipo == 2" type="button"
+                        class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
+                        (click)="abrirModalComprobante(modalComprobante,pedido.idpedido)" ngbTooltip="Ver Comprobante">
                         <i class="fas fa-eye"></i>
                     </button>
                 </td>
@@ -70,18 +72,18 @@
     <div class="modal-body">
         <form>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Cantidad</label>
-                    <input type="number" min="1" class="form-control" name="cantidad1"
-                        [(ngModel)]="cantidadAux">
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Producto</label>
-                    <input type="text" class="form-control" name="producto1" [(ngModel)]="productoAux" readonly>
+                <div class="form-group col-md-12">
+                    <label>Eliga su imagen</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" lang="es" accept="image/*"
+                        (change)="handleFileInput($event.target.files)">
+                        <label class="custom-file-label" name="titulo"> {{nombreArchivo}} </label>
+                    </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-block" (click)="agregarCarrito()" [disabled]="cantidadAux > cantidadProducto">
-                <span>Agregar</span>
+            <button type="button" class="btn btn-primary btn-block" (click)="agregarCarrito()"
+                [disabled]="cantidadAux > cantidadProducto">
+                <span>Actualizar Imagen</span>
             </button>
         </form>
     </div>
