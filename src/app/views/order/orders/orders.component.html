@@ -82,7 +82,7 @@
                 </div>
             </div>
             <button type="button" class="btn btn-primary btn-block" (click)="enviarComprobante()"
-                [disabled]="this.comprobador">
+                [disabled]="this.comprobador || this.base64Final == null">
                 <span *ngIf="this.comprobador" class="spinner-border spinner-border-sm" role="status"
                     aria-hidden="true"></span>
                 <span *ngIf="!this.comprobador" id="labelCarga">Enviar Comprobante</span>
