@@ -43,8 +43,8 @@
                         (click)="verDetalle(pedido.idpedido)" ngbTooltip="Ver Detalle Pedido">
                         <i class="fas fa-clipboard-list"></i>
                     </button>
-                    <button type="button" class="btn btn-info btn-sm ml-1 pr-2 pl-2" placement="top"
-                        (click)="verDetalle(pedido.idpedido)" ngbTooltip="Adjuntar Comprobante">
+                    <button *ngIf="pedido.idestado_pedido < 2" type="button" class="btn btn-info btn-sm ml-1 pr-2 pl-2"
+                        placement="top" (click)="verDetalle(pedido.idpedido)" ngbTooltip="Adjuntar Comprobante">
                         <i class="far fa-file-image"></i>
                     </button>
                 </td>
