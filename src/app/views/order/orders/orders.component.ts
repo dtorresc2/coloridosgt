@@ -39,7 +39,7 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         res => {
           this.listaPedidos = res;
-          console.log(res);
+          // console.log(res);
         },
         err => console.error(err)
       );
@@ -82,7 +82,6 @@ export class OrdersComponent implements OnInit {
       this.pedidosServicio.actualiazarComprobante(this.idPedidoAUX, this.base64Final, this.idUsuario)
         .subscribe(
           res => {
-            console.log(res);
 
             setTimeout(() => {
               this.comprobador = false;
