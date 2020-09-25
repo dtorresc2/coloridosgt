@@ -293,7 +293,7 @@
                 </button>
             </div>
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-block" (click)="finalizarPedido()" [disabled] = "detalleAceptado > 0">
+                <button type="button" class="btn btn-primary btn-block" (click)="finalizarPedido()" [disabled] = "this.detalleAceptado < 1">
                     <span>Confirmar</span>
                 </button>
             </div>

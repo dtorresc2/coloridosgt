@@ -237,6 +237,7 @@ export class CartFormComponent implements OnInit {
 
     this.comprobarItems();
     this.servicioModalAux = this.modalService.open(content, { centered: true, scrollable: true, size: 'lg' });
+    console.log(this.detalleAceptado);
   }
 
   onChangeTipoEnvio(idTipo) {
@@ -272,6 +273,10 @@ export class CartFormComponent implements OnInit {
           comprobacionAux.estado = 0;
           comprobacionAux.cantidadPedida = comprobacionAux.cantidadDisp;
         }
+      }
+
+      if (comprobacionAux.estado != -1) {
+        this.detalleAceptado++;
       }
 
       this.arregloComprobacion.push(comprobacionAux);
@@ -363,10 +368,6 @@ export class CartFormComponent implements OnInit {
         let descuentoReal = precio - descuento;
         this.pedidoService.fieldArray[index].descuento = descuento > 0 ? (descuentoReal * element.cantidadPedida) : 0.00;
         this.pedidoService.fieldArray[index].subtotal = descuento > 0 ? (precio - descuentoReal) * element.cantidadPedida : (precio * element.cantidadPedida);
-
-        if (element.estado != -1) {
-          this.detalleAceptado++;
-        }
       }
 
     });
