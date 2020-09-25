@@ -346,7 +346,7 @@
                                         ngbTooltip="Ej: ####.##"><i class="fas fa-info-circle"></i></span>
                                 </label>
                                 <input class="form-control form-control-sm" type="text" formControlName="precio"
-                                    maxlength="6" (focusin)="isPrecio = true" (focusout)="isPrecio = false">
+                                    maxlength="7" (focusin)="isPrecio = true" (focusout)="isPrecio = false">
                                 <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                                     *ngIf="isPrecio">
                                     Max: 4 enteros y 2 decimales
@@ -373,7 +373,7 @@
                                             class="fas fa-info-circle"></i></span>
                                 </label>
                                 <input class="form-control form-control-sm" type="text" formControlName="descuento"
-                                    maxlength="6" (focusin)="isDescu = true" (focusout)="isDescu = false">
+                                    maxlength="7" (focusin)="isDescu = true" (focusout)="isDescu = false">
                                 <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                                     *ngIf="isDescu">
                                     Max: 4 enteros y 2 decimales
@@ -512,11 +512,11 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label>Costo</label>
-                    <input type="text" class="form-control" formControlName="costo" maxlength="6"
+                    <input type="text" class="form-control" formControlName="costo" maxlength="7"
                         (focusin)="isCostoMod = true" (focusout)="isCostoMod = false">
                     <span class="bg-secondary text-white float-right pl-2 pr-2" style="font-size: 10px;"
                         *ngIf="isCostoMod">
-                        Max: 6 caracteres</span>
+                        Max: 4 enteros y 2 decimales</span>
                     <span class="text-danger" style="font-size: 10px;"
                         *ngIf="formCosto.get('costo').hasError('required') && formCosto.get('costo').touched">
                         Costo requerido
