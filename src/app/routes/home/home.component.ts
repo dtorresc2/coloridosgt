@@ -47,10 +47,10 @@ export class HomeComponent implements OnInit {
               this.moduloProductos = (<any>res[0]).inventario == 1 ? true : false;
               this.moduloFinanzas = (<any>res[0]).finanzas == 1 ? true : false;
 
-              this.usersService.moduloUsuarios = this.moduloUsuarios;
-              this.usersService.moduloPedidos = this.moduloPedidos;
-              this.usersService.moduloProductos = this.moduloProductos;
-              this.usersService.moduloFinanzas = this.moduloFinanzas;
+              // this.usersService.moduloUsuarios = this.moduloUsuarios;
+              // this.usersService.moduloPedidos = this.moduloPedidos;
+              // this.usersService.moduloProductos = this.moduloProductos;
+              // this.usersService.moduloFinanzas = this.moduloFinanzas;
               // this.moduloUsuarios = (<any>res).
               // console.log(res);
             },
@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         res => {
           // localStorage.setItem('userName', (<any>res).nick);
-          console.log(res);
+          // console.log(res);
           this.arregloUsuario = res;
           let encontrado = this.arregloUsuario.find(element => element.idusuario = this.idUsuario);
           // console.log(encontrado.correo);
