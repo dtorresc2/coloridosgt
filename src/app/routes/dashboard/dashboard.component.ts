@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         res => {
           localStorage.setItem('userName', (<any>res).nick);
-          console.log(res);
+          // console.log(res);
           this.nombreCompleto = (<any>res).nombre + ' ' + (<any>res).apellido;
           this.usuario = (<any>res).nick;
           this.dpi = (<any>res).dpi;
