@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
 
   arregloUsuario: any = [];
   arregloPedidos: any = [];
+  arregloIngresos: any = [];
+
   usuario: any;
   correo: any;
   intervalo;
@@ -28,6 +30,9 @@ export class HomeComponent implements OnInit {
   moduloFinanzas: boolean = false;
 
   ultimaActividad: any;
+
+  fromDate: any;
+  totalIngresos: any = 0;
 
   constructor(
     private usersService: UsersService,
@@ -48,13 +53,12 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/singin']);
     }
 
+    this.fromDate = this.calendar.getToday();
+
     this.obtenerUsuario();
     this.obtenerBitacora();
     this.obtenerDetallesPedido();
-
-    
-    console.log(this.calendar.getToday());
-    // this.obtenerGanancias();
+    // this.obtenerGananciasHoy();
 
     this.intervalo = setInterval(() => {
       if (localStorage['idUsuario']) {
@@ -114,22 +118,36 @@ export class HomeComponent implements OnInit {
 
   async obtenerDetallesPedido() {
     await this.obtenerGanancias();
+    await this.obtenerGananciasHoy();
 
     this.arregloPedidos.forEach(element => {
       if (element.idusuario == this.idUsuario) {
         this.contadorPedidos++;
       }
     });
+
+    this.arregloIngresos.forEach(element => {
+      this.totalIngresos += element.total;
+    });
+
   }
 
-  obtenerGananciasHoy(){
-    this.finanzaService.obtenerIngresos('','')
-      .subscribe(
-        res => {
-          this.ultimaActividad = (<any>res[0]).fecha + ' ' + (<any>res[0]).hora;
-        },
-        err => console.error(err)
-      );
+  obtenerGananciasHoy(): Promise<boolean> {
+    let fechaFinal = this.fromDate.year + '/' + this.fromDate.month + '/' + this.fromDate.day;
+    return new Promise(
+      resolve => {
+        this.finanzaService.obtenerIngresos(fechaFinal, fechaFinal)
+          .subscribe(
+            res => {
+              this.arregloIngresos = res;
+              resolve(true);
+            },
+            err => {
+              console.error(err);
+              resolve(false);
+            }
+          );
+      });
   }
 
 }
