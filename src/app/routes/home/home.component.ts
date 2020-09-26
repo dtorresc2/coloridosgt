@@ -11,15 +11,17 @@ export class HomeComponent implements OnInit {
   ID: any;
   idUsuario: any;
 
-  arregloUsuario:any = [];
-  usuario:any;
-  correo:any;
+  arregloUsuario: any = [];
+  usuario: any;
+  correo: any;
   intervalo;
 
   moduloUsuarios: boolean = false;
   moduloPedidos: boolean = false;
   moduloProductos: boolean = false;
   moduloFinanzas: boolean = false;
+
+  ultimaActividad:any;
 
   constructor(private usersService: UsersService, private router: Router) { }
 
@@ -35,6 +37,8 @@ export class HomeComponent implements OnInit {
     }
 
     this.obtenerUsuario();
+
+    this.obtenerBitacora();
 
     this.intervalo = setInterval(() => {
       if (localStorage['idUsuario']) {
@@ -71,6 +75,17 @@ export class HomeComponent implements OnInit {
           // console.log(encontrado.correo);
           this.usuario = encontrado.nombrerol;
           this.correo = encontrado.correo;
+        },
+        err => console.error(err)
+      );
+  }
+
+  obtenerBitacora() {
+    this.usersService.obtenerBitacora(localStorage.getItem('idUsuario'))
+      .subscribe(
+        res => {
+          // console.log(res);
+          this.ultimaActividad = (<any>res[0]).fecha + ' ' + (<any>res[0]).hora;
         },
         err => console.error(err)
       );
