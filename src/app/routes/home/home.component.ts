@@ -14,9 +14,12 @@ export class HomeComponent implements OnInit {
   arregloUsuario:any = [];
   usuario:any;
   correo:any;
-  permisos1:any;
-  permisos2:any;
-  permisos3:any;
+  intervalo;
+
+  moduloUsuarios: boolean = false;
+  moduloPedidos: boolean = false;
+  moduloProductos: boolean = false;
+  moduloFinanzas: boolean = false;
 
   constructor(private usersService: UsersService, private router: Router) { }
 
@@ -32,6 +35,29 @@ export class HomeComponent implements OnInit {
     }
 
     this.obtenerUsuario();
+
+    this.intervalo = setInterval(() => {
+      if (localStorage['idUsuario']) {
+        this.usersService.obtenerPermisos(localStorage.getItem('idUsuario'))
+          .subscribe(
+            res => {
+              // console.log((<any>res[0]).bitacora_y_usuario);
+              this.moduloUsuarios = (<any>res[0]).bitacora_y_usuario == 1 ? true : false;
+              this.moduloPedidos = (<any>res[0]).ventas == 1 ? true : false;
+              this.moduloProductos = (<any>res[0]).inventario == 1 ? true : false;
+              this.moduloFinanzas = (<any>res[0]).finanzas == 1 ? true : false;
+
+              this.usersService.moduloUsuarios = this.moduloUsuarios;
+              this.usersService.moduloPedidos = this.moduloPedidos;
+              this.usersService.moduloProductos = this.moduloProductos;
+              this.usersService.moduloFinanzas = this.moduloFinanzas;
+              // this.moduloUsuarios = (<any>res).
+              // console.log(res);
+            },
+            err => console.error(err)
+          );
+      }
+    }, 1000);
   }
 
   obtenerUsuario() {
