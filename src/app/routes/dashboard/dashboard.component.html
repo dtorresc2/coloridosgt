@@ -6,15 +6,19 @@
          <ul class="list-group list-group-flush">
             <li class="list-group-item">
                <i class="fas fa-user float-left mr-2 mt-1"></i>
-               Nombre
+               Usuario: {{this.usuario}}
             </li>
             <li class="list-group-item">
-               <i class="fas fa-user-circle mr-2 mt-1"></i>
-               Cras justo odio
+               <i class="fas fa-user-circle float-left mr-2 mt-1"></i>
+               Nombre: {{this.nombreCompleto}}
             </li>
             <li class="list-group-item">
                <i class="fas fa-address-card float-left mr-2 mt-1"></i>
-               Cras justo odio
+               DPI: {{this.dpi}}
+            </li>
+            <li class="list-group-item">
+               <i class="fas fa-at float-left mr-2 mt-1"></i>
+               Correo: {{this.correo}}
             </li>
          </ul>
       </div>
@@ -25,7 +29,7 @@
          <div class="card-body">
             <h4 class="card-text">
                <i class="far fa-calendar-alt float-left mr-2"></i>
-               1231231
+               {{this.ultimoActividad}}
             </h4>
          </div>
       </div>
