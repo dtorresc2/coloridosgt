@@ -153,7 +153,6 @@ export class CartFormComponent implements OnInit {
       .subscribe(
         res => {
           this.listaEnvios = res;
-          // console.log(res);
         },
         err => console.error(err)
       )
@@ -237,12 +236,10 @@ export class CartFormComponent implements OnInit {
 
     this.comprobarItems();
     this.servicioModalAux = this.modalService.open(content, { centered: true, scrollable: true, size: 'lg' });
-    console.log(this.detalleAceptado);
   }
 
   onChangeTipoEnvio(idTipo) {
     this.idEnvioAux = idTipo;
-    // console.log(idTipo);
   }
 
   comprobarItems() {
@@ -418,7 +415,3 @@ export class CartFormComponent implements OnInit {
   }
 
 }
-
-// this.firstName.valueChanges.subscribe(value => {
-//   console.log('name has changed:', value)
-// });
